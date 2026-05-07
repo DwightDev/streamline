@@ -1,0 +1,1887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+
+/* =====================================================
+   MOUNTAIN STREAM — Streamline ERP Homepage
+   Scope: .ms-home
+   Font: DM Sans (body + display)
+   Palette: Navy · Sky · Orange · White
+   ===================================================== */
+
+/* @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap');
+/* ── 1. DESIGN TOKENS ──────────────────────────────── */
+.ms-home {
+  --ms-navy:          #113058;
+  --ms-navy-mid:      #113058;
+  --ms-navy-dark:     #113058;
+  --ms-navy-deeper:   #113058;
+  --ms-navy-light:    #e3edf8;
+  --ms-navy-subtle:   #f1f6fc;
+
+  --ms-sky:           #4aa6e8;
+  --ms-sky-dark:      #1d7dc0;
+  --ms-sky-light:     #ddf1ff;
+  --ms-sky-subtle:    #f0f9ff;
+
+  --ms-orange:        #ff9100;
+  --ms-orange-dark:   #ff9100;
+  --ms-orange-deeper: #ff9100;
+  --ms-orange-light:  #fef0d8;
+  --ms-orange-subtle: #fff8ef;
+  --ms-orange-glow:   rgba(245,135,14,.18);
+
+  --ms-text:          #1a2d42;
+  --ms-text-mid:      #3a4a5e;
+  --ms-muted:         #54647a;
+  --ms-soft:          #7a8b9e;
+
+  --ms-border:        #dbe4ef;
+  --ms-border-strong: #c4d1e2;
+  --ms-bg:            #f8fbff;
+  --ms-bg-warm:       #fffaf4;
+  --ms-white:         #ffffff;
+
+  --ms-radius-xs:     6px;
+  --ms-radius-sm:     10px;
+  --ms-radius:        14px;
+  --ms-radius-lg:     22px;
+  --ms-radius-xl:     32px;
+  --ms-radius-pill:   999px;
+
+  --ms-shadow-xs:     0 1px 4px rgba(9,30,60,.07);
+  --ms-shadow-sm:     0 4px 16px rgba(9,30,60,.09);
+  --ms-shadow:        0 10px 36px rgba(9,30,60,.12);
+  --ms-shadow-lg:     0 24px 64px rgba(9,30,60,.16);
+  --ms-shadow-cta:    0 8px 28px var(--ms-orange-glow);
+
+  --ms-section-gap:   96px;
+  --ms-section-sm:    64px;
+  --ms-gap:           clamp(18px, 2.4vw, 28px);
+
+  --ms-font-body:     'DM Sans', system-ui, sans-serif;
+
+  --ms-font-display: 'Fraunces', Georgia, serif;
+
+  --ms-ease:          cubic-bezier(.25,.46,.45,.94);
+  --ms-spring:        cubic-bezier(.34,1.56,.64,1);
+
+  font-family: var(--ms-font-body);
+  font-size: 16px;
+  line-height: 1.68;
+  color: var(--ms-text);
+  background: var(--ms-white);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── 2. RESET ──────────────────────────────────────── */
+.ms-home *,
+.ms-home *::before,
+.ms-home *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.ms-home img,
+.ms-home svg      { max-width: 100%; height: auto; display: block; }
+.ms-home a        { text-decoration: none; transition: color .16s var(--ms-ease); }
+.ms-home p        { margin-bottom: 1rem; }
+.ms-home p:last-child { margin-bottom: 0; }
+
+/* ── 3. LAYOUT ─────────────────────────────────────── */
+.ms-home .ms-container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 4vw, 48px);
+}
+.ms-home .ms-container--narrow { max-width: 860px; }
+
+.ms-home .ms-section    { padding-block: var(--ms-section-gap); }
+.ms-home .ms-section-sm { padding-block: var(--ms-section-sm); }
+
+/* ── 4. TYPOGRAPHY ─────────────────────────────────── */
+.ms-home h1,
+.ms-home h2,
+.ms-home h3,
+.ms-home h4 {
+  font-family: var(--ms-font-display);
+  font-weight: 700;
+  letter-spacing: -.025em;
+  line-height: 1.12;
+  color: var(--ms-navy-dark);
+}
+.ms-home h1 { font-size: clamp(2.4rem, 5.5vw, 4rem); line-height: 1.06; letter-spacing: -.035em; }
+.ms-home h2 { font-size: clamp(1.8rem, 3.8vw, 3rem); }
+.ms-home h3 { font-size: clamp(1.15rem, 1.8vw, 1.6rem); }
+.ms-home h4 { font-size: 1rem; font-weight: 600; letter-spacing: -.01em; line-height: 1.35; }
+
+.ms-home .ms-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  color: var(--ms-orange);
+  margin-bottom: 14px;
+}
+.ms-home .ms-eyebrow::before {
+  content: "";
+  width: 20px; height: 2px;
+  border-radius: 2px;
+  background: var(--ms-orange);
+  flex-shrink: 0;
+}
+.ms-home .ms-section-intro {
+  text-align: center;
+  margin-bottom: 52px;
+}
+.ms-home .ms-section-intro h2,
+.ms-home .ms-section-intro h3 { margin-bottom: 12px; }
+.ms-home .ms-section-intro p {
+  font-size: 1.0625rem;
+  color: var(--ms-muted);
+  max-width: 560px;
+  margin-inline: auto;
+}
+.ms-home .ms-lede {
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  color: var(--ms-muted);
+  line-height: 1.75;
+  max-width: 580px;
+}
+
+/* ── 5. BUTTONS ────────────────────────────────────── */
+.ms-home .ms-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  min-height: 48px;
+  padding: 12px 24px;
+  border: 1.5px solid transparent;
+  border-radius: var(--ms-radius-pill);
+  font-family: var(--ms-font-body);
+  font-size: .9rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .18s var(--ms-ease), color .18s var(--ms-ease),
+              border-color .18s var(--ms-ease), box-shadow .18s var(--ms-ease),
+              transform .2s var(--ms-spring);
+}
+.ms-home .ms-btn:hover  { transform: translateY(-2px); }
+.ms-home .ms-btn:active { transform: translateY(0); }
+.ms-home .ms-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(74,166,232,.4); }
+
+.ms-home .ms-btn-primary {
+  background: linear-gradient(180deg, var(--ms-orange) 0%, var(--ms-orange-dark) 100%);
+  color: #fff;
+  border-color: var(--ms-orange-dark);
+  box-shadow: var(--ms-shadow-cta);
+}
+.ms-home .ms-btn-primary:hover {
+  background: linear-gradient(180deg, #ff9f36 0%, var(--ms-orange-deeper) 100%);
+  color: #fff;
+  box-shadow: 0 14px 36px var(--ms-orange-glow);
+}
+.ms-home .ms-btn-secondary {
+  background: var(--ms-white);
+  color: var(--ms-navy);
+  border-color: var(--ms-border-strong);
+  box-shadow: var(--ms-shadow-xs);
+}
+.ms-home .ms-btn-secondary:hover {
+  background: var(--ms-navy-subtle);
+  border-color: var(--ms-sky);
+  color: var(--ms-navy-dark);
+  box-shadow: var(--ms-shadow-sm);
+}
+.ms-home .ms-btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+.ms-home .ms-link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  color: var(--ms-navy);
+  font-weight: 600;
+  font-size: .9rem;
+}
+.ms-home .ms-link-arrow::after { content: "→"; transition: transform .16s var(--ms-spring); }
+.ms-home .ms-link-arrow:hover  { color: var(--ms-orange-dark); }
+.ms-home .ms-link-arrow:hover::after { transform: translateX(4px); }
+
+/* ── 6. HEADER ─────────────────────────────────────── */
+.ms-home .ms-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,.94);
+  border-bottom: 1px solid var(--ms-border);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.ms-home .ms-header-inner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 24px;
+  height: 68px;
+}
+.ms-home .ms-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.ms-home .ms-logo-mark {
+  width: 36px; height: 36px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, var(--ms-sky), var(--ms-navy));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ms-home .ms-logo-mark svg { width: 18px; height: 18px; }
+.ms-home .ms-logo-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ms-navy-dark);
+  letter-spacing: -.02em;
+  line-height: 1.1;
+}
+.ms-home .ms-logo-name span { color: var(--ms-orange); }
+.ms-home .ms-logo-sub {
+  display: block;
+  font-size: .62rem;
+  font-weight: 500;
+  letter-spacing: .04em;
+  color: var(--ms-soft);
+}
+.ms-home .ms-nav-wrap { justify-self: center; }
+.ms-home .ms-nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  list-style: none;
+}
+.ms-home .ms-nav a {
+  padding: 7px 13px;
+  border-radius: var(--ms-radius-pill);
+  color: var(--ms-muted);
+  font-size: .875rem;
+  font-weight: 600;
+  transition: color .14s, background .14s;
+}
+.ms-home .ms-nav a:hover { color: var(--ms-navy-dark); background: var(--ms-navy-subtle); }
+.ms-home .ms-header-cta { justify-self: end; }
+.ms-home .ms-menu-toggle {
+  display: none;
+  background: none;
+  border: 0;
+  font-size: 22px;
+  color: var(--ms-navy-dark);
+  cursor: pointer;
+  justify-self: end;
+}
+
+/* ── 7. HERO ───────────────────────────────────────── */
+.ms-home .ms-hero {
+  padding: clamp(72px, 10vw, 120px) 0 clamp(60px, 8vw, 96px);
+  /* background:
+    radial-gradient(ellipse 65% 75% at 88% 8%, rgba(74,166,232,.11), transparent 52%),
+    radial-gradient(ellipse 45% 55% at 4% 88%, rgba(245,135,14,.07), transparent 48%),
+    linear-gradient(162deg, var(--ms-navy-subtle) 0%, #ffffff 50%, var(--ms-bg-warm) 100%); */
+  /* border-bottom: 1px solid var(--ms-border); */
+  position: relative;
+  overflow: hidden;
+}
+.ms-home .ms-hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  /* background: linear-gradient(90deg, transparent, var(--ms-orange) 30%, var(--ms-sky) 70%, transparent); */
+  opacity: .3;
+}
+.ms-home .ms-hero-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 80px);
+  align-items: center;
+}
+.ms-home .ms-hero h1 { margin-bottom: 18px; }
+.ms-home .ms-hero h1 em { font-style: italic; color: var(--ms-orange-dark); }
+.ms-home .ms-hero-lede {
+  font-size: clamp(1rem, 1.3vw, 1.1rem);
+  color: var(--ms-muted);
+  max-width: 520px;
+  margin-bottom: 28px;
+  line-height: 1.72;
+}
+.ms-home .ms-hero-proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+.ms-home .ms-hero-proof span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border: 1px solid var(--ms-border);
+  border-radius: var(--ms-radius-pill);
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--ms-muted);
+  background: rgba(255,255,255,.8);
+}
+.ms-home .ms-hero-proof span::before {
+  content: "✓";
+  color: var(--ms-orange);
+  font-weight: 800;
+}
+.ms-home .ms-hero-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--ms-muted);
+  margin-top: 16px;
+}
+.ms-home .ms-hero-stars { color: var(--ms-orange); font-size: .95rem; letter-spacing: 2px; }
+.ms-home .ms-hero-visual {
+  border-radius: var(--ms-radius-xl);
+  overflow: hidden;
+  box-shadow: var(--ms-shadow-lg);
+}
+.ms-home .ms-hero-visual img { width: 100%; display: block; }
+
+/* ── 8. SECTION BACKGROUNDS ────────────────────────── */
+.ms-home .ms-bg-white { background: var(--ms-white); }
+.ms-home .ms-bg-page  { background: var(--ms-bg); }
+.ms-home .ms-bg-warm  {
+  background:
+    radial-gradient(ellipse 60% 60% at 90% 15%, rgba(245,135,14,.09), transparent),
+    linear-gradient(180deg, var(--ms-orange-subtle) 0%, #fff 100%);
+}
+.ms-home .ms-bg-light {
+  background:
+    radial-gradient(ellipse 70% 55% at 5% 20%, rgba(74,166,232,.08), transparent),
+    linear-gradient(180deg, var(--ms-navy-subtle) 0%, #fff 100%);
+}
+.ms-home .ms-bg-ruled {
+  background: var(--ms-bg);
+  border-top: 1px solid var(--ms-border);
+  border-bottom: 1px solid var(--ms-border);
+}
+
+/* ── 9. PROOF BAND ─────────────────────────────────── */
+.ms-home .ms-proof-band {
+  background: var(--ms-navy-dark);
+  padding-block: 28px;
+}
+.ms-home .ms-proof-band-inner {
+  display: grid;
+  grid-template-columns: 1.2fr repeat(3, .7fr);
+  gap: 20px;
+  align-items: center;
+}
+.ms-home .ms-proof-band-lead strong {
+  display: block;
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+.ms-home .ms-proof-band-lead span {
+  font-size: .85rem;
+  color: rgba(255,255,255,.55);
+}
+.ms-home .ms-proof-stat strong {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--ms-orange);
+  letter-spacing: -.03em;
+  line-height: 1.1;
+}
+.ms-home .ms-proof-stat span {
+  font-size: .8rem;
+  color: rgba(255,255,255,.5);
+  line-height: 1.4;
+}
+
+/* ── 10. AWARDS ────────────────────────────────────── */
+.ms-home .ms-awards-section { padding: 64px 0; background: var(--ms-white); }
+.ms-home .ms-awards-wrap    { text-align: center; }
+.ms-home .ms-awards-wrap h2 { margin-bottom: 8px; }
+.ms-home .ms-awards-wrap > p {
+  color: var(--ms-muted);
+  max-width: 440px;
+  margin: 0 auto 32px;
+}
+.ms-home .ms-grid-awards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 640px;
+  margin: 0 auto 24px;
+}
+.ms-home .ms-award-badge { display: flex; align-items: center; justify-content: center; }
+.ms-home .ms-award-badge img {
+  max-height: 130px; width: auto;
+  transition: transform .2s var(--ms-ease);
+}
+.ms-home .ms-award-badge img:hover { transform: scale(1.05); }
+.ms-home .ms-review-logos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 460px;
+  margin-inline: auto;
+}
+.ms-home .ms-review-logo {
+  height: 50px;
+  border: 1px solid var(--ms-border);
+  border-radius: var(--ms-radius-xs);
+  background: var(--ms-white);
+  box-shadow: var(--ms-shadow-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+}
+
+/* ── 11. LOGOS STRIP ───────────────────────────────── */
+.ms-home .ms-logos-section {
+  padding: 52px 0;
+  background: var(--ms-bg);
+  border-top: 1px solid var(--ms-border);
+  border-bottom: 1px solid var(--ms-border);
+}
+.ms-home .ms-logos-label {
+  text-align: center;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ms-soft);
+  margin-bottom: 28px;
+}
+.ms-home .ms-grid-logos {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+.ms-home .ms-logo-item {
+  background: var(--ms-white);
+  border: 1px solid var(--ms-border);
+  border-radius: var(--ms-radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 14px;
+  height: 80px;
+  transition: box-shadow .2s, border-color .2s, transform .2s var(--ms-spring);
+}
+.ms-home .ms-logo-item:hover { box-shadow: var(--ms-shadow-sm); border-color: var(--ms-border-strong); transform: translateY(-2px); }
+.ms-home .ms-logo-item img {
+  width: auto;
+  max-height: 42px;
+  filter: grayscale(100%) opacity(.45);
+  transition: filter .35s var(--ms-ease);
+}
+.ms-home .ms-logo-item:hover img { filter: grayscale(0%) opacity(1); }
+
+/* ── 12. AI ANSWER BLOCK ───────────────────────────── */
+.ms-home .ms-answer-block {
+  margin: 32px 0;
+  padding: clamp(20px, 3vw, 28px);
+  border: 1px solid var(--ms-sky-light);
+  border-left: 4px solid var(--ms-sky);
+  border-radius: var(--ms-radius);
+  background: var(--ms-sky-subtle);
+  box-shadow: var(--ms-shadow-xs);
+}
+.ms-home .ms-answer-block strong { color: var(--ms-navy-dark); }
+.ms-home .ms-answer-block p { color: var(--ms-muted); font-size: .95rem; line-height: 1.7; }
+
+/* ── 13. INDUSTRY GRID ─────────────────────────────── */
+.ms-home .ms-industry-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 36px;
+}
+.ms-home .ms-industry-card {
+  padding: 20px;
+  border: 1px solid var(--ms-border);
+  border-radius: var(--ms-radius-sm);
+  background: var(--ms-white);
+  box-shadow: var(--ms-shadow-xs);
+  transition: transform .2s var(--ms-ease), box-shadow .2s, border-color .2s;
+}
+.ms-home .ms-industry-card:hover { transform: translateY(-3px); box-shadow: var(--ms-shadow-sm); border-color: var(--ms-border-strong); }
+.ms-home .ms-industry-card strong {
+  display: block;
+  color: var(--ms-navy-dark);
+  font-weight: 700;
+  font-size: .95rem;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.ms-home .ms-industry-card span {
+  display: block;
+  color: var(--ms-muted);
+  font-size: .84rem;
+  line-height: 1.5;
+}
+
+/* ── 14. WORKFLOW STEPS ────────────────────────────── */
+.ms-home .ms-workflow {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  counter-reset: ms-step;
+  margin-top: 40px;
+}
+.ms-home .ms-step {
+  position: relative;
+  min-height: 130px;
+  padding: 18px 16px;
+  border: 1px solid var(--ms-border);
+  border-radius: var(--ms-radius-sm);
+  background: var(--ms-white);
+  box-shadow: var(--ms-shadow-xs);
+  font-size: .875rem;
+  color: var(--ms-text-mid);
+  font-weight: 500;
+  line-height: 1.45;
+  transition: border-color .2s, box-shadow .2s, transform .2s var(--ms-ease);
+}
+.ms-home .ms-step:hover { border-color: var(--ms-orange); box-shadow: var(--ms-shadow-sm); transform: translateY(-3px); }
+.ms-home .ms-step::before {
+  counter-increment: ms-step;
+  content: counter(ms-step);
+  display: grid;
+  width: 30px; height: 30px;
+  margin-bottom: 12px;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--ms-navy-dark);
+  background: var(--ms-orange-light);
+  font-weight: 700;
+  font-size: .82rem;
+}
+
+/* ── 15. FEATURE CARDS ─────────────────────────────── */
+.ms-home .ms-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--ms-gap);
+}
+.ms-home .ms-cap-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  padding: clamp(22px, 2.8vw, 30px);
+  border: 1px solid var(--ms-border);
+  border-radius: var(--ms-radius);
+  background: rgba(255,255,255,.9);
+  box-shadow: var(--ms-shadow-xs);
+  overflow: hidden;
+  transition: transform .22s var(--ms-ease), border-color .22s, box-shadow .22s;
+}
+.ms-home .ms-cap-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  /* background: linear-gradient(90deg, var(--ms-sky), var(--ms-orange)); */
+  background: #4fa6e9;
+  opacity: 0;
+  transition: opacity .22s;
+}
+.ms-home .ms-cap-card:hover { transform: translateY(-4px); border-color: var(--ms-border-strong); box-shadow: var(--ms-shadow); }
+.ms-home .ms-cap-card:hover::before { opacity: 1; }
+.ms-home .ms-cap-card h3 { font-size: clamp(1rem, 1.4vw, 1.25rem); margin-bottom: 6px; }
+.ms-home .ms-cap-card p  { color: var(--ms-muted); font-size: .9rem; flex: 1; line-height: 1.62; }
+.ms-home .ms-cap-card a  {
+  margin-top: .75rem;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--ms-navy);
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+}
+.ms-home .ms-cap-card a::after { content: "→"; transition: transform .16s var(--ms-spring); }
+.ms-home .ms-cap-card a:hover  { color: var(--ms-orange-dark); }
+.ms-home .ms-cap-card a:hover::after { transform: translateX(4px); }
+
+/* ── 16. PROBLEM CARDS (kept from original) ────────── */
+.ms-home .ms-card-problem {
+  background: var(--ms-white);
+  border: 2px solid var(--ms-border);
+  border-top: 4px solid var(--ms-sky);
+  border-radius: var(--ms-radius-sm);
+  padding: 28px 28px 32px;
+  transition: box-shadow .2s;
+}
+.ms-home .ms-card-problem:hover { box-shadow: var(--ms-shadow); }
+.ms-home .ms-card-problem h3 {
+  font-size: 1.1rem;
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+.ms-home .ms-card-problem ul { padding-left: 18px; }
+.ms-home .ms-card-problem ul li {
+  font-size: .95rem;
+  color: var(--ms-muted);
+  margin-bottom: 8px;
+}
+
+/* ── 17. FEATURE BLOCKS (alternating split) ────────── */
+.ms-home .ms-feature-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 88px);
+  align-items: center;
+}
+.ms-home .ms-feature-split--flip { direction: rtl; }
+.ms-home .ms-feature-split--flip > * { direction: ltr; }
+.ms-home .ms-feature-text { display: flex; flex-direction: column; gap: 14px; }
+.ms-home .ms-feature-text h3 { margin-bottom: 4px; }
+.ms-home .ms-feature-text p { color: var(--ms-muted); }
+.ms-home .ms-feature-visual {
+  border-radius: var(--ms-radius-xl);
+  overflow: hidden;
+  box-shadow: var(--ms-shadow-lg);
+}
+.ms-home .ms-feature-visual img { width: 100%; display: block; }
+
+.ms-home .ms-checklist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+.ms-home .ms-checklist li {
+  position: relative;
+  padding-left: 24px;
+  font-size: .95rem;
+  color: var(--ms-muted);
+  line-height: 1.55;
+}
+.ms-home .ms-checklist li::before {
+  content: "";
+  position: absolute;
+  top: .54em; left: 0;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--ms-orange);
+  box-shadow: 0 0 0 3px var(--ms-orange-light);
+}
+
+/* ── 18. MODULE ROWS (why section) ─────────────────── */
+.ms-home .ms-module-row {
+  display: grid;
+  grid-template-columns: .38fr .62fr;
+  gap: clamp(24px, 4vw, 54px);
+  padding-block: clamp(32px, 5vw, 52px);
+  border-top: 1px solid var(--ms-border);
+}
+.ms-home .ms-module-row:first-of-type { border-top: 0; padding-top: 0; }
+.ms-home .ms-module-row h3 { font-size: 1.25rem; }
+.ms-home .ms-module-row p { color: var(--ms-muted); font-size: .95rem; margin-bottom: .75rem; }
+
+.ms-home .ms-list-2col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 20px;
+  list-style: none;
+  margin-top: 12px;
+}
+.ms-home .ms-list-2col li {
+  position: relative;
+  padding-left: 20px;
+  font-size: .875rem;
+  color: var(--ms-text-mid);
+}
+.ms-home .ms-list-2col li::before {
+  content: "";
+  position: absolute;
+  top: .56em; left: 0;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--ms-sky);
+  box-shadow: 0 0 0 3px var(--ms-sky-light);
+}
+
+/* ── 19. INTEGRATION PILLS ─────────────────────────── */
+.ms-home .ms-int-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+.ms-home .ms-int-pill {
+  padding: 9px 16px;
+  border: 1px solid var(--ms-border);
+  border-radius: var(--ms-radius-pill);
+  background: var(--ms-white);
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--ms-navy);
+  box-shadow: var(--ms-shadow-xs);
+  transition: border-color .15s, background .15s, transform .16s var(--ms-spring), box-shadow .15s;
+  text-decoration: none;
+}
+.ms-home .ms-int-pill:hover {
+  border-color: var(--ms-sky);
+  background: var(--ms-sky-subtle);
+  transform: translateY(-2px);
+  box-shadow: var(--ms-shadow-sm);
+}
+.ms-home .ms-int-pill-link {
+  color: var(--ms-orange-dark);
+  border-color: var(--ms-orange-light);
+  background: var(--ms-orange-subtle);
+}
+.ms-home .ms-int-pill-link:hover { border-color: var(--ms-orange); background: var(--ms-orange-light); }
+
+/* ── 20. CALLOUT BOX ───────────────────────────────── */
+.ms-home .ms-callout-box {
+  padding: clamp(24px, 3.5vw, 36px);
+  border: 1px solid var(--ms-border);
+  border-radius: var(--ms-radius);
+  background: var(--ms-white);
+  box-shadow: var(--ms-shadow-sm);
+}
+.ms-home .ms-callout-box h3 { font-size: 1.1rem; margin-bottom: 10px; }
+.ms-home .ms-callout-box p  { color: var(--ms-muted); font-size: .9rem; }
+
+/* ── 21. CTA BAND ──────────────────────────────────── */
+.ms-home .ms-cta-band {
+  padding: 52px 0;
+  background: var(--ms-navy-dark);
+}
+.ms-home .ms-cta-band h2,
+.ms-home .ms-cta-band h3 { color: #fff; }
+.ms-home .ms-cta-band p  { color: rgba(255,255,255,.72); }
+.ms-home .ms-cta-band--centered { text-align: center; }
+.ms-home .ms-cta-band--centered .ms-container { max-width: 720px; }
+.ms-home .ms-cta-band--centered .ms-eyebrow { color: rgba(255,255,255,.6); }
+.ms-home .ms-cta-band--centered .ms-eyebrow::before { background: var(--ms-orange); }
+.ms-home .ms-cta-band--centered h2 { margin-bottom: 12px; }
+.ms-home .ms-cta-band--centered p  { margin-bottom: 28px; }
+/* Secondary button on dark */
+.ms-home .ms-cta-band .ms-btn-secondary {
+  color: #fff;
+  background: rgba(255,255,255,.1);
+  border-color: rgba(255,255,255,.28);
+  box-shadow: none;
+}
+.ms-home .ms-cta-band .ms-btn-secondary:hover {
+  background: rgba(255,255,255,.18);
+  border-color: rgba(255,255,255,.45);
+}
+
+/* ── 22. TESTIMONIALS ──────────────────────────────── */
+.ms-home .ms-grid-testimonials {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--ms-gap);
+}
+.ms-home .ms-card-testimonial {
+  background: var(--ms-white);
+  border: 1px solid var(--ms-border);
+  border-radius: var(--ms-radius);
+  padding: 28px 32px;
+  box-shadow: var(--ms-shadow-xs);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: box-shadow .2s, transform .2s var(--ms-ease);
+}
+.ms-home .ms-card-testimonial:hover { box-shadow: var(--ms-shadow); transform: translateY(-3px); }
+.ms-home .ms-testimonial-name { font-weight: 700; color: var(--ms-navy); font-size: 1rem; }
+.ms-home .ms-testimonial-name a { color: inherit; }
+.ms-home .ms-testimonial-name a:hover { color: var(--ms-orange-dark); }
+.ms-home .ms-card-testimonial p { color: var(--ms-muted); font-style: italic; font-size: .95rem; flex: 1; }
+.ms-home .ms-stars { color: var(--ms-orange); font-size: .95rem; letter-spacing: 2px; }
+
+/* ── 23. CASE STUDY ────────────────────────────────── */
+.ms-home .ms-case-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(36px, 5vw, 72px);
+  align-items: center;
+  padding: clamp(36px, 4vw, 56px);
+  border: 1px solid var(--ms-border);
+  border-radius: var(--ms-radius-xl);
+  background: linear-gradient(160deg, var(--ms-navy-subtle) 0%, #fff 55%, var(--ms-orange-subtle));
+  box-shadow: var(--ms-shadow-sm);
+}
+.ms-home .ms-case-logo { display: flex; align-items: center; justify-content: center; min-height: 160px; }
+.ms-home .ms-case-logo img { max-width: 200px; object-fit: contain; }
+
+/* ── 24. FAQ ───────────────────────────────────────── */
+.ms-home .ms-faq details {
+  padding: 20px 22px;
+  margin-bottom: 10px;
+  border: 1px solid var(--ms-border);
+  border-radius: var(--ms-radius-sm);
+  background: var(--ms-white);
+  box-shadow: var(--ms-shadow-xs);
+  transition: border-color .18s, box-shadow .18s;
+}
+.ms-home .ms-faq details:hover { border-color: var(--ms-border-strong); }
+.ms-home .ms-faq details[open] { border-color: var(--ms-sky); box-shadow: var(--ms-shadow-sm); }
+.ms-home .ms-faq summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: .95rem;
+  color: var(--ms-navy-dark);
+  list-style: none;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  line-height: 1.4;
+}
+.ms-home .ms-faq summary::-webkit-details-marker { display: none; }
+.ms-home .ms-faq summary::after {
+  content: "+";
+  flex-shrink: 0;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--ms-orange-light);
+  color: var(--ms-orange-dark);
+  font-weight: 700;
+  font-size: .85rem;
+  display: grid;
+  place-items: center;
+  transition: background .18s, color .18s, transform .22s var(--ms-spring);
+}
+.ms-home .ms-faq details[open] summary::after { content: "−"; background: var(--ms-orange); color: #fff; transform: rotate(180deg); }
+.ms-home .ms-faq p { margin: 12px 0 0; font-size: .9rem; color: var(--ms-muted); line-height: 1.72; }
+
+/* ── 25. FINAL CTA ─────────────────────────────────── */
+.ms-home .ms-final-cta {
+  padding-block: clamp(72px, 9vw, 112px);
+  text-align: center;
+  background:
+    radial-gradient(ellipse 60% 80% at 88% 8%, rgba(245,135,14,.1), transparent 50%),
+    radial-gradient(ellipse 50% 60% at 5% 85%, rgba(74,166,232,.08), transparent 48%),
+    linear-gradient(160deg, var(--ms-navy-subtle) 0%, #ffffff 50%, var(--ms-orange-subtle) 100%);
+  /* border-top: 4px solid var(--ms-orange); */
+}
+.ms-home .ms-final-cta h2 { margin-bottom: 14px; }
+.ms-home .ms-final-cta p  { color: var(--ms-muted); max-width: 560px; margin-inline: auto; margin-bottom: 32px; }
+
+/* ── 26. FOOTER ────────────────────────────────────── */
+.ms-home .ms-footer {
+  padding-block: 28px;
+  background: var(--ms-navy-deeper);
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.ms-home .ms-footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.ms-home .ms-footer-copy { font-size: .82rem; color: rgba(255,255,255,.35); }
+.ms-home .ms-footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+.ms-home .ms-footer-links a { font-size: .82rem; color: rgba(255,255,255,.5); font-weight: 500; }
+.ms-home .ms-footer-links a:hover { color: rgba(255,255,255,.85); }
+
+/* ── 27. APP BADGE ─────────────────────────────────── */
+.ms-home .ms-app-badge { max-width: 160px; height: auto; margin-top: 8px; }
+
+/* ── 28. FEATURE BLOCK (original app style) ────────── */
+.ms-home .ms-feature-block--app {
+  background: var(--ms-white);
+  border: 1px solid var(--ms-border);
+  border-radius: var(--ms-radius-lg);
+  padding: clamp(32px, 4vw, 56px) clamp(28px, 4vw, 64px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  margin-bottom: 28px;
+}
+.ms-home .ms-feature-block--app:last-child { margin-bottom: 0; }
+.ms-home .ms-feature-block--app-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ms-home .ms-feature-block--app-img img { width: 100%; max-height: 360px; object-fit: contain; }
+
+/* ── 29. SCROLL REVEAL ─────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .ms-home .ms-reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .6s var(--ms-ease), transform .6s var(--ms-ease);
+    will-change: opacity, transform;
+  }
+  .ms-home .ms-reveal.is-visible { opacity: 1; transform: none; }
+  .ms-home .ms-reveal--left  { transform: translateX(-32px); }
+  .ms-home .ms-reveal--right { transform: translateX(32px); }
+  .ms-home .ms-stagger > * {
+    opacity: 0;
+    transform: translateY(22px) scale(.97);
+    transition: opacity .52s var(--ms-ease), transform .52s var(--ms-ease);
+    will-change: opacity, transform;
+  }
+  .ms-home .ms-stagger.is-visible > * { opacity: 1; transform: none; }
+  .ms-home .ms-stagger > *:nth-child(1) { transition-delay: 0ms; }
+  .ms-home .ms-stagger > *:nth-child(2) { transition-delay: 75ms; }
+  .ms-home .ms-stagger > *:nth-child(3) { transition-delay: 150ms; }
+  .ms-home .ms-stagger > *:nth-child(4) { transition-delay: 225ms; }
+  .ms-home .ms-stagger > *:nth-child(5) { transition-delay: 300ms; }
+  .ms-home .ms-stagger > *:nth-child(6) { transition-delay: 375ms; }
+  .ms-home .ms-stagger > *:nth-child(7) { transition-delay: 450ms; }
+  .ms-home .ms-stagger > *:nth-child(8) { transition-delay: 525ms; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ms-home .ms-reveal,
+  .ms-home .ms-stagger > * { opacity: 1 !important; transform: none !important; }
+}
+
+/* ── 30. RESPONSIVE ────────────────────────────────── */
+@media (max-width: 1040px) {
+  .ms-home .ms-grid-logos    { grid-template-columns: repeat(3, 1fr); }
+  .ms-home .ms-industry-grid { grid-template-columns: repeat(2, 1fr); }
+  .ms-home .ms-workflow      { grid-template-columns: repeat(3, 1fr); }
+  .ms-home .ms-proof-band-inner { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 820px) {
+  .ms-home .ms-hero-layout,
+  .ms-home .ms-feature-split,
+  .ms-home .ms-feature-split--flip,
+  .ms-home .ms-case-card,
+  .ms-home .ms-feature-block--app,
+  .ms-home .ms-module-row { grid-template-columns: 1fr; direction: ltr; }
+  .ms-home .ms-hero-visual,
+  .ms-home .ms-feature-block--app-img { order: -1; }
+  .ms-home .ms-grid-3,
+  .ms-home .ms-grid-testimonials { grid-template-columns: 1fr; }
+  .ms-home .ms-list-2col { grid-template-columns: 1fr; }
+  .ms-home .ms-workflow { grid-template-columns: repeat(2, 1fr); }
+  .ms-home .ms-header-inner { grid-template-columns: auto auto; }
+  .ms-home .ms-nav-wrap { display: none; grid-column: 1/-1; }
+  .ms-home .ms-nav-wrap.open { display: block; padding-bottom: 16px; }
+  .ms-home .ms-nav { flex-direction: column; align-items: flex-start; gap: 4px; padding-top: 12px; }
+  .ms-home .ms-menu-toggle { display: flex; }
+  .ms-home .ms-header-cta { display: none; }
+  .ms-home .ms-industry-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px) {
+  .ms-home { --ms-section-gap: 64px; }
+  .ms-home .ms-grid-logos { grid-template-columns: repeat(2, 1fr); }
+  .ms-home .ms-workflow { grid-template-columns: 1fr; }
+  .ms-home .ms-industry-grid { grid-template-columns: 1fr; }
+  .ms-home .ms-btn-group { flex-direction: column; align-items: stretch; }
+  .ms-home .ms-proof-band-inner { grid-template-columns: 1fr; }
+  .ms-home .ms-grid-awards { grid-template-columns: 1fr; max-width: 280px; }
+}
+
+
+/* ── 31. MOBILE RESPONSIVE REFINEMENTS ───────────────
+   Content and design preserved; layout only adapts to
+   tablet/mobile viewports. Hero image is hidden on mobile.
+   ----------------------------------------------------- */
+.ms-home {
+  overflow-x: clip;
+}
+.ms-home .ms-hero-layout > div:last-child img,
+.ms-home .ms-feature-split img,
+.ms-home .ms-feature-block--app-img img,
+.ms-home .ms-case-logo img,
+.ms-home .ms-award-badge img,
+.ms-home .ms-review-logo img,
+.ms-home .ms-logo-item img {
+  max-width: 100%;
+}
+
+@media (max-width: 1040px) {
+  .ms-home .ms-container {
+    padding-inline: clamp(18px, 4vw, 36px);
+  }
+  .ms-home .ms-hero-layout {
+    gap: clamp(32px, 5vw, 52px);
+  }
+  .ms-home .ms-feature-block--app {
+    gap: clamp(32px, 5vw, 48px);
+  }
+}
+
+@media (max-width: 820px) {
+  .ms-home {
+    --ms-section-gap: 72px;
+    --ms-section-sm: 52px;
+  }
+  .ms-home .ms-container {
+    padding-inline: clamp(18px, 5vw, 28px);
+  }
+  .ms-home .ms-section-intro {
+    margin-bottom: 36px;
+  }
+  .ms-home .ms-section-intro p,
+  .ms-home .ms-lede,
+  .ms-home .ms-hero-lede {
+    max-width: none;
+  }
+  .ms-home .ms-hero {
+    padding: clamp(56px, 12vw, 76px) 0 clamp(48px, 10vw, 68px);
+  }
+  .ms-home .ms-hero-layout {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .ms-home .ms-hero .ms-hero-layout > div:last-child {
+    display: none;
+  }
+  .ms-home .ms-hero h1,
+  .ms-home .ms-hero-lede {
+    max-width: 680px;
+  }
+  .ms-home .ms-hero-rating {
+    align-items: flex-start;
+  }
+  .ms-home .ms-grid-awards {
+    gap: 14px;
+  }
+  .ms-home .ms-award-badge img {
+    max-height: 112px;
+  }
+  .ms-home .ms-review-logo {
+    min-width: 0;
+  }
+  .ms-home .ms-feature-split,
+  .ms-home .ms-feature-split--flip,
+  .ms-home .ms-case-card,
+  .ms-home .ms-feature-block--app,
+  .ms-home .ms-module-row {
+    gap: 28px;
+  }
+  .ms-home .ms-feature-block--app {
+    padding: clamp(26px, 6vw, 36px);
+  }
+  .ms-home .ms-feature-block--app-img img {
+    max-height: 320px;
+  }
+  .ms-home .ms-cta-band .ms-reveal[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+    gap: 22px !important;
+    text-align: center;
+    justify-items: center;
+  }
+  .ms-home .ms-cta-band .ms-reveal[style*="grid-template-columns"] > div {
+    max-width: 640px !important;
+  }
+  .ms-home .ms-case-card {
+    padding: clamp(28px, 6vw, 40px);
+  }
+  .ms-home .ms-case-logo {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .ms-home {
+    font-size: 15.5px;
+    --ms-section-gap: 60px;
+    --ms-section-sm: 44px;
+  }
+  .ms-home .ms-container {
+    padding-inline: 18px;
+  }
+  .ms-home h1 {
+    font-size: clamp(2.15rem, 12vw, 3rem);
+  }
+  .ms-home h2 {
+    font-size: clamp(1.65rem, 9vw, 2.35rem);
+  }
+  .ms-home h3 {
+    font-size: clamp(1.1rem, 6vw, 1.35rem);
+  }
+  .ms-home .ms-eyebrow {
+    font-size: .68rem;
+    letter-spacing: .09em;
+  }
+  .ms-home .ms-btn {
+    width: 100%;
+    min-height: 50px;
+    padding-inline: 18px;
+    white-space: normal;
+    text-align: center;
+  }
+  .ms-home .ms-btn-group {
+    width: 100%;
+  }
+  .ms-home .ms-hero-rating {
+    gap: 8px;
+    line-height: 1.45;
+  }
+  .ms-home .ms-grid-logos {
+    gap: 10px;
+  }
+  .ms-home .ms-logo-item {
+    height: 72px;
+    padding: 12px;
+  }
+  .ms-home .ms-logo-item img {
+    max-height: 34px;
+  }
+  .ms-home .ms-review-logos {
+    grid-template-columns: 1fr;
+    max-width: 280px;
+  }
+  .ms-home .ms-card-problem,
+  .ms-home .ms-card-testimonial,
+  .ms-home .ms-cap-card,
+  .ms-home .ms-callout-box,
+  .ms-home .ms-answer-block,
+  .ms-home .ms-faq details {
+    padding: 22px;
+  }
+  .ms-home .ms-feature-block--app {
+    border-radius: var(--ms-radius);
+    padding: 24px 20px;
+  }
+  .ms-home .ms-feature-block--app-img img {
+    max-height: 280px;
+  }
+  .ms-home .ms-module-row {
+    padding-block: 34px;
+  }
+  .ms-home .ms-int-pills {
+    gap: 8px;
+  }
+  .ms-home .ms-int-pill {
+    padding: 8px 13px;
+    font-size: .8rem;
+  }
+  .ms-home .ms-final-cta .ms-btn-group {
+    justify-content: stretch !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .ms-home .ms-container {
+    padding-inline: 16px;
+  }
+  .ms-home .ms-hero {
+    padding-top: 48px;
+  }
+  .ms-home h1 {
+    font-size: clamp(2rem, 13vw, 2.55rem);
+  }
+  .ms-home .ms-hero-lede,
+  .ms-home .ms-section-intro p,
+  .ms-home .ms-lede {
+    font-size: .98rem;
+    line-height: 1.65;
+  }
+  .ms-home .ms-awards-section,
+  .ms-home .ms-logos-section,
+  .ms-home .ms-cta-band {
+    padding-block: 40px;
+  }
+  .ms-home .ms-card-problem,
+  .ms-home .ms-card-testimonial,
+  .ms-home .ms-cap-card,
+  .ms-home .ms-callout-box,
+  .ms-home .ms-answer-block,
+  .ms-home .ms-faq details {
+    padding: 20px;
+  }
+  .ms-home .ms-feature-block--app-img img {
+    max-height: 240px;
+  }
+  .ms-home .ms-award-badge img {
+    max-height: 104px;
+  }
+}
+
+</style>
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"SoftwareApplication",
+      "name":"Streamline ERP",
+      "applicationCategory":"EnterpriseResourcePlanningSoftware",
+      "operatingSystem":"Web",
+      "url":"https://mountainstream.co/",
+      "description":"Flexible ERP software for order-driven businesses that need online ordering, production planning, inventory management, supply chain traceability, distribution, finance, reporting, and integrations.",
+      "provider":{"@type":"Organization","name":"Mountain Stream","url":"https://mountainstream.co/"},
+      "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","reviewCount":"150","bestRating":"5"}
+    },
+    {
+      "@type":"FAQPage",
+      "mainEntity":[
+        {"@type":"Question","name":"What is Streamline ERP?","acceptedAnswer":{"@type":"Answer","text":"Streamline ERP is flexible business software from Mountain Stream for order-driven operations. It connects customer ordering, production planning, recipe or bill-of-material workflows, inventory, lot tracking, traceability, distribution, invoicing, finance, reporting, and integrations."}},
+        {"@type":"Question","name":"Which industries can use Streamline ERP?","acceptedAnswer":{"@type":"Answer","text":"Streamline is suited to food and beverage producers, wholesale distributors, commissaries, commercial kitchens, bakeries, prepared-food operations, and specialty manufacturers — any business with recurring orders, production, inventory, delivery, and reporting needs."}},
+        {"@type":"Question","name":"Is Streamline only for bakeries?","acceptedAnswer":{"@type":"Answer","text":"No. Bakery remains a proven niche, but the system supports broader workflows used by food producers, distributors, commercial kitchens, prepared-food businesses, and specialty manufacturers."}},
+        {"@type":"Question","name":"Does Streamline support inventory and traceability?","acceptedAnswer":{"@type":"Answer","text":"Yes. Streamline supports receiving goods, assigning lot numbers, printing labels, moving stock, making products, depleting ingredients, tracing lots, and connecting traceability records to packing slips and recall communication."}},
+        {"@type":"Question","name":"Can Streamline integrate with accounting and delivery tools?","acceptedAnswer":{"@type":"Answer","text":"Yes. Streamline integrates with QuickBooks, Xero, Stripe, WholeSail, Melio, ACH, OptimoRoute, Detrack, and Shopify."}}
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="ms-home">
+
+  <!-- ── HERO ───────────────────────────────────────── -->
+  <section class="ms-hero" aria-labelledby="hero-title">
+    <div class="ms-container">
+      <div class="ms-hero-layout">
+
+        <div class="ms-reveal ms-reveal--left" style="transition-delay:80ms">
+          <span class="ms-eyebrow">Streamline ERP by Mountain Stream</span>
+          <h1 id="hero-title">Flexible ERP for <em>order-driven</em> operations.</h1>
+          <p class="ms-hero-lede">Connect customer ordering, production planning, inventory, traceability, distribution, finance, reporting, and integrations in one system built for businesses that make, move, and deliver products every day.</p>
+          <div class="ms-btn-group">
+            <a href="https://mountainstream.co/register-your-company?cta=hero&intent=book-demo" class="ms-btn ms-btn-primary">Book a Free Demo</a>
+            <a href="/streamline-features/" class="ms-btn ms-btn-secondary">Explore Features</a>
+          </div>
+          <div class="ms-hero-proof">
+            <!-- <span>Production planning</span>
+            <span>Inventory &amp; traceability</span>
+            <span>Distribution &amp; finance</span>
+            <span>Configurable reporting</span> -->
+          </div>
+          <div class="ms-hero-rating">
+            <span class="ms-hero-stars">★★★★★</span>
+            <span>Average <strong>4.8 rating</strong> from our users</span>
+          </div>
+        </div>
+
+        <div style="transition-delay:220ms">
+          <img
+            src="https://mountainstream.co/wp-content/uploads/2025/11/streamline-wholesale-bakery-software-hero.png"
+            alt="Streamline ERP feature overview — ordering, production, inventory, distribution, and finance in one connected system."
+            loading="eager"
+          >
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── AWARDS ─────────────────────────────────────── -->
+  <section class="ms-awards-section" aria-label="Awards and ratings">
+    <div class="ms-container">
+      <div class="ms-awards-wrap">
+        <div class="ms-reveal">
+          <h2>Award-Winning ERP Software</h2>
+          <p>Recognized in 2025 &amp; 2026 for <strong>value</strong>, <strong>simplicity</strong>, and <strong>support</strong> — Streamline helps operations scale with confidence.</p>
+        </div>
+        <div class="ms-grid-awards ms-stagger" style="margin-top:32px">
+          <div class="ms-award-badge">
+            <img src="https://mountainstream.co/wp-content/uploads/2026/01/SA-Badge-BestCustomerSupport-2026_FullColor_Preview_800x625px.png" alt="Best Customer Support 2026" loading="lazy">
+          </div>
+          <div class="ms-award-badge">
+            <img src="https://mountainstream.co/wp-content/uploads/2026/01/CAP-Badge-BestValue_FullColor-Positive-800x625px-.png" alt="Best Value" loading="lazy">
+          </div>
+          <div class="ms-award-badge">
+            <img src="https://mountainstream.co/wp-content/uploads/2026/01/SA-Badge-MostRecommended-2025_Positive-800x625px_Positive-800x625px.png" alt="Most Recommended 2025" loading="lazy">
+          </div>
+        </div>
+        <div class="ms-review-logos ms-stagger" style="margin-top:20px">
+          <div class="ms-review-logo"><img src="https://mountainstream.co/wp-content/uploads/2026/03/software-advice-ratings.svg" alt="Software Advice" loading="lazy"></div>
+          <div class="ms-review-logo"><img src="https://mountainstream.co/wp-content/uploads/2026/03/capterra-ratings.svg" alt="Capterra" loading="lazy"></div>
+          <div class="ms-review-logo"><img src="https://mountainstream.co/wp-content/uploads/2026/03/get-app-ratings-1.svg" alt="GetApp" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── LOGO STRIP ──────────────────────────────────── -->
+  <section class="ms-logos-section" aria-label="Customer logos">
+    <div class="ms-container">
+      <p class="ms-logos-label">Trusted by leading producers worldwide since 2012</p>
+      <div class="ms-grid-logos ms-stagger">
+        <div class="ms-logo-item"><img src="https://mountainstream.co/wp-content/uploads/2026/03/capital-bread-logo.png"               alt="Capital Bread" loading="lazy"></div>
+        <div class="ms-logo-item"><img src="https://mountainstream.co/wp-content/uploads/2026/03/bluepoint-bakery.png"                alt="Bluepoint Bakery" loading="lazy"></div>
+        <div class="ms-logo-item"><img src="https://mountainstream.co/wp-content/uploads/2025/02/streamline-customer-leadsbread.png"  alt="Leadsbread" loading="lazy"></div>
+        <div class="ms-logo-item"><img src="https://mountainstream.co/wp-content/uploads/2025/02/mountainstream-sourflour.png"        alt="Sour Flour" loading="lazy"></div>
+        <div class="ms-logo-item"><img src="https://mountainstream.co/wp-content/uploads/2025/02/streamline-customer-pumpstreet.png"  alt="Pump Street Bakery" loading="lazy"></div>
+        <div class="ms-logo-item"><img src="https://mountainstream.co/wp-content/uploads/2025/02/streamline-customer-tartine.png"     alt="Tartine" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── ERP POSITIONING + AI SUMMARY ───────────────── -->
+  <section class="ms-section ms-bg-light" aria-labelledby="erp-position-title">
+    <div class="ms-container">
+      <div class="ms-feature-split">
+        <div class="ms-reveal">
+          <span class="ms-eyebrow">Multi-industry ERP</span>
+          <h2 id="erp-position-title">Built for industries where orders become work, stock becomes revenue, and details matter.</h2>
+          <p class="ms-lede" style="margin-top:12px">Mountain Stream started with deep expertise in wholesale bakery operations. That niche remains important. The bigger opportunity is Streamline ERP as a configurable operations platform for any order-driven business that needs control across customers, catalogues, production, stock, delivery, finance, and reporting.</p>
+          <div class="ms-btn-group" style="margin-top:20px">
+            <a href="/streamline-features/" class="ms-btn ms-btn-primary">Explore Features</a>
+            <a href="https://mountainstream.co/case-study/" class="ms-btn ms-btn-secondary">Case Studies</a>
+          </div>
+        </div>
+        <div class="ms-reveal" style="transition-delay:120ms">
+          <div class="ms-answer-block" aria-label="AI-readable summary">
+            <strong>What is Streamline ERP?</strong>
+            <p>Streamline ERP is flexible business management software for order-driven companies. It helps teams manage online ordering, customer accounts, CRM, catalogues, production planning, recipes or bills of materials, inventory, lot tracking, traceability, delivery, invoicing, payment collection, accounting exports, reporting, automation, and integrations.</p>
+          </div>
+          <div class="ms-callout-box" style="margin-top:var(--ms-gap)">
+            <h3>One database. Every team.</h3>
+            <p>Orders, production, inventory, finance, and reporting share the same operational data — eliminating the re-entry and handoffs that break disconnected tools.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── INDUSTRIES ──────────────────────────────────── -->
+  <section class="ms-section ms-bg-white" id="ms-industries" aria-labelledby="industries-title">
+    <div class="ms-container">
+      <div class="ms-section-intro ms-reveal">
+        <span class="ms-eyebrow" style="justify-content:center">Industries</span>
+        <h2 id="industries-title">One ERP foundation. Multiple operational niches.</h2>
+        <!-- <p>Streamline is strongest where businesses handle repeat customers, time-sensitive orders, production, inventory, delivery, and invoicing. Bakery remains a flagship niche, but the same workflow applies across many production and distribution environments.</p> -->
+      </div>
+      <div class="ms-industry-grid ms-stagger">
+        <article class="ms-industry-card">
+          <strong>Food &amp; beverage producers</strong>
+          <span>Production planning, inventory, traceability, labels, distribution, and finance.</span>
+        </article>
+        <article class="ms-industry-card">
+          <strong>Wholesale distributors</strong>
+          <span>Customer catalogues, price lists, route delivery, proof of delivery, and invoicing.</span>
+        </article>
+        <article class="ms-industry-card">
+          <strong>Commercial kitchens</strong>
+          <span>Recurring orders, batch production, ingredient control, and delivery coordination.</span>
+        </article>
+        <article class="ms-industry-card">
+          <strong>Prepared-food operations</strong>
+          <span>Recipes, allergens, nutrition, production, stock, packaging, and customer fulfilment.</span>
+        </article>
+        <article class="ms-industry-card">
+          <strong>Specialty manufacturers</strong>
+          <span>Made-to-order products, bill-of-material workflows, stock movements, and reporting.</span>
+        </article>
+        <article class="ms-industry-card">
+          <strong>Route-based suppliers</strong>
+          <span>Packing slips, delivery routes, driver notes, assets, and electronic proof of delivery.</span>
+        </article>
+        <article class="ms-industry-card">
+          <strong>Bakeries</strong>
+          <span>The proven niche: standing orders, production sheets, recipe scaling, labels, and delivery.</span>
+        </article>
+        <article class="ms-industry-card">
+          <strong>Growing B2B teams</strong>
+          <span>Companies replacing spreadsheets, disconnected apps, and manual admin.</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── WORKFLOW ────────────────────────────────────── -->
+  <!-- <section class="ms-section-sm ms-bg-ruled" aria-labelledby="workflow-title">
+    <div class="ms-container">
+      <div class="ms-section-intro ms-reveal">
+        <span class="ms-eyebrow" style="justify-content:center">Connected workflow</span>
+        <h2 id="workflow-title">From customer order to production, delivery, invoice, and report.</h2>
+        <p>Streamline connects the operational chain so every team works from the same data. Orders feed production. Production feeds inventory. Delivery feeds invoices. Reporting needs no rebuilding in spreadsheets.</p>
+      </div>
+      <div class="ms-workflow ms-stagger">
+        <div class="ms-step">Customers order online or your team enters orders.</div>
+        <div class="ms-step">Catalogues, prices, deadlines, and account rules apply.</div>
+        <div class="ms-step">Production planning uses demand, stock, recipes, and forecasts.</div>
+        <div class="ms-step">Inventory, lots, labels, and replenishment update.</div>
+        <div class="ms-step">Routes, packing slips, deliveries, and proof of delivery are managed.</div>
+        <div class="ms-step">Invoices, statements, accounting exports, and reports are generated.</div>
+      </div>
+    </div>
+  </section> -->
+
+
+  <!-- ── VALUE PROPS ─────────────────────────────────── -->
+  <section class="ms-section ms-bg-page" aria-labelledby="value-title">
+    <div class="ms-container">
+      <div class="ms-section-intro ms-reveal">
+        <h2 id="value-title">Run your operation faster, smarter, and drive profit.</h2>
+        <p>Simplify operations, reduce manual work, and gain full control with tools built for how your business actually works.</p>
+      </div>
+      <div class="ms-grid-3 ms-stagger">
+        <div class="ms-card-problem">
+          <h3>Streamline your operations with ease</h3>
+          <ul>
+            <li>Reduce errors with connected workflows</li>
+            <li>Save time by eliminating manual re-entry</li>
+            <li>Scale processes as your business grows</li>
+          </ul>
+        </div>
+        <div class="ms-card-problem">
+          <h3>Software that adapts to your operation</h3>
+          <ul>
+            <li>Flexible workflows tailored to your business</li>
+            <li>Easily adjust as your operation evolves</li>
+            <li>Replace workarounds with a system that fits</li>
+          </ul>
+        </div>
+        <div class="ms-card-problem">
+          <h3>Gain visibility and maximize profit</h3>
+          <ul>
+            <li>Turn time savings into higher productivity</li>
+            <li>Make better decisions with clear insights</li>
+            <li>Reduce waste and control operational costs</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── CORE CAPABILITIES ───────────────────────────── -->
+  <section class="ms-section ms-bg-warm" id="ms-features" aria-labelledby="features-title">
+    <div class="ms-container">
+      <div class="ms-section-intro ms-reveal">
+        <span class="ms-eyebrow" style="justify-content:center">Core ERP capabilities</span>
+        <h2 id="features-title">The modules your operations team needs, in one system.</h2>
+        <p>Use the full platform or start with the workflows that matter most. Each module connects to the next — no re-entry, no data gaps.</p>
+      </div>
+      <div class="ms-grid-3 ms-stagger">
+        <article class="ms-cap-card">
+          <h3>Customer Management &amp; CRM</h3>
+          <p>Manage customer users, addresses, account settings, sales leads, samples, complaints, reminders, and customer history.</p>
+          <a href="/streamline-features/customer-management/">Explore customer management</a>
+        </article>
+        <article class="ms-cap-card">
+          <h3>Online Ordering &amp; Catalogues</h3>
+          <p>Support self-service ordering, repeat orders, saved carts, price lists, item visibility, customer SKUs, and order deadlines.</p>
+          <a href="/streamline-features/online-ordering/">Explore online ordering</a>
+        </article>
+        <article class="ms-cap-card">
+          <h3>Production Planning</h3>
+          <p>Plan work using live order demand, current stock, par levels, forecasts, maximum stock limits, and production reports.</p>
+          <a href="/streamline-features/production-planning/">Explore production planning</a>
+        </article>
+        <article class="ms-cap-card">
+          <h3>Recipes, BOMs &amp; Costing</h3>
+          <p>Manage recipes or product structures, ingredients, sub-recipes, packaging, costings, allergens, nutrition, and labels.</p>
+          <a href="/streamline-features/recipe-management/">Explore recipe management</a>
+        </article>
+        <article class="ms-cap-card">
+          <h3>Inventory Management</h3>
+          <p>Receive goods, move stock, count inventory, print labels, make products, deplete ingredients, and create shopping lists.</p>
+          <a href="/streamline-features/inventory-management/">Explore inventory management</a>
+        </article>
+        <article class="ms-cap-card">
+          <h3>Traceability &amp; Lot Tracking</h3>
+          <p>Track lots from purchase information through production, finished goods, packing slips, delivery, and recall communication.</p>
+          <a href="/streamline-features/supply-chain-traceability/">Explore traceability</a>
+        </article>
+        <article class="ms-cap-card">
+          <h3>Distribution &amp; Proof of Delivery</h3>
+          <p>Manage routes, packing slips, delivery charges, driver notes, route optimization, reusable assets, and electronic PoDs.</p>
+          <a href="/streamline-features/distribution/">Explore distribution</a>
+        </article>
+        <article class="ms-cap-card">
+          <h3>Finance &amp; Invoicing</h3>
+          <p>Generate invoices, credit notes, statements, payment collection workflows, accounting exports, and customer account rules.</p>
+          <a href="/streamline-features/finance/">Explore finance</a>
+        </article>
+        <article class="ms-cap-card">
+          <h3>Reporting &amp; Automation</h3>
+          <p>Build reports around your operation, schedule emails, create shortcuts, group by attributes, and automate routine outputs.</p>
+          <a href="/streamline-features/reporting/">Explore reporting</a>
+        </article>
+      </div>
+      <div style="text-align:center;margin-top:clamp(32px,4vw,48px)" class="ms-reveal">
+        <a href="/streamline-features/" class="ms-btn ms-btn-primary">View All Features</a>
+      </div>
+    </div>
+  </section>
+
+    <section class="ms-section" aria-labelledby="bakery-title" style="padding-top: 0;">
+    <div class="ms-container">
+      <div style="text-align: center; margin-bottom: 80px;"><span class="ms-eyebrow" style="justify-content:center">Exlusive AI Feature</span>
+        <div class="ms-section-intro ms-reveal">
+        <h2 id="features-title">Ask Your ERP. Get Instant Answers.</h2>
+        <p>An AI chatbot that retrieves real-time data across your recipes, inventory, production, and orders—so you can make faster, smarter decisions without digging through the system.</p>
+      </div>
+
+      </div>
+      <div class="ms-feature-split ms-reveal">
+        <div class="ms-feature-text">
+          <span class="ms-eyebrow">Artificial Intelligence</span>
+          <h2 id="bakery-title">Streamline PI</h2>
+          <!-- <p>Bakery is valuable because it proves Streamline can handle complex, real-world operations: standing orders, fresh production, recipes, allergens, lot tracking, labels, route delivery, customer-specific pricing, and invoices.</p> -->
+          <p>Instantly get the data you need through a smart AI chatbot connected to your entire ERP.</p>
+          <ul class="ms-checklist">
+            <li>Ask anything about recipes, inventory, orders, and production</li>
+            <li>Get real-time, accurate answers from your system</li>
+            <li>Retrieve reports, costs, and stock levels instantly</li>
+            <li>Route management, packing slips, proof of delivery</li>
+            <li>Simplify decisions with clear, actionable insights</li>
+          </ul>
+          <div class="ms-btn-group" style="margin-top:16px">
+            <!-- <a href="https://mountainstream.co/case-study/" class="ms-btn ms-btn-secondary">Read Case Studies</a> -->
+            <a href="/streamline-features/" class="ms-link-arrow">See how Streamline PI works</a>
+          </div>
+        </div>
+        <div class=" ms-reveal" style="transition-delay:120ms">
+          <img src="/streamline-pi.png/" alt="Streamline ERP bakery and food production workflow" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA BAND 1 ──────────────────────────────────── -->
+  <div class="ms-cta-band">
+    <div class="ms-container">
+      <div class="ms-reveal" style="display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center">
+        <div style="max-width: 500px;">
+          <h3 style="color:#fff;margin-bottom:10px">Have specific requirements?</h3>
+          <p style="margin:0">If your business has additional requirements, we take great pride in ensuring that we understand and deliver a solution that addresses your needs. Let’s collaborate to create something that truly works for you.</p>
+        </div>
+        <a href="https://mountainstream.co/register-your-company?cta=custom&intent=talk-sales" class="ms-btn ms-btn-primary">Contact Sales</a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ── APP FEATURES ────────────────────────────────── -->
+  <section class="ms-section ms-bg-page" aria-label="App features">
+    <div class="ms-container">
+      <div class="ms-feature-block--app ms-reveal">
+        <div class="ms-feature-text">
+          <span class="ms-eyebrow">Delivery app</span>
+          <h3>Track every delivery, confirmed.</h3>
+          <p style="color:var(--ms-muted)">Scan invoices, manage ingredients, create recipes, and print labels — all from a single app built for warehouse and production teams.</p>
+          <a href="https://play.google.com/store/apps/details?id=io.ionic.streamline.tracker2" target="_blank" rel="noopener">
+            <img src="https://mountainstream.co/wp-content/uploads/2026/03/visual-identity_badges_880x572-1.width-1440.png" alt="Download on Google Play" class="ms-app-badge" loading="lazy">
+          </a>
+        </div>
+        <div class="ms-feature-block--app-img">
+          <img src="https://mountainstream.co/wp-content/uploads/2025/09/streamline-asset-tracking-app-1.png" alt="Streamline inventory mobile app" loading="lazy">
+        </div>
+      </div>
+
+      <div class="ms-feature-block--app ms-reveal">
+        <div class="ms-feature-block--app-img">
+          <img src="https://mountainstream.co/wp-content/uploads/2025/09/streamline-distribution-management-feature.png" alt="Streamline delivery and distribution app" loading="lazy">
+        </div>
+        <div class="ms-feature-text">
+          <span class="ms-eyebrow">Inventory, Traceability & Labour Tracking App</span>
+          <h3>Keep inventory always accurate.</h3>
+          <p style="color:var(--ms-muted)">Monitor when, where, and by whom orders were delivered. Capture proof of delivery, manage assets, and sync with routes and invoices.</p>
+          <a href="https://play.google.com/store/apps/details?id=io.ionic.streamline.inventoryManagementApp" target="_blank" rel="noopener">
+            <img src="https://mountainstream.co/wp-content/uploads/2026/03/visual-identity_badges_880x572-1.width-1440.png" alt="Download on Google Play" class="ms-app-badge" loading="lazy">
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── WHY MOUNTAIN STREAM ─────────────────────────── -->
+  <section class="ms-section ms-bg-light" aria-labelledby="why-title">
+    <div class="ms-container">
+      <div class="ms-reveal">
+        <span class="ms-eyebrow">Why Mountain Stream</span>
+        <h2 id="why-title">Configurable enough for multiple industries. Practical enough for daily operators.</h2>
+      </div>
+
+      <div class="ms-module-row ms-reveal" style="margin-top:clamp(32px,4vw,52px)">
+        <div><h3>Operational ERP, not just accounting software</h3></div>
+        <div>
+          <p>Streamline handles the work that happens before the invoice: customer ordering, product rules, production requirements, inventory movements, delivery preparation, traceability records, and operational reporting.</p>
+          <ul class="ms-list-2col">
+            <li>Customer-specific catalogues and prices</li>
+            <li>Production and distribution reports</li>
+            <li>Inventory and lot tracking</li>
+            <li>Finance and accounting exports</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ms-module-row ms-reveal">
+        <div><h3>Flexible data structure</h3></div>
+        <div>
+          <p>Add attributes to items, customers, and addresses so reports, labels, routes, production groups, and workflows match the way your business operates. This is the foundation for multi-industry expansion — the platform adapts to the operation instead of forcing one rigid model.</p>
+          <ul class="ms-list-2col">
+            <li>Item attributes</li>
+            <li>Customer attributes</li>
+            <li>Address attributes</li>
+            <li>Spreadsheet-style batch editing</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ms-module-row ms-reveal">
+        <div><h3>Setup, training, and support</h3></div>
+        <div>
+          <p>Mountain Stream helps set up your data and teach your team the program. That matters for ERP projects, where success depends on real adoption by customer service, production, warehouse, delivery, finance, and management teams.</p>
+          <ul class="ms-list-2col">
+            <li>Data setup support</li>
+            <li>Team onboarding</li>
+            <li>24/7 customer service</li>
+            <li>Custom development options</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ── INTEGRATIONS ────────────────────────────────── -->
+  <section class="ms-section-sm ms-bg-ruled" aria-labelledby="integrations-title">
+    <div class="ms-container">
+      <div class="ms-feature-split ms-reveal">
+        <div>
+          <span class="ms-eyebrow">Integrations</span>
+          <h2 id="integrations-title">Connect the systems your business already depends on.</h2>
+          <p class="ms-lede" style="margin-top:10px">Streamline integrates with accounting, payments, route optimization, EDI, and e-commerce tools while keeping one operational database at the centre.</p>
+          <div class="ms-int-pills">
+            <span class="ms-int-pill">QuickBooks Desktop</span>
+            <span class="ms-int-pill">QuickBooks Online</span>
+            <span class="ms-int-pill">Xero</span>
+            <span class="ms-int-pill">Stripe</span>
+            <span class="ms-int-pill">WholeSail</span>
+            <span class="ms-int-pill">Melio</span>
+            <span class="ms-int-pill">ACH Bank</span>
+            <span class="ms-int-pill">Shopify</span>
+            <span class="ms-int-pill">OptimoRoute</span>
+            <span class="ms-int-pill">Detrack</span>
+            <span class="ms-int-pill">Whole Foods EDI</span>
+            <span class="ms-int-pill">Boomerang POS</span>
+            <a href="/streamline-features/integrations/" class="ms-int-pill ms-int-pill-link">All integrations →</a>
+          </div>
+        </div>
+        <div class="ms-callout-box ms-reveal" style="transition-delay:120ms">
+          <h3>One operational source of truth</h3>
+          <p>Use integrations to move data where it needs to go without making every department manage its own disconnected version of the business.</p>
+          <ul class="ms-checklist" style="margin-top:14px">
+            <li>Accounting exports</li>
+            <li>Payment collection</li>
+            <li>Delivery optimization</li>
+            <li>Retail and wholesale orders</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── TESTIMONIALS ────────────────────────────────── -->
+  <section class="ms-section ms-bg-white" aria-labelledby="testimonials-title">
+    <div class="ms-container">
+      <div class="ms-section-intro ms-reveal">
+        <h2 id="testimonials-title">Trusted by operations around the world.</h2>
+        <p>No matter where you are, our customer service is second to none.</p>
+      </div>
+      <div class="ms-grid-testimonials ms-stagger">
+        <div class="ms-card-testimonial">
+          <div class="ms-testimonial-name"><a href="https://www.capterra.com/p/146354/Streamline/#Capterra___6179846" target="_blank" rel="noopener">Ricky, Bluepoint Bakery</a></div>
+          <p>"Streamline is fantastic, and the people at Mountain Stream are even better! We get a response easily at any time of the day. Streamline is user friendly and powerful. It has eliminated a lot of tasks altogether, and made many so much easier."</p>
+          <div class="ms-stars">★★★★★</div>
+        </div>
+        <div class="ms-card-testimonial">
+          <div class="ms-testimonial-name"><a href="https://www.capterra.com/p/146354/Streamline/#Capterra___4053596/" target="_blank" rel="noopener">Daniela, Tartastic</a></div>
+          <p>"Streamline saved my life in a time where my business grew exponentially. When I need customer support, I am always able to reach help quickly and efficiently. It's incredible to reach a person that speaks your language and understands your business and its needs."</p>
+          <div class="ms-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── CASE STUDY ──────────────────────────────────── -->
+  <section class="ms-section-sm ms-bg-page" aria-label="Case study">
+    <div class="ms-container">
+      <div class="ms-case-card ms-reveal">
+        <div class="ms-feature-text">
+          <span class="ms-eyebrow">Case study</span>
+          <h3>From spreadsheet chaos to one connected system.</h3>
+          <p style="color:var(--ms-muted)">See how one wholesale bakery replaced disconnected order forms, spreadsheets, and manual invoicing with a single Streamline workflow — reducing admin time and improving order accuracy across their full customer base.</p>
+          <div style="margin-top:16px">
+            <a href="https://mountainstream.co/case-study/" class="ms-btn ms-btn-secondary">Read Case Study</a>
+          </div>
+        </div>
+        <div class="ms-case-logo">
+          <img src="https://mountainstream.co/wp-content/uploads/2026/03/capital-bread-logo.png" alt="Capital Bread — Streamline ERP case study" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── FAQ ────────────────────────────────────────── -->
+  <section class="ms-section ms-bg-white" aria-labelledby="faq-title">
+    <div class="ms-container ms-container--narrow">
+      <div class="ms-section-intro ms-reveal">
+        <span class="ms-eyebrow" style="justify-content:center">FAQ</span>
+        <h2 id="faq-title">Questions buyers ask before choosing ERP software.</h2>
+      </div>
+      <div class="ms-faq ms-reveal">
+        <details open>
+          <summary>What is Streamline ERP?</summary>
+          <p>Streamline ERP is flexible business software from Mountain Stream for order-driven operations. It connects customer ordering, production planning, recipes or bills of materials, inventory, lot tracking, traceability, distribution, invoicing, finance, reporting, and integrations.</p>
+        </details>
+        <details>
+          <summary>Is Streamline only for bakeries?</summary>
+          <p>No. Bakery remains a proven niche and an important source of operational expertise, but the platform supports broader workflows used by food producers, distributors, commercial kitchens, prepared-food businesses, and specialty manufacturers.</p>
+        </details>
+        <details>
+          <summary>Which companies are the best fit?</summary>
+          <p>Streamline is a strong fit for businesses with recurring customers, customer-specific pricing, production planning, stock movement, traceability requirements, route delivery, invoices, payment collection, and operational reporting.</p>
+        </details>
+        <details>
+          <summary>Does Streamline support inventory and traceability?</summary>
+          <p>Yes. Streamline supports receiving goods, assigning lot numbers, printing labels, moving stock, making products, depleting ingredients, tracing lots, and connecting traceability records to packing slips and recall communication.</p>
+        </details>
+        <details>
+          <summary>Can Streamline integrate with accounting and delivery tools?</summary>
+          <p>Yes. Streamline integrates with QuickBooks, Xero, Stripe, WholeSail, Melio, ACH, OptimoRoute, Detrack, and Shopify.</p>
+        </details>
+        <details>
+          <summary>How is Streamline different from generic ERP software?</summary>
+          <p>Streamline is purpose-built for order-driven production and distribution. Standing orders, recipe management, lot traceability, route delivery, and wholesale invoicing are standard features — not expensive configuration projects that take months to implement.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── CTA BAND 2 ──────────────────────────────────── -->
+  <!-- <div class="ms-cta-band ms-cta-band--centered">
+    <div class="ms-container ms-reveal">
+      <span class="ms-eyebrow">Ready to simplify?</span>
+      <h2>Get started without the stress.</h2>
+      <p>We guide you every step of the way — from setup to full implementation — so you can start seeing results fast.</p>
+      <a href="https://mountainstream.co/docs/the-setup-process/" class="ms-btn ms-btn-primary">Learn our onboarding process</a>
+    </div>
+  </div> -->
+
+
+  <!-- ── FINAL CTA ───────────────────────────────────── -->
+  <section class="ms-final-cta" id="ms-contact" aria-labelledby="cta-title">
+    <div class="ms-container">
+      <div class="ms-reveal">
+        <span class="ms-eyebrow" style="justify-content:center">Get started today</span>
+        <h2 id="cta-title">See how Streamline ERP can fit your operation.</h2>
+        <p>Tell us how your business handles orders, production, inventory, delivery, finance, and reporting. We'll show you how Streamline connects the workflow.</p>
+        <div class="ms-btn-group" style="justify-content:center">
+          <a href="https://mountainstream.co/register-your-company?cta=footer&intent=book-demo" class="ms-btn ms-btn-primary">Book a Free Demo</a>
+          <a href="https://mountainstream.co/register-your-company?cta=footer&intent=talk-sales" class="ms-btn ms-btn-secondary" style="color:var(--ms-navy-dark);background:var(--ms-white);border-color:var(--ms-border-strong)">Talk to Sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── FOOTER ──────────────────────────────────────── -->
+  <!-- <footer class="ms-footer" aria-label="Footer">
+    <div class="ms-container">
+      <div class="ms-footer-inner">
+        <span class="ms-footer-copy">© 2025 Mountain Stream · Streamline ERP for order-driven operations.</span>
+        <nav class="ms-footer-links" aria-label="Footer navigation">
+          <a href="/streamline-features/">Features</a>
+          <a href="https://mountainstream.co/pricing/">Pricing</a>
+          <a href="https://mountainstream.co/case-study/">Case Studies</a>
+          <a href="https://mountainstream.co/docs/">Docs</a>
+          <a href="https://mountainstream.co/register-your-company?cta=footer&intent=book-demo">Book a Demo</a>
+        </nav>
+      </div>
+    </div>
+  </footer> -->
+
+</div><!-- /.ms-home -->
+
+
+<script>
+/* ── Mobile nav toggle ─────────────────────────────── */
+(function () {
+  const toggle = document.getElementById('ms-menuToggle');
+  const nav    = document.getElementById('ms-navWrap');
+  if (!toggle || !nav) return;
+  toggle.addEventListener('click', function () {
+    const open = nav.classList.toggle('open');
+    this.setAttribute('aria-expanded', String(open));
+    this.textContent = open ? '✕' : '☰';
+  });
+})();
+
+/* ── Smooth scroll ─────────────────────────────────── */
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', function (e) {
+    const id = this.getAttribute('href');
+    if (id.length > 1) {
+      const target = document.querySelector(id);
+      if (target) {
+        e.preventDefault();
+        document.getElementById('ms-navWrap')?.classList.remove('open');
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  });
+});
+
+/* ── Scroll reveal ─────────────────────────────────── */
+(function () {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) {
+    document.querySelectorAll('.ms-home .ms-reveal, .ms-home .ms-stagger').forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+  const obs = new IntersectionObserver((entries, o) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('is-visible'); o.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -48px 0px' });
+
+  document.querySelectorAll('.ms-home .ms-reveal, .ms-home .ms-stagger').forEach(el => obs.observe(el));
+
+  /* Hero fires immediately */
+  requestAnimationFrame(() => setTimeout(() => {
+    document.querySelectorAll('.ms-home .ms-hero .ms-reveal').forEach(el => el.classList.add('is-visible'));
+  }, 80));
+})();
+</script>
+
+</body>
+</html>

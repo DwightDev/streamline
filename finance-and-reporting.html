@@ -1,0 +1,1242 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Finance & Reporting Software for Bakeries | Streamline</title>
+  <meta name="description" content="Bakery finance and reporting software for invoices, statements, payment collection, forecasting, flexible data, and real-time bakery insights.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+/* ── 1. TOKENS ─────────────────────────────────────────────── */
+.ms-feature-page {
+  --ms-primary-950: #113058;
+  --ms-primary-900: #113058;
+  --ms-primary-800: #113058;
+  --ms-primary-700: #113058;
+  --ms-primary-600: #245080;
+  --ms-primary-100: #e4eef9;
+  --ms-primary-050: #f2f7fd;
+  --ms-accent-700:  #ff9100;
+  --ms-accent-600:  #ff9100;
+  --ms-accent-500:  #ff9100;
+  --ms-accent-400:  #ff9100;
+  --ms-accent-100:  #fef0d8;
+  --ms-accent-050:  #fff8ef;
+  --ms-accent-glow: rgba(245,135,14,.22);
+  --ms-sky-600:     #1d7dc0;
+  --ms-sky-500:     #4aa6e8;
+  --ms-sky-100:     #ddf1ff;
+  --ms-sky-050:     #f0f9ff;
+  --ms-success-600: #1e7a52;
+  --ms-success-100: #e6f7ef;
+  --ms-ink:         #101b2a;
+  --ms-text:        #1e2f42;
+  --ms-muted:       #54647a;
+  --ms-soft:        #7a8b9e;
+  --ms-line:        #dbe4ef;
+  --ms-line-strong: #c4d1e2;
+  --ms-surface:     #ffffff;
+  --ms-surface-soft:#f6faff;
+  --ms-surface-warm:#fffaf4;
+  --ms-page:        #f9fbff;
+  --ms-font-display:'Fraunces', Georgia, serif;
+  --ms-font-body:   'DM Sans', system-ui, sans-serif;
+  --ms-wrap:        1180px;
+  --ms-wrap-narrow: 860px;
+  --ms-gutter:      clamp(20px, 4vw, 48px);
+  --ms-section-y:   clamp(72px, 9vw, 120px);
+  --ms-section-y-sm:clamp(48px, 6vw, 80px);
+  --ms-gap:         clamp(18px, 2.4vw, 28px);
+  --ms-r-xs:   6px;
+  --ms-r-sm:   12px;
+  --ms-r-md:   18px;
+  --ms-r-lg:   28px;
+  --ms-r-pill: 999px;
+  --ms-shadow-xs:    0 1px 3px rgba(9,30,60,.07);
+  --ms-shadow-sm:    0 4px 16px rgba(9,30,60,.09);
+  --ms-shadow-md:    0 14px 40px rgba(9,30,60,.13);
+  --ms-shadow-lg:    0 24px 64px rgba(9,30,60,.17);
+  --ms-shadow-focus: 0 0 0 4px rgba(74,166,232,.28);
+  --ms-ease:         cubic-bezier(.25,.46,.45,.94);
+  --ms-ease-spring:  cubic-bezier(.34,1.56,.64,1);
+  color: var(--ms-text);
+  background-color: var(--ms-page);
+  font-family: var(--ms-font-body);
+  font-size: 16px;
+  line-height: 1.68;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── 2. RESET ─────────────────────────────────────────────── */
+.ms-feature-page,.ms-feature-page * { box-sizing: border-box; }
+.ms-feature-page :where(h1,h2,h3,h4,p,ul,ol,figure) { margin-top: 0; }
+.ms-feature-page :where(img,svg) { max-width: 100%; height: auto; }
+.ms-feature-page a {
+  color: var(--ms-primary-800);
+  text-underline-offset: .2em;
+  transition: color .16s var(--ms-ease), background-color .16s var(--ms-ease),
+              border-color .16s var(--ms-ease), box-shadow .16s var(--ms-ease),
+              transform .2s var(--ms-ease-spring);
+}
+.ms-feature-page a:hover { color: var(--ms-accent-700); }
+.ms-feature-page :where(a,button,summary):focus-visible {
+  outline: none;
+  box-shadow: var(--ms-shadow-focus);
+  border-radius: var(--ms-r-xs);
+}
+
+/* ── 3. LAYOUT ────────────────────────────────────────────── */
+.ms-wrap {
+  width: min(var(--ms-wrap), calc(100% - var(--ms-gutter) * 2));
+  margin-inline: auto;
+}
+.ms-wrap-narrow {
+  width: min(var(--ms-wrap-narrow), calc(100% - var(--ms-gutter) * 2));
+  margin-inline: auto;
+}
+
+/* ── 4. TYPOGRAPHY ────────────────────────────────────────── */
+.ms-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  margin-bottom: 16px;
+  color: var(--ms-accent-600);
+  font-family: var(--ms-font-body);
+  font-size: .73rem;
+  font-weight: 600;
+  letter-spacing: .11em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.ms-kicker::before {
+  content: "";
+  flex-shrink: 0;
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ms-accent-500);
+}
+.ms-feature-page h1,
+.ms-feature-page h2,
+.ms-feature-page h3,
+.ms-feature-page h4 {
+  font-family: var(--ms-font-display);
+  font-weight: 600;
+  letter-spacing: -.035em;
+  color: var(--ms-primary-900);
+}
+.ms-feature-page h1 {
+  max-width: 860px;
+  margin-bottom: 20px;
+  font-size: clamp(2.4rem, 5.5vw, 4.6rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.05em;
+}
+.ms-feature-page h1 em {
+  font-style: italic;
+  color: var(--ms-accent-600);
+}
+.ms-feature-page h2 {
+  max-width: 820px;
+  margin-bottom: 18px;
+  font-size: clamp(1.8rem, 3.8vw, 3.2rem);
+  line-height: 1.05;
+  letter-spacing: -.04em;
+}
+.ms-feature-page h3 {
+  margin-bottom: 10px;
+  font-size: clamp(1.1rem, 1.8vw, 1.6rem);
+  line-height: 1.14;
+  letter-spacing: -.025em;
+}
+.ms-feature-page h4 {
+  margin-bottom: 8px;
+  font-size: .95rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -.01em;
+}
+.ms-feature-page p { margin-bottom: 1rem; }
+.ms-section-intro {
+  max-width: 760px;
+  color: var(--ms-muted);
+  font-size: clamp(1rem, 1.4vw, 1.16rem);
+  line-height: 1.78;
+}
+.ms-lede {
+  max-width: 680px;
+  color: var(--ms-muted);
+  font-size: clamp(1rem, 1.3vw, 1.12rem);
+  line-height: 1.75;
+}
+
+/* ── 5. BREADCRUMB ────────────────────────────────────────── */
+.ms-breadcrumb {
+  padding-block: 14px;
+  border-bottom: 1px solid var(--ms-line);
+  background: var(--ms-surface);
+}
+.ms-breadcrumb nav {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .82rem;
+  color: var(--ms-soft);
+}
+.ms-breadcrumb a {
+  color: var(--ms-muted);
+  text-decoration: none;
+  font-weight: 500;
+}
+.ms-breadcrumb a:hover { color: var(--ms-primary-800); }
+.ms-breadcrumb-sep { color: var(--ms-line-strong); }
+.ms-breadcrumb-current {
+  color: var(--ms-text);
+  font-weight: 600;
+}
+
+/* ── 6. COMPACT HERO ──────────────────────────────────────── */
+.ms-hero-compact {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(56px, 8vw, 96px) 0 clamp(48px, 7vw, 80px);
+  background:
+    radial-gradient(ellipse 65% 80% at 88% 8%, rgba(74,166,232,.12), transparent 52%),
+    radial-gradient(ellipse 45% 55% at 4% 92%, rgba(245,135,14,.08), transparent 48%),
+    linear-gradient(160deg, var(--ms-primary-050) 0%, #ffffff 52%, var(--ms-surface-warm) 100%);
+  border-bottom: 1px solid var(--ms-line);
+}
+.ms-hero-compact::before {
+  content: "";
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(74,166,232,.09) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+.ms-hero-compact::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  /* background: linear-gradient(90deg, transparent 0%, var(--ms-accent-500) 30%, var(--ms-sky-500) 70%, transparent 100%); */
+  opacity: .3;
+}
+.ms-hero-compact__inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+.ms-hero-compact__stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.ms-hero-stat {
+  padding: 16px 20px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: rgba(255,255,255,.9);
+  box-shadow: var(--ms-shadow-sm);
+  text-align: center;
+  min-width: 140px;
+}
+.ms-hero-stat__number {
+  display: block;
+  font-family: var(--ms-font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -.04em;
+  line-height: 1;
+  color: var(--ms-primary-900);
+}
+.ms-hero-stat__number span { color: var(--ms-accent-500); }
+.ms-hero-stat__label {
+  display: block;
+  margin-top: 4px;
+  font-size: .78rem;
+  font-weight: 500;
+  color: var(--ms-muted);
+  line-height: 1.3;
+}
+
+/* ── 7. STICKY NAV ────────────────────────────────────────── */
+.ms-nav {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: rgba(255,255,255,.9);
+  border-bottom: 1px solid rgba(219,228,239,.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.ms-nav .ms-wrap {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding-block: 10px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.ms-nav .ms-wrap::-webkit-scrollbar { display: none; }
+.ms-nav a {
+  flex: 0 0 auto;
+  padding: 7px 14px;
+  border: 1px solid transparent;
+  border-radius: var(--ms-r-pill);
+  color: var(--ms-muted);
+  font-size: .84rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .15s, background .15s, border-color .15s;
+}
+.ms-nav a:hover,
+.ms-nav a.active {
+  color: var(--ms-primary-900);
+  background: var(--ms-primary-050);
+  border-color: var(--ms-line);
+}
+.ms-nav__back {
+  color: var(--ms-muted) !important;
+  border-color: var(--ms-line) !important;
+  background: var(--ms-surface) !important;
+}
+.ms-nav__back::before { content: "← "; }
+.ms-nav__divider {
+  align-self: center;
+  width: 1px;
+  height: 18px;
+  background: var(--ms-line);
+  flex-shrink: 0;
+}
+
+/* ── 8. SECTIONS ──────────────────────────────────────────── */
+.ms-section { padding-block: var(--ms-section-y); }
+.ms-section-sm { padding-block: var(--ms-section-y-sm); }
+.ms-section-light {
+  background:
+    radial-gradient(ellipse 70% 60% at 4% 20%, rgba(74,166,232,.09), transparent),
+    linear-gradient(180deg, var(--ms-surface-soft) 0%, #fff 100%);
+}
+.ms-section-warm {
+  background:
+    radial-gradient(ellipse 60% 70% at 90% 15%, rgba(245,135,14,.11), transparent),
+    linear-gradient(180deg, var(--ms-accent-050) 0%, #fff 100%);
+}
+.ms-section-ruled {
+  border-top: 1px solid var(--ms-line);
+  border-bottom: 1px solid var(--ms-line);
+  background:
+    radial-gradient(ellipse 55% 70% at 90% 15%, rgba(74,166,232,.07), transparent),
+    linear-gradient(170deg, var(--ms-primary-050) 0%, #ffffff 60%, var(--ms-sky-050) 100%);
+}
+
+/* ── 9. GRIDS ─────────────────────────────────────────────── */
+.ms-grid   { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--ms-gap); }
+.ms-grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--ms-gap); }
+.ms-grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: var(--ms-gap); }
+.ms-stack  { display: grid; gap: var(--ms-gap); }
+
+/* ── 10. SPLIT (two-column detail) ───────────────────────── */
+.ms-split {
+  display: grid;
+  grid-template-columns: 1fr minmax(300px, .85fr);
+  gap: clamp(32px, 6vw, 80px);
+  align-items: center;
+}
+.ms-split--flip { direction: rtl; }
+.ms-split--flip > * { direction: ltr; }
+
+/* ── 11. CARDS ────────────────────────────────────────────── */
+.ms-card {
+  position: relative;
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  gap: .5rem;
+  padding: clamp(22px, 2.8vw, 32px);
+  overflow: hidden;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: rgba(255,255,255,.9);
+  box-shadow: var(--ms-shadow-xs);
+  transition: transform .22s var(--ms-ease), border-color .22s var(--ms-ease),
+              box-shadow .22s var(--ms-ease), background .22s var(--ms-ease);
+}
+.ms-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background:#4fa6e9;
+  opacity: 0;
+  transition: opacity .22s var(--ms-ease);
+}
+.ms-card:hover { transform: translateY(-5px); border-color: var(--ms-line-strong); background: #fff; box-shadow: var(--ms-shadow-md); }
+.ms-card:hover::before { opacity: 1; }
+.ms-card h3 { font-size: clamp(1.05rem, 1.4vw, 1.3rem); letter-spacing: -.02em; }
+.ms-card p { color: var(--ms-muted); flex: 1; }
+.ms-card a:not(.ms-btn) {
+  margin-top: auto;
+  padding-top: .75rem;
+  color: var(--ms-primary-700);
+  font-size: .875rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+}
+.ms-card a:not(.ms-btn)::after { content: "→"; transition: transform .18s var(--ms-ease-spring); }
+.ms-card a:not(.ms-btn):hover::after { transform: translateX(4px); }
+.ms-card a:not(.ms-btn):hover { color: var(--ms-accent-700); }
+.ms-card-accent {
+  background: linear-gradient(160deg, #fff 60%, var(--ms-accent-050));
+  border-color: rgba(245,135,14,.22);
+}
+.ms-card-sky {
+  background: linear-gradient(160deg, #fff 60%, var(--ms-sky-050));
+  border-color: rgba(74,166,232,.25);
+}
+.ms-card-quiet { box-shadow: none; }
+
+/* Benefit card — icon + title + body */
+.ms-benefit {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  padding: clamp(20px, 2.5vw, 28px);
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: var(--ms-surface);
+  box-shadow: var(--ms-shadow-xs);
+  transition: transform .2s var(--ms-ease), box-shadow .2s var(--ms-ease), border-color .2s;
+}
+.ms-benefit:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--ms-shadow-md);
+  border-color: var(--ms-line-strong);
+}
+.ms-benefit__icon {
+  width: 44px; height: 44px;
+  border-radius: var(--ms-r-sm);
+  background: var(--ms-accent-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+  transition: background .2s;
+}
+.ms-benefit:hover .ms-benefit__icon { background: var(--ms-accent-500); }
+.ms-benefit h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -.015em;
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+.ms-benefit p {
+  font-size: .875rem;
+  color: var(--ms-muted);
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+
+/* ── 12. FEATURE BLOCKS ───────────────────────────────────── */
+.ms-feature-block {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(260px, .7fr);
+  gap: clamp(24px, 4.5vw, 56px);
+  align-items: start;
+  padding-block: clamp(36px, 5.5vw, 62px);
+  border-top: 1px solid var(--ms-line);
+}
+.ms-feature-block:first-of-type { border-top: 0; padding-top: 0; }
+.ms-feature-block p { color: var(--ms-muted); }
+
+.ms-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 9px 22px;
+  padding: 0;
+  margin: 20px 0 0;
+  list-style: none;
+}
+.ms-list li {
+  position: relative;
+  padding-left: 22px;
+  color: var(--ms-text);
+  font-size: .92rem;
+  line-height: 1.5;
+}
+.ms-list li::before {
+  content: "";
+  position: absolute;
+  top: .55em; left: 0;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--ms-accent-500);
+  box-shadow: 0 0 0 4px var(--ms-accent-100);
+}
+
+.ms-mini {
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: rgba(255,255,255,.94);
+  box-shadow: var(--ms-shadow-sm);
+  padding: 22px;
+}
+.ms-mini h4 { color: var(--ms-primary-800); }
+.ms-mini p { color: var(--ms-muted); font-size: .875rem; }
+.ms-mini a {
+  display: block;
+  margin-top: 10px;
+  color: var(--ms-primary-700);
+  font-size: .875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.ms-mini a::after { content: " →"; }
+.ms-mini a:hover { color: var(--ms-accent-700); }
+
+/* ── 13. CALLOUT / ANSWER ─────────────────────────────────── */
+.ms-answer {
+  margin: 28px 0;
+  padding: clamp(20px, 3vw, 28px);
+  border: 1px solid var(--ms-sky-100);
+  border-left: 4px solid var(--ms-sky-500);
+  border-radius: var(--ms-r-md);
+  background: var(--ms-sky-050);
+  box-shadow: var(--ms-shadow-xs);
+}
+.ms-answer strong { color: var(--ms-primary-900); }
+.ms-answer p { color: var(--ms-muted); margin-bottom: 0; }
+
+.ms-callout {
+  padding: clamp(24px, 3.5vw, 36px);
+  border: 1px solid var(--ms-accent-100);
+  border-left: 4px solid var(--ms-accent-500);
+  border-radius: var(--ms-r-md);
+  background:
+    radial-gradient(ellipse 80% 60% at 100% 0%, rgba(245,135,14,.08), transparent),
+    var(--ms-accent-050);
+}
+.ms-callout h4 { color: var(--ms-primary-900); margin-bottom: 6px; }
+.ms-callout p { color: var(--ms-muted); margin-bottom: 0; font-size: .92rem; }
+
+/* ── 14. STAT BLOCKS ──────────────────────────────────────── */
+.ms-stat {
+  padding: 22px 24px;
+  border-left: 4px solid var(--ms-accent-500);
+  border-radius: var(--ms-r-sm);
+  background: var(--ms-accent-050);
+  border: 1px solid var(--ms-accent-100);
+  border-left-width: 4px;
+}
+.ms-stat strong {
+  display: block;
+  font-family: var(--ms-font-display);
+  font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -.04em;
+  color: var(--ms-primary-900);
+  line-height: 1.1;
+}
+.ms-stat p { margin-top: 5px; margin-bottom: 0; font-size: .875rem; color: var(--ms-muted); }
+
+/* ── 15. PROCESS STEPS ────────────────────────────────────── */
+.ms-process {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0,1fr));
+  gap: 10px;
+  counter-reset: ms-step;
+  margin-top: 32px;
+}
+.ms-step {
+  position: relative;
+  min-height: 120px;
+  padding: 18px 16px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-sm);
+  background: #fff;
+  box-shadow: var(--ms-shadow-xs);
+  color: var(--ms-text);
+  font-size: .875rem;
+  font-weight: 500;
+  line-height: 1.45;
+  transition: border-color .2s, box-shadow .2s, transform .2s var(--ms-ease);
+}
+.ms-step:hover {
+  border-color: var(--ms-accent-500);
+  box-shadow: var(--ms-shadow-sm);
+  transform: translateY(-3px);
+}
+.ms-step::before {
+  counter-increment: ms-step;
+  content: counter(ms-step);
+  display: grid;
+  width: 30px; height: 30px;
+  margin-bottom: 12px;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--ms-primary-900);
+  background: var(--ms-accent-100);
+  font-family: var(--ms-font-display);
+  font-size: .82rem;
+  font-weight: 700;
+}
+
+/* ── 16. BADGES ───────────────────────────────────────────── */
+.ms-badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-block: 18px 0; }
+.ms-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 5px 11px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-pill);
+  color: var(--ms-primary-800);
+  background: var(--ms-surface);
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  transition: background .15s, border-color .15s;
+}
+.ms-badge:hover { background: var(--ms-primary-050); border-color: var(--ms-sky-500); }
+
+/* ── 17. RELATED LINKS ────────────────────────────────────── */
+.ms-related-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.ms-related-links a {
+  display: inline-flex;
+  padding: 8px 14px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-pill);
+  background: var(--ms-surface);
+  color: var(--ms-primary-800);
+  font-size: .84rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .15s, border-color .15s;
+}
+.ms-related-links a:hover { border-color: var(--ms-sky-500); background: var(--ms-sky-050); }
+
+/* ── 18. USE CASE BLOCKS ──────────────────────────────────── */
+.ms-use-case {
+  padding: clamp(22px, 3vw, 32px);
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: linear-gradient(160deg, #fff 60%, var(--ms-primary-050));
+  box-shadow: var(--ms-shadow-xs);
+  transition: box-shadow .2s, transform .2s var(--ms-ease), border-color .2s;
+}
+.ms-use-case:hover {
+  box-shadow: var(--ms-shadow-md);
+  transform: translateY(-4px);
+  border-color: var(--ms-line-strong);
+}
+.ms-use-case h3 { font-size: 1.05rem; margin-bottom: 8px; }
+.ms-use-case p { font-size: .875rem; color: var(--ms-muted); margin-bottom: 0; }
+
+/* ── 19. BUTTONS ──────────────────────────────────────────── */
+.ms-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-top: 28px;
+}
+.ms-btn {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: 12px 22px;
+  border: 1.5px solid transparent;
+  border-radius: var(--ms-r-sm);
+  font-family: var(--ms-font-body);
+  font-size: .9rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: .01em;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .18s var(--ms-ease), color .18s var(--ms-ease),
+              border-color .18s var(--ms-ease), box-shadow .18s var(--ms-ease),
+              transform .2s var(--ms-ease-spring);
+}
+.ms-btn:hover { transform: translateY(-2px); }
+.ms-btn:active { transform: translateY(0); }
+.ms-btn-primary {
+  color: #fff !important;
+  background: linear-gradient(180deg, var(--ms-accent-400) 0%, var(--ms-accent-600) 100%);
+  border-color: var(--ms-accent-600);
+  box-shadow: 0 8px 24px var(--ms-accent-glow);
+}
+.ms-btn-primary:hover {
+  color: #fff !important;
+  background: linear-gradient(180deg, #ffaf3e 0%, var(--ms-accent-700) 100%);
+  box-shadow: 0 14px 32px var(--ms-accent-glow);
+}
+.ms-btn-secondary {
+  color: var(--ms-primary-900);
+  background: var(--ms-surface);
+  border-color: var(--ms-line-strong);
+  box-shadow: var(--ms-shadow-xs);
+}
+.ms-btn-secondary:hover {
+  color: var(--ms-primary-900);
+  background: var(--ms-primary-050);
+  border-color: var(--ms-sky-500);
+  box-shadow: var(--ms-shadow-sm);
+}
+.ms-link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  color: var(--ms-primary-700);
+  font-weight: 600;
+  font-size: .9rem;
+  text-decoration: none;
+}
+.ms-link-arrow::after { content: "→"; transition: transform .18s var(--ms-ease-spring); }
+.ms-link-arrow:hover { color: var(--ms-accent-700); }
+.ms-link-arrow:hover::after { transform: translateX(4px); }
+
+/* ── 20. FAQ ──────────────────────────────────────────────── */
+.ms-faq details {
+  padding: 20px 24px;
+  margin-bottom: 10px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-sm);
+  background: var(--ms-surface);
+  box-shadow: var(--ms-shadow-xs);
+  transition: border-color .18s, box-shadow .18s;
+}
+.ms-faq details:hover { border-color: var(--ms-line-strong); }
+.ms-faq details[open] { border-color: var(--ms-sky-500); box-shadow: var(--ms-shadow-sm); }
+.ms-faq summary {
+  cursor: pointer;
+  color: var(--ms-primary-900);
+  font-weight: 600;
+  font-size: 1rem;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.ms-faq summary::-webkit-details-marker { display: none; }
+.ms-faq summary::after {
+  content: "+";
+  flex-shrink: 0;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--ms-accent-100);
+  color: var(--ms-accent-600);
+  font-weight: 700;
+  font-size: .9rem;
+  display: grid;
+  place-items: center;
+  transition: background .18s, color .18s, transform .25s var(--ms-ease-spring);
+}
+.ms-faq details[open] summary::after {
+  content: "−";
+  background: var(--ms-accent-500);
+  color: #fff;
+  transform: rotate(180deg);
+}
+.ms-faq p { margin: 14px 0 0; color: var(--ms-muted); line-height: 1.72; }
+
+/* ── 21. CTA ──────────────────────────────────────────────── */
+.ms-cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: clamp(72px, 9vw, 112px);
+  background:
+    radial-gradient(ellipse 60% 80% at 90% 10%, rgba(245,135,14,.12), transparent 50%),
+    radial-gradient(ellipse 50% 60% at 5% 85%, rgba(74,166,232,.1), transparent 50%),
+    linear-gradient(160deg, var(--ms-primary-050) 0%, #ffffff 50%, var(--ms-accent-050) 100%);
+  border-top: 1px solid var(--ms-line);
+  border-bottom: 1px solid var(--ms-line);
+}
+.ms-cta::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background:#ff9100;
+}
+.ms-cta h2 { color: var(--ms-primary-900); }
+.ms-cta p { max-width: 680px; color: var(--ms-muted); }
+
+/* ── 22. FOOTER ───────────────────────────────────────────── */
+.ms-footer {
+  padding-block: 28px;
+  background: var(--ms-primary-050);
+  color: var(--ms-muted);
+  font-size: .88rem;
+  border-top: 1px solid var(--ms-line);
+}
+.ms-footer a { color: var(--ms-primary-700); text-decoration: none; }
+.ms-footer a:hover { color: var(--ms-accent-700); }
+
+/* ── 23. SCROLL REVEAL ────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .ms-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .5s var(--ms-ease), transform .5s var(--ms-ease);
+  }
+  .ms-reveal.visible { opacity: 1; transform: translateY(0); }
+  .ms-reveal-d1 { transition-delay: .08s; }
+  .ms-reveal-d2 { transition-delay: .16s; }
+  .ms-reveal-d3 { transition-delay: .24s; }
+  .ms-reveal-d4 { transition-delay: .32s; }
+}
+@media (prefers-reduced-motion: reduce) { .ms-reveal { opacity: 1; transform: none; } }
+
+/* ── 24. RESPONSIVE ───────────────────────────────────────── */
+@media (max-width: 1040px) {
+  .ms-grid-4 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .ms-grid   { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .ms-process { grid-template-columns: repeat(3, minmax(0,1fr)); }
+}
+@media (max-width: 820px) {
+  .ms-split, .ms-split--flip,
+  .ms-grid, .ms-grid-2, .ms-grid-4,
+  .ms-feature-block { grid-template-columns: 1fr; direction: ltr; }
+  .ms-list { grid-template-columns: 1fr; }
+  .ms-process { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .ms-hero-compact__inner { grid-template-columns: 1fr; }
+  .ms-hero-compact__stats { flex-direction: row; flex-wrap: wrap; }
+}
+@media (max-width: 520px) {
+  .ms-process { grid-template-columns: 1fr; }
+  .ms-btn { width: 100%; justify-content: center; }
+  .ms-actions { align-items: stretch; }
+  .ms-hero-compact__stats { flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ms-feature-page *,
+  .ms-feature-page *::before,
+  .ms-feature-page *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+  </style>
+</head>
+<body class="ms-feature-page">
+
+<!-- ── BREADCRUMB ─────────────────────────────────────────── -->
+<div class="ms-breadcrumb">
+  <div class="ms-wrap">
+    <nav aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="ms-breadcrumb-sep" aria-hidden="true">›</span>
+      <a href="/streamline-features/">Features</a>
+      <span class="ms-breadcrumb-sep" aria-hidden="true">›</span>
+      <span class="ms-breadcrumb-current">Finance & Reporting</span>
+    </nav>
+  </div>
+</div>
+
+<!-- ── COMPACT HERO ───────────────────────────────────────── -->
+<header class="ms-hero-compact">
+  <div class="ms-wrap">
+    <div class="ms-hero-compact__inner">
+      <div>
+        <p class="ms-kicker">Finance & Reporting</p>
+        <h1>Bakery finance, <em>without the spreadsheet drag</em></h1>
+        <p class="ms-lede">Manage invoices, statements, payment collection, reports, and business data in one connected bakery ERP software platform.</p>
+        <div class="ms-actions">
+          <a class="ms-btn ms-btn-primary" href="/book-a-demo/">Book a Demo</a>
+          <a class="ms-btn ms-btn-secondary" href="/pricing/">View Pricing</a>
+        </div>
+      </div>
+       <div class="ms-hero-compact__stats">
+        <img width="500px" src="finance-and-reporting.png" alt="Screenshot of Streamline's finance and reporting features, showing a customer statement with recent activity and an example of a pivot table report.">
+      </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ── STICKY NAV ─────────────────────────────────────────── -->
+<nav class="ms-nav" aria-label="Page sections">
+  <div class="ms-wrap">
+    <a href="/streamline-features/" class="ms-nav__back">All Features</a>
+    <span class="ms-nav__divider" aria-hidden="true"></span>
+    <a href="#overview">Overview</a>
+    <a href="#invoices-statements">Invoices & Statements</a>
+    <a href="#payment-collection">Payment Collection</a>
+    <a href="#reporting-forecasting">Reporting & Forecasting</a>
+    <a href="#flexible-data">Flexible Data Structure</a>
+    <a href="#faq">FAQ</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════════════════════════════
+     OVERVIEW
+═══════════════════════════════════════════════════════════════ -->
+<section id="overview" class="ms-section">
+  <div class="ms-wrap">
+    <p class="ms-kicker ms-reveal">What it does</p>
+    <h2 class="ms-reveal ms-reveal-d1">Keep bakery billing and reporting in one connected system.</h2>
+    <p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline combines bakery invoicing software, bakery billing software, and bakery reporting software in the same system used for orders, customers, delivery, and operations. That means less re-entry, cleaner records, and faster answers when your team needs them.</p>
+    <p class="ms-section-intro ms-reveal ms-reveal-d2">From live customer statements and batch invoices to payment collection, pivot-table reporting, and flexible attributes, Streamline helps wholesale bakeries run finance and reporting without the usual spreadsheet mess.</p>
+
+    <div class="ms-answer ms-reveal ms-reveal-d2">
+      <p><strong>Overview:</strong> Streamline is one connected bakery management software for invoices, statements, payment collection, reporting, and flexible data structure. It helps bakeries manage accounts receivable, automate customer billing workflows, create reports, and organize business data inside one bakery ERP software platform. </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     BENEFITS GRID
+═══════════════════════════════════════════════════════════════ -->
+<section class="ms-section ms-section-light">
+  <div class="ms-wrap">
+    <p class="ms-kicker ms-reveal">Why it matters</p>
+    <h2 class="ms-reveal ms-reveal-d1">Everything your bakery needs to bill smarter and report faster.</h2>
+    <p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline is a bakery reporting software that connects invoices, statements, payment collection, forecasting, and flexible data in one bakery ERP software system.</p>
+
+    <div class="ms-grid-4" style="margin-top: 2.5rem;">
+      <div class="ms-benefit ms-reveal ms-reveal-d1">
+        <div class="ms-benefit__icon">🧾</div>
+        <h3>Invoice with less friction</h3>
+        <p>Create, print, and email invoices and credits in batches without rebuilding the same data in separate systems.</p>
+      </div>
+      <div class="ms-benefit ms-reveal ms-reveal-d2">
+        <div class="ms-benefit__icon">📲</div>
+        <h3>Keep statements live</h3>
+        <p>Customers can have up-to-date self-service statements, with accounting reconciliation feeding back into Streamline.</p>
+      </div>
+      <div class="ms-benefit ms-reveal ms-reveal-d3">
+        <div class="ms-benefit__icon">⚙️</div>
+        <h3>Automate collection</h3>
+        <p>Set rules for reminders, statements, and auto-collection so overdue follow-up takes less manual effort.</p>
+      </div>
+      <div class="ms-benefit ms-reveal ms-reveal-d4">
+        <div class="ms-benefit__icon">🔢</div>
+        <h3>See the numbers faster</h3>
+        <p>Build reports, pivot tables, and charts that help teams track sales, trends, and exceptions without digging through exports.</p>
+      </div>
+      <div class="ms-benefit ms-reveal ms-reveal-d1">
+        <div class="ms-benefit__icon">🔀</div>
+        <h3>Stay flexible</h3>
+        <p>Use attributes and batch editing to organize data in ways that match your bakery, not a generic software template.</p>
+      </div>
+      <div class="ms-benefit ms-reveal ms-reveal-d2">
+        <div class="ms-benefit__icon">🔗</div>
+        <h3>Connect finance to operations</h3>
+        <p>Billing and reporting stay tied to customers, delivery, pricing, orders, and production workflows.</p>
+      </div>
+      <div class="ms-benefit ms-reveal ms-reveal-d3">
+        <div class="ms-benefit__icon">🧠</div>
+        <h3>Support smarter decisions</h3>
+        <p>Use Streamline as bakery business intelligence software for margin, sales, and performance visibility.</p>
+      </div>
+      <div class="ms-benefit ms-reveal ms-reveal-d4">
+        <div class="ms-benefit__icon">📝</div>
+        <h3>Replace spreadsheet sprawl</h3>
+        <p>One connected bakery management software system beats juggling Excel files, PDFs, inboxes, and separate finance workflows.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     INVOICES & STATEMENTS
+═══════════════════════════════════════════════════════════════ -->
+<section id="invoices-statements" class="ms-section">
+  <div class="ms-wrap">
+    <p class="ms-kicker ms-reveal">Invoices & Statements</p>
+    <h2 class="ms-reveal ms-reveal-d1">Send invoices, credits, and statements without the admin pile-up.</h2>
+
+    <div class="ms-split" style="margin-top: 3rem;">
+      <div class="ms-reveal">
+        <p class="ms-section-intro" style="max-width:100%">Streamline helps bakeries manage invoice publishing, credit notes, customer billing cycles, and live statements in one place. It supports practical bakery workflows, from route-based invoicing to customer-specific billing settings.</p>
+        <ul class="ms-list" style="margin-top: 1.5rem;">
+          <li>Invoice and credit note library</li>
+          <li>Daily, weekly, or monthly billing by customer</li>
+          <li>Batch multiple invoices in alphabetical or route order</li>
+          <li>Print or email invoice batches in one click</li>
+          <li>Live self-service customer statements</li>
+	  <li>One invoice per delivery or consolidated invoicing options</li>
+          <li>Paperless billing settings</li>
+          <li>Mark contacts to receive invoices and financial emails</li>
+          <li>Option to add card fees to select invoices</li>
+        </ul>
+        <div class="ms-actions">
+          <a class="ms-btn ms-btn-primary" href="https://mountainstream.co/register-your-company?cta=hero&intent=Book%20a%20demo">See it in action</a>
+        </div>
+      </div>
+      <div class="ms-reveal ms-reveal-d1">
+        <div class="ms-callout" style="margin-top: var(--ms-gap); border-color: var(--ms-sky-100); border-left-color: var(--ms-sky-500); background: var(--ms-sky-050);">
+          <h4>Why it helps</h4>
+          <p>This gives bakeries cleaner bakery invoicing software workflows and reduces the back-and-forth between customer service, delivery, and accounts receivable.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     PAYMENT COLLECTION
+═══════════════════════════════════════════════════════════════ -->
+<section id="payment-collection" class="ms-section ms-section-light">
+  <div class="ms-wrap">
+    <p class="ms-kicker ms-reveal">PAYMENT COLLECTION</p>
+    <h2 class="ms-reveal ms-reveal-d1">Collect faster, chase less.</h2>
+
+    <div class="ms-split ms-split--flip" style="margin-top: 3rem;">
+      <div class="ms-reveal">
+        <p class="ms-section-intro" style="max-width:100%">Streamline supports payment collection workflows with rules, reminders, and integrations that help bakeries stay on top of receivables. Instead of manually checking who is overdue, teams can automate more of the follow-up.</p>
+        <ul class="ms-list" style="margin-top: 1.5rem;">
+          <li>Rules for when to send statements</li>
+          <li>Auto-collection using Stripe</li>
+          <li>Credit control and automated reminders</li>
+          <li>Accounts on hold when credit limits are exceeded</li>
+          <li>Accounts on hold when payment terms are violated</li>
+          <li>Import payments via webhook-connected workflows</li>
+          <li>A/R updates when bank reconciliation happens in accounting</li>
+          <li>Integrations including Stripe, WholeSail, Melio, and ACH bank / CSV workflows</li>
+        </ul>
+      </div>
+      <div class="ms-reveal ms-reveal-d1">
+        <div class="ms-grid-2" style="gap: 14px;">
+          <div class="ms-stat">
+            <strong>Automated</strong>
+            <p>Set rules for when to send statements and collect payment, so routine follow-up happens inside one bakery billing software workflow.</p>
+          </div>
+          <div class="ms-stat" style="border-left-color: var(--ms-sky-500); background: var(--ms-sky-050); border-color: var(--ms-sky-100);">
+            <strong>Controlled</strong>
+            <p>Use credit limits, overdue reminders, and account holds when customers exceed terms or go past their limit.</p>
+          </div>
+          <div class="ms-stat" style="border-left-color: var(--ms-success-600); background: var(--ms-success-100); border-color: #c3ecd7;">
+            <strong>Current</strong>
+            <p>Keep customer statements up to date, with accounting reconciliation feeding back into Streamline’s A/R view.</p>
+          </div>
+          <div class="ms-stat">
+            <strong>Integrated</strong>
+            <p>Connect payment collection to invoices, statements, customer accounts, and finance workflows in one bakery ERP software system.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     REPORTING & FORECASTING
+═══════════════════════════════════════════════════════════════ -->
+<section id="reporting-forecasting" class="ms-section ms-section-warm">
+  <div class="ms-wrap">
+    <p class="ms-kicker ms-reveal">Reporting & Forecasting</p>
+    <h2 class="ms-reveal ms-reveal-d1">Reporting that answers real bakery questions.</h2>
+    <p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline gives bakeries flexible reporting tools that go beyond basic exports. Build pivot tables, charts, and operational reports that help teams understand sales, demand patterns, customer behavior, and performance trends.</p>
+
+    <div class="ms-grid" style="margin-top: 2.5rem;">
+      <div class="ms-use-case ms-reveal ms-reveal-d1">
+        <h3>Customizable reporting</h3>
+        <p>Build pivot tables, charts, and out-of-the-box reports that fit real bakery workflows — with filters, grouping, shortcuts, and formats that make bakery reporting software actually useful.</p>
+      </div>
+      <div class="ms-use-case ms-reveal ms-reveal-d2">
+        <h3>Forecast-ready visibility</h3>
+        <p>Track sales trends, year-on-year changes, order deviations, and demand patterns faster, helping teams make better planning decisions with connected bakery sales reporting software.</p>
+      </div>
+      <div class="ms-use-case ms-reveal ms-reveal-d3">
+        <h3>Early signals</h3>
+        <p>Track year-on-year trends, 80/20 performance, and order deviations, with scheduled reports and alerts that help teams spot changes sooner and make faster decisions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     FLEXIBLE DATA STRUCTURE
+═══════════════════════════════════════════════════════════════ -->
+<section id="flexible-data" class="ms-section ms-section-ruled">
+  <div class="ms-wrap">
+    <p class="ms-kicker ms-reveal">FLEXIBLE DATA STRUCTURE</p>
+    <h2 class="ms-reveal ms-reveal-d1">Organize your bakery data your way.</h2>
+    <p class="ms-section-intro ms-reveal ms-reveal-d2">Not every bakery thinks in the same columns. Streamline’s flexible data structure lets teams add attributes to customers, addresses, and catalogue records, then use those attributes to filter, group, and structure reports.</p>
+
+    <div class="ms-grid" style="margin-top: 2.5rem;">
+      <article class="ms-card ms-card-sky ms-reveal ms-reveal-d1">
+        <h3>Add your own structure</h3>
+        <p>Create unlimited attributes for your sales catalogue, customers, and customer addresses so your data matches real bakery workflows.</p>
+      </article>
+      <article class="ms-card ms-card-sky ms-reveal ms-reveal-d2">
+        <h3>Edit at scale</h3>
+        <p>Use batch edit in spreadsheet mode to copy, paste, and update whole lists quickly — no opening records one by one.</p>
+      </article>
+      <article class="ms-card ms-card-sky ms-reveal ms-reveal-d3">
+        <h3>Report your way</h3>
+        <p>Use attributes to group and filter data for departments, customer types, packing logic, and performance views inside bakery reporting software and bakery business intelligence software workflows.</p>
+      </article>
+    </div>
+
+    <div class="ms-answer" style="margin-top: 2.5rem;">
+      <p><strong>Flexible data support: </strong> Streamline helps bakeries manage attributes, batch edits, customer classifications, and report-ready data inside one connected bakery management software platform — so the system fits your bakery, not the other way around.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     FEATURE BADGE LIST
+═══════════════════════════════════════════════════════════════ -->
+<section class="ms-section ms-section-light">
+  <div class="ms-wrap">
+    <p class="ms-kicker ms-reveal">Complete feature list</p>
+    <h2 class="ms-reveal ms-reveal-d1">Finance & reporting features in Streamline.</h2>
+    <div class="ms-badge-row ms-reveal ms-reveal-d2">
+      <span class="ms-badge">Invoice library</span>
+      <span class="ms-badge">Credit note library</span>
+      <span class="ms-badge">Daily billing</span>
+      <span class="ms-badge">Weekly billing</span>
+      <span class="ms-badge">Monthly billing</span>
+      <span class="ms-badge">Batch invoice printing and emailing</span>
+      <span class="ms-badge">Route-order invoicing</span>
+      <span class="ms-badge">Customer statements</span>
+      <span class="ms-badge">Paperless billing</span>
+      <span class="ms-badge">Consolidated invoicing</span>
+      <span class="ms-badge">Per-delivery invoicing</span>
+      <span class="ms-badge">Payment collection rules</span>
+      <span class="ms-badge">Credit control</span>
+      <span class="ms-badge">Card fee settings</span>
+      <span class="ms-badge">Published invoices CSV</span>
+      <span class="ms-badge">Pivot tables</span>
+      <span class="ms-badge">Order deviation alerts</span>
+      <span class="ms-badge">Year-on-year reports</span>
+      <span class="ms-badge">80/20 Pareto analysis</span>
+      <span class="ms-badge">Custom report formatting</span>
+      <span class="ms-badge">Attribute filtering and grouping</span>
+      <span class="ms-badge">Unlimited attributes</span>
+      <span class="ms-badge">Batch edit</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     FAQ
+═══════════════════════════════════════════════════════════════ -->
+<section id="faq" class="ms-section ms-faq">
+  <div class="ms-wrap-narrow">
+    <p class="ms-kicker ms-reveal">FAQ</p>
+    <h2 class="ms-reveal ms-reveal-d1">Finance & reporting questions, answered.</h2>
+
+    <div class="ms-reveal ms-reveal-d2" style="margin-top: 2rem;">
+      <details open>
+        <summary>Does Streamline include invoicing tools?</summary>
+        <p>Yes. Streamline includes invoice and credit note workflows, batch invoice printing and emailing, customer billing settings, and live statements inside one connected bakery invoicing software system.</p>
+      </details>
+      <details>
+        <summary>Can Streamline help with payment collection?</summary>
+        <p>Yes. Streamline supports automated payment collection workflows, statement sending, Stripe-based collection, overdue reminders, and account controls for customers who exceed terms or credit limits.</p>
+      </details>
+      <details>
+        <summary>What reporting does Streamline include?</summary>
+        <p>Streamline includes pivot tables, charts, saved reports, order deviation alerts, year-on-year analysis, 80/20 reporting, and customizable operational reports. It supports bakery reporting software and bakery business intelligence software needs.</p>
+      </details>
+      <details>
+        <summary>What does flexible data structure mean in Streamline?</summary>
+        <p>It means you can add unlimited attributes to key lists like customers, addresses, and catalogue items, then use those attributes to filter, group, edit, and report on data in ways that match your bakery.</p>
+      </details>
+      <details>
+        <summary>Can Streamline support margin and performance analysis?</summary>
+        <p>Yes. Tools like Menu Engineering, sales reporting, and flexible reporting help support bakery margin tracking software and food COGS software style analysis.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     RELATED FEATURES
+═══════════════════════════════════════════════════════════════ -->
+<section class="ms-section-sm ms-section-light">
+  <div class="ms-wrap">
+    <p class="ms-kicker ms-reveal">Related features</p>
+    <p class="ms-reveal ms-reveal-d1" style="color: var(--ms-muted); font-size: .95rem; margin-bottom: 0;">Finance & reporting connects to every other part of Streamline.</p>
+    <div class="ms-related-links ms-reveal ms-reveal-d2">
+      <a href="https://mountainstream.co/streamline-features/customers-and-ordering/">Customers & Ordering</a>
+      <a href="https://mountainstream.co/streamline-features/production-and-recipes/">Production & Recipes</a>
+      <a href="https://mountainstream.co/streamline-features/inventory-and-traceability/">Inventory & Traceability</a>
+      <a href="https://mountainstream.co/streamline-features/delivery-and-distribution/">Delivery & Distribution</a>
+      <a href="https://mountainstream.co/streamline-features/integrations/">Integrations</a>
+      <a href="https://mountainstream.co/streamline-features/">All Features</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     CTA
+═══════════════════════════════════════════════════════════════ -->
+<section class="ms-cta">
+  <div class="ms-wrap ms-reveal">
+    <p class="ms-kicker">Get started</p>
+    <h2>See how Streamline manages bakery finance from invoice to insight.</h2>
+    <p>Connect invoices, statements, payment collection, reporting, forecasting views, and flexible business data in one bakery ERP software system.</p>
+    <div class="ms-actions">
+      <a class="ms-btn ms-btn-primary" href="https://mountainstream.co/register-your-company?cta=hero&intent=Book%20a%20demo">Book a Demo</a>
+      <a class="ms-btn ms-btn-secondary" href="https://mountainstream.co/pricing/">View Pricing</a>
+      <a class="ms-link-arrow" href="https://mountainstream.co/streamline-features/">All Features</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(({ target, isIntersecting }) => {
+      if (isIntersecting) { target.classList.add('visible'); observer.unobserve(target); }
+    });
+  },
+  { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+);
+document.querySelectorAll('.ms-reveal').forEach(el => observer.observe(el));
+
+// Active nav on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.ms-nav a:not(.ms-nav__back)');
+const navObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(({ target, isIntersecting }) => {
+      if (isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`.ms-nav a[href="#${target.id}"]`);
+        if (active) { active.classList.add('active'); active.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); }
+      }
+    });
+  },
+  { threshold: 0.3 }
+);
+sections.forEach(s => navObserver.observe(s));
+</script>
+
+</body>
+</html>

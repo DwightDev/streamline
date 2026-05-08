@@ -9,20 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "MobileApplication",
-    "name": "Streamline Inventory App",
-    "applicationCategory": "BusinessApplication",
-    "operatingSystem": "Android",
-    "url": "https://play.google.com/store/apps/details?id=io.ionic.streamline.inventoryManagementApp",
-    "description": "Mobile inventory management app for wholesale bakeries and food producers. Receive goods, assign lots, print barcode labels, count stock, make recipes, and trigger replenishment from a mobile device.",
-    "provider": { "@type": "Organization", "name": "Mountain Stream", "url": "https://mountainstream.co/streamline-delivery-app/" },
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-  }
-  </script>
-
   <style>
 /* ============================================================
    STREAMLINE INVENTORY APP — Landing Page
@@ -34,22 +20,22 @@
 
 /* ── TOKENS ─────────────────────────────────────────── */
 .sl-lp {
-  --c-navy-950: #05121f;
-  --c-navy-900: #091e3c;
-  --c-navy-800: #0f2f5a;
-  --c-navy-700: #173a6a;
+  --c-navy-950: #113058;
+  --c-navy-900: #113058;
+  --c-navy-800: #113058;
+  --c-navy-700: #113058;
   --c-navy-100: #e4eef9;
   --c-navy-050: #f2f7fd;
 
-  --c-orange-700: #b85200;
-  --c-orange-600: #de6e00;
-  --c-orange:     #f5870e;
-  --c-orange-400: #ff9f36;
+  --c-orange-700: #ff9100;
+  --c-orange-600: #ff9100;
+  --c-orange:     #ff9100;
+  --c-orange-400: #ff9100;
   --c-orange-100: #fef0d8;
   --c-orange-050: #fff8ef;
   --c-orange-glow: rgba(245,135,14,.2);
 
-  --c-sky-500: #4aa6e8;
+  --c-sky-500: #4fa6e9;
   --c-sky-100: #ddf1ff;
   --c-sky-050: #f0f9ff;
 
@@ -943,7 +929,7 @@
   .sl-lp .hero-layout,
   .sl-lp .feat-row,
   .sl-lp .feat-row--flip { grid-template-columns: 1fr; direction: ltr; }
-  .sl-lp .phone-wrap { justify-content: center; margin-top: 16px; }
+  .sl-lp .phone-wrap { justify-content: center; margin-top: 16px; display:none }
   .sl-lp .float-card-1,
   .sl-lp .float-card-2 { display: none; }
   .sl-lp .steps { grid-template-columns: 1fr 1fr; }
@@ -966,33 +952,6 @@
 </head>
 <body class="sl-lp">
 
-<!-- ══════════════════════════════════════════════════
-     MINIMAL HEADER — no nav distraction
-════════════════════════════════════════════════════ -->
-<header class="lp-header">
-  <div class="wrap">
-    <div class="lp-header-inner">
-
-      <a href="https://mountainstream.co/" class="lp-logo" aria-label="Mountain Stream — Streamline ERP">
-        <div class="lp-logo-mark" aria-hidden="true">
-          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 12 L4.5 7 L8 10 L11 5 L15 12" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div>
-          <span class="lp-logo-name">Mountain Stream<span>.</span></span>
-          <span class="lp-logo-sub">Streamline ERP</span>
-        </div>
-      </a>
-
-      <div class="lp-header-right">
-        <a href="/streamline-features/" class="lp-header-link">All Features</a>
-        <a href="https://mountainstream.co/register-your-company?cta=lp-header&intent=book-demo" class="btn btn-primary" style="min-height:40px;padding:10px 20px;font-size:.85rem">Book a Demo</a>
-      </div>
-
-    </div>
-  </div>
-</header>
 
 
 <!-- ══════════════════════════════════════════════════
@@ -1012,9 +971,8 @@
           Give drivers a simple Android app for scanning trays, confirming deliveries, collecting returns, and creating Proof of Delivery while they are on the road.
         </p>
         <div class="btn-group reveal" style="transition-delay:.24s">
-          <a href="https://play.google.com/store/apps/details?id=io.ionic.streamline.inventoryManagementApp"
-             target="_blank" rel="noopener" class="btn btn-primary">
-            ↓ Download on Android
+          <a href="https://play.google.com/store/apps/details?id=io.ionic.streamline.tracker2" target="_blank" rel="noopener" style="width:175px">
+            <img src="https://mountainstream.co/wp-content/uploads/2026/03/visual-identity_badges_880x572-1.width-1440.png" alt="Download on Google Play" class="ms-app-badge" loading="lazy">
           </a>
           <a href="https://mountainstream.co/register-your-company?cta=hero&intent=book-demo" class="btn btn-secondary">Book a Demo</a>
         </div>
@@ -1028,83 +986,7 @@
 
       <!-- Right: phone mockup -->
       <div class="phone-wrap reveal reveal-r" style="transition-delay:.2s" aria-hidden="true">
-
-        <!-- Floating stat cards -->
-        <div class="float-card float-card-1">
-          <p class="float-label">Stock accuracy</p>
-          <p class="float-value">99<span>%</span></p>
-          <p class="float-sub"><span class="float-dot green"></span>Real-time sync</p>
-        </div>
-        <div class="float-card float-card-2">
-          <p class="float-label">Today's goods-in</p>
-          <p class="float-value">12</p>
-          <p class="float-sub"><span class="float-dot orange"></span>3 lots pending labels</p>
-        </div>
-
-        <!-- Phone -->
-        <div class="phone">
-          <div class="phone-notch"></div>
-          <div class="phone-screen">
-            <div class="app-bar">
-              <div class="app-bar-icon">
-                <svg viewBox="0 0 16 16" fill="none"><path d="M1 11 L4 6.5 L7 9.5 L10 4.5 L14 11" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
-              <span class="app-bar-title">Inventory</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="rgba(255,255,255,.4)" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="rgba(255,255,255,.4)" stroke-width="2" stroke-linecap="round"/></svg>
-            </div>
-            <div class="app-tabs">
-              <div class="app-tab active">Receive</div>
-              <div class="app-tab">Count</div>
-              <div class="app-tab">Labels</div>
-              <div class="app-tab">Make</div>
-            </div>
-            <div class="app-content">
-
-              <div class="app-item">
-                <div class="app-item-top">
-                  <span class="app-item-name">Organic Wheat Flour</span>
-                  <span class="app-chip received">Received</span>
-                </div>
-                <span class="app-item-lot">LOT-2025-0441 · OWF-GH-0330</span>
-                <div class="app-item-row">
-                  <span class="app-item-qty">25 kg received</span>
-                  <div class="app-progress"><div class="app-progress-bar" style="width:100%"></div></div>
-                </div>
-              </div>
-
-              <div class="app-item">
-                <div class="app-item-top">
-                  <span class="app-item-name">Butter (Unsalted)</span>
-                  <span class="app-chip pending">Pending</span>
-                </div>
-                <span class="app-item-lot">LOT-2025-0442 · Awaiting label</span>
-                <div class="app-item-row">
-                  <span class="app-item-qty">10 kg of 15 kg</span>
-                  <div class="app-progress"><div class="app-progress-bar" style="width:67%"></div></div>
-                </div>
-              </div>
-
-              <div class="app-item">
-                <div class="app-item-top">
-                  <span class="app-item-name">Sea Salt</span>
-                  <span class="app-chip counted">Counted</span>
-                </div>
-                <span class="app-item-lot">LOT-2025-0438 · Use by 12/2026</span>
-                <div class="app-item-row">
-                  <span class="app-item-qty">5 kg in stock</span>
-                  <div class="app-progress"><div class="app-progress-bar" style="width:45%"></div></div>
-                </div>
-              </div>
-
-              <div class="app-scan-btn">
-                <div class="app-scan-icon"></div>
-                Scan barcode
-              </div>
-
-            </div>
-          </div>
-          <div class="phone-home-bar"><span></span></div>
-        </div>
+        <img src="streamline-distribution-app.png" alt="Streamline Delivery App screenshot showing a list of received items with scan status and progress bars" class="phone-mockup">
 
       </div>
     </div>
@@ -1125,7 +1007,7 @@
       </div>
       <div class="step-item">
         <span class="step-num"></span>
-        <p class="step-title">Despatch orders</p>
+        <p class="step-title">DISPATCH orders</p>
         <p class="step-desc">Confirm the packed trays have left the bakery, by delivery, route, address, or batch where configured.</p>
       </div>
       <div class="step-item">
@@ -1154,12 +1036,12 @@
 <section class="section" style="background:var(--c-white)">
   <div class="wrap">
 
-    <!-- Feature 1: Pack, Despatch, Deliver -->
+    <!-- Feature 1: Pack, DISPATCH, Deliver -->
     <div class="feat-row reveal">
       <div class="feat-text">
-        <p class="eyebrow" style="margin-bottom:10px">PACK, DESPATCH, DELIVER</p>
+        <p class="eyebrow" style="margin-bottom:10px">PACK, DISPATCH, DELIVER</p>
         <h3>Scan every tray through the delivery flow.</h3>
-        <p>Drivers use the app for the core actions that keep delivery status current: Pack, Despatch, Deliver, and Collect. Each scan updates the tray record against the tray, customer, delivery note, driver, and time.
+        <p>Drivers use the app for the core actions that keep delivery status current: Pack, Dispatch, Deliver, and Collect. Each scan updates the tray record against the tray, customer, delivery note, driver, and time.
 </p>
         <ul class="feat-checklist">
           <li>Scan trays onto a delivery before they leave the site</li>
@@ -1167,61 +1049,12 @@
           <li>Confirm packed trays have left the bakery</li>
           <li>Confirm delivered trays at the customer site</li>
           <li>Collect trays when they come back into your possession</li>
-          <li>Collect trays when they come back into your possession</li>
         </ul>
         <div style="margin-top:12px">
         </div>
       </div>
-      <div class="feat-visual reveal reveal-r reveal-d1">
-        <div class="panel">
-          <div class="panel-header">
-            <div class="panel-dot"></div><div class="panel-dot"></div><div class="panel-dot"></div>
-            <span class="panel-title">Goods Receipt — 06 May 2025</span>
-          </div>
-          <div class="panel-body">
-            <div class="panel-kpis">
-              <div class="panel-kpi">
-                <div class="panel-kpi-label">Items received</div>
-                <div class="panel-kpi-val">12</div>
-                <div class="panel-kpi-delta">↑ Today</div>
-              </div>
-              <div class="panel-kpi">
-                <div class="panel-kpi-label">Lots assigned</div>
-                <div class="panel-kpi-val">10</div>
-                <div class="panel-kpi-delta">✓ Labelled</div>
-              </div>
-              <div class="panel-kpi">
-                <div class="panel-kpi-label">Pending labels</div>
-                <div class="panel-kpi-val">2</div>
-                <div class="panel-kpi-delta" style="color:var(--c-orange)">→ Print</div>
-              </div>
-            </div>
-            <div class="panel-row">
-              <span class="panel-row-name">Organic Wheat Flour</span>
-              <span class="panel-row-lot">LOT-2025-0441</span>
-              <span class="panel-row-qty">25 kg</span>
-              <span class="panel-tag green">Received</span>
-            </div>
-            <div class="panel-row">
-              <span class="panel-row-name">Butter (Unsalted)</span>
-              <span class="panel-row-lot">LOT-2025-0442</span>
-              <span class="panel-row-qty">15 kg</span>
-              <span class="panel-tag orange">Label pending</span>
-            </div>
-            <div class="panel-row">
-              <span class="panel-row-name">Active Sourdough Starter</span>
-              <span class="panel-row-lot">LOT-2025-0443</span>
-              <span class="panel-row-qty">8 kg</span>
-              <span class="panel-tag green">Received</span>
-            </div>
-            <div class="panel-row">
-              <span class="panel-row-name">Rye Flour</span>
-              <span class="panel-row-lot">LOT-2025-0444</span>
-              <span class="panel-row-qty">20 kg</span>
-              <span class="panel-tag blue">In transit</span>
-            </div>
-          </div>
-        </div>
+      <div class="reveal reveal-r reveal-d1">
+        <img src="distribution-app-feat-main.png" alt="Streamline Distribution App" style="height:500px; margin: 0 auto">
       </div>
     </div>
 
@@ -1241,49 +1074,8 @@
         <div style="margin-top:12px">
         </div>
       </div>
-      <div class="feat-visual reveal reveal-l reveal-d1">
-        <div class="panel">
-          <div class="panel-header">
-            <div class="panel-dot"></div><div class="panel-dot"></div><div class="panel-dot"></div>
-            <span class="panel-title">Stock Count — Dry Store A</span>
-          </div>
-          <div class="panel-body">
-            <div class="count-list">
-              <div class="count-row">
-                <div class="count-icon">🌾</div>
-                <div class="count-info">
-                  <div class="count-name">Organic Wheat Flour</div>
-                  <div class="count-meta">System: 48 kg &nbsp;·&nbsp; LOT-2025-0441</div>
-                </div>
-                <span class="count-val">48 kg</span>
-              </div>
-              <div class="count-row" style="border-color:var(--c-orange-100);background:var(--c-orange-050)">
-                <div class="count-icon">🧈</div>
-                <div class="count-info">
-                  <div class="count-name">Butter (Unsalted)</div>
-                  <div class="count-meta" style="color:var(--c-orange-700)">System: 15 kg &nbsp;·&nbsp; Variance: −2 kg</div>
-                </div>
-                <span class="count-val" style="color:var(--c-orange-700)">13 kg</span>
-              </div>
-              <div class="count-row">
-                <div class="count-icon">🧂</div>
-                <div class="count-info">
-                  <div class="count-name">Sea Salt</div>
-                  <div class="count-meta">System: 5 kg &nbsp;·&nbsp; LOT-2025-0438</div>
-                </div>
-                <span class="count-val">5 kg</span>
-              </div>
-              <div class="count-row">
-                <div class="count-icon">🍞</div>
-                <div class="count-info">
-                  <div class="count-name">Active Sourdough Starter</div>
-                  <div class="count-meta">System: 8 kg &nbsp;·&nbsp; LOT-2025-0443</div>
-                </div>
-                <span class="count-val">8 kg</span>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="reveal reveal-r reveal-d1">
+        <img src="distribution-app-feat-pod.png" alt="Streamline Distribution App" style="height:500px; margin: 0 auto">
       </div>
     </div>
 
@@ -1303,50 +1095,8 @@
         <div style="margin-top:12px">
         </div>
       </div>
-      <div class="feat-visual reveal reveal-r reveal-d1">
-        <div class="panel">
-          <div class="panel-header">
-            <div class="panel-dot"></div><div class="panel-dot"></div><div class="panel-dot"></div>
-            <span class="panel-title">Make Recipe — Sourdough Loaf 800g</span>
-          </div>
-          <div class="panel-body">
-            <div class="panel-kpis">
-              <div class="panel-kpi">
-                <div class="panel-kpi-label">Batch size</div>
-                <div class="panel-kpi-val">240</div>
-                <div class="panel-kpi-delta">units</div>
-              </div>
-              <div class="panel-kpi">
-                <div class="panel-kpi-label">Lots used</div>
-                <div class="panel-kpi-val">3</div>
-                <div class="panel-kpi-delta">✓ Confirmed</div>
-              </div>
-              <div class="panel-kpi">
-                <div class="panel-kpi-label">Finished lot</div>
-                <div class="panel-kpi-val" style="font-size:.85rem">FG-1204</div>
-                <div class="panel-kpi-delta">→ Created</div>
-              </div>
-            </div>
-            <div class="panel-row">
-              <span class="panel-row-name">Organic Wheat Flour</span>
-              <span class="panel-row-lot">LOT-2025-0441</span>
-              <span class="panel-row-qty">12 kg</span>
-              <span class="panel-tag green">Depleted</span>
-            </div>
-            <div class="panel-row">
-              <span class="panel-row-name">Active Sourdough Starter</span>
-              <span class="panel-row-lot">LOT-2025-0443</span>
-              <span class="panel-row-qty">2.8 kg</span>
-              <span class="panel-tag green">Depleted</span>
-            </div>
-            <div class="panel-row">
-              <span class="panel-row-name">Sea Salt</span>
-              <span class="panel-row-lot">LOT-2025-0438</span>
-              <span class="panel-row-qty">240 g</span>
-              <span class="panel-tag green">Depleted</span>
-            </div>
-          </div>
-        </div>
+      <div class="reveal reveal-r reveal-d1">
+        <img src="distribution-app-feat-asset-collect.png" alt="Streamline Distribution App" style="height:500px; margin: 0 auto">
       </div>
     </div>
 
@@ -1365,49 +1115,8 @@
         <div style="margin-top:12px">
         </div>
       </div>
-      <div class="feat-visual reveal reveal-l reveal-d1">
-        <div class="panel">
-          <div class="panel-header">
-            <div class="panel-dot"></div><div class="panel-dot"></div><div class="panel-dot"></div>
-            <span class="panel-title">Stock Count — Dry Store A</span>
-          </div>
-          <div class="panel-body">
-            <div class="count-list">
-              <div class="count-row">
-                <div class="count-icon">🌾</div>
-                <div class="count-info">
-                  <div class="count-name">Organic Wheat Flour</div>
-                  <div class="count-meta">System: 48 kg &nbsp;·&nbsp; LOT-2025-0441</div>
-                </div>
-                <span class="count-val">48 kg</span>
-              </div>
-              <div class="count-row" style="border-color:var(--c-orange-100);background:var(--c-orange-050)">
-                <div class="count-icon">🧈</div>
-                <div class="count-info">
-                  <div class="count-name">Butter (Unsalted)</div>
-                  <div class="count-meta" style="color:var(--c-orange-700)">System: 15 kg &nbsp;·&nbsp; Variance: −2 kg</div>
-                </div>
-                <span class="count-val" style="color:var(--c-orange-700)">13 kg</span>
-              </div>
-              <div class="count-row">
-                <div class="count-icon">🧂</div>
-                <div class="count-info">
-                  <div class="count-name">Sea Salt</div>
-                  <div class="count-meta">System: 5 kg &nbsp;·&nbsp; LOT-2025-0438</div>
-                </div>
-                <span class="count-val">5 kg</span>
-              </div>
-              <div class="count-row">
-                <div class="count-icon">🍞</div>
-                <div class="count-info">
-                  <div class="count-name">Active Sourdough Starter</div>
-                  <div class="count-meta">System: 8 kg &nbsp;·&nbsp; LOT-2025-0443</div>
-                </div>
-                <span class="count-val">8 kg</span>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="reveal reveal-r reveal-d1">
+        <img src="distribution-app-feat-offline-sync.png" alt="Streamline Distribution App" style="height:500px; margin: 0 auto">
       </div>
     </div>
    </div>
@@ -1496,23 +1205,6 @@
   </div>
 </section>
 
-
-<!-- ══════════════════════════════════════════════════
-     FOOTER
-════════════════════════════════════════════════════ -->
-<footer class="lp-footer">
-  <div class="wrap">
-    <div class="lp-footer-inner">
-      <span>© 2025 Mountain Stream · Streamline ERP</span>
-      <nav class="lp-footer-links" aria-label="Footer">
-        <a href="/streamline-features/">Features</a>
-        <a href="/pricing/">Pricing</a>
-        <a href="/docs/">Docs</a>
-        <a href="https://mountainstream.co/register-your-company?cta=lp-footer&intent=book-demo">Book a Demo</a>
-      </nav>
-    </div>
-  </div>
-</footer>
 
 <script>
 // Scroll reveal

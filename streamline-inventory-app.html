@@ -9,48 +9,34 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "MobileApplication",
-    "name": "Streamline Inventory App",
-    "applicationCategory": "BusinessApplication",
-    "operatingSystem": "Android",
-    "url": "https://play.google.com/store/apps/details?id=io.ionic.streamline.inventoryManagementApp",
-    "description": "Mobile inventory management app for wholesale bakeries and food producers. Receive goods, assign lots, print barcode labels, count stock, make recipes, and trigger replenishment from a mobile device.",
-    "provider": { "@type": "Organization", "name": "Mountain Stream", "url": "https://mountainstream.co/" },
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-  }
-  </script>
-
   <style>
 /* ============================================================
    STREAMLINE INVENTORY APP — Landing Page
-   Scope:    .sl-lp
+   Scope:    .ms-inventory-app
    Goal:     Single CTA — Download the app / Book a demo
    Design:   Minimal, white, generous space, one accent colour
    Fonts:    Fraunces (display) + DM Sans (body)
    ============================================================ */
 
 /* ── TOKENS ─────────────────────────────────────────── */
-.sl-lp {
-  --c-navy-950: #05121f;
-  --c-navy-900: #091e3c;
-  --c-navy-800: #0f2f5a;
-  --c-navy-700: #173a6a;
+.ms-inventory-app {
+  --c-navy-950: #113058;
+  --c-navy-900: #113058;
+  --c-navy-800: #113058;
+  --c-navy-700: #113058;
   --c-navy-100: #e4eef9;
   --c-navy-050: #f2f7fd;
 
-  --c-orange-700: #b85200;
-  --c-orange-600: #de6e00;
-  --c-orange:     #f5870e;
-  --c-orange-400: #ff9f36;
+  --c-orange-700: #ff9100;
+  --c-orange-600: #ff9100;
+  --c-orange:     #ff9100;
+  --c-orange-400: #ff9100;
   --c-orange-100: #fef0d8;
   --c-orange-050: #fff8ef;
   --c-orange-glow: rgba(245,135,14,.2);
 
-  --c-sky-500: #4aa6e8;
-  --c-sky-100: #ddf1ff;
+  --c-sky-500: #4fa6e9;
+  --c-sky-100: #ecf4ff;
   --c-sky-050: #f0f9ff;
 
   --c-green-600: #1e7a52;
@@ -94,52 +80,52 @@
 }
 
 /* ── RESET ──────────────────────────────────────────── */
-.sl-lp *, .sl-lp *::before, .sl-lp *::after { box-sizing: border-box; margin: 0; padding: 0; }
-.sl-lp img { display: block; max-width: 100%; height: auto; }
-.sl-lp p   { margin-bottom: 1rem; line-height: 1.72; }
-.sl-lp p:last-child { margin-bottom: 0; }
-.sl-lp a   { text-decoration: none; transition: color .15s var(--ease), opacity .15s; }
+.ms-inventory-app *, .ms-inventory-app *::before, .ms-inventory-app *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.ms-inventory-app img { display: block; max-width: 100%; height: auto; }
+.ms-inventory-app p   { margin-bottom: 1rem; line-height: 1.72; }
+.ms-inventory-app p:last-child { margin-bottom: 0; }
+.ms-inventory-app a   { text-decoration: none; transition: color .15s var(--ease), opacity .15s; }
 
 /* ── LAYOUT ─────────────────────────────────────────── */
-.sl-lp .wrap {
+.ms-inventory-app .wrap {
   width: min(var(--wrap), calc(100% - var(--gutter) * 2));
   margin-inline: auto;
 }
-.sl-lp .wrap-narrow {
+.ms-inventory-app .wrap-narrow {
   width: min(720px, calc(100% - var(--gutter) * 2));
   margin-inline: auto;
 }
-.sl-lp .section    { padding-block: clamp(72px, 9vw, 112px); }
-.sl-lp .section-sm { padding-block: clamp(48px, 6vw, 72px); }
-.sl-lp .divider    { height: 1px; background: var(--c-line); border: none; }
+.ms-inventory-app .section    { padding-block: clamp(72px, 9vw, 112px); }
+.ms-inventory-app .section-sm { padding-block: clamp(48px, 6vw, 72px); }
+.ms-inventory-app .divider    { height: 1px; background: var(--c-line); border: none; }
 
 /* ── TYPOGRAPHY ─────────────────────────────────────── */
-.sl-lp h1, .sl-lp h2, .sl-lp h3 {
+.ms-inventory-app h1, .ms-inventory-app h2, .ms-inventory-app h3 {
   font-family: var(--f-display);
   font-weight: 600;
   letter-spacing: -.04em;
   line-height: 1.06;
   color: var(--c-navy-900);
 }
-.sl-lp h1 {
+.ms-inventory-app h1 {
   font-size: clamp(2.6rem, 5.5vw, 4.8rem);
   font-weight: 700;
   letter-spacing: -.055em;
   line-height: 1;
 }
-.sl-lp h1 em { font-style: italic; color: var(--c-orange-600); }
-.sl-lp h2 {
+.ms-inventory-app h1 em { font-style: italic; color: var(--c-orange-600); }
+.ms-inventory-app h2 {
   font-size: clamp(1.9rem, 3.5vw, 3rem);
   letter-spacing: -.04em;
 }
-.sl-lp h2 em { font-style: italic; color: var(--c-orange-600); }
-.sl-lp h3 {
+.ms-inventory-app h2 em { font-style: italic; color: var(--c-orange-600); }
+.ms-inventory-app h3 {
   font-size: clamp(1.1rem, 1.6vw, 1.45rem);
   letter-spacing: -.025em;
   line-height: 1.18;
 }
 
-.sl-lp .eyebrow {
+.ms-inventory-app .eyebrow {
   display: inline-flex;
   align-items: center;
   gap: .5rem;
@@ -150,20 +136,20 @@
   color: var(--c-orange-600);
   margin-bottom: 14px;
 }
-.sl-lp .eyebrow::before {
+.ms-inventory-app .eyebrow::before {
   content: "";
   width: 20px; height: 2px;
   border-radius: 2px;
   background: var(--c-orange);
   flex-shrink: 0;
 }
-.sl-lp .lede {
+.ms-inventory-app .lede {
   font-size: clamp(1.0625rem, 1.4vw, 1.2rem);
   color: var(--c-muted);
   line-height: 1.75;
   max-width: 560px;
 }
-.sl-lp .section-label {
+.ms-inventory-app .section-label {
   font-size: .72rem;
   font-weight: 700;
   letter-spacing: .12em;
@@ -174,8 +160,8 @@
 }
 
 /* ── BUTTONS ────────────────────────────────────────── */
-.sl-lp .btn-group { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 32px; }
-.sl-lp .btn {
+.ms-inventory-app .btn-group { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 32px; }
+.ms-inventory-app .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -194,44 +180,44 @@
               border-color .18s var(--ease), box-shadow .18s var(--ease),
               transform .2s var(--spring);
 }
-.sl-lp .btn:hover  { transform: translateY(-2px); }
-.sl-lp .btn:active { transform: translateY(0); }
-.sl-lp .btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(74,166,232,.4); }
+.ms-inventory-app .btn:hover  { transform: translateY(-2px); }
+.ms-inventory-app .btn:active { transform: translateY(0); }
+.ms-inventory-app .btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(74,166,232,.4); }
 
-.sl-lp .btn-primary {
+.ms-inventory-app .btn-primary {
   background: linear-gradient(170deg, var(--c-orange-400) 0%, var(--c-orange-600) 100%);
   color: #fff;
   border-color: var(--c-orange-600);
   box-shadow: var(--sh-cta);
 }
-.sl-lp .btn-primary:hover {
+.ms-inventory-app .btn-primary:hover {
   background: linear-gradient(170deg, #ffb84a 0%, var(--c-orange-700) 100%);
   color: #fff;
   box-shadow: 0 16px 40px var(--c-orange-glow);
 }
-.sl-lp .btn-secondary {
+.ms-inventory-app .btn-secondary {
   background: var(--c-white);
   color: var(--c-navy-900);
   border-color: var(--c-line);
   box-shadow: var(--sh-xs);
 }
-.sl-lp .btn-secondary:hover {
+.ms-inventory-app .btn-secondary:hover {
   background: var(--c-navy-050);
   border-color: var(--c-sky-500);
   color: var(--c-navy-900);
   box-shadow: var(--sh-sm);
 }
-.sl-lp .btn-ghost {
+.ms-inventory-app .btn-ghost {
   background: rgba(255,255,255,.1);
   color: #fff;
   border-color: rgba(255,255,255,.25);
 }
-.sl-lp .btn-ghost:hover {
+.ms-inventory-app .btn-ghost:hover {
   background: rgba(255,255,255,.18);
   color: #fff;
   border-color: rgba(255,255,255,.45);
 }
-.sl-lp .link-arrow {
+.ms-inventory-app .link-arrow {
   display: inline-flex;
   align-items: center;
   gap: .4rem;
@@ -239,13 +225,13 @@
   font-weight: 600;
   font-size: .9rem;
 }
-.sl-lp .link-arrow::after { content: "→"; transition: transform .16s var(--spring); }
-.sl-lp .link-arrow:hover  { color: var(--c-orange-600); }
-.sl-lp .link-arrow:hover::after { transform: translateX(4px); }
+.ms-inventory-app .link-arrow::after { content: "→"; transition: transform .16s var(--spring); }
+.ms-inventory-app .link-arrow:hover  { color: var(--c-orange-600); }
+.ms-inventory-app .link-arrow:hover::after { transform: translateX(4px); }
 
 /* ── MINIMAL HEADER ─────────────────────────────────── */
 /* Landing page: logo + single CTA only — no distracting nav */
-.sl-lp .lp-header {
+.ms-inventory-app .lp-header {
   position: sticky;
   top: 0;
   z-index: 100;
@@ -254,19 +240,19 @@
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
-.sl-lp .lp-header-inner {
+.ms-inventory-app .lp-header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 64px;
 }
-.sl-lp .lp-logo {
+.ms-inventory-app .lp-logo {
   display: inline-flex;
   align-items: center;
   gap: 9px;
   text-decoration: none;
 }
-.sl-lp .lp-logo-mark {
+.ms-inventory-app .lp-logo-mark {
   width: 34px; height: 34px;
   border-radius: 8px;
   background: linear-gradient(135deg, var(--c-sky-500), var(--c-navy-800));
@@ -275,8 +261,8 @@
   justify-content: center;
   flex-shrink: 0;
 }
-.sl-lp .lp-logo-mark svg { width: 16px; height: 16px; }
-.sl-lp .lp-logo-name {
+.ms-inventory-app .lp-logo-mark svg { width: 16px; height: 16px; }
+.ms-inventory-app .lp-logo-name {
   font-family: var(--f-display);
   font-size: .95rem;
   font-weight: 700;
@@ -284,28 +270,28 @@
   letter-spacing: -.02em;
   line-height: 1.1;
 }
-.sl-lp .lp-logo-name span { color: var(--c-orange); }
-.sl-lp .lp-logo-sub {
+.ms-inventory-app .lp-logo-name span { color: var(--c-orange); }
+.ms-inventory-app .lp-logo-sub {
   display: block;
   font-size: .6rem;
   font-weight: 500;
   letter-spacing: .04em;
   color: var(--c-soft);
 }
-.sl-lp .lp-header-right {
+.ms-inventory-app .lp-header-right {
   display: flex;
   align-items: center;
   gap: 16px;
 }
-.sl-lp .lp-header-link {
+.ms-inventory-app .lp-header-link {
   font-size: .85rem;
   font-weight: 600;
   color: var(--c-muted);
 }
-.sl-lp .lp-header-link:hover { color: var(--c-navy-900); }
+.ms-inventory-app .lp-header-link:hover { color: var(--c-navy-900); }
 
 /* ── HERO ───────────────────────────────────────────── */
-.sl-lp .hero {
+.ms-inventory-app .hero {
   padding: clamp(64px, 9vw, 112px) 0 clamp(48px, 7vw, 80px);
   background:
     radial-gradient(ellipse 65% 70% at 90% 5%, rgba(74,166,232,.1), transparent 50%),
@@ -315,7 +301,7 @@
   position: relative;
   overflow: hidden;
 }
-.sl-lp .hero::after {
+.ms-inventory-app .hero::after {
   content: "";
   position: absolute;
   bottom: 0; left: 0; right: 0;
@@ -323,21 +309,21 @@
   background: linear-gradient(90deg, transparent, var(--c-orange) 30%, var(--c-sky-500) 70%, transparent);
   opacity: .28;
 }
-.sl-lp .hero-layout {
+.ms-inventory-app .hero-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(48px, 7vw, 96px);
   align-items: center;
 }
-.sl-lp .hero-content .eyebrow { margin-bottom: 18px; }
-.sl-lp .hero-content h1 { margin-bottom: 20px; }
-.sl-lp .hero-badges {
+.ms-inventory-app .hero-content .eyebrow { margin-bottom: 18px; }
+.ms-inventory-app .hero-content h1 { margin-bottom: 20px; }
+.ms-inventory-app .hero-badges {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 20px;
 }
-.sl-lp .hero-badge {
+.ms-inventory-app .hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -349,20 +335,20 @@
   font-weight: 600;
   color: var(--c-muted);
 }
-.sl-lp .hero-badge::before {
+.ms-inventory-app .hero-badge::before {
   content: "✓";
   color: var(--c-orange);
   font-weight: 800;
 }
 
 /* ── CSS PHONE MOCKUP ───────────────────────────────── */
-.sl-lp .phone-wrap {
+.ms-inventory-app .phone-wrap {
   display: flex;
   justify-content: center;
   align-items: flex-end;
   position: relative;
 }
-.sl-lp .phone {
+.ms-inventory-app .phone {
   width: 260px;
   background: var(--c-navy-950);
   border-radius: 36px;
@@ -375,7 +361,7 @@
   flex-shrink: 0;
 }
 /* Notch */
-.sl-lp .phone-notch {
+.ms-inventory-app .phone-notch {
   width: 90px;
   height: 26px;
   background: var(--c-navy-950);
@@ -385,14 +371,14 @@
   z-index: 2;
 }
 /* Screen */
-.sl-lp .phone-screen {
+.ms-inventory-app .phone-screen {
   background: #0d1f33;
   min-height: 520px;
   padding: 0;
   overflow: hidden;
 }
 /* App top bar */
-.sl-lp .app-bar {
+.ms-inventory-app .app-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -400,14 +386,14 @@
   background: #091525;
   border-bottom: 1px solid rgba(255,255,255,.07);
 }
-.sl-lp .app-bar-title {
+.ms-inventory-app .app-bar-title {
   font-family: var(--f-display);
   font-size: .78rem;
   font-weight: 700;
   color: rgba(255,255,255,.9);
   letter-spacing: -.01em;
 }
-.sl-lp .app-bar-icon {
+.ms-inventory-app .app-bar-icon {
   width: 26px; height: 26px;
   border-radius: 6px;
   background: linear-gradient(135deg, var(--c-sky-500), var(--c-navy-800));
@@ -415,17 +401,17 @@
   align-items: center;
   justify-content: center;
 }
-.sl-lp .app-bar-icon svg { width: 12px; height: 12px; }
+.ms-inventory-app .app-bar-icon svg { width: 12px; height: 12px; }
 
 /* App nav tabs */
-.sl-lp .app-tabs {
+.ms-inventory-app .app-tabs {
   display: flex;
   gap: 0;
   background: #091525;
   border-bottom: 1px solid rgba(255,255,255,.07);
   padding: 0 10px;
 }
-.sl-lp .app-tab {
+.ms-inventory-app .app-tab {
   flex: 1;
   padding: 8px 4px;
   text-align: center;
@@ -436,10 +422,10 @@
   text-transform: uppercase;
   position: relative;
 }
-.sl-lp .app-tab.active {
+.ms-inventory-app .app-tab.active {
   color: var(--c-orange-400);
 }
-.sl-lp .app-tab.active::after {
+.ms-inventory-app .app-tab.active::after {
   content: "";
   position: absolute;
   bottom: 0; left: 20%; right: 20%;
@@ -449,10 +435,10 @@
 }
 
 /* App content */
-.sl-lp .app-content { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.ms-inventory-app .app-content { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
 
 /* Goods-in item row */
-.sl-lp .app-item {
+.ms-inventory-app .app-item {
   background: rgba(255,255,255,.06);
   border: 1px solid rgba(255,255,255,.08);
   border-radius: 10px;
@@ -461,45 +447,45 @@
   flex-direction: column;
   gap: 5px;
 }
-.sl-lp .app-item-top {
+.ms-inventory-app .app-item-top {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 6px;
 }
-.sl-lp .app-item-name {
+.ms-inventory-app .app-item-name {
   font-size: .72rem;
   font-weight: 700;
   color: rgba(255,255,255,.9);
   line-height: 1.3;
 }
-.sl-lp .app-chip {
+.ms-inventory-app .app-chip {
   font-size: .56rem;
   font-weight: 700;
   padding: 2px 7px;
   border-radius: 20px;
   flex-shrink: 0;
 }
-.sl-lp .app-chip.received { background: rgba(30,122,82,.25); color: #4ade80; }
-.sl-lp .app-chip.pending  { background: rgba(245,135,14,.2); color: var(--c-orange-400); }
-.sl-lp .app-chip.counted  { background: rgba(74,166,232,.2); color: #7dd3fc; }
-.sl-lp .app-item-lot {
+.ms-inventory-app .app-chip.received { background: rgba(30,122,82,.25); color: #4ade80; }
+.ms-inventory-app .app-chip.pending  { background: rgba(245,135,14,.2); color: var(--c-orange-400); }
+.ms-inventory-app .app-chip.counted  { background: rgba(74,166,232,.2); color: #7dd3fc; }
+.ms-inventory-app .app-item-lot {
   font-size: .6rem;
   color: rgba(255,255,255,.35);
   font-weight: 600;
   letter-spacing: .03em;
 }
-.sl-lp .app-item-row {
+.ms-inventory-app .app-item-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.sl-lp .app-item-qty {
+.ms-inventory-app .app-item-qty {
   font-size: .65rem;
   color: rgba(255,255,255,.55);
   font-weight: 600;
 }
-.sl-lp .app-progress {
+.ms-inventory-app .app-progress {
   height: 3px;
   background: rgba(255,255,255,.08);
   border-radius: 2px;
@@ -507,14 +493,14 @@
   flex: 1;
   margin-left: 8px;
 }
-.sl-lp .app-progress-bar {
+.ms-inventory-app .app-progress-bar {
   height: 100%;
   border-radius: 2px;
   background: linear-gradient(90deg, var(--c-sky-500), var(--c-orange));
 }
 
 /* Scan button */
-.sl-lp .app-scan-btn {
+.ms-inventory-app .app-scan-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -530,29 +516,29 @@
   letter-spacing: .04em;
   text-transform: uppercase;
 }
-.sl-lp .app-scan-icon {
+.ms-inventory-app .app-scan-icon {
   width: 14px; height: 14px;
   border: 2px solid rgba(255,255,255,.7);
   border-radius: 3px;
   position: relative;
 }
-.sl-lp .app-scan-icon::before,
-.sl-lp .app-scan-icon::after {
+.ms-inventory-app .app-scan-icon::before,
+.ms-inventory-app .app-scan-icon::after {
   content: "";
   position: absolute;
   background: rgba(255,255,255,.7);
 }
-.sl-lp .app-scan-icon::before { top: 3px; left: 0; right: 0; height: 1px; }
-.sl-lp .app-scan-icon::after  { top: 0; bottom: 0; left: 3px; width: 1px; }
+.ms-inventory-app .app-scan-icon::before { top: 3px; left: 0; right: 0; height: 1px; }
+.ms-inventory-app .app-scan-icon::after  { top: 0; bottom: 0; left: 3px; width: 1px; }
 
 /* Phone bottom bar */
-.sl-lp .phone-home-bar {
+.ms-inventory-app .phone-home-bar {
   padding: 10px;
   display: flex;
   justify-content: center;
   background: #091525;
 }
-.sl-lp .phone-home-bar span {
+.ms-inventory-app .phone-home-bar span {
   width: 80px; height: 4px;
   border-radius: 4px;
   background: rgba(255,255,255,.2);
@@ -560,7 +546,7 @@
 }
 
 /* Floating notification card */
-.sl-lp .float-card {
+.ms-inventory-app .float-card {
   position: absolute;
   width: 180px;
   padding: 12px 14px;
@@ -569,9 +555,9 @@
   box-shadow: var(--sh);
   border: 1px solid var(--c-line);
 }
-.sl-lp .float-card-1 { right: -24px; top: 40px; transform: rotate(2.5deg); }
-.sl-lp .float-card-2 { left: -28px;  bottom: 72px; transform: rotate(-2deg); }
-.sl-lp .float-label {
+.ms-inventory-app .float-card-1 { right: -24px; top: 40px; transform: rotate(2.5deg); }
+.ms-inventory-app .float-card-2 { left: -28px;  bottom: 72px; transform: rotate(-2deg); }
+.ms-inventory-app .float-label {
   font-size: .6rem;
   font-weight: 700;
   letter-spacing: .08em;
@@ -579,7 +565,7 @@
   color: var(--c-soft);
   margin-bottom: 5px;
 }
-.sl-lp .float-value {
+.ms-inventory-app .float-value {
   font-family: var(--f-display);
   font-size: 1.35rem;
   font-weight: 700;
@@ -588,35 +574,35 @@
   color: var(--c-navy-900);
   margin-bottom: 3px;
 }
-.sl-lp .float-value span { color: var(--c-orange); }
-.sl-lp .float-sub {
+.ms-inventory-app .float-value span { color: var(--c-orange); }
+.ms-inventory-app .float-sub {
   font-size: .65rem;
   color: var(--c-muted);
 }
-.sl-lp .float-dot {
+.ms-inventory-app .float-dot {
   display: inline-block;
   width: 6px; height: 6px;
   border-radius: 50%;
   margin-right: 4px;
   vertical-align: middle;
 }
-.sl-lp .float-dot.green { background: #22c55e; }
-.sl-lp .float-dot.orange { background: var(--c-orange); }
+.ms-inventory-app .float-dot.green { background: #22c55e; }
+.ms-inventory-app .float-dot.orange { background: var(--c-orange); }
 
 /* ── SOCIAL PROOF ROW ───────────────────────────────── */
-.sl-lp .proof-row {
+.ms-inventory-app .proof-row {
   padding-block: 28px;
   border-bottom: 1px solid var(--c-line);
   background: var(--c-white);
 }
-.sl-lp .proof-inner {
+.ms-inventory-app .proof-inner {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 28px;
   justify-content: space-between;
 }
-.sl-lp .proof-rating {
+.ms-inventory-app .proof-rating {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -624,15 +610,15 @@
   color: var(--c-muted);
   font-weight: 500;
 }
-.sl-lp .proof-rating img { height: 20px; width: auto; }
-.sl-lp .proof-stars { color: var(--c-orange); letter-spacing: 2px; }
-.sl-lp .proof-stat {
+.ms-inventory-app .proof-rating img { height: 20px; width: auto; }
+.ms-inventory-app .proof-stars { color: var(--c-orange); letter-spacing: 2px; }
+.ms-inventory-app .proof-stat {
   text-align: center;
   padding: 0 20px;
   border-left: 1px solid var(--c-line);
 }
-.sl-lp .proof-stat:first-of-type { border-left: 0; }
-.sl-lp .proof-stat strong {
+.ms-inventory-app .proof-stat:first-of-type { border-left: 0; }
+.ms-inventory-app .proof-stat strong {
   display: block;
   font-family: var(--f-display);
   font-size: 1.6rem;
@@ -641,12 +627,12 @@
   color: var(--c-navy-900);
   line-height: 1.1;
 }
-.sl-lp .proof-stat strong span { color: var(--c-orange); }
-.sl-lp .proof-stat p { font-size: .75rem; color: var(--c-muted); margin-top: 2px; }
-.sl-lp .proof-stats { display: flex; }
+.ms-inventory-app .proof-stat strong span { color: var(--c-orange); }
+.ms-inventory-app .proof-stat p { font-size: .75rem; color: var(--c-muted); margin-top: 2px; }
+.ms-inventory-app .proof-stats { display: flex; }
 
 /* ── FEATURES — ALTERNATING ROWS ───────────────────── */
-.sl-lp .feat-row {
+.ms-inventory-app .feat-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(48px, 7vw, 96px);
@@ -654,26 +640,26 @@
   padding-block: clamp(56px, 7vw, 88px);
   border-top: 1px solid var(--c-line);
 }
-.sl-lp .feat-row:first-of-type { border-top: 0; padding-top: 0; }
-.sl-lp .feat-row--flip { direction: rtl; }
-.sl-lp .feat-row--flip > * { direction: ltr; }
-.sl-lp .feat-text { display: flex; flex-direction: column; gap: 14px; }
-.sl-lp .feat-text h3 { margin-bottom: 4px; }
-.sl-lp .feat-text p { color: var(--c-muted); font-size: 1.0625rem; }
-.sl-lp .feat-checklist {
+.ms-inventory-app .feat-row:first-of-type { border-top: 0; padding-top: 0; }
+.ms-inventory-app .feat-row--flip { direction: rtl; }
+.ms-inventory-app .feat-row--flip > * { direction: ltr; }
+.ms-inventory-app .feat-text { display: flex; flex-direction: column; gap: 14px; }
+.ms-inventory-app .feat-text h3 { margin-bottom: 4px; }
+.ms-inventory-app .feat-text p { color: var(--c-muted); font-size: 1.0625rem; }
+.ms-inventory-app .feat-checklist {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 9px;
 }
-.sl-lp .feat-checklist li {
+.ms-inventory-app .feat-checklist li {
   position: relative;
   padding-left: 24px;
   font-size: .95rem;
   color: var(--c-muted);
   line-height: 1.55;
 }
-.sl-lp .feat-checklist li::before {
+.ms-inventory-app .feat-checklist li::before {
   content: "";
   position: absolute;
   top: .54em; left: 0;
@@ -684,7 +670,7 @@
 }
 
 /* Feature visual panels */
-.sl-lp .feat-visual {
+.ms-inventory-app .feat-visual {
   border-radius: var(--r-xl);
   overflow: hidden;
   box-shadow: var(--sh-lg);
@@ -692,10 +678,10 @@
   background: var(--c-navy-050);
 }
 /* Receive goods panel */
-.sl-lp .panel {
+.ms-inventory-app .panel {
   background: var(--c-white);
 }
-.sl-lp .panel-header {
+.ms-inventory-app .panel-header {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -703,23 +689,23 @@
   background: var(--c-navy-050);
   border-bottom: 1px solid var(--c-line);
 }
-.sl-lp .panel-dot { width: 8px; height: 8px; border-radius: 50%; }
-.sl-lp .panel-dot:nth-child(1) { background: #ff5f57; }
-.sl-lp .panel-dot:nth-child(2) { background: #febc2e; }
-.sl-lp .panel-dot:nth-child(3) { background: #28c840; }
-.sl-lp .panel-title { font-size: .7rem; font-weight: 600; color: var(--c-soft); margin-left: 4px; letter-spacing: .03em; }
-.sl-lp .panel-body { padding: 18px; display: flex; flex-direction: column; gap: 10px; }
-.sl-lp .panel-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 4px; }
-.sl-lp .panel-kpi {
+.ms-inventory-app .panel-dot { width: 8px; height: 8px; border-radius: 50%; }
+.ms-inventory-app .panel-dot:nth-child(1) { background: #ff5f57; }
+.ms-inventory-app .panel-dot:nth-child(2) { background: #febc2e; }
+.ms-inventory-app .panel-dot:nth-child(3) { background: #28c840; }
+.ms-inventory-app .panel-title { font-size: .7rem; font-weight: 600; color: var(--c-soft); margin-left: 4px; letter-spacing: .03em; }
+.ms-inventory-app .panel-body { padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+.ms-inventory-app .panel-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 4px; }
+.ms-inventory-app .panel-kpi {
   background: var(--c-page);
   border: 1px solid var(--c-line);
   border-radius: var(--r-sm);
   padding: 10px 12px;
 }
-.sl-lp .panel-kpi-label { font-size: .6rem; font-weight: 700; color: var(--c-soft); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
-.sl-lp .panel-kpi-val { font-family: var(--f-display); font-size: 1.2rem; font-weight: 700; color: var(--c-navy-900); letter-spacing: -.03em; line-height: 1; }
-.sl-lp .panel-kpi-delta { font-size: .6rem; font-weight: 700; color: #22c55e; margin-top: 2px; }
-.sl-lp .panel-row {
+.ms-inventory-app .panel-kpi-label { font-size: .6rem; font-weight: 700; color: var(--c-soft); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
+.ms-inventory-app .panel-kpi-val { font-family: var(--f-display); font-size: 1.2rem; font-weight: 700; color: var(--c-navy-900); letter-spacing: -.03em; line-height: 1; }
+.ms-inventory-app .panel-kpi-delta { font-size: .6rem; font-weight: 700; color: #22c55e; margin-top: 2px; }
+.ms-inventory-app .panel-row {
   display: grid;
   grid-template-columns: 1.6fr .8fr .8fr auto;
   gap: 8px;
@@ -730,23 +716,23 @@
   border: 1px solid var(--c-line);
   font-size: .72rem;
 }
-.sl-lp .panel-row-name { font-weight: 600; color: var(--c-navy-900); }
-.sl-lp .panel-row-lot  { color: var(--c-muted); font-size: .65rem; }
-.sl-lp .panel-row-qty  { color: var(--c-muted); font-size: .7rem; }
-.sl-lp .panel-tag {
+.ms-inventory-app .panel-row-name { font-weight: 600; color: var(--c-navy-900); }
+.ms-inventory-app .panel-row-lot  { color: var(--c-muted); font-size: .65rem; }
+.ms-inventory-app .panel-row-qty  { color: var(--c-muted); font-size: .7rem; }
+.ms-inventory-app .panel-tag {
   font-size: .6rem;
   font-weight: 700;
   padding: 3px 8px;
   border-radius: var(--r-pill);
   white-space: nowrap;
 }
-.sl-lp .panel-tag.green  { background: var(--c-green-100); color: var(--c-green-600); }
-.sl-lp .panel-tag.orange { background: var(--c-orange-100); color: var(--c-orange-700); }
-.sl-lp .panel-tag.blue   { background: var(--c-sky-100); color: #1d7dc0; }
+.ms-inventory-app .panel-tag.green  { background: var(--c-green-100); color: var(--c-green-600); }
+.ms-inventory-app .panel-tag.orange { background: var(--c-orange-100); color: var(--c-orange-700); }
+.ms-inventory-app .panel-tag.blue   { background: var(--c-sky-100); color: #1d7dc0; }
 
 /* Stock count panel */
-.sl-lp .count-list { display: flex; flex-direction: column; gap: 8px; }
-.sl-lp .count-row {
+.ms-inventory-app .count-list { display: flex; flex-direction: column; gap: 8px; }
+.ms-inventory-app .count-row {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -755,7 +741,7 @@
   border-radius: var(--r-sm);
   background: var(--c-white);
 }
-.sl-lp .count-icon {
+.ms-inventory-app .count-icon {
   width: 32px; height: 32px;
   border-radius: 8px;
   background: var(--c-orange-100);
@@ -765,13 +751,13 @@
   font-size: 14px;
   flex-shrink: 0;
 }
-.sl-lp .count-info { flex: 1; min-width: 0; }
-.sl-lp .count-name { font-size: .8rem; font-weight: 600; color: var(--c-navy-900); }
-.sl-lp .count-meta { font-size: .68rem; color: var(--c-muted); margin-top: 1px; }
-.sl-lp .count-val  { font-family: var(--f-display); font-size: 1rem; font-weight: 700; color: var(--c-navy-900); letter-spacing: -.02em; flex-shrink: 0; }
+.ms-inventory-app .count-info { flex: 1; min-width: 0; }
+.ms-inventory-app .count-name { font-size: .8rem; font-weight: 600; color: var(--c-navy-900); }
+.ms-inventory-app .count-meta { font-size: .68rem; color: var(--c-muted); margin-top: 1px; }
+.ms-inventory-app .count-val  { font-family: var(--f-display); font-size: 1rem; font-weight: 700; color: var(--c-navy-900); letter-spacing: -.02em; flex-shrink: 0; }
 
 /* ── STEP FLOW ──────────────────────────────────────── */
-.sl-lp .steps {
+.ms-inventory-app .steps {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 0;
@@ -782,15 +768,15 @@
   background: var(--c-white);
   box-shadow: var(--sh-sm);
 }
-.sl-lp .step-item {
+.ms-inventory-app .step-item {
   padding: clamp(20px, 2.5vw, 28px) clamp(16px, 2vw, 22px);
   border-right: 1px solid var(--c-line);
   position: relative;
   transition: background .18s;
 }
-.sl-lp .step-item:last-child { border-right: 0; }
-.sl-lp .step-item:hover { background: var(--c-navy-050); }
-.sl-lp .step-item::after {
+.ms-inventory-app .step-item:last-child { border-right: 0; }
+.ms-inventory-app .step-item:hover { background: var(--c-navy-050); }
+.ms-inventory-app .step-item::after {
   content: "›";
   position: absolute;
   right: -11px;
@@ -805,9 +791,9 @@
   line-height: 1;
   transition: background .18s;
 }
-.sl-lp .step-item:hover::after { background: var(--c-navy-050); }
-.sl-lp .step-item:last-child::after { display: none; }
-.sl-lp .step-num {
+.ms-inventory-app .step-item:hover::after { background: var(--c-navy-050); }
+.ms-inventory-app .step-item:last-child::after { display: none; }
+.ms-inventory-app .step-num {
   counter-increment: step;
   font-family: var(--f-display);
   font-size: .7rem;
@@ -817,17 +803,17 @@
   margin-bottom: 8px;
   display: block;
 }
-.sl-lp .step-num::before { content: "0" counter(step); }
-.sl-lp .step-title { font-size: .88rem; font-weight: 700; color: var(--c-navy-900); margin-bottom: 5px; line-height: 1.3; }
-.sl-lp .step-desc  { font-size: .76rem; color: var(--c-muted); line-height: 1.5; }
+.ms-inventory-app .step-num::before { content: "0" counter(step); }
+.ms-inventory-app .step-title { font-size: .88rem; font-weight: 700; color: var(--c-navy-900); margin-bottom: 5px; line-height: 1.3; }
+.ms-inventory-app .step-desc  { font-size: .76rem; color: var(--c-muted); line-height: 1.5; }
 
 /* ── TESTIMONIALS ───────────────────────────────────── */
-.sl-lp .testi-grid {
+.ms-inventory-app .testi-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(18px, 2.5vw, 28px);
 }
-.sl-lp .testi {
+.ms-inventory-app .testi {
   padding: clamp(22px, 3vw, 32px);
   border: 1px solid var(--c-line);
   border-radius: var(--r-lg);
@@ -838,15 +824,15 @@
   gap: 14px;
   transition: box-shadow .2s, transform .2s var(--ease);
 }
-.sl-lp .testi:hover { box-shadow: var(--sh); transform: translateY(-3px); }
-.sl-lp .testi-stars { color: var(--c-orange); font-size: .9rem; letter-spacing: 2px; }
-.sl-lp .testi-quote { font-size: .95rem; color: var(--c-muted); line-height: 1.72; font-style: italic; flex: 1; }
-.sl-lp .testi-author { font-weight: 700; font-size: .88rem; color: var(--c-navy-800); }
-.sl-lp .testi-author a { color: inherit; }
-.sl-lp .testi-author a:hover { color: var(--c-orange-600); }
+.ms-inventory-app .testi:hover { box-shadow: var(--sh); transform: translateY(-3px); }
+.ms-inventory-app .testi-stars { color: var(--c-orange); font-size: .9rem; letter-spacing: 2px; }
+.ms-inventory-app .testi-quote { font-size: .95rem; color: var(--c-muted); line-height: 1.72; font-style: italic; flex: 1; }
+.ms-inventory-app .testi-author { font-weight: 700; font-size: .88rem; color: var(--c-navy-800); }
+.ms-inventory-app .testi-author a { color: inherit; }
+.ms-inventory-app .testi-author a:hover { color: var(--c-orange-600); }
 
 /* ── FAQ ────────────────────────────────────────────── */
-.sl-lp .faq details {
+.ms-inventory-app .faq details {
   padding: 20px 22px;
   margin-bottom: 10px;
   border: 1px solid var(--c-line);
@@ -855,9 +841,9 @@
   box-shadow: var(--sh-xs);
   transition: border-color .18s, box-shadow .18s;
 }
-.sl-lp .faq details:hover { border-color: #c4d1e2; }
-.sl-lp .faq details[open] { border-color: var(--c-sky-500); box-shadow: var(--sh-sm); }
-.sl-lp .faq summary {
+.ms-inventory-app .faq details:hover { border-color: #c4d1e2; }
+.ms-inventory-app .faq details[open] { border-color: var(--c-sky-500); box-shadow: var(--sh-sm); }
+.ms-inventory-app .faq summary {
   cursor: pointer;
   font-weight: 600;
   font-size: .95rem;
@@ -869,8 +855,8 @@
   gap: 12px;
   line-height: 1.4;
 }
-.sl-lp .faq summary::-webkit-details-marker { display: none; }
-.sl-lp .faq summary::after {
+.ms-inventory-app .faq summary::-webkit-details-marker { display: none; }
+.ms-inventory-app .faq summary::after {
   content: "+";
   flex-shrink: 0;
   width: 22px; height: 22px;
@@ -883,11 +869,11 @@
   place-items: center;
   transition: background .18s, color .18s, transform .22s var(--spring);
 }
-.sl-lp .faq details[open] summary::after { content: "−"; background: var(--c-orange); color: #fff; transform: rotate(180deg); }
-.sl-lp .faq p { margin: 12px 0 0; font-size: .9rem; color: var(--c-muted); line-height: 1.72; }
+.ms-inventory-app .faq details[open] summary::after { content: "−"; background: var(--c-orange); color: #fff; transform: rotate(180deg); }
+.ms-inventory-app .faq p { margin: 12px 0 0; font-size: .9rem; color: var(--c-muted); line-height: 1.72; }
 
 /* ── FINAL CTA ──────────────────────────────────────── */
-.sl-lp .final-cta {
+.ms-inventory-app .final-cta {
   padding-block: clamp(80px, 10vw, 120px);
   text-align: center;
   background:
@@ -896,17 +882,17 @@
     linear-gradient(165deg, var(--c-navy-050) 0%, var(--c-white) 55%);
   border-top: 4px solid var(--c-orange);
 }
-.sl-lp .final-cta h2 { margin-bottom: 14px; }
-.sl-lp .final-cta p  { color: var(--c-muted); max-width: 520px; margin-inline: auto; margin-bottom: 32px; }
-.sl-lp .final-cta .btn-group { justify-content: center; }
+.ms-inventory-app .final-cta h2 { margin-bottom: 14px; }
+.ms-inventory-app .final-cta p  { color: var(--c-muted); max-width: 520px; margin-inline: auto; margin-bottom: 32px; }
+.ms-inventory-app .final-cta .btn-group { justify-content: center; }
 
 /* ── SIMPLE FOOTER ──────────────────────────────────── */
-.sl-lp .lp-footer {
+.ms-inventory-app .lp-footer {
   padding-block: 28px;
   background: var(--c-navy-050);
   border-top: 1px solid var(--c-line);
 }
-.sl-lp .lp-footer-inner {
+.ms-inventory-app .lp-footer-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -915,84 +901,56 @@
   font-size: .82rem;
   color: var(--c-muted);
 }
-.sl-lp .lp-footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
-.sl-lp .lp-footer-links a { color: var(--c-navy-700); font-weight: 500; }
-.sl-lp .lp-footer-links a:hover { color: var(--c-orange-600); }
+.ms-inventory-app .lp-footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+.ms-inventory-app .lp-footer-links a { color: var(--c-navy-700); font-weight: 500; }
+.ms-inventory-app .lp-footer-links a:hover { color: var(--c-orange-600); }
 
 /* ── SCROLL REVEAL ──────────────────────────────────── */
 @media (prefers-reduced-motion: no-preference) {
-  .sl-lp .reveal {
+  .ms-inventory-app .reveal {
     opacity: 0;
     transform: translateY(24px);
     transition: opacity .55s var(--ease), transform .55s var(--ease);
     will-change: opacity, transform;
   }
-  .sl-lp .reveal.in { opacity: 1; transform: none; }
-  .sl-lp .reveal-l  { transform: translateX(-28px); }
-  .sl-lp .reveal-r  { transform: translateX(28px); }
-  .sl-lp .reveal-d1 { transition-delay: .08s; }
-  .sl-lp .reveal-d2 { transition-delay: .16s; }
-  .sl-lp .reveal-d3 { transition-delay: .24s; }
+  .ms-inventory-app .reveal.in { opacity: 1; transform: none; }
+  .ms-inventory-app .reveal-l  { transform: translateX(-28px); }
+  .ms-inventory-app .reveal-r  { transform: translateX(28px); }
+  .ms-inventory-app .reveal-d1 { transition-delay: .08s; }
+  .ms-inventory-app .reveal-d2 { transition-delay: .16s; }
+  .ms-inventory-app .reveal-d3 { transition-delay: .24s; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .sl-lp .reveal { opacity: 1 !important; transform: none !important; }
+  .ms-inventory-app .reveal { opacity: 1 !important; transform: none !important; }
 }
 
 /* ── RESPONSIVE ─────────────────────────────────────── */
 @media (max-width: 900px) {
-  .sl-lp .hero-layout,
-  .sl-lp .feat-row,
-  .sl-lp .feat-row--flip { grid-template-columns: 1fr; direction: ltr; }
-  .sl-lp .phone-wrap { justify-content: center; margin-top: 16px; }
-  .sl-lp .float-card-1,
-  .sl-lp .float-card-2 { display: none; }
-  .sl-lp .steps { grid-template-columns: 1fr 1fr; }
-  .sl-lp .step-item:nth-child(2)::after { display: none; }
-  .sl-lp .testi-grid { grid-template-columns: 1fr; }
-  .sl-lp .proof-stats { display: none; }
+  .ms-inventory-app .hero-layout,
+  .ms-inventory-app .feat-row,
+  .ms-inventory-app .feat-row--flip { grid-template-columns: 1fr; direction: ltr; }
+  .ms-inventory-app .phone-wrap { justify-content: center; margin-top: 16px; display:none}
+  .ms-inventory-app .float-card-1,
+  .ms-inventory-app .float-card-2 { display: none; }
+  .ms-inventory-app .steps { grid-template-columns: 1fr 1fr; }
+  .ms-inventory-app .step-item:nth-child(2)::after { display: none; }
+  .ms-inventory-app .testi-grid { grid-template-columns: 1fr; }
+  .ms-inventory-app .proof-stats { display: none; }
 }
 @media (max-width: 580px) {
-  .sl-lp .steps { grid-template-columns: 1fr; }
-  .sl-lp .step-item::after { display: none; }
-  .sl-lp .btn { width: 100%; justify-content: center; }
-  .sl-lp .btn-group { align-items: stretch; flex-direction: column; }
-  .sl-lp .final-cta .btn-group { flex-direction: column; align-items: center; }
-  .sl-lp .final-cta .btn { width: auto; }
-  .sl-lp .panel-kpis { grid-template-columns: 1fr 1fr; }
-  .sl-lp .panel-row { grid-template-columns: 1fr auto; }
-  .sl-lp .panel-row-lot, .sl-lp .panel-row-qty { display: none; }
+  .ms-inventory-app .steps { grid-template-columns: 1fr; }
+  .ms-inventory-app .step-item::after { display: none; }
+  .ms-inventory-app .btn { width: 100%; justify-content: center; }
+  .ms-inventory-app .btn-group { align-items: stretch; flex-direction: column; }
+  .ms-inventory-app .final-cta .btn-group { flex-direction: column; align-items: center; }
+  .ms-inventory-app .final-cta .btn { width: auto; }
+  .ms-inventory-app .panel-kpis { grid-template-columns: 1fr 1fr; }
+  .ms-inventory-app .panel-row { grid-template-columns: 1fr auto; }
+  .ms-inventory-app .panel-row-lot, .ms-inventory-app .panel-row-qty { display: none; }
 }
   </style>
 </head>
-<body class="sl-lp">
-
-<!-- ══════════════════════════════════════════════════
-     MINIMAL HEADER — no nav distraction
-════════════════════════════════════════════════════ -->
-<header class="lp-header">
-  <div class="wrap">
-    <div class="lp-header-inner">
-
-      <a href="https://mountainstream.co/" class="lp-logo" aria-label="Mountain Stream — Streamline ERP">
-        <div class="lp-logo-mark" aria-hidden="true">
-          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 12 L4.5 7 L8 10 L11 5 L15 12" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div>
-          <span class="lp-logo-name">Mountain Stream<span>.</span></span>
-          <span class="lp-logo-sub">Streamline ERP</span>
-        </div>
-      </a>
-
-      <div class="lp-header-right">
-        <a href="/streamline-features/" class="lp-header-link">All Features</a>
-        <a href="https://mountainstream.co/register-your-company?cta=lp-header&intent=book-demo" class="btn btn-primary" style="min-height:40px;padding:10px 20px;font-size:.85rem">Book a Demo</a>
-      </div>
-
-    </div>
-  </div>
-</header>
+<body class="ms-inventory-app">
 
 
 <!-- ══════════════════════════════════════════════════
@@ -1012,101 +970,21 @@
           Scan invoices, receive goods, assign lot numbers, print barcode labels, count stock, and make recipes — all from a mobile app built for warehouse and production teams.
         </p>
         <div class="btn-group reveal" style="transition-delay:.24s">
-          <a href="https://play.google.com/store/apps/details?id=io.ionic.streamline.inventoryManagementApp"
-             target="_blank" rel="noopener" class="btn btn-primary">
-            ↓ Download on Android
+          <a href="https://play.google.com/store/apps/details?id=io.ionic.streamline.inventoryManagementApp" target="_blank" rel="noopener" style="width:175px">
+            <img src="https://mountainstream.co/wp-content/uploads/2026/03/visual-identity_badges_880x572-1.width-1440.png" alt="Download on Google Play" class="ms-app-badge" loading="lazy">
           </a>
           <a href="https://mountainstream.co/register-your-company?cta=hero&intent=book-demo" class="btn btn-secondary">Book a Demo</a>
         </div>
         <div class="hero-badges reveal" style="transition-delay:.3s">
           <span class="hero-badge">Free with Streamline ERP</span>
-          <span class="hero-badge">Works offline</span>
           <span class="hero-badge">Barcode scanning</span>
           <span class="hero-badge">Lot tracking</span>
         </div>
       </div>
-
-      <!-- Right: phone mockup -->
-      <div class="phone-wrap reveal reveal-r" style="transition-delay:.2s" aria-hidden="true">
-
-        <!-- Floating stat cards -->
-        <div class="float-card float-card-1">
-          <p class="float-label">Stock accuracy</p>
-          <p class="float-value">99<span>%</span></p>
-          <p class="float-sub"><span class="float-dot green"></span>Real-time sync</p>
-        </div>
-        <div class="float-card float-card-2">
-          <p class="float-label">Today's goods-in</p>
-          <p class="float-value">12</p>
-          <p class="float-sub"><span class="float-dot orange"></span>3 lots pending labels</p>
-        </div>
-
-        <!-- Phone -->
-        <div class="phone">
-          <div class="phone-notch"></div>
-          <div class="phone-screen">
-            <div class="app-bar">
-              <div class="app-bar-icon">
-                <svg viewBox="0 0 16 16" fill="none"><path d="M1 11 L4 6.5 L7 9.5 L10 4.5 L14 11" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
-              <span class="app-bar-title">Inventory</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="rgba(255,255,255,.4)" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="rgba(255,255,255,.4)" stroke-width="2" stroke-linecap="round"/></svg>
-            </div>
-            <div class="app-tabs">
-              <div class="app-tab active">Receive</div>
-              <div class="app-tab">Count</div>
-              <div class="app-tab">Labels</div>
-              <div class="app-tab">Make</div>
-            </div>
-            <div class="app-content">
-
-              <div class="app-item">
-                <div class="app-item-top">
-                  <span class="app-item-name">Organic Wheat Flour</span>
-                  <span class="app-chip received">Received</span>
-                </div>
-                <span class="app-item-lot">LOT-2025-0441 · OWF-GH-0330</span>
-                <div class="app-item-row">
-                  <span class="app-item-qty">25 kg received</span>
-                  <div class="app-progress"><div class="app-progress-bar" style="width:100%"></div></div>
-                </div>
-              </div>
-
-              <div class="app-item">
-                <div class="app-item-top">
-                  <span class="app-item-name">Butter (Unsalted)</span>
-                  <span class="app-chip pending">Pending</span>
-                </div>
-                <span class="app-item-lot">LOT-2025-0442 · Awaiting label</span>
-                <div class="app-item-row">
-                  <span class="app-item-qty">10 kg of 15 kg</span>
-                  <div class="app-progress"><div class="app-progress-bar" style="width:67%"></div></div>
-                </div>
-              </div>
-
-              <div class="app-item">
-                <div class="app-item-top">
-                  <span class="app-item-name">Sea Salt</span>
-                  <span class="app-chip counted">Counted</span>
-                </div>
-                <span class="app-item-lot">LOT-2025-0438 · Use by 12/2026</span>
-                <div class="app-item-row">
-                  <span class="app-item-qty">5 kg in stock</span>
-                  <div class="app-progress"><div class="app-progress-bar" style="width:45%"></div></div>
-                </div>
-              </div>
-
-              <div class="app-scan-btn">
-                <div class="app-scan-icon"></div>
-                Scan barcode
-              </div>
-
-            </div>
-          </div>
-          <div class="phone-home-bar"><span></span></div>
-        </div>
-
+      <div class="phone-wrap">
+        <img src="streamline-inventory-app-by-mountainstream.png" alt="Streamline Inventory Management App preview" class="hero-phone reveal" style="transition-delay:.35s">
       </div>
+
     </div>
   </div>
 </section>
@@ -1171,56 +1049,8 @@
           <a href="/streamline-features/inventory-management/" class="link-arrow">See inventory management</a>
         </div>
       </div>
-      <div class="feat-visual reveal reveal-r reveal-d1">
-        <div class="panel">
-          <div class="panel-header">
-            <div class="panel-dot"></div><div class="panel-dot"></div><div class="panel-dot"></div>
-            <span class="panel-title">Goods Receipt — 06 May 2025</span>
-          </div>
-          <div class="panel-body">
-            <div class="panel-kpis">
-              <div class="panel-kpi">
-                <div class="panel-kpi-label">Items received</div>
-                <div class="panel-kpi-val">12</div>
-                <div class="panel-kpi-delta">↑ Today</div>
-              </div>
-              <div class="panel-kpi">
-                <div class="panel-kpi-label">Lots assigned</div>
-                <div class="panel-kpi-val">10</div>
-                <div class="panel-kpi-delta">✓ Labelled</div>
-              </div>
-              <div class="panel-kpi">
-                <div class="panel-kpi-label">Pending labels</div>
-                <div class="panel-kpi-val">2</div>
-                <div class="panel-kpi-delta" style="color:var(--c-orange)">→ Print</div>
-              </div>
-            </div>
-            <div class="panel-row">
-              <span class="panel-row-name">Organic Wheat Flour</span>
-              <span class="panel-row-lot">LOT-2025-0441</span>
-              <span class="panel-row-qty">25 kg</span>
-              <span class="panel-tag green">Received</span>
-            </div>
-            <div class="panel-row">
-              <span class="panel-row-name">Butter (Unsalted)</span>
-              <span class="panel-row-lot">LOT-2025-0442</span>
-              <span class="panel-row-qty">15 kg</span>
-              <span class="panel-tag orange">Label pending</span>
-            </div>
-            <div class="panel-row">
-              <span class="panel-row-name">Active Sourdough Starter</span>
-              <span class="panel-row-lot">LOT-2025-0443</span>
-              <span class="panel-row-qty">8 kg</span>
-              <span class="panel-tag green">Received</span>
-            </div>
-            <div class="panel-row">
-              <span class="panel-row-name">Rye Flour</span>
-              <span class="panel-row-lot">LOT-2025-0444</span>
-              <span class="panel-row-qty">20 kg</span>
-              <span class="panel-tag blue">In transit</span>
-            </div>
-          </div>
-        </div>
+      <div class="">
+        <img src="inventory-app-goods-in.png">
       </div>
     </div>
 
@@ -1241,49 +1071,8 @@
           <a href="/streamline-features/inventory-management/" class="link-arrow">See stock management</a>
         </div>
       </div>
-      <div class="feat-visual reveal reveal-l reveal-d1">
-        <div class="panel">
-          <div class="panel-header">
-            <div class="panel-dot"></div><div class="panel-dot"></div><div class="panel-dot"></div>
-            <span class="panel-title">Stock Count — Dry Store A</span>
-          </div>
-          <div class="panel-body">
-            <div class="count-list">
-              <div class="count-row">
-                <div class="count-icon">🌾</div>
-                <div class="count-info">
-                  <div class="count-name">Organic Wheat Flour</div>
-                  <div class="count-meta">System: 48 kg &nbsp;·&nbsp; LOT-2025-0441</div>
-                </div>
-                <span class="count-val">48 kg</span>
-              </div>
-              <div class="count-row" style="border-color:var(--c-orange-100);background:var(--c-orange-050)">
-                <div class="count-icon">🧈</div>
-                <div class="count-info">
-                  <div class="count-name">Butter (Unsalted)</div>
-                  <div class="count-meta" style="color:var(--c-orange-700)">System: 15 kg &nbsp;·&nbsp; Variance: −2 kg</div>
-                </div>
-                <span class="count-val" style="color:var(--c-orange-700)">13 kg</span>
-              </div>
-              <div class="count-row">
-                <div class="count-icon">🧂</div>
-                <div class="count-info">
-                  <div class="count-name">Sea Salt</div>
-                  <div class="count-meta">System: 5 kg &nbsp;·&nbsp; LOT-2025-0438</div>
-                </div>
-                <span class="count-val">5 kg</span>
-              </div>
-              <div class="count-row">
-                <div class="count-icon">🍞</div>
-                <div class="count-info">
-                  <div class="count-name">Active Sourdough Starter</div>
-                  <div class="count-meta">System: 8 kg &nbsp;·&nbsp; LOT-2025-0443</div>
-                </div>
-                <span class="count-val">8 kg</span>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="">
+        <img src="inventory-app-stock-count.png">
       </div>
     </div>
 
@@ -1304,50 +1093,8 @@
           <a href="/streamline-features/recipe-management/" class="link-arrow">See recipe management</a>
         </div>
       </div>
-      <div class="feat-visual reveal reveal-r reveal-d1">
-        <div class="panel">
-          <div class="panel-header">
-            <div class="panel-dot"></div><div class="panel-dot"></div><div class="panel-dot"></div>
-            <span class="panel-title">Make Recipe — Sourdough Loaf 800g</span>
-          </div>
-          <div class="panel-body">
-            <div class="panel-kpis">
-              <div class="panel-kpi">
-                <div class="panel-kpi-label">Batch size</div>
-                <div class="panel-kpi-val">240</div>
-                <div class="panel-kpi-delta">units</div>
-              </div>
-              <div class="panel-kpi">
-                <div class="panel-kpi-label">Lots used</div>
-                <div class="panel-kpi-val">3</div>
-                <div class="panel-kpi-delta">✓ Confirmed</div>
-              </div>
-              <div class="panel-kpi">
-                <div class="panel-kpi-label">Finished lot</div>
-                <div class="panel-kpi-val" style="font-size:.85rem">FG-1204</div>
-                <div class="panel-kpi-delta">→ Created</div>
-              </div>
-            </div>
-            <div class="panel-row">
-              <span class="panel-row-name">Organic Wheat Flour</span>
-              <span class="panel-row-lot">LOT-2025-0441</span>
-              <span class="panel-row-qty">12 kg</span>
-              <span class="panel-tag green">Depleted</span>
-            </div>
-            <div class="panel-row">
-              <span class="panel-row-name">Active Sourdough Starter</span>
-              <span class="panel-row-lot">LOT-2025-0443</span>
-              <span class="panel-row-qty">2.8 kg</span>
-              <span class="panel-tag green">Depleted</span>
-            </div>
-            <div class="panel-row">
-              <span class="panel-row-name">Sea Salt</span>
-              <span class="panel-row-lot">LOT-2025-0438</span>
-              <span class="panel-row-qty">240 g</span>
-              <span class="panel-tag green">Depleted</span>
-            </div>
-          </div>
-        </div>
+      <div class="">
+        <img src="inventory-app-make-recipe.png">
       </div>
     </div>
 
@@ -1458,11 +1205,11 @@
 const obs = new IntersectionObserver((entries, o) => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); o.unobserve(e.target); } });
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.sl-lp .reveal').forEach(el => obs.observe(el));
+document.querySelectorAll('.ms-inventory-app .reveal').forEach(el => obs.observe(el));
 
 // Fire hero immediately
 requestAnimationFrame(() => setTimeout(() => {
-  document.querySelectorAll('.sl-lp .hero .reveal').forEach(el => el.classList.add('in'));
+  document.querySelectorAll('.ms-inventory-app .hero .reveal').forEach(el => el.classList.add('in'));
 }, 60));
 </script>
 

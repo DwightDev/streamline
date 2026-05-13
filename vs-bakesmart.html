@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Streamline vs BakeSmart | Bakery ERP Comparison</title>
+<meta content="Compare Streamline vs BakeSmart for bakery ordering, production, inventory, traceability, delivery, invoicing, ecommerce, wholesale, and ERP workflows." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;display=swap" rel="stylesheet"/>
+<style>
+
+/* ── TOKENS ──────────────────────────────────────── */
+:root {
+  --navy:       #113058;
+  --orange:     #ff9100;
+  --orange-100: #fef0d8;
+  --orange-050: #fff8ef;
+  --sky:        #4aa6e8;
+  --sky-100:    #ddf1ff;
+  --sky-050:    #f0f9ff;
+  --green:      #1e7a52;
+  --green-100:  #e6f7ef;
+  --text:       #1e2f42;
+  --muted:      #54647a;
+  --soft:       #7a8b9e;
+  --line:       #dbe4ef;
+  --line-lt:    #f0f4f9;
+  --surface:    #ffffff;
+  --page:       #f9fbff;
+  --page-warm:  #fffaf4;
+  --f-display:  'Fraunces', Georgia, serif;
+  --f-body:     'DM Sans', system-ui, sans-serif;
+  --wrap:       1160px;
+  --r:          12px;
+  --r-lg:       18px;
+  --r-xl:       24px;
+  --sh-sm:      0 4px 16px rgba(9,30,60,.08);
+  --sh-md:      0 12px 40px rgba(9,30,60,.11);
+  --ease:       cubic-bezier(.25,.46,.45,.94);
+  --spring:     cubic-bezier(.34,1.56,.64,1);
+}
+
+/* ── RESET ───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: var(--f-body);
+  color: var(--text);
+  background: var(--surface);
+  line-height: 1.68;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--navy); text-decoration: none; transition: color .15s; }
+a:hover { color: var(--orange); }
+p { margin-bottom: 1rem; }
+p:last-child { margin-bottom: 0; }
+ul { list-style: none; }
+
+/* ── LAYOUT ──────────────────────────────────────── */
+.wrap {
+  width: min(var(--wrap), calc(100% - clamp(24px,4vw,64px) * 2));
+  margin-inline: auto;
+}
+.wrap-narrow {
+  width: min(820px, calc(100% - clamp(24px,4vw,64px) * 2));
+  margin-inline: auto;
+}
+section { padding-block: clamp(64px,8vw,104px); }
+section.tight { padding-block: clamp(36px,5vw,56px); }
+
+/* ── TYPOGRAPHY ──────────────────────────────────── */
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 14px;
+}
+.kicker::before {
+  content: '';
+  width: 20px; height: 2px;
+  border-radius: 2px;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+h1 {
+  font-family: var(--f-display);
+  font-size: clamp(2.6rem, 5.5vw, 4.8rem);
+  font-weight: 700;
+  letter-spacing: -.055em;
+  line-height: 1;
+  color: var(--navy);
+  margin-bottom: 20px;
+}
+h1 em { font-style: italic; color: var(--orange); }
+h2 {
+  font-family: var(--f-display);
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -.04em;
+  line-height: 1.06;
+  color: var(--navy);
+  margin-bottom: 16px;
+}
+h3 {
+  font-family: var(--f-display);
+  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  font-weight: 600;
+  letter-spacing: -.025em;
+  line-height: 1.18;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.lede {
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  color: var(--muted);
+  line-height: 1.76;
+  max-width: 680px;
+}
+.section-intro {
+  font-size: clamp(1rem, 1.3vw, 1.1rem);
+  color: var(--muted);
+  line-height: 1.76;
+  max-width: 740px;
+  margin-bottom: 0;
+}
+
+/* ── BUTTONS ─────────────────────────────────────── */
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-top: 28px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  min-height: 48px;
+  padding: 11px 22px;
+  border-radius: var(--r);
+  font-family: var(--f-body);
+  font-size: .9rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: background .16s var(--ease), color .16s, border-color .16s, box-shadow .16s, transform .18s var(--spring);
+  text-decoration: none;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+.btn-primary {
+  background: linear-gradient(170deg, #ffaa33 0%, var(--orange) 100%);
+  color: #fff;
+  border-color: var(--orange);
+  box-shadow: 0 8px 24px rgba(245,135,14,.28);
+}
+.btn-primary:hover { color: #fff; box-shadow: 0 14px 32px rgba(245,135,14,.32); }
+.btn-secondary {
+  background: var(--surface);
+  color: var(--navy);
+  border-color: var(--line);
+  box-shadow: 0 1px 4px rgba(9,30,60,.07);
+}
+.btn-secondary:hover { background: var(--page); border-color: var(--sky); color: var(--navy); }
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+.link-arrow::after { content: '→'; transition: transform .16s var(--spring); }
+.link-arrow:hover { color: var(--orange); }
+.link-arrow:hover::after { transform: translateX(4px); }
+
+/* ── HERO ────────────────────────────────────────── */
+.hero {
+  padding: clamp(72px,10vw,128px) 0 clamp(56px,8vw,96px);
+  background:
+    radial-gradient(ellipse 65% 70% at 88% 8%, rgba(74,166,232,.11), transparent 52%),
+    radial-gradient(ellipse 45% 55% at 4% 90%, rgba(245,135,14,.08), transparent 48%),
+    linear-gradient(160deg, #f2f7fd 0%, #fff 55%);
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--orange) 30%, var(--sky) 70%, transparent);
+  opacity: .25;
+}
+
+/* ── SUMMARY CARDS ───────────────────────────────── */
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: var(--sh-sm);
+}
+.summary-card {
+  padding: clamp(24px,3vw,40px);
+  position: relative;
+}
+.summary-card--streamline {
+  background: #fff;
+  border-right: 1px solid var(--line);
+}
+.summary-card--streamline::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--orange);
+}
+.summary-card--competitor {
+  background: var(--page);
+}
+.summary-card-label {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.summary-card-label--orange { color: var(--orange); }
+.summary-card-label--muted  { color: var(--soft); }
+.summary-card h3 {
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  margin-bottom: 18px;
+  line-height: 1.3;
+}
+.check-list { display: flex; flex-direction: column; gap: 9px; }
+.check-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: .875rem;
+  line-height: 1.5;
+}
+.check-list li .icon { flex-shrink: 0; font-size: .85rem; margin-top: .1em; }
+.check-list li .icon--yes  { color: var(--green); font-weight: 700; }
+.check-list li .icon--no   { color: var(--line); font-weight: 400; }
+.check-list li.yes  { color: var(--text); }
+.check-list li.no   { color: var(--soft); }
+
+/* ── SECTION BACKGROUNDS ─────────────────────────── */
+.bg-page { background: var(--page); }
+.bg-white { background: var(--surface); }
+
+/* ── COMPARISON TABLE ────────────────────────────── */
+.table-wrap {
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: var(--sh-sm);
+  margin-top: 2.5rem;
+}
+.table-head {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  background: var(--surface);
+  border-bottom: 2px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.th {
+  padding: 14px 24px;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.th-feature { color: var(--soft); }
+.th-streamline {
+  border-left: 1px solid var(--line);
+  background: var(--orange-050);
+  color: var(--orange);
+  text-align: center;
+}
+.th-competitor {
+  border-left: 1px solid var(--line);
+  color: var(--soft);
+  text-align: center;
+}
+
+.table-section-label {
+  padding: 10px 24px;
+  background: #f4f7fb;
+  border-top: 1px solid var(--line);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+.table-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  border-top: 1px solid var(--line-lt);
+}
+.table-row:nth-child(even) { background: #fafbff; }
+.table-row:hover { background: #f2f7fd; }
+.td-feature {
+  padding: 13px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.td-feature-name {
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+}
+.td-feature-desc {
+  font-size: .76rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.td-check {
+  padding: 13px 24px;
+  border-left: 1px solid var(--line-lt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.td-check--streamline { background: var(--orange-050); }
+.check-yes {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--green-100);
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.check-partial {
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--soft);
+  text-align: center;
+  line-height: 1.3;
+}
+.check-no {
+  width: 20px; height: 2px;
+  border-radius: 2px;
+  background: var(--line);
+}
+
+/* ── BENEFIT CARDS ───────────────────────────────── */
+.benefit-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(14px,2vw,22px);
+  margin-top: 2.5rem;
+}
+.benefit-card {
+  padding: clamp(20px,2.5vw,28px);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  box-shadow: 0 1px 4px rgba(9,30,60,.06);
+  transition: transform .2s var(--ease), box-shadow .2s;
+}
+.benefit-card:hover { transform: translateY(-4px); box-shadow: var(--sh-md); }
+.benefit-icon {
+  width: 42px; height: 42px;
+  border-radius: var(--r);
+  background: var(--orange-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 14px;
+  transition: background .2s;
+}
+.benefit-card:hover .benefit-icon { background: var(--orange); }
+.benefit-card h3 { font-size: 1rem; margin-bottom: 8px; }
+.benefit-card p { font-size: .875rem; color: var(--muted); line-height: 1.6; margin: 0; }
+
+/* ── FIT CARDS ───────────────────────────────────── */
+.fit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(16px,2.5vw,28px);
+  margin-top: 2rem;
+}
+.fit-card {
+  padding: clamp(24px,3vw,36px);
+  border-radius: var(--r-xl);
+}
+.fit-card--streamline {
+  border: 2px solid var(--orange);
+  background: linear-gradient(160deg, #fff 60%, var(--orange-050));
+}
+.fit-card--competitor {
+  border: 1px solid var(--line);
+  background: var(--page);
+}
+.fit-label {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.fit-label--orange { color: var(--orange); }
+.fit-label--muted  { color: var(--soft); }
+.fit-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 0; }
+.fit-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: .875rem;
+  line-height: 1.5;
+}
+.fit-list li .bullet { flex-shrink: 0; font-weight: 700; margin-top: .1em; }
+.fit-card--streamline .bullet { color: var(--green); }
+.fit-card--competitor .bullet { color: var(--soft); }
+.fit-card--streamline li { color: var(--text); }
+.fit-card--competitor li { color: var(--muted); }
+
+/* ── FAQ ─────────────────────────────────────────── */
+.faq-list { margin-top: 2rem; display: flex; flex-direction: column; gap: 10px; }
+details {
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--surface);
+  box-shadow: 0 1px 4px rgba(9,30,60,.06);
+  overflow: hidden;
+  transition: border-color .15s, box-shadow .15s;
+}
+details:hover { border-color: #c4d1e2; }
+details[open] { border-color: var(--sky); box-shadow: var(--sh-sm); }
+summary {
+  padding: 18px 22px;
+  cursor: pointer;
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--navy);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  user-select: none;
+}
+summary::-webkit-details-marker { display: none; }
+summary::after {
+  content: '+';
+  flex-shrink: 0;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--orange-100);
+  color: var(--orange);
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  font-size: .9rem;
+  transition: background .15s, transform .22s var(--spring);
+}
+details[open] summary::after {
+  content: '−';
+  background: var(--orange);
+  color: #fff;
+  transform: rotate(180deg);
+}
+.faq-body {
+  padding: 0 22px 18px;
+  font-size: .9rem;
+  color: var(--muted);
+  line-height: 1.72;
+}
+
+/* ── CTA SECTION ─────────────────────────────────── */
+.cta-section {
+  padding: clamp(72px,9vw,112px) 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 90% 10%, rgba(245,135,14,.1), transparent 50%),
+    radial-gradient(ellipse 50% 60% at 5% 85%, rgba(74,166,232,.08), transparent 50%),
+    linear-gradient(160deg, #f2f7fd 0%, #fff 50%, var(--orange-050) 100%);
+  border-top: 1px solid var(--line);
+  position: relative;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--orange);
+}
+
+/* ── SCROLL REVEAL ───────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .5s var(--ease), transform .5s var(--ease);
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-d1 { transition-delay: .08s; }
+  .reveal-d2 { transition-delay: .16s; }
+  .reveal-d3 { transition-delay: .24s; }
+}
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 860px) {
+  .summary-grid, .fit-grid { grid-template-columns: 1fr; }
+  .summary-card--streamline { border-right: none; border-bottom: 1px solid var(--line); }
+  .benefit-grid { grid-template-columns: 1fr 1fr; }
+  .table-head, .table-row {
+    grid-template-columns: 1.6fr 1fr 1fr;
+  }
+  .td-feature { padding: 12px 14px; }
+  .th, .td-check { padding: 12px 10px; }
+  .td-feature-name { font-size: .82rem; }
+  .td-feature-desc { font-size: .72rem; }
+}
+@media (max-width: 560px) {
+  .benefit-grid { grid-template-columns: 1fr; }
+  .btn { width: 100%; justify-content: center; }
+  .btn-row { flex-direction: column; align-items: stretch; }
+}
+
+</style>
+</head>
+<body>
+<!-- ══════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════ -->
+<section class="hero">
+<div class="wrap">
+<p class="kicker">Bakery ERP Comparison</p>
+<h1>Streamline ERP <em>vs</em> BakeSmart</h1>
+<p class="lede">A practical bakery software comparison for teams evaluating wholesale ordering, production, inventory, traceability, delivery, invoicing, ecommerce, custom cake orders, and reporting workflows.</p>
+<div class="btn-row">
+<a class="btn btn-primary" href="https://mountainstream.co/register-your-company?cta=comparison&amp;intent=Book%20a%20demo">Book a Demo</a>
+<a class="btn btn-secondary" href="https://mountainstream.co/pricing/">View Pricing</a>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════
+     QUICK SUMMARY
+═══════════════════════════════════════════════════ -->
+<section class="tight bg-white">
+<div class="wrap">
+<div class="summary-grid">
+<div class="summary-card summary-card--streamline">
+<p class="summary-card-label summary-card-label--orange">Streamline ERP</p>
+<h3>Connected bakery ERP for wholesale bakeries, food manufacturers, distributors, commissaries, and central kitchens.</h3>
+<ul class="check-list">
+<li class="yes"><span class="icon icon--yes">✓</span> Wholesale ordering, production, inventory, traceability, delivery, and finance in one system</li>
+<li class="yes"><span class="icon icon--yes">✓</span> Customer-specific catalogues, recurring orders, lead times, order deadlines, and CRM visibility</li>
+<li class="yes"><span class="icon icon--yes">✓</span> Recipe costing, allergens, nutrition facts, labels, lot tracking, and recall workflows</li>
+<li class="yes"><span class="icon icon--yes">✓</span> Route planning, proof of delivery, delivery asset tracking, reporting, accounting, and integrations</li>
+</ul>
+</div>
+<div class="summary-card summary-card--competitor">
+<p class="summary-card-label summary-card-label--muted">BakeSmart</p>
+<h3>Bakery software for retail bakeries, custom cake departments, ecommerce, wholesale accounts, and customer ordering.</h3>
+<ul class="check-list">
+<li class="yes"><span class="icon icon--yes">✓</span> Centralized order management, customer database, production reports, payment processing, and multi-location support</li>
+<li class="yes"><span class="icon icon--yes">✓</span> Cake Matrix for custom cake pricing, tier/layer configuration, cake layer reports, and decorator tickets</li>
+<li class="yes"><span class="icon icon--yes">✓</span> eCommerce, same-day ordering, product lead times, seasonal availability, and availability controls</li>
+<li class="yes"><span class="icon icon--yes">✓</span> Wholesale menus, recurring orders, customer portal, invoice payments, POS, gift cards, texting, and time cards</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════
+     COMPARISON TABLE
+═══════════════════════════════════════════════════ -->
+<section class="bg-page">
+<div class="wrap">
+<p class="kicker reveal">Feature by feature</p>
+<h2 class="reveal reveal-d1">How Streamline and BakeSmart compare.</h2>
+<p class="section-intro reveal reveal-d2">Both platforms support bakery operations. Streamline is strongest when wholesale bakeries need connected ERP workflows across ordering, production, inventory, traceability, delivery, finance, and reporting; BakeSmart is strong for retail bakery order management, custom cake workflows, ecommerce, POS, and modular wholesale tools.</p>
+<div class="table-wrap reveal reveal-d2"><div class="table-head">
+<div class="th th-feature">Feature</div>
+<div class="th th-streamline">Streamline</div>
+<div class="th th-competitor">BakeSmart</div>
+</div><div class="table-section-label">Customers &amp; Ordering</div><div class="table-row"><div class="td-feature"><span class="td-feature-name">Wholesale online ordering</span><span class="td-feature-desc">Customers place wholesale orders through a portal or online catalogue</span></div><div class="td-check td-check--streamline"><div class="check-yes">✓</div></div><div class="td-check"><div class="check-yes">✓</div></div></div><div class="table-row"><div class="td-feature"><span class="td-feature-name">Standing, recurring &amp; repeat orders</span><span class="td-feature-desc">Repeat order workflows for regular bakery customers</span></div><div class="td-check td-check--streamline"><div class="check-yes">✓</div></div><div class="td-check"><div class="check-yes">✓</div></div></div><div class="table-row"><div class="td-feature"><span class="td-feature-name">Customer-specific pricing &amp; catalogues</span><span class="td-feature-desc">Different products, prices, SKUs, menus, and rules by customer</span></div><div class="td-check td-check--streamline"><div class="check-yes">✓</div></div><div class="td-check"><div class="check-yes">✓</div></div></div><div class="table-row"><div class="td-feature"><span class="td-feature-name">CRM, samples, complaints &amp; follow-up</span><span class="td-feature-desc">Customer relationship workflows beyond order entry</span></div><div class="td-check td-check--streamline"><div class="check-yes">✓</div></div><div class="td-check"><div class="check-partial">Customer<br/>profiles</div></div></div><div class="table-row"><div class="td-feature"><span class="td-feature-name">Order deadlines, lead times &amp; lock times</span><span class="td-feature-desc">Cutoffs, preparation rules, and controlled ordering windows</span></div><div class="td-check td-check--streamline"><div class="check-yes">✓</div></div><div class="td-check"><div class="check-yes">✓</div></div></div><div class="table-row"><div class="td-feature"><span class="td-feature-name">Custom cake order workflows</span><span class="td-feature-desc">Structured custom cake quoting, design, pricing, and decorator instructions</span></div><div class="td-check td-check--streamline"><div class="check-partial">Configurable<br/>orders</div></div><div class="td-check"><div class="check-yes">✓</div></div></div><div class="table-section-label">Production &amp; Recipes</div><div class="table-row"><div class="td-feature"><span class="td-feature-name">Production planning from orders</span><span class="td-feature-desc">Orders flow into production reports, bake lists, or recipe totals</span></div><div class="td-check td-check--streamline"><div class="check-yes">✓</div></div><div class="td-check"><div class="check-yes">✓</div></div></div><div class="table-row"><div class="td-feature"><span class="td-feature-name">Recipe management &amp; recipe costing</span><span class="td-feature-desc">Ingredients, sub-recipes, yields, costs, and production records</span></div><div class="td-check td-check--streamline"><div class="check-yes">✓</div></div><div class="td-check"><div class="check-yes">✓</div></div></div><div class="table-row"><div class="td-feature"><span class="td-feature-name">Allergens, nutrition facts &amp; labels</span><span class="td-feature-desc">Food information generated from recipe or ingredient data</span></div><div class="td-check td-check--streamline"><div class="check-yes">✓</div></div><div class="td-check"><div class="check-yes">✓</div></div></div><div class="table-row"><div class="td-feature"><span class="td-feature-name">Batch scaling &amp; capacity-based production</span><span class="td-feature-desc">Scale or split production based on recipe, batch, or equipment constraints</span></div><div class="td-check td-check--streamline"><div class="check-yes">✓</div></div><div class="td-check"><div class="check-partial">Cake layer<br/>reports</div></div></div><div class="table-row"><div class="td-feature"><span class="td-feature-name">Production waste control</span><span class="td-feature-desc">Forecasting, production planning, or availability controls to reduce waste</span></div><div class="td-check td-check--streamline"><div class="check-yes">✓</div></div><div class="td-check"><div class="check-partial">Availability<br/>controls</div></div></div><div class="table-section-label">Inventory, Purchasing &amp; Traceability</div><div class="table-row"><div class="td-feature"><span class="td-feature-name">Inventory management</span><span class="td-feature-desc">Ingredients, finished goods, stock levels, counts, and adjustments</span></div><div class="td-check td-check--streamline"><div class="check-yes">✓</div></div><div class="td-check"><div class="check-yes">✓</div></div></div><div class="table-row"><div class="td-feature"><span class="td-feature-name">Purchasing &amp; supplier workflows</span><span class="td-feature-desc">Purchase orders, goods-in, supplier costs, invoices, and replenishment</span></div><div class="td-check td-check--streamline"><div class="check-yes">✓</div></div><div class="td-check"><div class="check-partial">Less<br/>clear</div></div></div><div class="table-row"><div class="td-feature"><span class="td-feature-name">Lot tracking &amp; recall traceability</span><span class="td-feature-desc">Trace lots from supplier goods-in through production, delivery, and recall records</span></div><div class="td-check td-check--streamline"><div class="check-yes">✓</div></div><div class="td-check"><div class="check-partial">Less<br/>clear</div></div></div><div class="table-row"><div class="td-feature"><span class="td-feature-name">Mobile inventory workflows</span><span class="td-feature-desc">Goods-in, invoice scanning, stock count, labels, and production-side inventory tasks</span></div><div class="td-check td-check--streamline"><div class="check-yes">✓</div></div><div class="td-check"><div class="check-partial">Less<br/>clear</div></div></div><div class="table-section-label">Delivery, Finance, Retail &amp; Integrations</div><div class="table-row"><div class="td-feature"><span class="td-feature-name">Route planning &amp; proof of delivery</span><span class="td-feature-desc">Plan deliveries, confirm drops, capture signatures/photos, and manage driver workflows</span></div><div class="td-check td-check--streamline"><div class="check-yes">✓</div></div><div class="td-check"><div class="check-partial">Less<br/>clear</div></div></div><div class="table-row"><div class="td-feature"><span class="td-feature-name">Delivery asset tracking</span><span class="td-feature-desc">Track reusable trays, baskets, racks, or other delivery assets</span></div><div class="td-check td-check--streamline"><div class="check-yes">✓</div></div><div class="td-check"><div class="check-partial">Less<br/>clear</div></div></div><div class="table-row"><div class="td-feature"><span class="td-feature-name">Automated invoicing, statements &amp; payments</span><span class="td-feature-desc">Invoices, statements, online payments, balances, credits, and billing workflows</span></div><div class="td-check td-check--streamline"><div class="check-yes">✓</div></div><div class="td-check"><div class="check-yes">✓</div></div></div><div class="table-row"><div class="td-feature"><span class="td-feature-name">Accounting integrations</span><span class="td-feature-desc">QuickBooks, Xero, exports, and related finance workflows</span></div><div class="td-check td-check--streamline"><div class="check-yes">✓</div></div><div class="td-check"><div class="check-partial">Partial</div></div></div><div class="table-row"><div class="td-feature"><span class="td-feature-name">Operational reporting &amp; BI</span><span class="td-feature-desc">Production, inventory, margin, customer, delivery, sales, and performance reporting</span></div><div class="td-check td-check--streamline"><div class="check-yes">✓</div></div><div class="td-check"><div class="check-yes">✓</div></div></div><div class="table-row"><div class="td-feature"><span class="td-feature-name">Retail POS &amp; shop workflows</span><span class="td-feature-desc">Walk-in sales, POS, gift cards, counter sales, and retail-store operations</span></div><div class="td-check td-check--streamline"><div class="check-partial">Not<br/>core</div></div><div class="td-check"><div class="check-yes">✓</div></div></div><div class="table-row"><div class="td-feature"><span class="td-feature-name">eCommerce &amp; same-day online ordering</span><span class="td-feature-desc">Online ordering for custom, ready-made, seasonal, and same-day products</span></div><div class="td-check td-check--streamline"><div class="check-partial">Shopify<br/>import</div></div><div class="td-check"><div class="check-yes">✓</div></div></div><div class="table-row"><div class="td-feature"><span class="td-feature-name">AI-powered inventory &amp; reordering</span><span class="td-feature-desc">Demand-aware inventory tracking, purchase suggestions, and reorder automation</span></div><div class="td-check td-check--streamline"><div class="check-yes">✓</div></div><div class="td-check"><div class="check-no"></div></div></div></div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════
+     THE KEY DIFFERENCE
+═══════════════════════════════════════════════════ -->
+<section class="bg-white">
+<div class="wrap">
+<p class="kicker reveal">The key difference</p>
+<h2 class="reveal reveal-d1">Wholesale ERP depth vs modular retail bakery operations.</h2>
+<p class="section-intro reveal reveal-d2">BakeSmart has useful bakery tools for retail ordering, ecommerce, custom cake pricing, wholesale menus, recurring orders, and invoice payments. Streamline stands out when a growing wholesale bakery needs one connected ERP system where customer ordering, production, recipes, inventory, traceability, delivery, finance, CRM, reporting, and service teams all work from the same operational data.</p>
+<div class="benefit-grid">
+<div class="benefit-card reveal reveal-d1">
+<div class="benefit-icon">🛒</div>
+<h3>Wholesale ordering depth</h3>
+<p>Streamline supports standing orders, cart orders, saved carts, cloned orders, late orders, customer-specific catalogues, pricing, SKUs, lead times, order deadlines, address permissions, and mobile ordering.</p>
+</div>
+<div class="benefit-card reveal reveal-d2">
+<div class="benefit-icon">🏭</div>
+<h3>Production tied to inventory and traceability</h3>
+<p>Orders can drive recipe totals, recipe cards, ingredient demand, capacity-based batch splitting, inventory depletion, finished goods, allergens, nutrition facts, labels, and lot records.</p>
+</div>
+<div class="benefit-card reveal reveal-d3">
+<div class="benefit-icon">🚚</div>
+<h3>Delivery, finance, and reporting stay connected</h3>
+<p>Route planning, packing slips, proof of delivery, reusable delivery assets, invoices, statements, payment collection, accounting workflows, pivot reports, and customer service visibility connect back to the same data.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════
+     WHO IT'S FOR
+═══════════════════════════════════════════════════ -->
+<section class="bg-page">
+<div class="wrap">
+<p class="kicker reveal">Who each platform suits</p>
+<h2 class="reveal reveal-d1">Different strengths for different bakery operations.</h2>
+<div class="fit-grid reveal reveal-d2">
+<div class="fit-card fit-card--streamline">
+<p class="fit-label fit-label--orange">Choose Streamline if you…</p>
+<ul class="fit-list">
+<li><span class="bullet">✓</span> Run a wholesale bakery, food manufacturer, distributor, commissary, or central kitchen</li>
+<li><span class="bullet">✓</span> Need ordering, production, inventory, traceability, delivery, invoicing, CRM, reporting, and service visibility in one system</li>
+<li><span class="bullet">✓</span> Manage recurring orders, customer-specific catalogues, lead times, deadlines, complex delivery schedules, and reusable delivery assets</li>
+<li><span class="bullet">✓</span> Need lot tracking, recall workflows, allergens, nutrition facts, labels, purchase orders, and audit-ready traceability</li>
+<li><span class="bullet">✓</span> Want finance, operations, delivery, sales, and customer service teams working from the same order-to-invoice data</li>
+</ul>
+<div class="btn-row">
+<a class="btn btn-primary" href="https://mountainstream.co/register-your-company?cta=comparison&amp;intent=Book%20a%20demo">Book a Demo</a>
+<a class="btn btn-secondary" href="https://mountainstream.co/pricing/">View Pricing</a>
+</div>
+</div>
+<div class="fit-card fit-card--competitor">
+<p class="fit-label fit-label--muted">BakeSmart may suit you if you…</p>
+<ul class="fit-list">
+<li><span class="bullet">→</span> Want bakery software centered on retail order management, customer records, production reports, and POS workflows</li>
+<li><span class="bullet">→</span> Need a strong custom cake workflow with Cake Matrix pricing, tier/layer options, cake layer reports, and decorator tickets</li>
+<li><span class="bullet">→</span> Sell online and need ecommerce controls for lead times, seasonal items, exceptions, availability, same-day orders, and customer payments</li>
+<li><span class="bullet">→</span> Need modular wholesale tools such as wholesale menus, recurring orders, customer portal access, invoice payments, and running balances</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════
+     FAQ
+═══════════════════════════════════════════════════ -->
+<section class="bg-white">
+<div class="wrap-narrow">
+<p class="kicker reveal">FAQ</p>
+<h2 class="reveal reveal-d1">Common questions about Streamline vs BakeSmart.</h2>
+<div class="faq-list reveal reveal-d2">
+<details open="">
+<summary>What is the best BakeSmart alternative for wholesale bakeries?</summary>
+<div class="faq-body">Streamline is a strong BakeSmart alternative for wholesale bakeries that need connected ordering, standing orders, production planning, recipe costing, inventory, lot traceability, route planning, proof of delivery, delivery asset tracking, invoicing, CRM, accounting workflows, and reporting in one bakery ERP system.</div>
+</details>
+<details>
+<summary>Is Streamline bakery ERP software?</summary>
+<div class="faq-body">Yes. Streamline is bakery ERP software for wholesale bakeries, food manufacturers, distributors, commissaries, and central kitchens. It connects order management, production, recipes, inventory, purchasing, traceability, labelling, allergens, nutrition facts, delivery, invoicing, accounts receivable, CRM, reporting, and customer service workflows.</div>
+</details>
+<details>
+<summary>Does Streamline handle traceability?</summary>
+<div class="faq-body">Yes. Streamline tracks lots from supplier goods-in through recipes, finished goods, packing slips, customer deliveries, and recall workflows. This helps bakeries and food manufacturers connect ingredient traceability with production, delivery, and customer records.</div>
+</details>
+<details>
+<summary>Which platform is better for retail bakeries and custom cakes?</summary>
+<div class="faq-body">BakeSmart may be a good fit for retail bakeries that prioritize POS, ecommerce, custom cake pricing, decorator tickets, gift cards, texting, and customer-facing online orders. Streamline is stronger when retail or ecommerce orders need to feed a larger wholesale ERP workflow across production, inventory, traceability, delivery, finance, CRM, and reporting.</div>
+</details>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════
+     CTA
+═══════════════════════════════════════════════════ -->
+<section class="cta-section">
+<div class="wrap reveal">
+<p class="kicker">Get started</p>
+<h2>See how Streamline connects bakery operations from order to invoice.</h2>
+<p class="lede" style="margin-top:12px;">Streamline brings wholesale ordering, production planning, recipes, inventory, traceability, delivery, invoicing, CRM, accounting workflows, reporting, and customer service together in one bakery ERP system built for growing wholesale bakeries and food manufacturers.</p>
+<div class="btn-row">
+<a class="btn btn-primary" href="https://mountainstream.co/register-your-company?cta=comparison&amp;intent=Book%20a%20demo">Book a Demo</a>
+<a class="btn btn-secondary" href="https://mountainstream.co/pricing/">View Pricing</a>
+<a class="link-arrow" href="https://mountainstream.co/streamline-features/">All Features</a>
+</div>
+</div>
+</section>
+<script>
+(function () {
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function (el) {
+    var r = el.getBoundingClientRect();
+    if (r.top < window.innerHeight && r.bottom > 0) {
+      el.classList.add('visible');
+    } else {
+      obs.observe(el);
+    }
+  });
+})();
+</script>
+</body>
+</html>

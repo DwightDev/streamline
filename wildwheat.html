@@ -1,0 +1,904 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wild Wheat — Streamline ERP Case Study</title>
+<meta name="description" content="How Wild Wheat uses Streamline ERP by Mountain Stream to manage bakery production, ordering, recipes, reporting, delivery, and growth in New Zealand.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+
+<style>
+
+/* ── TOKENS ──────────────────────────────────────── */
+:root {
+  --navy:       #113058;
+  --orange:     #ff9100;
+  --orange-100: #fef0d8;
+  --orange-050: #fff8ef;
+  --sky:        #4aa6e8;
+  --sky-100:    #ddf1ff;
+  --sky-050:    #f0f9ff;
+  --green:      #1e7a52;
+  --green-100:  #e6f7ef;
+  --text:       #1e2f42;
+  --muted:      #54647a;
+  --soft:       #7a8b9e;
+  --line:       #dbe4ef;
+  --line-lt:    #f0f4f9;
+  --surface:    #ffffff;
+  --page:       #f9fbff;
+  --f-display:  'Fraunces', Georgia, serif;
+  --f-body:     'DM Sans', system-ui, sans-serif;
+  --wrap:       1120px;
+  --r:          12px;
+  --r-lg:       18px;
+  --r-xl:       24px;
+  --sh-xs:      0 1px 4px rgba(9,30,60,.06);
+  --sh-sm:      0 4px 16px rgba(9,30,60,.09);
+  --sh-md:      0 14px 40px rgba(9,30,60,.12);
+  --ease:       cubic-bezier(.25,.46,.45,.94);
+  --spring:     cubic-bezier(.34,1.56,.64,1);
+}
+
+/* ── RESET ───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: var(--f-body);
+  color: var(--text);
+  background: var(--surface);
+  line-height: 1.68;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--navy); text-decoration: none; transition: color .15s; }
+a:hover { color: var(--orange); }
+p { margin-bottom: 1rem; }
+p:last-child { margin-bottom: 0; }
+
+/* ── LAYOUT ──────────────────────────────────────── */
+.wrap {
+  width: min(var(--wrap), calc(100% - clamp(20px,4vw,48px) * 2));
+  margin-inline: auto;
+}
+.wrap-narrow {
+  width: min(760px, calc(100% - clamp(20px,4vw,48px) * 2));
+  margin-inline: auto;
+}
+
+/* ── TYPOGRAPHY ──────────────────────────────────── */
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 14px;
+}
+.kicker::before {
+  content: '';
+  width: 20px; height: 2px;
+  border-radius: 2px;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+h1 {
+  font-family: var(--f-display);
+  font-size: clamp(2.8rem,6vw,5.2rem);
+  font-weight: 700;
+  letter-spacing: -.055em;
+  line-height: .96;
+  color: var(--navy);
+  margin-bottom: 20px;
+}
+h2 {
+  font-family: var(--f-display);
+  font-size: clamp(1.8rem,3.2vw,2.8rem);
+  font-weight: 600;
+  letter-spacing: -.04em;
+  line-height: 1.06;
+  color: var(--navy);
+  margin-bottom: 14px;
+}
+h3 {
+  font-family: var(--f-display);
+  font-size: clamp(1.1rem,1.5vw,1.35rem);
+  font-weight: 600;
+  letter-spacing: -.022em;
+  line-height: 1.18;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.lede {
+  font-size: clamp(1rem,1.3vw,1.12rem);
+  color: var(--muted);
+  line-height: 1.76;
+  max-width: 620px;
+}
+
+/* ── BUTTONS ─────────────────────────────────────── */
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-top: 28px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  min-height: 48px;
+  padding: 11px 22px;
+  border-radius: var(--r);
+  font-family: var(--f-body);
+  font-size: .9rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: background .16s var(--ease), color .16s, border-color .16s,
+              box-shadow .16s, transform .18s var(--spring);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+.btn-primary {
+  background: linear-gradient(170deg, #ffaa33 0%, var(--orange) 100%);
+  color: #fff;
+  border-color: var(--orange);
+  box-shadow: 0 8px 24px rgba(245,135,14,.25);
+}
+.btn-primary:hover { color: #fff; box-shadow: 0 14px 32px rgba(245,135,14,.3); }
+.btn-secondary {
+  background: var(--surface);
+  color: var(--navy);
+  border-color: var(--line);
+  box-shadow: var(--sh-xs);
+}
+.btn-secondary:hover { background: var(--page); border-color: var(--sky); color: var(--navy); }
+
+/* ── BREADCRUMB ──────────────────────────────────── */
+.breadcrumb {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+.breadcrumb nav {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .82rem;
+  color: var(--soft);
+}
+.breadcrumb a { color: var(--muted); font-weight: 500; }
+.breadcrumb a:hover { color: var(--navy); }
+.breadcrumb-sep { color: var(--line); }
+.breadcrumb-current { color: var(--text); font-weight: 600; }
+
+/* ── HERO ────────────────────────────────────────── */
+.hero {
+  padding: clamp(56px,8vw,96px) 0 clamp(48px,7vw,80px);
+  background:
+    radial-gradient(ellipse 65% 70% at 90% 5%, rgba(74,166,232,.1), transparent 52%),
+    radial-gradient(ellipse 45% 55% at 4% 92%, rgba(245,135,14,.07), transparent 48%),
+    linear-gradient(160deg, #f2f7fd 0%, #fff 55%);
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.hero-layout {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: clamp(32px,5vw,72px);
+  align-items: start;
+}
+.hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.hero-location {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.hero-location::before { content: '📍'; font-size: 13px; }
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+.hero-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex-shrink: 0;
+  min-width: 220px;
+}
+.hero-stat-card {
+  padding: 18px 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: rgba(255,255,255,.9);
+  box-shadow: var(--sh-sm);
+  text-align: center;
+}
+.hero-stat-number {
+  font-family: var(--f-display);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -.04em;
+  line-height: 1;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+.hero-stat-number span { color: var(--orange); }
+.hero-stat-label {
+  font-size: .76rem;
+  font-weight: 500;
+  color: var(--muted);
+  line-height: 1.3;
+}
+
+/* ── VIDEO / IMAGE SECTION ───────────────────────── */
+.video-section {
+  padding: clamp(48px,7vw,80px) 0;
+  background: var(--page);
+  border-bottom: 1px solid var(--line);
+}
+.video-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(32px,5vw,64px);
+  align-items: center;
+}
+.video-embed {
+  position: relative;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: var(--sh-md);
+  background: #0d1a2a;
+  aspect-ratio: 16/9;
+}
+.video-embed iframe,
+.video-embed video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.video-embed img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── PULLQUOTE ───────────────────────────────────── */
+.pullquote {
+  position: relative;
+  padding: clamp(24px,3.5vw,36px);
+  border-left: 4px solid var(--orange);
+  background: var(--orange-050);
+  border-radius: 0 var(--r-lg) var(--r-lg) 0;
+}
+.pullquote p {
+  font-family: var(--f-display);
+  font-size: clamp(1.15rem,1.8vw,1.5rem);
+  font-style: italic;
+  font-weight: 600;
+  color: var(--navy);
+  letter-spacing: -.02em;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+.pullquote-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pullquote-avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--orange-100);
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--line);
+}
+.pullquote-meta { display: flex; flex-direction: column; gap: 1px; }
+.pullquote-name {
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+.pullquote-role {
+  font-size: .75rem;
+  color: var(--muted);
+}
+
+/* ── STORY SECTION ───────────────────────────────── */
+.story-section {
+  padding: clamp(64px,8vw,104px) 0;
+}
+.story-layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: clamp(40px,6vw,80px);
+  align-items: start;
+}
+.story-body h2 { margin-bottom: 20px; }
+.story-body p {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.78;
+  margin-bottom: 1.25rem;
+}
+.story-body p:last-child { margin-bottom: 0; }
+
+/* Inline callout inside story */
+.story-callout {
+  margin: 2rem 0;
+  padding: clamp(18px,2.5vw,24px);
+  border: 1px solid var(--sky-100);
+  border-left: 4px solid var(--sky);
+  border-radius: 0 var(--r) var(--r) 0;
+  background: var(--sky-050);
+}
+.story-callout p {
+  font-size: .95rem;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.65;
+}
+.story-callout strong { color: var(--navy); }
+
+/* Sidebar */
+.story-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: sticky;
+  top: 24px;
+}
+.sidebar-card {
+  padding: clamp(18px,2.5vw,24px);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  box-shadow: var(--sh-xs);
+}
+.sidebar-card-label {
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--soft);
+  margin-bottom: 12px;
+}
+.sidebar-feature-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sidebar-feature-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .875rem;
+  color: var(--text);
+  font-weight: 500;
+}
+.sidebar-feature-list li::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 0 0 3px var(--orange-100);
+  flex-shrink: 0;
+}
+.sidebar-quote-card {
+  padding: clamp(18px,2.5vw,24px);
+  border-radius: var(--r-lg);
+  background: var(--navy);
+  position: relative;
+  overflow: hidden;
+}
+.sidebar-quote-card::before {
+  content: '"';
+  position: absolute;
+  top: -10px; right: 16px;
+  font-family: var(--f-display);
+  font-size: 6rem;
+  color: rgba(255,255,255,.07);
+  font-weight: 700;
+  line-height: 1;
+  pointer-events: none;
+}
+.sidebar-quote-text {
+  font-family: var(--f-display);
+  font-size: clamp(.95rem,1.2vw,1.05rem);
+  font-style: italic;
+  font-weight: 600;
+  color: rgba(255,255,255,.9);
+  line-height: 1.4;
+  letter-spacing: -.015em;
+  margin-bottom: 14px;
+}
+.sidebar-quote-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sidebar-quote-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.2);
+  object-fit: cover;
+  background: rgba(255,255,255,.1);
+  flex-shrink: 0;
+}
+.sidebar-quote-name {
+  font-size: .8rem;
+  font-weight: 700;
+  color: rgba(255,255,255,.9);
+}
+.sidebar-quote-role {
+  font-size: .72rem;
+  color: rgba(255,255,255,.5);
+}
+
+/* ── RESULTS STRIP ───────────────────────────────── */
+.results-section {
+  padding: clamp(56px,7vw,88px) 0;
+  background: var(--page);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  margin-top: 2.5rem;
+  box-shadow: var(--sh-sm);
+}
+.result-item {
+  padding: clamp(24px,3vw,36px);
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.result-number {
+  font-family: var(--f-display);
+  font-size: clamp(2rem,3.5vw,3rem);
+  font-weight: 700;
+  letter-spacing: -.04em;
+  color: var(--navy);
+  line-height: 1;
+}
+.result-number span { color: var(--orange); }
+.result-label {
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+}
+.result-desc {
+  font-size: .8rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-top: 2px;
+}
+
+/* ── MORE QUOTES ─────────────────────────────────── */
+.quotes-section {
+  padding: clamp(64px,8vw,104px) 0;
+}
+.quotes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(14px,2vw,22px);
+  margin-top: 2.5rem;
+}
+.quote-card {
+  padding: clamp(20px,2.5vw,28px);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  box-shadow: var(--sh-xs);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: transform .2s var(--ease), box-shadow .2s;
+}
+.quote-card:hover { transform: translateY(-4px); box-shadow: var(--sh-md); }
+.quote-stars { color: var(--orange); letter-spacing: 2px; font-size: .85rem; }
+.quote-text {
+  font-size: .9rem;
+  color: var(--muted);
+  line-height: 1.7;
+  font-style: italic;
+  flex: 1;
+}
+.quote-author { font-size: .82rem; font-weight: 700; color: var(--navy); }
+.quote-author span { font-weight: 400; color: var(--muted); }
+
+/* ── CTA ─────────────────────────────────────────── */
+.cta-section {
+  padding: clamp(72px,9vw,112px) 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 90% 10%, rgba(245,135,14,.1), transparent 50%),
+    radial-gradient(ellipse 50% 60% at 5% 85%, rgba(74,166,232,.08), transparent 50%),
+    linear-gradient(160deg, #f2f7fd 0%, #fff 50%, var(--orange-050) 100%);
+  border-top: 1px solid var(--line);
+  position: relative;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--orange);
+}
+.cta-section h2 { margin-bottom: 14px; }
+.cta-section p { color: var(--muted); max-width: 600px; margin-bottom: 0; }
+
+/* ── SCROLL REVEAL ───────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .5s var(--ease), transform .5s var(--ease);
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-d1 { transition-delay: .08s; }
+  .reveal-d2 { transition-delay: .16s; }
+  .reveal-d3 { transition-delay: .24s; }
+}
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 960px) {
+  .hero-layout { grid-template-columns: 1fr; }
+  .hero-aside { flex-direction: row; flex-wrap: wrap; }
+  .hero-stat-card { flex: 1; min-width: 140px; }
+  .video-layout { grid-template-columns: 1fr; }
+  .story-layout { grid-template-columns: 1fr; }
+  .story-sidebar { position: static; }
+  .results-grid { grid-template-columns: 1fr 1fr; }
+  .quotes-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 580px) {
+  .results-grid { grid-template-columns: 1fr; }
+  .quotes-grid { grid-template-columns: 1fr; }
+  .btn { width: 100%; justify-content: center; }
+  .btn-row { flex-direction: column; align-items: stretch; }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ── BREADCRUMB ─────────────────────────────────── -->
+<div class="breadcrumb">
+  <div class="wrap">
+    <nav aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="breadcrumb-sep" aria-hidden="true">›</span>
+      <a href="/case-study/">Case Studies</a>
+      <span class="breadcrumb-sep" aria-hidden="true">›</span>
+      <span class="breadcrumb-current">Wild Wheat</span>
+    </nav>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-layout">
+
+      <div>
+        <p class="kicker">Case Study</p>
+        <div class="hero-meta">
+          <span class="hero-location">Auckland, New Zealand</span>
+          <span class="hero-tag">Wholesale, Retail & Online Bakery</span>
+        </div>
+        <h1>Wild Wheat</h1>
+        <p class="lede">How Wild Wheat turned decades of bakery knowledge into a connected cloud-based system — simplifying production, recipes, reporting, ordering, and delivery with Streamline ERP.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="https://mountainstream.co/register-your-company?cta=case-study&intent=Book%20a%20demo">Book a Demo</a>
+          <a class="btn btn-secondary" href="/case-study/">All Case Studies</a>
+        </div>
+      </div>
+
+      <div class="hero-aside">
+        <div class="hero-stat-card">
+          <div class="hero-stat-number">130<span>+</span></div>
+          <div class="hero-stat-label">staff across the business</div>
+        </div>
+        <div class="hero-stat-card">
+          <div class="hero-stat-number">6</div>
+          <div class="hero-stat-label">retail shops plus wholesale and online sales</div>
+        </div>
+        <div class="hero-stat-card">
+          <div class="hero-stat-number">40<span>–</span>50</div>
+          <div class="hero-stat-label">product lines produced seven days a week</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════
+     IMAGE + PULLQUOTE
+═══════════════════════════════════════════════════ -->
+<section class="video-section">
+  <div class="wrap">
+    <div class="video-layout">
+
+      <!-- Replace this image URL with the final Wild Wheat image uploaded in WordPress -->
+      <div class="video-embed">
+        <img 
+          src="wild-wheat.png" 
+          alt="Wild Wheat bakery production supported by Streamline ERP"
+        >
+      </div>
+
+      <div>
+        <div class="pullquote">
+          <p>"The reports and knowledge is key to being able to work out what you are doing rather than operating in the dark."</p>
+          <div class="pullquote-author">
+            <img
+              class="pullquote-avatar"
+              src="https://mountainstream.co/wp-content/uploads/2026/03/andrew-fearnside-wild-wheat.jpg"
+              alt="Andrew Fearnside"
+              onerror="this.style.background='#dbe4ef'"
+            >
+            <div class="pullquote-meta">
+              <span class="pullquote-name">Andrew Fearnside</span>
+              <span class="pullquote-role">Founder, Wild Wheat</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:20px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);box-shadow:var(--sh-xs);">
+          <p style="font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-bottom:8px;">Andrew also said</p>
+          <p style="font-size:.95rem;color:var(--muted);font-style:italic;margin:0;line-height:1.6;">"The efficiencies it has created right across the board for everybody are enormous."</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     STORY + SIDEBAR
+═══════════════════════════════════════════════════ -->
+<section class="story-section">
+  <div class="wrap">
+    <div class="story-layout">
+
+      <!-- Story body -->
+      <div class="story-body">
+        <p class="kicker reveal">Their story</p>
+        <h2 class="reveal reveal-d1">From pioneering sourdough to managing a growing bakery operation.</h2>
+
+        <p class="reveal reveal-d2">Wild Wheat began in 1999, when Andrew Fearnside set out to bring nutritionally superior sourdough bread to New Zealand. What started as a small East Tamaki bakery grew steadily into a much larger operation with six shops, a sizeable wholesale trade, online sales, and a team of around 130 staff.</p>
+
+        <p class="reveal reveal-d2">As Wild Wheat grew, so did the complexity behind the scenes. Production, recipes, ordering, reporting, delivery, purchasing, and customer information all needed to be managed with more structure and visibility.</p>
+
+        <div class="story-callout reveal reveal-d2">
+          <p><strong>The challenge was not replacing the craft of baking.</strong> It was organising the operational knowledge behind the bakery so the whole team could work from the same accurate information.</p>
+        </div>
+
+        <p class="reveal reveal-d2">For years, much of that information lived in Andrew’s head or inside an ageing computer programme that needed constant tweaking. As production volumes increased, Wild Wheat needed a system that could turn that knowledge into clear reports, accessible workflows, and repeatable processes.</p>
+
+        <h2 class="reveal" style="margin-top:2.5rem;">Turning 20 years of bakery knowledge into a connected system.</h2>
+
+        <p class="reveal reveal-d1">Working with Mountain Stream, Wild Wheat moved toward a cloud-based bakery operating system that could support the way the business actually worked. The onboarding process was not a quick copy-and-paste exercise. It involved understanding Wild Wheat’s production shifts, day and night teams, pastry operations, delivery drivers, recipes, reporting needs, and the many small details that keep a bakery running.</p>
+
+        <p class="reveal reveal-d1">Andrew described the onboarding process as a major part of the success. Mountain Stream took the time to understand how Wild Wheat worked, then helped turn that knowledge into a system staff could use across the business.</p>
+
+        <div class="story-callout reveal reveal-d1" style="border-left-color:var(--orange);background:var(--orange-050);border-color:var(--orange-100);">
+          <p><strong>"Tim has been fantastic in the on-boarding process... he has been amazing."</strong> — Andrew Fearnside, Wild Wheat</p>
+        </div>
+
+        <h2 class="reveal" style="margin-top:2.5rem;">Clearer production, easier recipes, and better visibility.</h2>
+
+        <p class="reveal reveal-d1">With Streamline, Wild Wheat gained a system that connects online ordering, internal order entry, production reports, recipes, financial information, delivery workflows, and retrospective reporting.</p>
+
+        <p class="reveal reveal-d1">The impact was felt across the business. Production staff could work from clear reports. Managers could check orders from the Mountain Stream app. Recipes could be scaled and printed accurately. Trends could be reviewed over several weeks to support production planning, staffing, and purchasing decisions.</p>
+
+        <p class="reveal reveal-d1">For a seven-day bakery producing 40–50 product lines, that visibility matters. Instead of relying on memory, manual notes, or last-minute calculations, the team could work from a shared system built around real bakery operations.</p>
+
+        <h2 class="reveal" style="margin-top:2.5rem;">A system built around how bakers actually work.</h2>
+
+        <p class="reveal reveal-d1">One of the biggest wins for Wild Wheat was recipe handling. Tasks that once required manual calculations could now be printed directly from the system with the correct ingredient ratios. Andrew described this as a game-changer for his team.</p>
+
+        <p class="reveal reveal-d1">Streamline also helped Wild Wheat create bespoke reports, including delivery run reports for subcontracted drivers and operational reports tailored to the bakery’s production needs.</p>
+
+        <p class="reveal reveal-d1">As Wild Wheat continues to grow, Mountain Stream gives the team the structure, reporting, and operational control to scale without going back to manual systems.</p>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="story-sidebar reveal reveal-d3">
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-label">Features they use</div>
+          <ul class="sidebar-feature-list">
+            <li>Online ordering</li>
+            <li>Production reports</li>
+            <li>Recipe management</li>
+            <li>Recipe scaling</li>
+            <li>Delivery reports</li>
+            <li>Retrospective reporting</li>
+            <li>Mobile app access</li>
+            <li>Purchasing support</li>
+          </ul>
+        </div>
+
+        <div class="sidebar-quote-card">
+          <p class="sidebar-quote-text">"When you come in, in the morning you press two buttons, press print and you're done."</p>
+          <div class="sidebar-quote-author">
+            <img
+              class="sidebar-quote-avatar"
+              src="https://mountainstream.co/wp-content/uploads/2026/03/andrew-fearnside-wild-wheat.jpg"
+              alt="Andrew Fearnside"
+              onerror="this.style.background='rgba(255,255,255,.1)'"
+            >
+            <div>
+              <div class="sidebar-quote-name">Andrew Fearnside</div>
+              <div class="sidebar-quote-role">Founder, Wild Wheat</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-card" style="background:var(--page);">
+          <div class="sidebar-card-label">Location</div>
+          <p style="font-size:.9rem;color:var(--text);font-weight:600;margin:0;">Auckland, New Zealand 🇳🇿</p>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-label">Industry</div>
+          <p style="font-size:.9rem;color:var(--text);font-weight:600;margin:0;">Wholesale, Retail & Online Bakery</p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     KEY RESULTS
+═══════════════════════════════════════════════════ -->
+<section class="results-section">
+  <div class="wrap">
+    <p class="kicker reveal">The outcome</p>
+    <h2 class="reveal reveal-d1">What Wild Wheat gained with Streamline.</h2>
+
+    <div class="results-grid reveal reveal-d2">
+      <div class="result-item">
+        <div class="result-number">6</div>
+        <div class="result-label">shops supported</div>
+        <div class="result-desc">Alongside wholesale trade and online sales, Streamline helps support a growing multi-channel bakery operation.</div>
+      </div>
+      <div class="result-item">
+        <div class="result-number">40<span>–</span>50</div>
+        <div class="result-label">product lines managed</div>
+        <div class="result-desc">Clear reports help staff follow production requirements across a seven-day operation.</div>
+      </div>
+      <div class="result-item">
+        <div class="result-number">130<span>+</span></div>
+        <div class="result-label">staff across the business</div>
+        <div class="result-desc">Operational knowledge is easier to share across production, management, delivery, and support teams.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     MORE QUOTES
+═══════════════════════════════════════════════════ -->
+<section class="quotes-section">
+  <div class="wrap">
+    <p class="kicker reveal">In their words</p>
+    <h2 class="reveal reveal-d1">What Wild Wheat said.</h2>
+
+    <div class="quotes-grid">
+      <div class="quote-card reveal reveal-d1">
+        <div class="quote-stars">★★★★★</div>
+        <p class="quote-text">"The reports and knowledge is key to being able to work out what you are doing rather than operating in the dark."</p>
+        <div class="quote-author">Andrew Fearnside <span>— Wild Wheat</span></div>
+      </div>
+      <div class="quote-card reveal reveal-d2">
+        <div class="quote-stars">★★★★★</div>
+        <p class="quote-text">"The efficiencies it has created right across the board for everybody are enormous."</p>
+        <div class="quote-author">Andrew Fearnside <span>— Wild Wheat</span></div>
+      </div>
+      <div class="quote-card reveal reveal-d3">
+        <div class="quote-stars">★★★★★</div>
+        <p class="quote-text">"The system certainly provides time-saving efficiencies for me but there are efficiencies for everybody across the board."</p>
+        <div class="quote-author">Andrew Fearnside <span>— Wild Wheat</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     CTA
+═══════════════════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="wrap reveal">
+    <p class="kicker">Get started</p>
+    <h2>Ready to simplify your bakery operations like Wild Wheat?</h2>
+    <p style="color:var(--muted);max-width:600px;margin-top:12px;">See how Streamline connects your ordering, production, recipes, delivery, reporting, and finance in one bakery ERP system.</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="https://mountainstream.co/register-your-company?cta=case-study&intent=Book%20a%20demo">Book a Demo</a>
+      <a class="btn btn-secondary" href="https://mountainstream.co/pricing/">View Pricing</a>
+      <a href="/case-study/" style="font-size:.9rem;font-weight:600;color:var(--navy);display:inline-flex;align-items:center;gap:.35rem;">All Case Studies <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      el.classList.add('visible');
+    });
+    return;
+  }
+
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function (el) {
+    var r = el.getBoundingClientRect();
+    if (r.top < window.innerHeight && r.bottom > 0) {
+      el.classList.add('visible');
+    } else {
+      obs.observe(el);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

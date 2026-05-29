@@ -1,29 +1,35 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Streamline Inventory App — Bakery Inventory Management on Mobile</title>
-  <meta name="description" content="The Streamline Inventory App lets your warehouse and production team receive goods, assign lot numbers, print barcode labels, count stock, and make recipes — all from a mobile device. Download on Android.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
-
-  <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Streamline Chrome Extension — Email Order Import for Streamline ERP</title>
+<meta content="The Streamline Chrome Extension scans approved Gmail order emails, reads order files, validates orders, imports valid orders into Streamline, and flags exceptions for review." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&amp;family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&amp;display=swap" rel="stylesheet"/>
+<script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "MobileApplication",
-    "name": "Streamline Inventory App",
-    "applicationCategory": "BusinessApplication",
-    "operatingSystem": "Android",
-    "url": "https://play.google.com/store/apps/details?id=io.ionic.streamline.inventoryManagementApp",
-    "description": "Mobile inventory management app for wholesale bakeries and food producers. Receive goods, assign lots, print barcode labels, count stock, make recipes, and trigger replenishment from a mobile device.",
-    "provider": { "@type": "Organization", "name": "Mountain Stream", "url": "https://mountainstream.co/" },
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Streamline Chrome Extension",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Chrome",
+  "description": "Chrome extension for Streamline ERP users that scans approved Gmail order emails, processes PDF, HTML, CSV and Excel order files, validates order details, imports valid orders into Streamline, and flags emails that need attention.",
+  "provider": {
+    "@type": "Organization",
+    "name": "Mountain Stream",
+    "url": "https://mountainstream.co/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
   }
+}
   </script>
-
-  <style>
+<style>
 /* ============================================================
    STREAMLINE INVENTORY APP — Landing Page
    Scope:    .sl-lp
@@ -678,6 +684,38 @@
   border: 1px solid var(--c-line);
   background: var(--c-navy-050);
 }
+
+/* Compact supporting feature cards */
+.streamline-app .feature-intro {
+  max-width: 680px;
+  margin: 0 auto clamp(40px, 5vw, 64px);
+  text-align: center;
+}
+.streamline-app .feature-intro .eyebrow { justify-content: center; }
+.streamline-app .feature-intro p { color: var(--c-muted); font-size: 1.0625rem; }
+.streamline-app .feature-support-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(18px, 2.5vw, 28px);
+  padding-top: clamp(48px, 6vw, 72px);
+  border-top: 1px solid var(--c-line);
+}
+.streamline-app .feature-support-card {
+  padding: clamp(22px, 3vw, 30px);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-lg);
+  background: var(--c-white);
+  box-shadow: var(--sh-xs);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: box-shadow .2s, transform .2s var(--ease);
+}
+.streamline-app .feature-support-card:hover { box-shadow: var(--sh); transform: translateY(-3px); }
+.streamline-app .feature-support-card h3 { font-size: clamp(1.05rem, 1.35vw, 1.25rem); }
+.streamline-app .feature-support-card p { color: var(--c-muted); font-size: .95rem; line-height: 1.65; }
+.streamline-app .feature-support-card .feat-checklist { margin-top: 4px; gap: 7px; }
+.streamline-app .feature-support-card .feat-checklist li { font-size: .88rem; }
 .streamline-app .panel { background: var(--c-white); }
 .streamline-app .panel-header {
   display: flex;
@@ -927,6 +965,7 @@
   .streamline-app .hero-layout,
   .streamline-app .feat-row,
   .streamline-app .feat-row--flip { grid-template-columns: 1fr; direction: ltr; }
+  .streamline-app .feature-support-grid { grid-template-columns: 1fr; }
   .streamline-app .phone-wrap { justify-content: center; margin-top: 16px; display: none; }
   .streamline-app .float-card-1,
   .streamline-app .float-card-2 { display: none; }
@@ -963,239 +1002,210 @@ div:has(> div:has(> .streamline-app)) {
   </style>
 </head>
 <body class="sl-lp">
-
 <div class="streamline-app">
-
 <!-- ══════════════════════════════════════════════════
      HERO
 ════════════════════════════════════════════════════ -->
-<section class="hero" aria-labelledby="hero-title">
-  <div class="wrap">
-    <div class="hero-layout">
-
-      <!-- Left: copy -->
-      <div class="hero-content">
-        <p class="eyebrow reveal" style="transition-delay:.05s">Inventory Management App</p>
-        <h1 id="hero-title" class="reveal" style="transition-delay:.1s">
-          Keep bakery inventory <em>always accurate.</em>
-        </h1>
-        <p class="lede reveal" style="transition-delay:.17s;margin-top:16px">
-          Scan invoices, receive goods, assign lot numbers, print barcode labels, count stock, and make recipes — all from a mobile app built for warehouse and production teams.
-        </p>
-        <div class="btn-group reveal" style="transition-delay:.24s">
-          <a href="https://play.google.com/store/apps/details?id=io.ionic.streamline.inventoryManagementApp" target="_blank" rel="noopener" style="width:175px">
-            <img src="https://mountainstream.co/wp-content/uploads/2026/03/visual-identity_badges_880x572-1.width-1440.png" alt="Download on Google Play" class="ms-app-badge" loading="lazy">
-          </a>
-          <a href="https://mountainstream.co/register-your-company?cta=hero&intent=book-demo" class="btn btn-secondary">Book a Demo</a>
-        </div>
-        <div class="hero-badges reveal" style="transition-delay:.3s">
-          <span class="hero-badge">Free with Streamline ERP</span>
-          <span class="hero-badge">Barcode scanning</span>
-          <span class="hero-badge">Lot tracking</span>
-        </div>
-      </div>
-      <div class="phone-wrap">
-        <img src="inbox-chaos-chrome-extension.png" alt="Streamline Inventory Management App preview" class="hero-phone reveal" style="transition-delay:.35s">
-      </div>
-
-    </div>
-  </div>
+<section aria-labelledby="hero-title" class="hero">
+<div class="wrap">
+<div class="hero-layout">
+<!-- Left: copy -->
+<div class="hero-content">
+<p class="eyebrow reveal" style="transition-delay:.05s">Streamline Chrome Extension</p>
+<h1 class="reveal" id="hero-title" style="transition-delay:.1s">Email orders, <em>neatly handled.</em></h1>
+<p class="lede reveal" style="transition-delay:.17s;margin-top:16px">The Streamline Chrome Extension scans approved Gmail order emails, reads order files, validates the order, and imports it into Streamline. When something needs attention, the extension shows the status so the team can review it quickly.</p>
+<div class="btn-group reveal" style="transition-delay:.24s"><a class="btn btn-primary" href="https://mountainstream.co/register-your-company?cta=hero&amp;intent=book-demo">Book a Demo</a>
+          <a class="btn btn-secondary" href="#how-it-works">See how it works</a></div>
+<div class="hero-badges reveal" style="transition-delay:.3s"><span class="hero-badge">Gmail order scanning</span>
+          <span class="hero-badge">PDF, HTML, CSV and Excel</span>
+          <span class="hero-badge">Order validation</span>
+          <span class="hero-badge">Status labels and alerts</span>
+          </div>
+</div>
+<div class="phone-wrap">
+<img alt="Streamline Chrome Extension order import preview" class="hero-phone reveal" src="inbox-chaos-chrome-extension.png" style="transition-delay:.35s"/>
+</div>
+</div>
+</div>
 </section>
-
 <!-- ══════════════════════════════════════════════════
      WORKFLOW STEPS
 ════════════════════════════════════════════════════ -->
-<section class="section-sm" style="background:var(--c-page);border-bottom:1px solid var(--c-line)">
-  <div class="wrap">
-    <p class="section-label reveal">How it works</p>
-    <div class="steps reveal reveal-d1">
-      <div class="step-item">
-        <span class="step-num"></span>
-        <p class="step-title">Receive goods</p>
-        <p class="step-desc">Scan the vendor invoice, confirm quantities, and capture delivery details on your phone.</p>
-      </div>
-      <div class="step-item">
-        <span class="step-num"></span>
-        <p class="step-title">Assign lot numbers</p>
-        <p class="step-desc">Generate internal lot numbers linked to vendor references — automatically.</p>
-      </div>
-      <div class="step-item">
-        <span class="step-num"></span>
-        <p class="step-title">Print barcode labels</p>
-        <p class="step-desc">Send lot-specific labels straight to your connected label printer from the app.</p>
-      </div>
-      <div class="step-item">
-        <span class="step-num"></span>
-        <p class="step-title">Count &amp; adjust stock</p>
-        <p class="step-desc">Run stock counts by location, confirm variances, and post adjustments instantly.</p>
-      </div>
-      <div class="step-item">
-        <span class="step-num"></span>
-        <p class="step-title">Make recipes</p>
-        <p class="step-desc">Record production runs that automatically deplete ingredient lots and update stock.</p>
-      </div>
-    </div>
-  </div>
+<section class="section-sm" id="how-it-works" style="background:var(--c-page);border-bottom:1px solid var(--c-line)">
+<div class="wrap">
+<p class="section-label reveal">How email order import works</p>
+<div class="steps reveal reveal-d1">
+<div class="step-item">
+<span class="step-num"></span>
+<p class="step-title">Scan approved Gmail</p>
+<p class="step-desc">Use the extension to inspect a Gmail account and its inbox order area.</p>
+</div>
+<div class="step-item">
+<span class="step-num"></span>
+<p class="step-title">Read order files</p>
+<p class="step-desc">Run scheduled scans or select Scan Now when order activity requires immediate review.</p>
+</div>
+<div class="step-item">
+<span class="step-num"></span>
+<p class="step-title">Validate the order</p>
+<p class="step-desc">Order details are checked before the import moves forward.</p>
+</div>
+<div class="step-item">
+<span class="step-num"></span>
+<p class="step-title">Import or flag</p>
+<p class="step-desc">Line items and flags clearly show the status when manual review is needed.</p>
+</div>
+<div class="step-item">
+<span class="step-num"></span>
+<p class="step-title">Review quickly</p>
+<p class="step-desc">Provide status and customer service links with a clearer browser-based order intake workflow.</p>
+</div>
+</div>
+</div>
 </section>
-
-
 <!-- ══════════════════════════════════════════════════
-     FEATURES — ALTERNATING ROWS
+     FEATURES — STREAMLINED STORY
 ════════════════════════════════════════════════════ -->
 <section class="section" style="background:var(--c-white)">
   <div class="wrap">
 
-    <!-- Feature 1: Receive & scan -->
-    <div class="feat-row reveal">
-      <div class="feat-text">
-        <p class="eyebrow" style="margin-bottom:10px">Goods receipt</p>
-        <h3>Receive goods and assign lots — on the loading dock.</h3>
-        <p>No more paper delivery sheets or laptop at the door. Your team opens the app, scans the invoice, confirms quantities, records the use-by date and delivery temperature, and assigns a lot number — all in one flow.</p>
-        <ul class="feat-checklist">
-          <li>Invoice scanning with automatic item matching</li>
-          <li>Internal lot number generated on receipt</li>
-          <li>Vendor lot reference linked for traceability</li>
-          <li>Use-by date and delivery temperature recorded</li>
-          <li>Stock levels updated in real time</li>
-        </ul>
-        <div style="margin-top:12px">
-          <a href="/streamline-features/inventory-and-traceability/" class="link-arrow">See inventory management</a>
-        </div>
-      </div>
-      <div>
-        <img src="https://mountainstream.co/wp-content/uploads/2026/05/inventory-app-goods-in.png" alt="Goods receipt on the Streamline Inventory App">
-      </div>
+    <div class="feature-intro reveal">
+      <p class="eyebrow" style="margin-bottom:10px">Order Email Intake</p>
+      <h2>Everything your team needs to turn order emails into clean, reviewable imports.</h2>
+      <p style="margin-top:16px">The extension keeps the workflow simple: see what was scanned, review the emails that need attention, then control which senders, labels, notifications, and schedules keep the process focused.</p>
     </div>
 
-    <!-- Feature 2: Stock counts (flipped) -->
-    <div class="feat-row feat-row--flip reveal">
-      <div class="feat-text">
-        <p class="eyebrow" style="margin-bottom:10px">Stock counting</p>
-        <h3>Count inventory accurately — without clipboards.</h3>
-        <p>Run a stock count from your phone. Scan items by location, enter quantities, review variances against system stock, and post adjustments with a reason code. Everything syncs back to Streamline instantly.</p>
-        <ul class="feat-checklist">
-          <li>Count by location, category, or full warehouse</li>
-          <li>Blind count mode for unbiased results</li>
-          <li>Variance review before posting adjustments</li>
-          <li>Adjustment reason codes for audit trail</li>
-          <li>Syncs in real time to Streamline ERP</li>
-        </ul>
-        <div style="margin-top:12px">
-          <a href="/streamline-features/inventory-and-traceability/" class="link-arrow">See stock management</a>
-        </div>
-      </div>
-      <div>
-        <img src="https://mountainstream.co/wp-content/uploads/2026/05/inventory-app-stock-count.png" alt="Stock counting on the Streamline Inventory App">
-      </div>
-    </div>
-
-    <!-- Feature 3: Make recipes -->
+    <!-- Feature 1: Import status -->
     <div class="feat-row reveal">
       <div class="feat-text">
-        <p class="eyebrow" style="margin-bottom:10px">Recipe production</p>
-        <h3>Record production runs and deplete ingredient lots automatically.</h3>
-        <p>Select a recipe, enter the batch quantity, and confirm ingredient lots. The app automatically depletes stock, creates the production lot record, and links ingredient lots to your finished goods — feeding directly into traceability.</p>
+        <p class="eyebrow" style="margin-bottom:10px">Import Status Dashboard</p>
+        <h3>Review order import status before inbox activity becomes difficult to manage.</h3>
+        <p>The Home screen shows how order emails are moving: imported, pending review, failed, processed, and scanned today. Users can also see scan timing and run a manual scan.</p>
         <ul class="feat-checklist">
-          <li>Select recipes and enter batch quantity</li>
-          <li>Confirm which ingredient lots are used</li>
-          <li>Automatic stock depletion on confirmation</li>
-          <li>Finished goods lot created and linked</li>
-          <li>Full production record for traceability audits</li>
+          <li>View imported, pending review, failed, processed, and scanned email counts</li>
+          <li>See last scan and next scan timing</li>
+          <li>Run a manual scan with the Scan Now button</li>
+          <li>Review recent activity without switching between multiple tabs</li>
         </ul>
-        <div style="margin-top:12px">
-          <a href="/streamline-features/production-and-recipes#recipe-management/" class="link-arrow">See recipe management</a>
-        </div>
+        <div style="margin-top:12px"><a class="link-arrow" href="/streamline-features/order-import-workflows/">Learn more about Import Status Dashboard</a></div>
       </div>
-      <div>
-        <img src="https://mountainstream.co/wp-content/uploads/2026/05/inventory-app-make-recipe.png" alt="Recipe production on the Streamline Inventory App">
+      <div><img alt="Import Status Dashboard in the Streamline Chrome Extension" src="import-status-dashboard.png"/></div>
+    </div>
+
+    <!-- Feature 2: Email review -->
+    <div class="feat-row reveal feat-row--flip">
+      <div class="feat-text">
+        <p class="eyebrow" style="margin-bottom:10px">Scan and Review Order Emails</p>
+        <h3>Review order emails without searching through Gmail manually.</h3>
+        <p>The Emails tab lists order-related emails with sender, subject, preview, timestamp, unread marker, and import status, so customer service has a cleaner place to start.</p>
+        <ul class="feat-checklist">
+          <li>Review sender, subject, preview, timestamp, unread marker, and status</li>
+          <li>See which emails need review, failed, processed, or were manually scanned</li>
+          <li>Keep email-based wholesale order management easier to monitor</li>
+          <li>Give customer service a clear starting point for follow-up</li>
+        </ul>
+        <div style="margin-top:12px"><a class="link-arrow" href="/streamline-features/order-import-workflows/">Learn more about Order Email Review</a></div>
+      </div>
+      <div><img alt="Scan and Review Order Emails in the Streamline Chrome Extension" src="scan-and-review-order-emails.png"/></div>
+    </div>
+
+    <!-- Supporting controls -->
+    <div class="feature-support-grid reveal reveal-d1">
+      <div class="feature-support-card">
+        <p class="eyebrow" style="margin-bottom:4px">Approved Sender Management</p>
+        <h3>Scan approved senders instead of every inbox message.</h3>
+        <p>Customer email whitelist settings help teams control which sender addresses are scanned for orders.</p>
+        <ul class="feat-checklist">
+          <li>Add approved customer email addresses</li>
+          <li>Search whitelisted customers quickly</li>
+          <li>Reduce noise from unrelated inbox messages</li>
+        </ul>
+        <div style="margin-top:auto"><a class="link-arrow" href="/streamline-features/order-import-workflows/">Learn more</a></div>
+      </div>
+
+      <div class="feature-support-card">
+        <p class="eyebrow" style="margin-bottom:4px">Gmail Labels and Notifications</p>
+        <h3>Apply clear labels to every order email for easier follow-up.</h3>
+        <p>Customize Gmail labels and notifications so your team can quickly identify items requiring attention.</p>
+        <ul class="feat-checklist">
+          <li>Apply labels to processed emails</li>
+          <li>Use color coding for faster status checks</li>
+          <li>Show desktop notifications and badge alerts</li>
+        </ul>
+        <div style="margin-top:auto"><a class="link-arrow" href="/streamline-features/order-import-workflows/">Learn more</a></div>
+      </div>
+
+      <div class="feature-support-card">
+        <p class="eyebrow" style="margin-bottom:4px">Scanning Rules and Schedule</p>
+        <h3>Run order intake on a defined schedule.</h3>
+        <p>Set automatic import, choose scan frequency, limit scanning to business hours, and keep processing focused.</p>
+        <ul class="feat-checklist">
+          <li>Scan every 10, 15, or 30 minutes, hourly, or daily</li>
+          <li>Scan only inbox and unread emails</li>
+          <li>Use subject filters such as Order or Purchase Order</li>
+        </ul>
+        <div style="margin-top:auto"><a class="link-arrow" href="/streamline-features/order-import-workflows/">Learn more</a></div>
       </div>
     </div>
 
   </div>
 </section>
-
-
 <!-- ══════════════════════════════════════════════════
      TESTIMONIALS
 ════════════════════════════════════════════════════ -->
 <section class="section-sm" style="background:var(--c-page);border-top:1px solid var(--c-line)">
-  <div class="wrap">
-    <p class="section-label reveal">What customers say</p>
-    <div class="testi-grid">
-      <div class="testi reveal reveal-d1">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">"Streamline is fantastic, and the people at Mountain Stream are even better! We get a response easily at any time of the day. It has eliminated a lot of tasks altogether, and made many so much easier."</p>
-        <div class="testi-author"><a href="https://www.capterra.com/p/146354/Streamline/#Capterra___6179846" target="_blank" rel="noopener">Ricky — Bluepoint Bakery</a></div>
-      </div>
-      <div class="testi reveal reveal-d2">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">"Streamline saved my life in a time where my business grew exponentially. It's incredible to reach a person that speaks your language and understands your business and its needs."</p>
-        <div class="testi-author"><a href="https://www.capterra.com/p/146354/Streamline/#Capterra___4053596/" target="_blank" rel="noopener">Daniela — Tartastic</a></div>
-      </div>
-    </div>
-  </div>
+<div class="wrap">
+<p class="section-label reveal">Customer Feedback</p>
+<div class="testi-grid">
+<div class="testi reveal reveal-d1">
+<div class="testi-stars">★★★★★</div>
+<p class="testi-quote">"Streamline is fantastic, and the people at Mountain Stream are even better! We get a response easily at any time of the day. It has eliminated a lot of tasks altogether, and made many so much easier."</p>
+<div class="testi-author"><a href="https://www.capterra.com/p/146354/Streamline/#Capterra___6179846" rel="noopener" target="_blank">Ricky — Bluepoint Bakery</a></div>
+</div>
+<div class="testi reveal reveal-d2">
+<div class="testi-stars">★★★★★</div>
+<p class="testi-quote">"Streamline saved my life in a time where my business grew exponentially. It's incredible to reach a person that speaks your language and understands your business and its needs."</p>
+<div class="testi-author"><a href="https://www.capterra.com/p/146354/Streamline/#Capterra___4053596/" rel="noopener" target="_blank">Daniela — Tartastic</a></div>
+</div>
+</div>
+</div>
 </section>
-
-
 <!-- ══════════════════════════════════════════════════
      FAQ
 ════════════════════════════════════════════════════ -->
 <section class="section-sm" style="background:var(--c-white);border-top:1px solid var(--c-line)">
-  <div class="wrap-narrow">
-    <p class="section-label reveal">Common questions</p>
-    <div class="faq reveal reveal-d1">
-      <details open>
-        <summary>What does the Streamline Inventory App do?</summary>
-        <p>The Streamline Inventory App lets your warehouse and production team receive goods, assign internal lot numbers, link vendor lot references, print barcode labels, count stock by location, move inventory, and record recipe production runs — all from an Android mobile device.</p>
-      </details>
-      <details>
-        <summary>Is the app included with Streamline ERP?</summary>
-        <p>Yes. The Streamline Inventory App is included at no extra cost as part of your Streamline ERP subscription. It connects directly to your live operational data.</p>
-      </details>
-      <details>
-        <summary>Does the app work offline?</summary>
-        <p>The app supports core scanning and data entry functions in low-connectivity environments, with automatic sync when connection is restored.</p>
-      </details>
-      <details>
-        <summary>Can the app print barcode labels directly?</summary>
-        <p>Yes. The app connects to compatible label printers and can print lot-specific barcode labels at goods receipt, during stock movements, and at recipe production time.</p>
-      </details>
-      <details>
-        <summary>How does the app connect to traceability?</summary>
-        <p>Every lot assigned at goods receipt, every stock movement, and every recipe production run recorded in the app automatically updates the traceability record in Streamline ERP — creating an unbroken chain from supplier to customer delivery.</p>
-      </details>
-    </div>
-  </div>
+<div class="wrap-narrow">
+<p class="section-label reveal">Frequently Asked Questions</p>
+<div class="faq reveal reveal-d1"><details open=""><summary>What does the Chrome Extension do?</summary><p>It scans approved Gmail order emails, processes PDF, HTML, CSV and Excel order files, validates order details, imports valid orders into Streamline, and flags emails that need attention.</p></details>
+      <details><summary>Does it work with Outlook or other email clients?</summary><p>The workflow shown here is built around approved Gmail order emails. Other email clients are not shown in the page content.</p></details>
+      <details><summary>Does it work in Edge, Safari, or other browsers?</summary><p>The workflow shown here is for the Chrome Extension. Edge, Safari, and other browser support are not shown in the page content.</p></details>
+      <details><summary>What do the order statuses mean?</summary><p>Statuses show whether an order was imported, needs review, failed, was processed manually, was ignored, or has only been scanned.</p></details>
+      <details><summary>How does this connect to Streamline?</summary><p>Valid order details are imported into Streamline, while exceptions are flagged so your team can review them before moving forward.</p></details>
+      </div>
+</div>
 </section>
-
-
 <!-- ══════════════════════════════════════════════════
      FINAL CTA
 ════════════════════════════════════════════════════ -->
 <section class="final-cta" id="download">
-  <div class="wrap">
-    <div class="reveal">
-      <p class="eyebrow" style="justify-content:center">Get started today</p>
-      <h2>Accurate inventory starts at the loading dock.</h2>
-      <p>Download the Streamline Inventory App and connect your warehouse, production, and traceability in one place.</p>
-      <div class="btn-group">
-        <a href="https://play.google.com/store/apps/details?id=io.ionic.streamline.inventoryManagementApp"
-           target="_blank" rel="noopener" class="btn btn-primary">
-          ↓ Download on Android
-        </a>
-        <a href="https://mountainstream.co/register-your-company?cta=lp-footer&intent=book-demo" class="btn btn-secondary">
-          Book a Demo
-        </a>
-      </div>
-      <p style="margin-top:20px;font-size:.82rem;color:var(--c-soft)">
-        Included free with Streamline ERP &nbsp;·&nbsp; Android &nbsp;·&nbsp;
-        <a href="/streamline-features/inventory-and-traceability/" style="color:var(--c-navy-700);font-weight:600">Learn more about inventory management →</a>
-      </p>
-    </div>
-  </div>
-</section>
+<div class="wrap">
+<div class="reveal">
+<p class="eyebrow" style="justify-content:center">Email Order Intake</p>
+<h2>Bring more structure to order email intake.</h2>
+<p>Use the Chrome Extension to scan approved Gmail order emails, validate the details, import valid orders, and flag the exceptions your team needs to review.</p>
+<div class="btn-group"><a class="btn btn-primary" href="https://mountainstream.co/register-your-company?cta=lp-footer&amp;intent=book-demo">Book a Demo</a></div>
+<p style="margin-top:20px;font-size:.82rem;color:var(--c-soft)">Built for Streamline ERP users · Chrome Extension · Order import workflows</p>
 </div>
+</div>
+</section>
 
+<footer class="lp-footer"><div class="wrap lp-footer-inner"><div>© 2026 Mountain Stream · Streamline ERP</div>
+      <div class="lp-footer-links"><a href="/features/">Features</a>
+        <a href="/pricing/">Pricing</a>
+        <a href="/docs/">Docs</a>
+        <a href="https://mountainstream.co/register-your-company?cta=footer&amp;intent=book-demo">Book a Demo</a>
+        </div></div></footer>
+</div>
 <script>
 (function () {
   var root = document.querySelector('.streamline-app');
@@ -1232,6 +1242,5 @@ div:has(> div:has(> .streamline-app)) {
 })();
 
 </script>
-
 </body>
 </html>

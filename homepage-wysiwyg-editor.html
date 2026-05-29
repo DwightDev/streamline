@@ -1530,12 +1530,12 @@ body .container.main-content .wpb_row.full-width-content {
 <p contenteditable="true" data-ms-editable="true" spellcheck="true">Streamline connects the operational chain so every team works from the same data. Orders feed production. Production feeds inventory. Delivery feeds invoices. Reporting needs no rebuilding in spreadsheets.</p>
 </div>
 <div class="ms-workflow ms-stagger">
-<div class="ms-step" contenteditable="true" data-ms-editable="true">Customers order online or your team enters orders.</div>
-<div class="ms-step" contenteditable="true" data-ms-editable="true">Catalogues, prices, deadlines, and account rules apply.</div>
-<div class="ms-step" contenteditable="true" data-ms-editable="true">Production planning uses demand, stock, recipes, and forecasts.</div>
-<div class="ms-step" contenteditable="true" data-ms-editable="true">Inventory, lots, labels, and replenishment update.</div>
-<div class="ms-step" contenteditable="true" data-ms-editable="true">Routes, packing slips, deliveries, and proof of delivery are managed.</div>
-<div class="ms-step" contenteditable="true" data-ms-editable="true">Invoices, statements, accounting exports, and reports are generated.</div>
+<div class="ms-step">Customers order online or your team enters orders.</div>
+<div class="ms-step">Catalogues, prices, deadlines, and account rules apply.</div>
+<div class="ms-step">Production planning uses demand, stock, recipes, and forecasts.</div>
+<div class="ms-step">Inventory, lots, labels, and replenishment update.</div>
+<div class="ms-step">Routes, packing slips, deliveries, and proof of delivery are managed.</div>
+<div class="ms-step">Invoices, statements, accounting exports, and reports are generated.</div>
 </div>
 </div>
 </section>
@@ -1975,20 +1975,72 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   function safeName(name){ var base=(name||'imported-page.html').replace(/\.(html?|xhtml)$/i,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); return (base||'imported-page')+'-edited.html'; }
   function markEditable(scope){
     if(!scope) return;
-    scope.querySelectorAll('[contenteditable],[data-ms-editable]').forEach(function(el){ el.removeAttribute('contenteditable'); el.removeAttribute('data-ms-editable'); el.removeAttribute('spellcheck'); });
-    var selector=['h1','h2','h3','h4','h5','h6','p','li','summary','.ms-eyebrow','.eyebrow','.lede','.ms-lede','.ms-section-intro','.section-label','.hero-badge','.ms-badge','.ms-btn','.btn','.ms-link-arrow','.link-arrow','.ms-int-pill'].join(',');
-    scope.querySelectorAll(selector).forEach(function(el){
-      if(!el.textContent || !el.textContent.trim()) return;
-      if(el.closest('script,style,noscript,svg,canvas,form')) return;
-      if(el.querySelector('img,video,iframe,input,textarea,select,button')) return;
-      el.setAttribute('contenteditable','true'); el.setAttribute('data-ms-editable','true'); el.setAttribute('spellcheck','true');
+
+    // Clear any previous editor markers first. This is important for imported files too.
+    scope.querySelectorAll('[contenteditable],[data-ms-editable]').forEach(function(el){
+      el.removeAttribute('contenteditable');
+      el.removeAttribute('data-ms-editable');
+      el.removeAttribute('spellcheck');
     });
+
+    // Prefer small, leaf-like text elements instead of large layout containers.
+    // This catches card titles/descriptions like .ms-industry-card strong/span,
+    // workflow step divs, CTA text, stats, pills, buttons, links, and FAQ rows.
+    var selector = [
+      'h1','h2','h3','h4','h5','h6',
+      'p','li','summary',
+      'a[href]','button',
+      'strong','em','span',
+      '.ms-step','.step-item','.step-title','.step-desc',
+      '.ms-eyebrow','.eyebrow','.lede','.ms-lede',
+      '.ms-logos-label','.ms-hero-stars','.ms-stars',
+      '.ms-badge','.hero-badge','.ms-int-pill',
+      '.ms-btn','.btn','.ms-link-arrow','.link-arrow',
+      '.ms-testimonial-name','.testi-author','.testi-quote',
+      '.ms-proof-stat strong','.ms-proof-stat span',
+      '.ms-proof-band-lead strong','.ms-proof-band-lead span',
+      '.ms-logo-name','.ms-logo-sub'
+    ].join(',');
+
+    function hasText(el){
+      return !!(el && el.textContent && el.textContent.replace(/\s+/g,' ').trim());
+    }
+    function isUnsafe(el){
+      return !!(el.closest('script,style,noscript,svg,canvas,form,select,textarea'));
+    }
+    function hasMediaControl(el){
+      return !!el.querySelector('img,video,iframe,input,textarea,select,button');
+    }
+    function hasCandidateChild(el){
+      return Array.prototype.some.call(el.children || [], function(child){
+        return child.matches && (child.matches(selector) || child.querySelector(selector));
+      });
+    }
+    function make(el){
+      el.setAttribute('contenteditable','true');
+      el.setAttribute('data-ms-editable','true');
+      el.setAttribute('spellcheck','true');
+    }
+
+    Array.prototype.forEach.call(scope.querySelectorAll(selector), function(el){
+      if(!hasText(el) || isUnsafe(el)) return;
+      if(el.closest('[data-ms-editable="true"]')) return;
+      if(hasMediaControl(el)) return;
+
+      var tag = el.tagName ? el.tagName.toLowerCase() : '';
+      var alwaysOk = /^(h1|h2|h3|h4|h5|h6|p|li|summary|a|button|strong|em|span)$/.test(tag);
+
+      // Do not make broad wrapper divs editable when they contain smaller text targets.
+      if(!alwaysOk && hasCandidateChild(el)) return;
+
+      make(el);
+    });
+
+    // Links need URL metadata even when their visible content is an image/logo.
     scope.querySelectorAll('a[href]').forEach(function(a){
       if(!a.hasAttribute('data-original-href')) a.setAttribute('data-original-href', a.getAttribute('href') || '#');
       a.setAttribute('title','Ctrl/Cmd-click to open link. Use Edit link URL to change this URL.');
-      if(a.textContent && a.textContent.trim() && !a.querySelector('img,video,iframe,input,textarea,select,button')){
-        a.setAttribute('contenteditable','true'); a.setAttribute('data-ms-editable','true'); a.setAttribute('spellcheck','true');
-      }
+      if(hasText(a) && !hasMediaControl(a) && !a.closest('[data-ms-editable="true"]')) make(a);
     });
   }
   function prepare(){
@@ -2032,7 +2084,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   document.addEventListener('click',function(e){ var a=e.target.closest&&e.target.closest('#ms-editor-content a'); if(a && !document.body.classList.contains('ms-preview-mode') && !(e.metaKey||e.ctrlKey)){ e.preventDefault(); toast('Link click blocked while editing. Ctrl/Cmd-click to open, or use Edit link URL.'); } },true);
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&document.body.classList.contains('ms-preview-mode')) window.msTogglePreview(); if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){ e.preventDefault(); window.msDownloadEditedHTML(); } });
   window.addEventListener('resize',setToolbarOffset); window.addEventListener('load',setToolbarOffset);
-  prepare(); toast('Editable homepage ready. Click any outlined text to revise it.');
+  prepare(); toast('Editable homepage ready. More card text is now editable. Click any outlined text to revise it.');
 })();
 </script>
 </body>

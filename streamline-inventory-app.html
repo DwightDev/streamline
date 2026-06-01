@@ -1,25 +1,20 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Streamline Inventory App — Bakery Inventory Management on Mobile</title>
-  <meta name="description" content="The Streamline Inventory App lets your warehouse and production team receive goods, assign lot numbers, print barcode labels, count stock, and make recipes — all from a mobile device. Download on Android.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
-
-  <style>
-/* ============================================================
-   STREAMLINE INVENTORY APP — Landing Page
-   Scope:    .ms-inventory-app
-   Goal:     Single CTA — Download the app / Book a demo
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* ============================================================
+   STREAMLINE APPS — Shared Landing Page Styles
+   Scope:    .streamline-app
+   Covers:   Inventory App + Distribution App
    Design:   Minimal, white, generous space, one accent colour
    Fonts:    Fraunces (display) + DM Sans (body)
    ============================================================ */
 
 /* ── TOKENS ─────────────────────────────────────────── */
-.ms-inventory-app {
+.streamline-app {
   --c-navy-950: #113058;
   --c-navy-900: #113058;
   --c-navy-800: #113058;
@@ -36,7 +31,7 @@
   --c-orange-glow: rgba(245,135,14,.2);
 
   --c-sky-500: #4fa6e9;
-  --c-sky-100: #ecf4ff;
+  --c-sky-100: #ddf1ff;
   --c-sky-050: #f0f9ff;
 
   --c-green-600: #1e7a52;
@@ -80,52 +75,52 @@
 }
 
 /* ── RESET ──────────────────────────────────────────── */
-.ms-inventory-app *, .ms-inventory-app *::before, .ms-inventory-app *::after { box-sizing: border-box; margin: 0; padding: 0; }
-.ms-inventory-app img { display: block; max-width: 100%; height: auto; }
-.ms-inventory-app p   { margin-bottom: 1rem; line-height: 1.72; }
-.ms-inventory-app p:last-child { margin-bottom: 0; }
-.ms-inventory-app a   { text-decoration: none; transition: color .15s var(--ease), opacity .15s; }
+.streamline-app *, .streamline-app *::before, .streamline-app *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.streamline-app img { display: block; max-width: 100%; height: auto; }
+.streamline-app p   { margin-bottom: 1rem; line-height: 1.72; }
+.streamline-app p:last-child { margin-bottom: 0; }
+.streamline-app a   { text-decoration: none; transition: color .15s var(--ease), opacity .15s; }
 
 /* ── LAYOUT ─────────────────────────────────────────── */
-.ms-inventory-app .wrap {
+.streamline-app .wrap {
   width: min(var(--wrap), calc(100% - var(--gutter) * 2));
   margin-inline: auto;
 }
-.ms-inventory-app .wrap-narrow {
+.streamline-app .wrap-narrow {
   width: min(720px, calc(100% - var(--gutter) * 2));
   margin-inline: auto;
 }
-.ms-inventory-app .section    { padding-block: clamp(72px, 9vw, 112px); }
-.ms-inventory-app .section-sm { padding-block: clamp(48px, 6vw, 72px); }
-.ms-inventory-app .divider    { height: 1px; background: var(--c-line); border: none; }
+.streamline-app .section    { padding-block: clamp(72px, 9vw, 112px); }
+.streamline-app .section-sm { padding-block: clamp(48px, 6vw, 72px); }
+.streamline-app .divider    { height: 1px; background: var(--c-line); border: none; }
 
 /* ── TYPOGRAPHY ─────────────────────────────────────── */
-.ms-inventory-app h1, .ms-inventory-app h2, .ms-inventory-app h3 {
+.streamline-app h1, .streamline-app h2, .streamline-app h3 {
   font-family: var(--f-display);
   font-weight: 600;
   letter-spacing: -.04em;
   line-height: 1.06;
   color: var(--c-navy-900);
 }
-.ms-inventory-app h1 {
+.streamline-app h1 {
   font-size: clamp(2.6rem, 5.5vw, 4.8rem);
   font-weight: 700;
   letter-spacing: -.055em;
   line-height: 1;
 }
-.ms-inventory-app h1 em { font-style: italic; color: var(--c-orange-600); }
-.ms-inventory-app h2 {
+.streamline-app h1 em { font-style: italic; color: var(--c-orange-600); }
+.streamline-app h2 {
   font-size: clamp(1.9rem, 3.5vw, 3rem);
   letter-spacing: -.04em;
 }
-.ms-inventory-app h2 em { font-style: italic; color: var(--c-orange-600); }
-.ms-inventory-app h3 {
+.streamline-app h2 em { font-style: italic; color: var(--c-orange-600); }
+.streamline-app h3 {
   font-size: clamp(1.1rem, 1.6vw, 1.45rem);
   letter-spacing: -.025em;
   line-height: 1.18;
 }
 
-.ms-inventory-app .eyebrow {
+.streamline-app .eyebrow {
   display: inline-flex;
   align-items: center;
   gap: .5rem;
@@ -136,20 +131,20 @@
   color: var(--c-orange-600);
   margin-bottom: 14px;
 }
-.ms-inventory-app .eyebrow::before {
+.streamline-app .eyebrow::before {
   content: "";
   width: 20px; height: 2px;
   border-radius: 2px;
   background: var(--c-orange);
   flex-shrink: 0;
 }
-.ms-inventory-app .lede {
+.streamline-app .lede {
   font-size: clamp(1.0625rem, 1.4vw, 1.2rem);
   color: var(--c-muted);
   line-height: 1.75;
   max-width: 560px;
 }
-.ms-inventory-app .section-label {
+.streamline-app .section-label {
   font-size: .72rem;
   font-weight: 700;
   letter-spacing: .12em;
@@ -160,8 +155,8 @@
 }
 
 /* ── BUTTONS ────────────────────────────────────────── */
-.ms-inventory-app .btn-group { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 32px; }
-.ms-inventory-app .btn {
+.streamline-app .btn-group { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 32px; }
+.streamline-app .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -180,44 +175,44 @@
               border-color .18s var(--ease), box-shadow .18s var(--ease),
               transform .2s var(--spring);
 }
-.ms-inventory-app .btn:hover  { transform: translateY(-2px); }
-.ms-inventory-app .btn:active { transform: translateY(0); }
-.ms-inventory-app .btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(74,166,232,.4); }
+.streamline-app .btn:hover  { transform: translateY(-2px); }
+.streamline-app .btn:active { transform: translateY(0); }
+.streamline-app .btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(74,166,232,.4); }
 
-.ms-inventory-app .btn-primary {
+.streamline-app .btn-primary {
   background: linear-gradient(170deg, var(--c-orange-400) 0%, var(--c-orange-600) 100%);
   color: #fff;
   border-color: var(--c-orange-600);
   box-shadow: var(--sh-cta);
 }
-.ms-inventory-app .btn-primary:hover {
+.streamline-app .btn-primary:hover {
   background: linear-gradient(170deg, #ffb84a 0%, var(--c-orange-700) 100%);
   color: #fff;
   box-shadow: 0 16px 40px var(--c-orange-glow);
 }
-.ms-inventory-app .btn-secondary {
+.streamline-app .btn-secondary {
   background: var(--c-white);
   color: var(--c-navy-900);
   border-color: var(--c-line);
   box-shadow: var(--sh-xs);
 }
-.ms-inventory-app .btn-secondary:hover {
+.streamline-app .btn-secondary:hover {
   background: var(--c-navy-050);
   border-color: var(--c-sky-500);
   color: var(--c-navy-900);
   box-shadow: var(--sh-sm);
 }
-.ms-inventory-app .btn-ghost {
+.streamline-app .btn-ghost {
   background: rgba(255,255,255,.1);
   color: #fff;
   border-color: rgba(255,255,255,.25);
 }
-.ms-inventory-app .btn-ghost:hover {
+.streamline-app .btn-ghost:hover {
   background: rgba(255,255,255,.18);
   color: #fff;
   border-color: rgba(255,255,255,.45);
 }
-.ms-inventory-app .link-arrow {
+.streamline-app .link-arrow {
   display: inline-flex;
   align-items: center;
   gap: .4rem;
@@ -225,13 +220,12 @@
   font-weight: 600;
   font-size: .9rem;
 }
-.ms-inventory-app .link-arrow::after { content: "→"; transition: transform .16s var(--spring); }
-.ms-inventory-app .link-arrow:hover  { color: var(--c-orange-600); }
-.ms-inventory-app .link-arrow:hover::after { transform: translateX(4px); }
+.streamline-app .link-arrow::after { content: "→"; transition: transform .16s var(--spring); }
+.streamline-app .link-arrow:hover  { color: var(--c-orange-600); }
+.streamline-app .link-arrow:hover::after { transform: translateX(4px); }
 
 /* ── MINIMAL HEADER ─────────────────────────────────── */
-/* Landing page: logo + single CTA only — no distracting nav */
-.ms-inventory-app .lp-header {
+.streamline-app .lp-header {
   position: sticky;
   top: 0;
   z-index: 100;
@@ -240,19 +234,19 @@
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
-.ms-inventory-app .lp-header-inner {
+.streamline-app .lp-header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 64px;
 }
-.ms-inventory-app .lp-logo {
+.streamline-app .lp-logo {
   display: inline-flex;
   align-items: center;
   gap: 9px;
   text-decoration: none;
 }
-.ms-inventory-app .lp-logo-mark {
+.streamline-app .lp-logo-mark {
   width: 34px; height: 34px;
   border-radius: 8px;
   background: linear-gradient(135deg, var(--c-sky-500), var(--c-navy-800));
@@ -261,8 +255,8 @@
   justify-content: center;
   flex-shrink: 0;
 }
-.ms-inventory-app .lp-logo-mark svg { width: 16px; height: 16px; }
-.ms-inventory-app .lp-logo-name {
+.streamline-app .lp-logo-mark svg { width: 16px; height: 16px; }
+.streamline-app .lp-logo-name {
   font-family: var(--f-display);
   font-size: .95rem;
   font-weight: 700;
@@ -270,28 +264,28 @@
   letter-spacing: -.02em;
   line-height: 1.1;
 }
-.ms-inventory-app .lp-logo-name span { color: var(--c-orange); }
-.ms-inventory-app .lp-logo-sub {
+.streamline-app .lp-logo-name span { color: var(--c-orange); }
+.streamline-app .lp-logo-sub {
   display: block;
   font-size: .6rem;
   font-weight: 500;
   letter-spacing: .04em;
   color: var(--c-soft);
 }
-.ms-inventory-app .lp-header-right {
+.streamline-app .lp-header-right {
   display: flex;
   align-items: center;
   gap: 16px;
 }
-.ms-inventory-app .lp-header-link {
+.streamline-app .lp-header-link {
   font-size: .85rem;
   font-weight: 600;
   color: var(--c-muted);
 }
-.ms-inventory-app .lp-header-link:hover { color: var(--c-navy-900); }
+.streamline-app .lp-header-link:hover { color: var(--c-navy-900); }
 
 /* ── HERO ───────────────────────────────────────────── */
-.ms-inventory-app .hero {
+.streamline-app .hero {
   padding: clamp(64px, 9vw, 112px) 0 clamp(48px, 7vw, 80px);
   background:
     radial-gradient(ellipse 65% 70% at 90% 5%, rgba(74,166,232,.1), transparent 50%),
@@ -301,7 +295,7 @@
   position: relative;
   overflow: hidden;
 }
-.ms-inventory-app .hero::after {
+.streamline-app .hero::after {
   content: "";
   position: absolute;
   bottom: 0; left: 0; right: 0;
@@ -309,21 +303,21 @@
   background: linear-gradient(90deg, transparent, var(--c-orange) 30%, var(--c-sky-500) 70%, transparent);
   opacity: .28;
 }
-.ms-inventory-app .hero-layout {
+.streamline-app .hero-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(48px, 7vw, 96px);
   align-items: center;
 }
-.ms-inventory-app .hero-content .eyebrow { margin-bottom: 18px; }
-.ms-inventory-app .hero-content h1 { margin-bottom: 20px; }
-.ms-inventory-app .hero-badges {
+.streamline-app .hero-content .eyebrow { margin-bottom: 18px; }
+.streamline-app .hero-content h1 { margin-bottom: 20px; }
+.streamline-app .hero-badges {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 20px;
 }
-.ms-inventory-app .hero-badge {
+.streamline-app .hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -335,20 +329,20 @@
   font-weight: 600;
   color: var(--c-muted);
 }
-.ms-inventory-app .hero-badge::before {
+.streamline-app .hero-badge::before {
   content: "✓";
   color: var(--c-orange);
   font-weight: 800;
 }
 
 /* ── CSS PHONE MOCKUP ───────────────────────────────── */
-.ms-inventory-app .phone-wrap {
+.streamline-app .phone-wrap {
   display: flex;
   justify-content: center;
   align-items: flex-end;
   position: relative;
 }
-.ms-inventory-app .phone {
+.streamline-app .phone {
   width: 260px;
   background: var(--c-navy-950);
   border-radius: 36px;
@@ -360,8 +354,7 @@
   position: relative;
   flex-shrink: 0;
 }
-/* Notch */
-.ms-inventory-app .phone-notch {
+.streamline-app .phone-notch {
   width: 90px;
   height: 26px;
   background: var(--c-navy-950);
@@ -370,15 +363,13 @@
   position: relative;
   z-index: 2;
 }
-/* Screen */
-.ms-inventory-app .phone-screen {
+.streamline-app .phone-screen {
   background: #0d1f33;
   min-height: 520px;
   padding: 0;
   overflow: hidden;
 }
-/* App top bar */
-.ms-inventory-app .app-bar {
+.streamline-app .app-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -386,14 +377,14 @@
   background: #091525;
   border-bottom: 1px solid rgba(255,255,255,.07);
 }
-.ms-inventory-app .app-bar-title {
+.streamline-app .app-bar-title {
   font-family: var(--f-display);
   font-size: .78rem;
   font-weight: 700;
   color: rgba(255,255,255,.9);
   letter-spacing: -.01em;
 }
-.ms-inventory-app .app-bar-icon {
+.streamline-app .app-bar-icon {
   width: 26px; height: 26px;
   border-radius: 6px;
   background: linear-gradient(135deg, var(--c-sky-500), var(--c-navy-800));
@@ -401,17 +392,15 @@
   align-items: center;
   justify-content: center;
 }
-.ms-inventory-app .app-bar-icon svg { width: 12px; height: 12px; }
-
-/* App nav tabs */
-.ms-inventory-app .app-tabs {
+.streamline-app .app-bar-icon svg { width: 12px; height: 12px; }
+.streamline-app .app-tabs {
   display: flex;
   gap: 0;
   background: #091525;
   border-bottom: 1px solid rgba(255,255,255,.07);
   padding: 0 10px;
 }
-.ms-inventory-app .app-tab {
+.streamline-app .app-tab {
   flex: 1;
   padding: 8px 4px;
   text-align: center;
@@ -422,10 +411,8 @@
   text-transform: uppercase;
   position: relative;
 }
-.ms-inventory-app .app-tab.active {
-  color: var(--c-orange-400);
-}
-.ms-inventory-app .app-tab.active::after {
+.streamline-app .app-tab.active { color: var(--c-orange-400); }
+.streamline-app .app-tab.active::after {
   content: "";
   position: absolute;
   bottom: 0; left: 20%; right: 20%;
@@ -433,12 +420,8 @@
   border-radius: 2px;
   background: var(--c-orange);
 }
-
-/* App content */
-.ms-inventory-app .app-content { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
-
-/* Goods-in item row */
-.ms-inventory-app .app-item {
+.streamline-app .app-content { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.streamline-app .app-item {
   background: rgba(255,255,255,.06);
   border: 1px solid rgba(255,255,255,.08);
   border-radius: 10px;
@@ -447,45 +430,45 @@
   flex-direction: column;
   gap: 5px;
 }
-.ms-inventory-app .app-item-top {
+.streamline-app .app-item-top {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 6px;
 }
-.ms-inventory-app .app-item-name {
+.streamline-app .app-item-name {
   font-size: .72rem;
   font-weight: 700;
   color: rgba(255,255,255,.9);
   line-height: 1.3;
 }
-.ms-inventory-app .app-chip {
+.streamline-app .app-chip {
   font-size: .56rem;
   font-weight: 700;
   padding: 2px 7px;
   border-radius: 20px;
   flex-shrink: 0;
 }
-.ms-inventory-app .app-chip.received { background: rgba(30,122,82,.25); color: #4ade80; }
-.ms-inventory-app .app-chip.pending  { background: rgba(245,135,14,.2); color: var(--c-orange-400); }
-.ms-inventory-app .app-chip.counted  { background: rgba(74,166,232,.2); color: #7dd3fc; }
-.ms-inventory-app .app-item-lot {
+.streamline-app .app-chip.received { background: rgba(30,122,82,.25); color: #4ade80; }
+.streamline-app .app-chip.pending  { background: rgba(245,135,14,.2); color: var(--c-orange-400); }
+.streamline-app .app-chip.counted  { background: rgba(74,166,232,.2); color: #7dd3fc; }
+.streamline-app .app-item-lot {
   font-size: .6rem;
   color: rgba(255,255,255,.35);
   font-weight: 600;
   letter-spacing: .03em;
 }
-.ms-inventory-app .app-item-row {
+.streamline-app .app-item-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.ms-inventory-app .app-item-qty {
+.streamline-app .app-item-qty {
   font-size: .65rem;
   color: rgba(255,255,255,.55);
   font-weight: 600;
 }
-.ms-inventory-app .app-progress {
+.streamline-app .app-progress {
   height: 3px;
   background: rgba(255,255,255,.08);
   border-radius: 2px;
@@ -493,14 +476,12 @@
   flex: 1;
   margin-left: 8px;
 }
-.ms-inventory-app .app-progress-bar {
+.streamline-app .app-progress-bar {
   height: 100%;
   border-radius: 2px;
   background: linear-gradient(90deg, var(--c-sky-500), var(--c-orange));
 }
-
-/* Scan button */
-.ms-inventory-app .app-scan-btn {
+.streamline-app .app-scan-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -516,37 +497,35 @@
   letter-spacing: .04em;
   text-transform: uppercase;
 }
-.ms-inventory-app .app-scan-icon {
+.streamline-app .app-scan-icon {
   width: 14px; height: 14px;
   border: 2px solid rgba(255,255,255,.7);
   border-radius: 3px;
   position: relative;
 }
-.ms-inventory-app .app-scan-icon::before,
-.ms-inventory-app .app-scan-icon::after {
+.streamline-app .app-scan-icon::before,
+.streamline-app .app-scan-icon::after {
   content: "";
   position: absolute;
   background: rgba(255,255,255,.7);
 }
-.ms-inventory-app .app-scan-icon::before { top: 3px; left: 0; right: 0; height: 1px; }
-.ms-inventory-app .app-scan-icon::after  { top: 0; bottom: 0; left: 3px; width: 1px; }
-
-/* Phone bottom bar */
-.ms-inventory-app .phone-home-bar {
+.streamline-app .app-scan-icon::before { top: 3px; left: 0; right: 0; height: 1px; }
+.streamline-app .app-scan-icon::after  { top: 0; bottom: 0; left: 3px; width: 1px; }
+.streamline-app .phone-home-bar {
   padding: 10px;
   display: flex;
   justify-content: center;
   background: #091525;
 }
-.ms-inventory-app .phone-home-bar span {
+.streamline-app .phone-home-bar span {
   width: 80px; height: 4px;
   border-radius: 4px;
   background: rgba(255,255,255,.2);
   display: block;
 }
 
-/* Floating notification card */
-.ms-inventory-app .float-card {
+/* Floating notification cards */
+.streamline-app .float-card {
   position: absolute;
   width: 180px;
   padding: 12px 14px;
@@ -555,9 +534,9 @@
   box-shadow: var(--sh);
   border: 1px solid var(--c-line);
 }
-.ms-inventory-app .float-card-1 { right: -24px; top: 40px; transform: rotate(2.5deg); }
-.ms-inventory-app .float-card-2 { left: -28px;  bottom: 72px; transform: rotate(-2deg); }
-.ms-inventory-app .float-label {
+.streamline-app .float-card-1 { right: -24px; top: 40px; transform: rotate(2.5deg); }
+.streamline-app .float-card-2 { left: -28px;  bottom: 72px; transform: rotate(-2deg); }
+.streamline-app .float-label {
   font-size: .6rem;
   font-weight: 700;
   letter-spacing: .08em;
@@ -565,7 +544,7 @@
   color: var(--c-soft);
   margin-bottom: 5px;
 }
-.ms-inventory-app .float-value {
+.streamline-app .float-value {
   font-family: var(--f-display);
   font-size: 1.35rem;
   font-weight: 700;
@@ -574,35 +553,32 @@
   color: var(--c-navy-900);
   margin-bottom: 3px;
 }
-.ms-inventory-app .float-value span { color: var(--c-orange); }
-.ms-inventory-app .float-sub {
-  font-size: .65rem;
-  color: var(--c-muted);
-}
-.ms-inventory-app .float-dot {
+.streamline-app .float-value span { color: var(--c-orange); }
+.streamline-app .float-sub { font-size: .65rem; color: var(--c-muted); }
+.streamline-app .float-dot {
   display: inline-block;
   width: 6px; height: 6px;
   border-radius: 50%;
   margin-right: 4px;
   vertical-align: middle;
 }
-.ms-inventory-app .float-dot.green { background: #22c55e; }
-.ms-inventory-app .float-dot.orange { background: var(--c-orange); }
+.streamline-app .float-dot.green  { background: #22c55e; }
+.streamline-app .float-dot.orange { background: var(--c-orange); }
 
 /* ── SOCIAL PROOF ROW ───────────────────────────────── */
-.ms-inventory-app .proof-row {
+.streamline-app .proof-row {
   padding-block: 28px;
   border-bottom: 1px solid var(--c-line);
   background: var(--c-white);
 }
-.ms-inventory-app .proof-inner {
+.streamline-app .proof-inner {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 28px;
   justify-content: space-between;
 }
-.ms-inventory-app .proof-rating {
+.streamline-app .proof-rating {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -610,15 +586,15 @@
   color: var(--c-muted);
   font-weight: 500;
 }
-.ms-inventory-app .proof-rating img { height: 20px; width: auto; }
-.ms-inventory-app .proof-stars { color: var(--c-orange); letter-spacing: 2px; }
-.ms-inventory-app .proof-stat {
+.streamline-app .proof-rating img { height: 20px; width: auto; }
+.streamline-app .proof-stars { color: var(--c-orange); letter-spacing: 2px; }
+.streamline-app .proof-stat {
   text-align: center;
   padding: 0 20px;
   border-left: 1px solid var(--c-line);
 }
-.ms-inventory-app .proof-stat:first-of-type { border-left: 0; }
-.ms-inventory-app .proof-stat strong {
+.streamline-app .proof-stat:first-of-type { border-left: 0; }
+.streamline-app .proof-stat strong {
   display: block;
   font-family: var(--f-display);
   font-size: 1.6rem;
@@ -627,12 +603,12 @@
   color: var(--c-navy-900);
   line-height: 1.1;
 }
-.ms-inventory-app .proof-stat strong span { color: var(--c-orange); }
-.ms-inventory-app .proof-stat p { font-size: .75rem; color: var(--c-muted); margin-top: 2px; }
-.ms-inventory-app .proof-stats { display: flex; }
+.streamline-app .proof-stat strong span { color: var(--c-orange); }
+.streamline-app .proof-stat p { font-size: .75rem; color: var(--c-muted); margin-top: 2px; }
+.streamline-app .proof-stats { display: flex; }
 
 /* ── FEATURES — ALTERNATING ROWS ───────────────────── */
-.ms-inventory-app .feat-row {
+.streamline-app .feat-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(48px, 7vw, 96px);
@@ -640,26 +616,26 @@
   padding-block: clamp(56px, 7vw, 88px);
   border-top: 1px solid var(--c-line);
 }
-.ms-inventory-app .feat-row:first-of-type { border-top: 0; padding-top: 0; }
-.ms-inventory-app .feat-row--flip { direction: rtl; }
-.ms-inventory-app .feat-row--flip > * { direction: ltr; }
-.ms-inventory-app .feat-text { display: flex; flex-direction: column; gap: 14px; }
-.ms-inventory-app .feat-text h3 { margin-bottom: 4px; }
-.ms-inventory-app .feat-text p { color: var(--c-muted); font-size: 1.0625rem; }
-.ms-inventory-app .feat-checklist {
+.streamline-app .feat-row:first-of-type { border-top: 0; padding-top: 0; }
+.streamline-app .feat-row--flip { direction: rtl; }
+.streamline-app .feat-row--flip > * { direction: ltr; }
+.streamline-app .feat-text { display: flex; flex-direction: column; gap: 14px; }
+.streamline-app .feat-text h3 { margin-bottom: 4px; }
+.streamline-app .feat-text p { color: var(--c-muted); font-size: 1.0625rem; }
+.streamline-app .feat-checklist {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 9px;
 }
-.ms-inventory-app .feat-checklist li {
+.streamline-app .feat-checklist li {
   position: relative;
   padding-left: 24px;
   font-size: .95rem;
   color: var(--c-muted);
   line-height: 1.55;
 }
-.ms-inventory-app .feat-checklist li::before {
+.streamline-app .feat-checklist li::before {
   content: "";
   position: absolute;
   top: .54em; left: 0;
@@ -668,20 +644,15 @@
   background: var(--c-orange);
   box-shadow: 0 0 0 3px var(--c-orange-100);
 }
-
-/* Feature visual panels */
-.ms-inventory-app .feat-visual {
+.streamline-app .feat-visual {
   border-radius: var(--r-xl);
   overflow: hidden;
   box-shadow: var(--sh-lg);
   border: 1px solid var(--c-line);
   background: var(--c-navy-050);
 }
-/* Receive goods panel */
-.ms-inventory-app .panel {
-  background: var(--c-white);
-}
-.ms-inventory-app .panel-header {
+.streamline-app .panel { background: var(--c-white); }
+.streamline-app .panel-header {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -689,23 +660,23 @@
   background: var(--c-navy-050);
   border-bottom: 1px solid var(--c-line);
 }
-.ms-inventory-app .panel-dot { width: 8px; height: 8px; border-radius: 50%; }
-.ms-inventory-app .panel-dot:nth-child(1) { background: #ff5f57; }
-.ms-inventory-app .panel-dot:nth-child(2) { background: #febc2e; }
-.ms-inventory-app .panel-dot:nth-child(3) { background: #28c840; }
-.ms-inventory-app .panel-title { font-size: .7rem; font-weight: 600; color: var(--c-soft); margin-left: 4px; letter-spacing: .03em; }
-.ms-inventory-app .panel-body { padding: 18px; display: flex; flex-direction: column; gap: 10px; }
-.ms-inventory-app .panel-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 4px; }
-.ms-inventory-app .panel-kpi {
+.streamline-app .panel-dot { width: 8px; height: 8px; border-radius: 50%; }
+.streamline-app .panel-dot:nth-child(1) { background: #ff5f57; }
+.streamline-app .panel-dot:nth-child(2) { background: #febc2e; }
+.streamline-app .panel-dot:nth-child(3) { background: #28c840; }
+.streamline-app .panel-title { font-size: .7rem; font-weight: 600; color: var(--c-soft); margin-left: 4px; letter-spacing: .03em; }
+.streamline-app .panel-body { padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+.streamline-app .panel-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 4px; }
+.streamline-app .panel-kpi {
   background: var(--c-page);
   border: 1px solid var(--c-line);
   border-radius: var(--r-sm);
   padding: 10px 12px;
 }
-.ms-inventory-app .panel-kpi-label { font-size: .6rem; font-weight: 700; color: var(--c-soft); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
-.ms-inventory-app .panel-kpi-val { font-family: var(--f-display); font-size: 1.2rem; font-weight: 700; color: var(--c-navy-900); letter-spacing: -.03em; line-height: 1; }
-.ms-inventory-app .panel-kpi-delta { font-size: .6rem; font-weight: 700; color: #22c55e; margin-top: 2px; }
-.ms-inventory-app .panel-row {
+.streamline-app .panel-kpi-label { font-size: .6rem; font-weight: 700; color: var(--c-soft); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
+.streamline-app .panel-kpi-val { font-family: var(--f-display); font-size: 1.2rem; font-weight: 700; color: var(--c-navy-900); letter-spacing: -.03em; line-height: 1; }
+.streamline-app .panel-kpi-delta { font-size: .6rem; font-weight: 700; color: #22c55e; margin-top: 2px; }
+.streamline-app .panel-row {
   display: grid;
   grid-template-columns: 1.6fr .8fr .8fr auto;
   gap: 8px;
@@ -716,23 +687,23 @@
   border: 1px solid var(--c-line);
   font-size: .72rem;
 }
-.ms-inventory-app .panel-row-name { font-weight: 600; color: var(--c-navy-900); }
-.ms-inventory-app .panel-row-lot  { color: var(--c-muted); font-size: .65rem; }
-.ms-inventory-app .panel-row-qty  { color: var(--c-muted); font-size: .7rem; }
-.ms-inventory-app .panel-tag {
+.streamline-app .panel-row-name { font-weight: 600; color: var(--c-navy-900); }
+.streamline-app .panel-row-lot  { color: var(--c-muted); font-size: .65rem; }
+.streamline-app .panel-row-qty  { color: var(--c-muted); font-size: .7rem; }
+.streamline-app .panel-tag {
   font-size: .6rem;
   font-weight: 700;
   padding: 3px 8px;
   border-radius: var(--r-pill);
   white-space: nowrap;
 }
-.ms-inventory-app .panel-tag.green  { background: var(--c-green-100); color: var(--c-green-600); }
-.ms-inventory-app .panel-tag.orange { background: var(--c-orange-100); color: var(--c-orange-700); }
-.ms-inventory-app .panel-tag.blue   { background: var(--c-sky-100); color: #1d7dc0; }
+.streamline-app .panel-tag.green  { background: var(--c-green-100); color: var(--c-green-600); }
+.streamline-app .panel-tag.orange { background: var(--c-orange-100); color: var(--c-orange-700); }
+.streamline-app .panel-tag.blue   { background: var(--c-sky-100); color: #1d7dc0; }
 
 /* Stock count panel */
-.ms-inventory-app .count-list { display: flex; flex-direction: column; gap: 8px; }
-.ms-inventory-app .count-row {
+.streamline-app .count-list { display: flex; flex-direction: column; gap: 8px; }
+.streamline-app .count-row {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -741,7 +712,7 @@
   border-radius: var(--r-sm);
   background: var(--c-white);
 }
-.ms-inventory-app .count-icon {
+.streamline-app .count-icon {
   width: 32px; height: 32px;
   border-radius: 8px;
   background: var(--c-orange-100);
@@ -751,13 +722,13 @@
   font-size: 14px;
   flex-shrink: 0;
 }
-.ms-inventory-app .count-info { flex: 1; min-width: 0; }
-.ms-inventory-app .count-name { font-size: .8rem; font-weight: 600; color: var(--c-navy-900); }
-.ms-inventory-app .count-meta { font-size: .68rem; color: var(--c-muted); margin-top: 1px; }
-.ms-inventory-app .count-val  { font-family: var(--f-display); font-size: 1rem; font-weight: 700; color: var(--c-navy-900); letter-spacing: -.02em; flex-shrink: 0; }
+.streamline-app .count-info { flex: 1; min-width: 0; }
+.streamline-app .count-name { font-size: .8rem; font-weight: 600; color: var(--c-navy-900); }
+.streamline-app .count-meta { font-size: .68rem; color: var(--c-muted); margin-top: 1px; }
+.streamline-app .count-val  { font-family: var(--f-display); font-size: 1rem; font-weight: 700; color: var(--c-navy-900); letter-spacing: -.02em; flex-shrink: 0; }
 
 /* ── STEP FLOW ──────────────────────────────────────── */
-.ms-inventory-app .steps {
+.streamline-app .steps {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 0;
@@ -768,15 +739,15 @@
   background: var(--c-white);
   box-shadow: var(--sh-sm);
 }
-.ms-inventory-app .step-item {
+.streamline-app .step-item {
   padding: clamp(20px, 2.5vw, 28px) clamp(16px, 2vw, 22px);
   border-right: 1px solid var(--c-line);
   position: relative;
   transition: background .18s;
 }
-.ms-inventory-app .step-item:last-child { border-right: 0; }
-.ms-inventory-app .step-item:hover { background: var(--c-navy-050); }
-.ms-inventory-app .step-item::after {
+.streamline-app .step-item:last-child { border-right: 0; }
+.streamline-app .step-item:hover { background: var(--c-navy-050); }
+.streamline-app .step-item::after {
   content: "›";
   position: absolute;
   right: -11px;
@@ -791,9 +762,9 @@
   line-height: 1;
   transition: background .18s;
 }
-.ms-inventory-app .step-item:hover::after { background: var(--c-navy-050); }
-.ms-inventory-app .step-item:last-child::after { display: none; }
-.ms-inventory-app .step-num {
+.streamline-app .step-item:hover::after { background: var(--c-navy-050); }
+.streamline-app .step-item:last-child::after { display: none; }
+.streamline-app .step-num {
   counter-increment: step;
   font-family: var(--f-display);
   font-size: .7rem;
@@ -803,17 +774,17 @@
   margin-bottom: 8px;
   display: block;
 }
-.ms-inventory-app .step-num::before { content: "0" counter(step); }
-.ms-inventory-app .step-title { font-size: .88rem; font-weight: 700; color: var(--c-navy-900); margin-bottom: 5px; line-height: 1.3; }
-.ms-inventory-app .step-desc  { font-size: .76rem; color: var(--c-muted); line-height: 1.5; }
+.streamline-app .step-num::before { content: "0" counter(step); }
+.streamline-app .step-title { font-size: .88rem; font-weight: 700; color: var(--c-navy-900); margin-bottom: 5px; line-height: 1.3; }
+.streamline-app .step-desc  { font-size: .76rem; color: var(--c-muted); line-height: 1.5; }
 
 /* ── TESTIMONIALS ───────────────────────────────────── */
-.ms-inventory-app .testi-grid {
+.streamline-app .testi-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(18px, 2.5vw, 28px);
 }
-.ms-inventory-app .testi {
+.streamline-app .testi {
   padding: clamp(22px, 3vw, 32px);
   border: 1px solid var(--c-line);
   border-radius: var(--r-lg);
@@ -824,15 +795,15 @@
   gap: 14px;
   transition: box-shadow .2s, transform .2s var(--ease);
 }
-.ms-inventory-app .testi:hover { box-shadow: var(--sh); transform: translateY(-3px); }
-.ms-inventory-app .testi-stars { color: var(--c-orange); font-size: .9rem; letter-spacing: 2px; }
-.ms-inventory-app .testi-quote { font-size: .95rem; color: var(--c-muted); line-height: 1.72; font-style: italic; flex: 1; }
-.ms-inventory-app .testi-author { font-weight: 700; font-size: .88rem; color: var(--c-navy-800); }
-.ms-inventory-app .testi-author a { color: inherit; }
-.ms-inventory-app .testi-author a:hover { color: var(--c-orange-600); }
+.streamline-app .testi:hover { box-shadow: var(--sh); transform: translateY(-3px); }
+.streamline-app .testi-stars { color: var(--c-orange); font-size: .9rem; letter-spacing: 2px; }
+.streamline-app .testi-quote { font-size: .95rem; color: var(--c-muted); line-height: 1.72; font-style: italic; flex: 1; }
+.streamline-app .testi-author { font-weight: 700; font-size: .88rem; color: var(--c-navy-800); }
+.streamline-app .testi-author a { color: inherit; }
+.streamline-app .testi-author a:hover { color: var(--c-orange-600); }
 
 /* ── FAQ ────────────────────────────────────────────── */
-.ms-inventory-app .faq details {
+.streamline-app .faq details {
   padding: 20px 22px;
   margin-bottom: 10px;
   border: 1px solid var(--c-line);
@@ -841,9 +812,9 @@
   box-shadow: var(--sh-xs);
   transition: border-color .18s, box-shadow .18s;
 }
-.ms-inventory-app .faq details:hover { border-color: #c4d1e2; }
-.ms-inventory-app .faq details[open] { border-color: var(--c-sky-500); box-shadow: var(--sh-sm); }
-.ms-inventory-app .faq summary {
+.streamline-app .faq details:hover { border-color: #c4d1e2; }
+.streamline-app .faq details[open] { border-color: var(--c-sky-500); box-shadow: var(--sh-sm); }
+.streamline-app .faq summary {
   cursor: pointer;
   font-weight: 600;
   font-size: .95rem;
@@ -855,8 +826,8 @@
   gap: 12px;
   line-height: 1.4;
 }
-.ms-inventory-app .faq summary::-webkit-details-marker { display: none; }
-.ms-inventory-app .faq summary::after {
+.streamline-app .faq summary::-webkit-details-marker { display: none; }
+.streamline-app .faq summary::after {
   content: "+";
   flex-shrink: 0;
   width: 22px; height: 22px;
@@ -869,11 +840,11 @@
   place-items: center;
   transition: background .18s, color .18s, transform .22s var(--spring);
 }
-.ms-inventory-app .faq details[open] summary::after { content: "−"; background: var(--c-orange); color: #fff; transform: rotate(180deg); }
-.ms-inventory-app .faq p { margin: 12px 0 0; font-size: .9rem; color: var(--c-muted); line-height: 1.72; }
+.streamline-app .faq details[open] summary::after { content: "−"; background: var(--c-orange); color: #fff; transform: rotate(180deg); }
+.streamline-app .faq p { margin: 12px 0 0; font-size: .9rem; color: var(--c-muted); line-height: 1.72; }
 
 /* ── FINAL CTA ──────────────────────────────────────── */
-.ms-inventory-app .final-cta {
+.streamline-app .final-cta {
   padding-block: clamp(80px, 10vw, 120px);
   text-align: center;
   background:
@@ -882,17 +853,17 @@
     linear-gradient(165deg, var(--c-navy-050) 0%, var(--c-white) 55%);
   border-top: 4px solid var(--c-orange);
 }
-.ms-inventory-app .final-cta h2 { margin-bottom: 14px; }
-.ms-inventory-app .final-cta p  { color: var(--c-muted); max-width: 520px; margin-inline: auto; margin-bottom: 32px; }
-.ms-inventory-app .final-cta .btn-group { justify-content: center; }
+.streamline-app .final-cta h2 { margin-bottom: 14px; }
+.streamline-app .final-cta p  { color: var(--c-muted); max-width: 520px; margin-inline: auto; margin-bottom: 32px; }
+.streamline-app .final-cta .btn-group { justify-content: center; }
 
 /* ── SIMPLE FOOTER ──────────────────────────────────── */
-.ms-inventory-app .lp-footer {
+.streamline-app .lp-footer {
   padding-block: 28px;
   background: var(--c-navy-050);
   border-top: 1px solid var(--c-line);
 }
-.ms-inventory-app .lp-footer-inner {
+.streamline-app .lp-footer-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -901,57 +872,71 @@
   font-size: .82rem;
   color: var(--c-muted);
 }
-.ms-inventory-app .lp-footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
-.ms-inventory-app .lp-footer-links a { color: var(--c-navy-700); font-weight: 500; }
-.ms-inventory-app .lp-footer-links a:hover { color: var(--c-orange-600); }
+.streamline-app .lp-footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+.streamline-app .lp-footer-links a { color: var(--c-navy-700); font-weight: 500; }
+.streamline-app .lp-footer-links a:hover { color: var(--c-orange-600); }
 
 /* ── SCROLL REVEAL ──────────────────────────────────── */
 @media (prefers-reduced-motion: no-preference) {
-  .ms-inventory-app .reveal {
+  .streamline-app .reveal {
     opacity: 0;
     transform: translateY(24px);
     transition: opacity .55s var(--ease), transform .55s var(--ease);
     will-change: opacity, transform;
   }
-  .ms-inventory-app .reveal.in { opacity: 1; transform: none; }
-  .ms-inventory-app .reveal-l  { transform: translateX(-28px); }
-  .ms-inventory-app .reveal-r  { transform: translateX(28px); }
-  .ms-inventory-app .reveal-d1 { transition-delay: .08s; }
-  .ms-inventory-app .reveal-d2 { transition-delay: .16s; }
-  .ms-inventory-app .reveal-d3 { transition-delay: .24s; }
+  .streamline-app .reveal.in { opacity: 1; transform: none; }
+  .streamline-app .reveal-l  { transform: translateX(-28px); }
+  .streamline-app .reveal-r  { transform: translateX(28px); }
+  .streamline-app .reveal-d1 { transition-delay: .08s; }
+  .streamline-app .reveal-d2 { transition-delay: .16s; }
+  .streamline-app .reveal-d3 { transition-delay: .24s; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ms-inventory-app .reveal { opacity: 1 !important; transform: none !important; }
+  .streamline-app .reveal { opacity: 1 !important; transform: none !important; }
 }
 
 /* ── RESPONSIVE ─────────────────────────────────────── */
 @media (max-width: 900px) {
-  .ms-inventory-app .hero-layout,
-  .ms-inventory-app .feat-row,
-  .ms-inventory-app .feat-row--flip { grid-template-columns: 1fr; direction: ltr; }
-  .ms-inventory-app .phone-wrap { justify-content: center; margin-top: 16px; display:none}
-  .ms-inventory-app .float-card-1,
-  .ms-inventory-app .float-card-2 { display: none; }
-  .ms-inventory-app .steps { grid-template-columns: 1fr 1fr; }
-  .ms-inventory-app .step-item:nth-child(2)::after { display: none; }
-  .ms-inventory-app .testi-grid { grid-template-columns: 1fr; }
-  .ms-inventory-app .proof-stats { display: none; }
+  .streamline-app .hero-layout,
+  .streamline-app .feat-row,
+  .streamline-app .feat-row--flip { grid-template-columns: 1fr; direction: ltr; }
+  .streamline-app .phone-wrap { justify-content: center; margin-top: 16px; display: none; }
+  .streamline-app .float-card-1,
+  .streamline-app .float-card-2 { display: none; }
+  .streamline-app .steps { grid-template-columns: 1fr 1fr; }
+  .streamline-app .step-item:nth-child(2)::after { display: none; }
+  .streamline-app .testi-grid { grid-template-columns: 1fr; }
+  .streamline-app .proof-stats { display: none; }
 }
 @media (max-width: 580px) {
-  .ms-inventory-app .steps { grid-template-columns: 1fr; }
-  .ms-inventory-app .step-item::after { display: none; }
-  .ms-inventory-app .btn { width: 100%; justify-content: center; }
-  .ms-inventory-app .btn-group { align-items: stretch; flex-direction: column; }
-  .ms-inventory-app .final-cta .btn-group { flex-direction: column; align-items: center; }
-  .ms-inventory-app .final-cta .btn { width: auto; }
-  .ms-inventory-app .panel-kpis { grid-template-columns: 1fr 1fr; }
-  .ms-inventory-app .panel-row { grid-template-columns: 1fr auto; }
-  .ms-inventory-app .panel-row-lot, .ms-inventory-app .panel-row-qty { display: none; }
+  .streamline-app .steps { grid-template-columns: 1fr; }
+  .streamline-app .step-item::after { display: none; }
+  .streamline-app .btn { width: 100%; justify-content: center; }
+  .streamline-app .btn-group { align-items: stretch; flex-direction: column; }
+  .streamline-app .final-cta .btn-group { flex-direction: column; align-items: center; }
+  .streamline-app .final-cta .btn { width: auto; }
+  .streamline-app .panel-kpis { grid-template-columns: 1fr 1fr; }
+  .streamline-app .panel-row { grid-template-columns: 1fr auto; }
+  .streamline-app .panel-row-lot, .streamline-app .panel-row-qty { display: none; }
 }
-  </style>
-</head>
-<body class="ms-inventory-app">
 
+/* ── WP CONTAINER FIX ───────────────────────────────── */
+html .container-wrap { padding: 0 !important; }
+ul li { list-style: none; }
+
+/* ── WP PARENT OVERFLOW FIX (sticky header) ─────────── */
+div:has(> .streamline-app),
+div:has(> div:has(> .streamline-app)) {
+  overflow: visible !important;
+}
+
+.section .distribution img{
+	width: auto !important;
+}
+    </style>
+</head>
+<body>
+    <div class="streamline-app">
 
 <!-- ══════════════════════════════════════════════════
      HERO
@@ -982,7 +967,7 @@
         </div>
       </div>
       <div class="phone-wrap">
-        <img src="streamline-inventory-app-by-mountainstream.png" alt="Streamline Inventory Management App preview" class="hero-phone reveal" style="transition-delay:.35s">
+        <img src="https://mountainstream.co/wp-content/uploads/2026/05/streamline-inventory-app-by-mountainstream.png" alt="Streamline Inventory Management App preview" class="hero-phone reveal" style="transition-delay:.35s">
       </div>
 
     </div>
@@ -1046,11 +1031,11 @@
           <li>Stock levels updated in real time</li>
         </ul>
         <div style="margin-top:12px">
-          <a href="/streamline-features/inventory-management/" class="link-arrow">See inventory management</a>
+          <a href="/streamline-features/inventory-and-traceability/" class="link-arrow">See inventory management</a>
         </div>
       </div>
-      <div class="">
-        <img src="inventory-app-goods-in.png">
+      <div>
+        <img src="https://mountainstream.co/wp-content/uploads/2026/06/streamline-inventory-app-goods-in-feature.png" alt="Goods receipt on the Streamline Inventory App">
       </div>
     </div>
 
@@ -1068,11 +1053,11 @@
           <li>Syncs in real time to Streamline ERP</li>
         </ul>
         <div style="margin-top:12px">
-          <a href="/streamline-features/inventory-management/" class="link-arrow">See stock management</a>
+          <a href="/streamline-features/inventory-and-traceability/" class="link-arrow">See stock management</a>
         </div>
       </div>
-      <div class="">
-        <img src="inventory-app-stock-count.png">
+      <div>
+        <img src="https://mountainstream.co/wp-content/uploads/2026/06/streamline-inventory-app-stock-adjustments-feature.png" alt="Stock counting on the Streamline Inventory App">
       </div>
     </div>
 
@@ -1090,11 +1075,11 @@
           <li>Full production record for traceability audits</li>
         </ul>
         <div style="margin-top:12px">
-          <a href="/streamline-features/recipe-management/" class="link-arrow">See recipe management</a>
+          <a href="/streamline-features/production-and-recipes#recipe-management/" class="link-arrow">See recipe management</a>
         </div>
       </div>
-      <div class="">
-        <img src="inventory-app-make-recipe.png">
+      <div>
+        <img src="https://mountainstream.co/wp-content/uploads/2026/06/streamline-inventory-app-recipe-production-feature.png" alt="Recipe production on the Streamline Inventory App">
       </div>
     </div>
 
@@ -1175,43 +1160,48 @@
         </a>
       </div>
       <p style="margin-top:20px;font-size:.82rem;color:var(--c-soft)">
-        Included free with Streamline ERP &nbsp;·&nbsp; Android &nbsp;·&nbsp; 
+        Included free with Streamline ERP &nbsp;·&nbsp; Android &nbsp;·&nbsp;
+        <a href="/streamline-features/inventory-and-traceability/" style="color:var(--c-navy-700);font-weight:600">Learn more about inventory management →</a>
       </p>
-<a href="/streamline-features/inventory-management/" style="color:var(--c-navy-700);font-weight:600">Learn more about inventory management →</a>
     </div>
   </div>
 </section>
-
-
-<!-- ══════════════════════════════════════════════════
-     FOOTER
-════════════════════════════════════════════════════ -->
-<footer class="lp-footer">
-  <div class="wrap">
-    <div class="lp-footer-inner">
-      <span>© 2025 Mountain Stream · Streamline ERP</span>
-      <nav class="lp-footer-links" aria-label="Footer">
-        <a href="/streamline-features/">Features</a>
-        <a href="/pricing/">Pricing</a>
-        <a href="/docs/">Docs</a>
-        <a href="https://mountainstream.co/register-your-company?cta=lp-footer&intent=book-demo">Book a Demo</a>
-      </nav>
-    </div>
-  </div>
-</footer>
-
+</div>
 <script>
-// Scroll reveal
-const obs = new IntersectionObserver((entries, o) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); o.unobserve(e.target); } });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.ms-inventory-app .reveal').forEach(el => obs.observe(el));
+    (function () {
+  var root = document.querySelector('.streamline-app');
+  if (!root) return;
 
-// Fire hero immediately
-requestAnimationFrame(() => setTimeout(() => {
-  document.querySelectorAll('.ms-inventory-app .hero .reveal').forEach(el => el.classList.add('in'));
-}, 60));
+  // Scroll reveal — uses 'in' class (not 'visible') per this page's design system
+  var obs = new IntersectionObserver(function (entries, o) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        o.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  root.querySelectorAll('.reveal').forEach(function (el) {
+    // If already in viewport on load, mark visible immediately
+    var rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.classList.add('in');
+    } else {
+      obs.observe(el);
+    }
+  });
+
+  // Fire hero elements immediately
+  requestAnimationFrame(function () {
+    setTimeout(function () {
+      root.querySelectorAll('.hero .reveal').forEach(function (el) {
+        el.classList.add('in');
+      });
+    }, 60);
+  });
+})();
+
 </script>
-
 </body>
 </html>

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Stock Counting — Streamline Inventory App</title>
+<meta name="description" content="Expand the Streamline Inventory App stock counting workflow: count stock by location, scan items, review variances, add reason codes, and sync inventory adjustments back to Streamline ERP." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Streamline Inventory App - Stock Counting",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Android",
+  "description": "Mobile stock counting for Streamline Inventory App users. Count inventory by location, category, or warehouse; scan items; review variances; add adjustment reason codes; and sync updates back to Streamline ERP.",
+  "provider": {
+    "@type": "Organization",
+    "name": "Mountain Stream",
+    "url": "https://mountainstream.co/"
+  }
+}
+</script>
+<style>
+/* ============================================================
+   STREAMLINE INVENTORY APP — Feature Page
+   Feature:  Stock Counting
+   Design:   Based on Streamline app landing page / Import Dashboard structure
+   Fonts:    Fraunces (display) + DM Sans (body)
+   ============================================================ */
+.streamline-app {
+  --c-navy-950: #113058;
+  --c-navy-900: #113058;
+  --c-navy-800: #113058;
+  --c-navy-700: #113058;
+  --c-navy-100: #e4eef9;
+  --c-navy-050: #f2f7fd;
+  --c-orange-700: #ff9100;
+  --c-orange-600: #ff9100;
+  --c-orange: #ff9100;
+  --c-orange-400: #ff9100;
+  --c-orange-100: #fef0d8;
+  --c-orange-050: #fff8ef;
+  --c-orange-glow: rgba(245,135,14,.2);
+  --c-sky-500: #4fa6e9;
+  --c-sky-100: #ddf1ff;
+  --c-sky-050: #f0f9ff;
+  --c-green-600: #1e7a52;
+  --c-green-100: #e6f7ef;
+  --c-text: #1a2d42;
+  --c-muted: #54647a;
+  --c-soft: #8a9bae;
+  --c-line: #e2eaf4;
+  --c-white: #ffffff;
+  --c-page: #f9fbff;
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body: 'DM Sans', system-ui, sans-serif;
+  --wrap: 1120px;
+  --gutter: clamp(20px, 4vw, 48px);
+  --r-sm: 8px;
+  --r: 14px;
+  --r-lg: 22px;
+  --r-xl: 32px;
+  --r-pill: 999px;
+  --sh-xs: 0 1px 4px rgba(9,30,60,.06);
+  --sh-sm: 0 4px 18px rgba(9,30,60,.09);
+  --sh: 0 12px 40px rgba(9,30,60,.12);
+  --sh-lg: 0 28px 72px rgba(9,30,60,.16);
+  --sh-cta: 0 10px 32px var(--c-orange-glow);
+  --ease: cubic-bezier(.25,.46,.45,.94);
+  --spring: cubic-bezier(.34,1.56,.64,1);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.68;
+  color: var(--c-text);
+  background: var(--c-white);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.streamline-app *, .streamline-app *::before, .streamline-app *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.streamline-app img { display: block; max-width: 100%; height: auto; }
+.streamline-app p { margin-bottom: 1rem; line-height: 1.72; }
+.streamline-app p:last-child { margin-bottom: 0; }
+.streamline-app a { text-decoration: none; transition: color .15s var(--ease), opacity .15s; }
+.streamline-app ul li { list-style: none; }
+.streamline-app .wrap { width: min(var(--wrap), calc(100% - var(--gutter) * 2)); margin-inline: auto; }
+.streamline-app .wrap-narrow { width: min(720px, calc(100% - var(--gutter) * 2)); margin-inline: auto; }
+.streamline-app .section { padding-block: clamp(72px, 9vw, 112px); }
+.streamline-app .section-sm { padding-block: clamp(48px, 6vw, 72px); }
+.streamline-app h1, .streamline-app h2, .streamline-app h3 { font-family: var(--f-display); font-weight: 600; letter-spacing: -.04em; line-height: 1.06; color: var(--c-navy-900); }
+.streamline-app h1 { font-size: clamp(2.6rem, 5.5vw, 4.8rem); font-weight: 700; letter-spacing: -.055em; line-height: 1; }
+.streamline-app h1 em, .streamline-app h2 em { font-style: italic; color: var(--c-orange-600); }
+.streamline-app h2 { font-size: clamp(1.9rem, 3.5vw, 3rem); letter-spacing: -.04em; }
+.streamline-app h3 { font-size: clamp(1.1rem, 1.6vw, 1.45rem); letter-spacing: -.025em; line-height: 1.18; }
+.streamline-app .eyebrow { display: inline-flex; align-items: center; gap: .5rem; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--c-orange-600); margin-bottom: 14px; }
+.streamline-app .eyebrow::before { content: ""; width: 20px; height: 2px; border-radius: 2px; background: var(--c-orange); flex-shrink: 0; }
+.streamline-app .lede { font-size: clamp(1.0625rem, 1.4vw, 1.2rem); color: var(--c-muted); line-height: 1.75; max-width: 560px; }
+.streamline-app .section-label { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--c-soft); margin-bottom: 32px; text-align: center; }
+.streamline-app .btn-group { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 32px; }
+.streamline-app .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 52px; padding: 13px 28px; border: 1.5px solid transparent; border-radius: var(--r-pill); font-family: var(--f-body); font-size: .95rem; font-weight: 600; letter-spacing: .01em; cursor: pointer; white-space: nowrap; transition: background .18s var(--ease), color .18s var(--ease), border-color .18s var(--ease), box-shadow .18s var(--ease), transform .2s var(--spring); }
+.streamline-app .btn:hover { transform: translateY(-2px); }
+.streamline-app .btn-primary { background: linear-gradient(170deg, var(--c-orange-400) 0%, var(--c-orange-600) 100%); color: #fff; border-color: var(--c-orange-600); box-shadow: var(--sh-cta); }
+.streamline-app .btn-secondary { background: var(--c-white); color: var(--c-navy-900); border-color: var(--c-line); box-shadow: var(--sh-xs); }
+.streamline-app .btn-secondary:hover { background: var(--c-navy-050); border-color: var(--c-sky-500); }
+.streamline-app .link-arrow { display: inline-flex; align-items: center; gap: .4rem; color: var(--c-navy-700); font-weight: 600; font-size: .9rem; }
+.streamline-app .link-arrow::after { content: "→"; transition: transform .16s var(--spring); }
+.streamline-app .link-arrow:hover { color: var(--c-orange-600); }
+.streamline-app .link-arrow:hover::after { transform: translateX(4px); }
+.streamline-app .hero { padding: clamp(64px, 9vw, 112px) 0 clamp(48px, 7vw, 80px); background: radial-gradient(ellipse 65% 70% at 90% 5%, rgba(74,166,232,.1), transparent 50%), radial-gradient(ellipse 40% 50% at 5% 90%, rgba(245,135,14,.07), transparent 48%), linear-gradient(165deg, var(--c-navy-050) 0%, var(--c-white) 55%); border-bottom: 1px solid var(--c-line); position: relative; overflow: hidden; }
+.streamline-app .hero::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--c-orange) 30%, var(--c-sky-500) 70%, transparent); opacity: .28; }
+.streamline-app .hero-layout { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(48px, 7vw, 96px); align-items: center; }
+.streamline-app .hero-content h1 { margin-bottom: 20px; }
+.streamline-app .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.streamline-app .hero-badge { display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: var(--r-pill); border: 1px solid var(--c-line); background: rgba(255,255,255,.8); font-size: .78rem; font-weight: 600; color: var(--c-muted); }
+.streamline-app .hero-badge::before { content: "✓"; color: var(--c-orange); font-weight: 800; }
+.streamline-app .phone-wrap { display: flex; justify-content: center; align-items: center; position: relative; }
+.streamline-app .phone { width: 265px; background: var(--c-navy-950); border-radius: 36px; box-shadow: 0 0 0 2px rgba(255,255,255,.08), 0 0 0 6px rgba(9,30,60,.6), var(--sh-lg); overflow: hidden; flex-shrink: 0; }
+.streamline-app .phone-notch { width: 90px; height: 24px; background: var(--c-navy-950); border-radius: 0 0 18px 18px; margin: 0 auto; position: relative; z-index: 2; }
+.streamline-app .phone-screen { background: #0d1f33; min-height: 520px; overflow: hidden; }
+.streamline-app .app-bar { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px 10px; background: #091525; border-bottom: 1px solid rgba(255,255,255,.07); }
+.streamline-app .app-bar-title { font-family: var(--f-display); font-size: .82rem; font-weight: 700; color: rgba(255,255,255,.9); letter-spacing: -.01em; }
+.streamline-app .app-tab-row { display: flex; background: #091525; border-bottom: 1px solid rgba(255,255,255,.07); padding: 0 10px; }
+.streamline-app .app-tab { flex: 1; padding: 8px 4px; text-align: center; font-size: .58rem; font-weight: 600; color: rgba(255,255,255,.35); letter-spacing: .04em; text-transform: uppercase; position: relative; }
+.streamline-app .app-tab.active { color: var(--c-orange-400); }
+.streamline-app .app-tab.active::after { content: ""; position: absolute; bottom: 0; left: 22%; right: 22%; height: 2px; border-radius: 2px; background: var(--c-orange); }
+.streamline-app .app-content { padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+.streamline-app .count-progress { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 12px; }
+.streamline-app .count-progress strong { display: block; color: rgba(255,255,255,.92); font-size: .76rem; margin-bottom: 5px; }
+.streamline-app .count-progress span { display: block; color: rgba(255,255,255,.45); font-size: .64rem; }
+.streamline-app .app-meter { height: 5px; background: rgba(255,255,255,.08); border-radius: 5px; overflow: hidden; margin-top: 10px; }
+.streamline-app .app-meter-bar { height: 100%; width: 72%; border-radius: 5px; background: linear-gradient(90deg, var(--c-sky-500), var(--c-orange)); }
+.streamline-app .app-count-item { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); border-radius: 10px; padding: 10px 12px; }
+.streamline-app .app-count-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.streamline-app .app-count-name { font-size: .72rem; font-weight: 700; color: rgba(255,255,255,.9); line-height: 1.3; }
+.streamline-app .app-count-meta { font-size: .58rem; color: rgba(255,255,255,.35); margin-top: 3px; font-weight: 600; }
+.streamline-app .app-count-qty { font-family: var(--f-display); font-size: 1rem; font-weight: 700; color: var(--c-orange-400); }
+.streamline-app .app-scan-btn { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 2px 0; padding: 10px; border-radius: 10px; background: linear-gradient(170deg, var(--c-orange-400), var(--c-orange-600)); box-shadow: 0 4px 16px rgba(245,135,14,.3); font-size: .68rem; font-weight: 700; color: #fff; letter-spacing: .04em; text-transform: uppercase; }
+.streamline-app .phone-home-bar { padding: 10px; display: flex; justify-content: center; background: #091525; }
+.streamline-app .phone-home-bar span { width: 80px; height: 4px; border-radius: 4px; background: rgba(255,255,255,.2); display: block; }
+.streamline-app .steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; counter-reset: step; border: 1px solid var(--c-line); border-radius: var(--r-lg); overflow: hidden; background: var(--c-white); box-shadow: var(--sh-sm); }
+.streamline-app .step-item { padding: clamp(20px, 2.5vw, 28px) clamp(16px, 2vw, 22px); border-right: 1px solid var(--c-line); position: relative; transition: background .18s; }
+.streamline-app .step-item:last-child { border-right: 0; }
+.streamline-app .step-item:hover { background: var(--c-navy-050); }
+.streamline-app .step-item::after { content: "›"; position: absolute; right: -11px; top: 50%; transform: translateY(-50%); font-size: 1.2rem; color: var(--c-orange); font-weight: 700; z-index: 1; background: var(--c-white); padding: 0 2px; line-height: 1; }
+.streamline-app .step-item:last-child::after { display: none; }
+.streamline-app .step-num { counter-increment: step; font-family: var(--f-display); font-size: .7rem; font-weight: 700; color: var(--c-orange); letter-spacing: .04em; margin-bottom: 8px; display: block; }
+.streamline-app .step-num::before { content: "0" counter(step); }
+.streamline-app .step-title { font-size: .88rem; font-weight: 700; color: var(--c-navy-900); margin-bottom: 5px; line-height: 1.3; }
+.streamline-app .step-desc { font-size: .76rem; color: var(--c-muted); line-height: 1.5; }
+.streamline-app .feature-intro { max-width: 760px; margin: 0 auto clamp(42px, 6vw, 70px); text-align: center; }
+.streamline-app .feature-intro .eyebrow { justify-content: center; }
+.streamline-app .feature-intro p:not(.eyebrow) { color: var(--c-muted); font-size: 1.05rem; }
+.streamline-app .feat-row { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(48px, 7vw, 96px); align-items: center; padding-block: clamp(56px, 7vw, 88px); border-top: 1px solid var(--c-line); }
+.streamline-app .feat-row:first-of-type { border-top: 0; padding-top: 0; }
+.streamline-app .feat-text { display: flex; flex-direction: column; gap: 14px; }
+.streamline-app .feat-text p { color: var(--c-muted); font-size: 1.0625rem; }
+.streamline-app .feat-checklist { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.streamline-app .feat-checklist li { position: relative; padding-left: 24px; font-size: .95rem; color: var(--c-muted); line-height: 1.55; }
+.streamline-app .feat-checklist li::before { content: ""; position: absolute; top: .54em; left: 0; width: 10px; height: 10px; border-radius: 50%; background: var(--c-orange); box-shadow: 0 0 0 3px var(--c-orange-100); }
+.streamline-app .browser-mock { background: var(--c-white); border: 1px solid var(--c-line); border-radius: var(--r-xl); box-shadow: var(--sh-lg); overflow: hidden; width: 100%; max-width: 470px; margin-inline: auto; }
+.streamline-app .browser-top { height: 38px; background: var(--c-navy-050); border-bottom: 1px solid var(--c-line); display: flex; align-items: center; gap: 7px; padding: 0 14px; }
+.streamline-app .browser-dot { width: 7px; height: 7px; border-radius: 50%; }
+.streamline-app .browser-dot:nth-child(1) { background: #ff5f57; }
+.streamline-app .browser-dot:nth-child(2) { background: #febc2e; }
+.streamline-app .browser-dot:nth-child(3) { background: #28c840; }
+.streamline-app .browser-url { flex: 1; height: 18px; border: 1px solid var(--c-line); background: var(--c-white); border-radius: var(--r-pill); margin-left: 8px; }
+.streamline-app .browser-stage { min-height: 300px; padding: clamp(28px, 4vw, 44px); background: radial-gradient(ellipse 80% 80% at 18% 10%, rgba(74,166,232,.12), transparent 52%), radial-gradient(ellipse 70% 75% at 90% 100%, rgba(245,135,14,.10), transparent 50%), var(--c-page); }
+.streamline-app .inventory-table { display: grid; gap: 10px; }
+.streamline-app .inventory-row { display: grid; grid-template-columns: 1.3fr .7fr .8fr auto; gap: 8px; align-items: center; padding: 10px 12px; border-radius: var(--r-sm); background: var(--c-white); border: 1px solid var(--c-line); font-size: .72rem; }
+.streamline-app .inventory-name { font-weight: 700; color: var(--c-navy-900); }
+.streamline-app .inventory-meta { color: var(--c-muted); font-size: .66rem; }
+.streamline-app .inventory-qty { color: var(--c-muted); font-size: .7rem; }
+.streamline-app .tag { font-size: .6rem; font-weight: 700; padding: 3px 8px; border-radius: var(--r-pill); white-space: nowrap; }
+.streamline-app .tag.green { background: var(--c-green-100); color: var(--c-green-600); }
+.streamline-app .tag.orange { background: var(--c-orange-100); color: var(--c-orange-700); }
+.streamline-app .tag.blue { background: var(--c-sky-100); color: #1d7dc0; }
+.streamline-app .action-panel { background: var(--c-page); border-top: 1px solid var(--c-line); border-bottom: 1px solid var(--c-line); }
+.streamline-app .action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 3vw, 32px); margin-top: 28px; }
+.streamline-app .action-card, .streamline-app .benefit-card { background: var(--c-white); border: 1px solid var(--c-line); border-radius: var(--r-lg); box-shadow: var(--sh-xs); padding: clamp(22px, 3vw, 30px); }
+.streamline-app .action-card h3, .streamline-app .benefit-card h3 { margin-bottom: 12px; }
+.streamline-app .status-pill-row { display: flex; flex-direction: column; gap: 10px; }
+.streamline-app .status-pill { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 11px 14px; border: 1px solid var(--c-line); border-radius: var(--r-sm); background: var(--c-white); font-size: .82rem; font-weight: 700; color: var(--c-navy-900); }
+.streamline-app .status-pill span { color: var(--c-muted); font-weight: 600; font-size: .72rem; }
+.streamline-app .two-card-feature-section { background: var(--c-white); border-top: 1px solid var(--c-line); }
+.streamline-app .two-card-feature-intro { text-align: center; max-width: 720px; margin: 0 auto 46px; }
+.streamline-app .two-card-feature-intro .eyebrow { justify-content: center; }
+.streamline-app .two-card-feature-intro .lede { margin: 16px auto 0; }
+.streamline-app .two-card-feature-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(22px, 4vw, 36px); }
+.streamline-app .two-card-feature-card { position: relative; padding: clamp(30px, 4vw, 44px); border: 1px solid var(--c-line); border-radius: var(--r-xl); background: radial-gradient(ellipse 70% 70% at 100% 0%, rgba(74,166,232,.08), transparent 52%), radial-gradient(ellipse 60% 70% at 0% 100%, rgba(245,135,14,.07), transparent 50%), var(--c-white); box-shadow: var(--sh-sm); overflow: hidden; transition: transform .2s var(--ease), box-shadow .2s var(--ease), border-color .2s var(--ease); }
+.streamline-app .two-card-feature-card:hover { transform: translateY(-3px); box-shadow: var(--sh); border-color: #c8d8ea; }
+.streamline-app .two-card-feature-icon { width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center; margin-bottom: 22px; background: linear-gradient(165deg, var(--c-orange-100), var(--c-sky-050)); border: 1px solid var(--c-line); color: var(--c-orange-600); font-size: 1.35rem; font-weight: 800; box-shadow: var(--sh-xs); }
+.streamline-app .two-card-feature-card .eyebrow { margin-bottom: 12px; }
+.streamline-app .two-card-feature-card h3 { max-width: 440px; margin-bottom: 14px; }
+.streamline-app .two-card-feature-card p { color: var(--c-muted); font-size: 1rem; line-height: 1.72; margin-bottom: 22px; }
+.streamline-app .benefit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(18px, 2.5vw, 28px); }
+.streamline-app .benefit-card p { color: var(--c-muted); font-size: .95rem; }
+.streamline-app .related-feature-section { background: var(--c-page); border-top: 1px solid var(--c-line); border-bottom: 1px solid var(--c-line); }
+.streamline-app .related-feature-intro { text-align: center; max-width: 680px; margin: 0 auto 42px; }
+.streamline-app .related-feature-intro .eyebrow { justify-content: center; }
+.streamline-app .related-feature-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 2.5vw, 24px); }
+.streamline-app .related-feature-card { display: flex; flex-direction: column; min-height: 100%; padding: clamp(22px, 3vw, 30px); border: 1px solid var(--c-line); border-radius: var(--r-lg); background: var(--c-white); box-shadow: var(--sh-xs); }
+.streamline-app .related-feature-kicker { display: inline-flex; align-items: center; gap: .45rem; margin-bottom: 14px; font-size: .68rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--c-orange-600); }
+.streamline-app .related-feature-kicker::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c-orange); box-shadow: 0 0 0 3px var(--c-orange-100); }
+.streamline-app .related-feature-card h3 { margin-bottom: 12px; font-size: clamp(1.05rem, 1.45vw, 1.28rem); }
+.streamline-app .related-feature-card p { color: var(--c-muted); font-size: .94rem; line-height: 1.68; margin-bottom: 20px; }
+.streamline-app .related-feature-card .link-arrow { margin-top: auto; }
+.streamline-app .testi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(18px, 2.5vw, 28px); }
+.streamline-app .testi { padding: clamp(22px, 3vw, 32px); border: 1px solid var(--c-line); border-radius: var(--r-lg); background: var(--c-white); box-shadow: var(--sh-xs); display: flex; flex-direction: column; gap: 14px; }
+.streamline-app .testi-stars { color: var(--c-orange); font-size: .9rem; letter-spacing: 2px; }
+.streamline-app .testi-quote { font-size: .95rem; color: var(--c-muted); line-height: 1.72; font-style: italic; flex: 1; }
+.streamline-app .testi-author { font-weight: 700; font-size: .88rem; color: var(--c-navy-800); }
+.streamline-app .testi-author a { color: inherit; }
+.streamline-app .faq details { padding: 20px 22px; margin-bottom: 10px; border: 1px solid var(--c-line); border-radius: var(--r); background: var(--c-white); box-shadow: var(--sh-xs); }
+.streamline-app .faq details[open] { border-color: var(--c-sky-500); box-shadow: var(--sh-sm); }
+.streamline-app .faq summary { cursor: pointer; font-weight: 600; font-size: .95rem; color: var(--c-navy-900); list-style: none; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; line-height: 1.4; }
+.streamline-app .faq summary::-webkit-details-marker { display: none; }
+.streamline-app .faq summary::after { content: "+"; flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: var(--c-orange-100); color: var(--c-orange-600); font-weight: 700; font-size: .85rem; display: grid; place-items: center; }
+.streamline-app .faq details[open] summary::after { content: "−"; background: var(--c-orange); color: #fff; }
+.streamline-app .faq p { margin: 12px 0 0; font-size: .9rem; color: var(--c-muted); line-height: 1.72; }
+.streamline-app .final-cta { padding-block: clamp(80px, 10vw, 120px); text-align: center; background: radial-gradient(ellipse 60% 80% at 85% 8%, rgba(245,135,14,.1), transparent 50%), radial-gradient(ellipse 50% 60% at 5% 85%, rgba(74,166,232,.08), transparent 48%), linear-gradient(165deg, var(--c-navy-050) 0%, var(--c-white) 55%); border-top: 4px solid var(--c-orange); }
+.streamline-app .final-cta h2 { margin-bottom: 14px; }
+.streamline-app .final-cta p { color: var(--c-muted); max-width: 520px; margin-inline: auto; margin-bottom: 32px; }
+.streamline-app .final-cta .btn-group { justify-content: center; }
+@media (prefers-reduced-motion: no-preference) {
+  .streamline-app .reveal { opacity: 0; transform: translateY(24px); transition: opacity .55s var(--ease), transform .55s var(--ease); will-change: opacity, transform; }
+  .streamline-app .reveal.in { opacity: 1; transform: none; }
+  .streamline-app .reveal-d1 { transition-delay: .08s; }
+  .streamline-app .reveal-d2 { transition-delay: .16s; }
+}
+@media (prefers-reduced-motion: reduce) { .streamline-app .reveal { opacity: 1 !important; transform: none !important; } }
+@media (max-width: 900px) {
+  .streamline-app .hero-layout, .streamline-app .feat-row { grid-template-columns: 1fr; }
+  .streamline-app .phone-wrap { display: none; }
+  .streamline-app .steps { grid-template-columns: 1fr 1fr; }
+  .streamline-app .step-item:nth-child(2)::after, .streamline-app .step-item:nth-child(4)::after { display: none; }
+  .streamline-app .action-grid, .streamline-app .two-card-feature-grid, .streamline-app .benefit-grid, .streamline-app .related-feature-grid, .streamline-app .testi-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 580px) {
+  .streamline-app .steps { grid-template-columns: 1fr; }
+  .streamline-app .step-item::after { display: none; }
+  .streamline-app .btn { width: 100%; justify-content: center; }
+  .streamline-app .btn-group { align-items: stretch; flex-direction: column; }
+  .streamline-app .inventory-row { grid-template-columns: 1fr auto; }
+  .streamline-app .inventory-meta, .streamline-app .inventory-qty { display: none; }
+}
+html .container-wrap { padding: 0 !important; }
+div:has(> .streamline-app), div:has(> div:has(> .streamline-app)) { overflow: visible !important; }
+</style>
+</head>
+<body class="sl-lp">
+<div class="streamline-app">
+
+  
+
+<!-- HERO -->
+<section aria-labelledby="hero-title" class="hero">
+  <div class="wrap">
+    <div class="hero-layout">
+      <div class="hero-content">
+        <p class="eyebrow reveal" style="transition-delay:.05s">Stock Counting</p>
+        <h1 class="reveal" id="hero-title" style="transition-delay:.1s">Count bakery inventory accurately <em>without clipboards.</em></h1>
+        <p class="lede reveal" style="transition-delay:.17s;margin-top:16px">The Streamline Inventory App helps warehouse and production teams count stock from a mobile device, review variances, and post approved inventory adjustments back to Streamline ERP.</p>
+        <div class="btn-group reveal" style="transition-delay:.24s">
+          <a class="btn btn-primary" href="https://mountainstream.co/register-your-company?cta=hero&intent=book-demo">Book a Demo</a>
+          <a class="btn btn-secondary" href="#stock-count-flow">See how it works</a>
+        </div>
+        <div class="hero-badges reveal" style="transition-delay:.3s">
+          <span class="hero-badge">Move and take stock</span>          
+          <span class="hero-badge">Count by location</span>
+          <span class="hero-badge">Scan items</span>
+          <span class="hero-badge">Review variances</span>
+          <span class="hero-badge">Adjustment reason codes</span>
+        </div>
+      </div>
+      <div class="phone-wrap">
+        <img src="stock-count.png" alt="">
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section class="section-sm" id="stock-count-flow" style="background:var(--c-page);border-bottom:1px solid var(--c-line)">
+  <div class="wrap">
+    <p class="section-label reveal">How stock counting works</p>
+    <div class="steps reveal reveal-d1">
+      <div class="step-item"><span class="step-num"></span><p class="step-title">Choose count scope</p><p class="step-desc">Count by location, category, or a full warehouse depending on the task.</p></div>
+      <div class="step-item"><span class="step-num"></span><p class="step-title">Scan or select items</p><p class="step-desc">Use the mobile app to identify stock items while working on the floor.</p></div>
+      <div class="step-item"><span class="step-num"></span><p class="step-title">Enter quantities</p><p class="step-desc">Record counted quantities directly in the app instead of writing them down.</p></div>
+      <div class="step-item"><span class="step-num"></span><p class="step-title">Review variances</p><p class="step-desc">Compare counted stock against system stock before any adjustment is posted.</p></div>
+      <div class="step-item"><span class="step-num"></span><p class="step-title">Post updates</p><p class="step-desc">Add a reason code and sync approved adjustments back to Streamline ERP.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN OVERVIEW -->
+<section class="section" style="background:var(--c-white)">
+  <div class="wrap">
+    <div class="feature-intro reveal">
+      <p class="eyebrow" style="margin-bottom:10px">Stock Count Overview</p>
+      <h2>Run stock counts from the floor, not after the fact.</h2>
+      <p style="margin-top:16px">Stock Counting is one of the three core Inventory App workflows, alongside Goods Receipt and Recipe Production. This page focuses only on the counting process: selecting what to count, recording quantities, reviewing variances, and syncing the final adjustment.</p>
+    </div>
+
+    <div class="feat-row reveal">
+      <div class="feat-text">
+        <p class="eyebrow" style="margin-bottom:10px">Mobile Counting</p>
+        <h3>Count stock by location, category, or warehouse.</h3>
+        <p>Teams can start a stock count from the mobile app and work through the items that matter for that count. The workflow keeps counting close to the shelves, cold room, dry store, or warehouse area being checked.</p>
+        <ul class="feat-checklist">
+          <li>Count by location, category, or full warehouse</li>
+          <li>Scan items or select them from the count list</li>
+          <li>Enter counted quantities directly on the device</li>
+          <li>Keep warehouse and production teams connected to Streamline</li>
+        </ul>
+      </div>
+      <div>
+        <img src="streamline-inventory-app-stock-adjustments-feature.png" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TWO CARD SECTION -->
+<section class="section-sm two-card-feature-section">
+  <div class="wrap">
+    <div class="two-card-feature-intro reveal">
+      <p class="eyebrow">Move and Take Stock</p>
+      <h2>Update stock when items move or leave inventory</h2>
+      <p style="margin-top:17px">The Streamline Inventory app also supports stock actions for moving items between locations and taking stock out when stock needs to be removed from available inventory.</p>
+    </div>
+    <div class="two-card-feature-grid reveal reveal-d1">
+      <article class="two-card-feature-card">
+        <div class="two-card-feature-icon" aria-hidden="true"><span>↔</span></div>
+        <h3>Move Stock</h3>
+        <p>Move Stock records stock transfers between locations so inventory reflects where goods are actually stored.</p>
+        <ul class="feat-checklist">
+          <li>Select the stock item being moved</li>
+          <li>Choose the source and destination location</li>
+          <li>Enter the moved quantity from the app</li>
+          <li>Keep location-level stock more accurate</li>
+        </ul>
+      </article>
+      <article class="two-card-feature-card">
+        <div class="two-card-feature-icon" aria-hidden="true"><span>−</span></div>
+        <h3>Take Stock</h3>
+        <p>Take Stock removes stock from available inventory when items are taken out outside the normal recipe production flow.</p>
+        <ul class="feat-checklist">
+          <li>Select the item being taken from stock</li>
+          <li>Enter the quantity removed</li>
+          <li>Add a reason for the stock movement</li>
+          <li>Sync the stock reduction to Streamline ERP</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ACTION SECTION -->
+<section class="section action-panel">
+  <div class="wrap">
+    <div class="feature-intro reveal" style="margin-bottom:36px">
+      <p class="eyebrow" style="margin-bottom:10px">Variance Review</p>
+      <h2>Check differences before posting adjustments.</h2>
+      <p style="margin-top:16px">A stock count only becomes useful when differences are reviewed properly. The Streamline Inventory App lets teams compare counted quantities against system stock before adjustments are posted.</p>
+    </div>
+    <div class="action-grid reveal reveal-d1">
+      <div class="action-card">
+        <h3>Count result, without guessing.</h3>
+        <div class="status-pill-row">
+          <div class="status-pill">Matched <span>Count agrees with stock</span></div>
+          <div class="status-pill">Variance <span>Quantity needs review</span></div>
+          <div class="status-pill">Reason Code <span>Explain the adjustment</span></div>
+          <div class="status-pill">Posted <span>Synced to Streamline</span></div>
+        </div>
+      </div>
+      <div class="action-card">
+        <h3>Review, explain, and sync.</h3>
+        <p>Before inventory is updated, users can review the difference between the counted quantity and the system quantity. When an adjustment is needed, the reason code gives the stock movement a clearer audit trail.</p>
+        <ul class="feat-checklist">
+          <li>Review variances before posting adjustments</li>
+          <li>Use adjustment reason codes for audit trail context</li>
+          <li>Reduce unexplained inventory changes</li>
+          <li>Sync approved updates back to Streamline ERP</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- TWO CARD SECTION -->
+<section class="section-sm two-card-feature-section">
+  <div class="wrap">
+    <div class="two-card-feature-intro reveal">
+      <p class="eyebrow">Counting Control</p>
+      <h2>Keep stock counts focused and fair.</h2>
+      <p class="lede">The stock counting workflow is built for practical bakery inventory checks: count the right area, avoid bias where needed, and only post changes after review.</p>
+    </div>
+    <div class="two-card-feature-grid reveal reveal-d1">
+      <article class="two-card-feature-card">
+        <div class="two-card-feature-icon" aria-hidden="true"><span>◎</span></div>
+        <p class="eyebrow">Count Scope</p>
+        <h3>Count the area that needs attention.</h3>
+        <p>Teams can run focused counts for a location or category instead of turning every check into a full stocktake.</p>
+        <ul class="feat-checklist">
+          <li>Location-based counts</li>
+          <li>Category-based counts</li>
+          <li>Full warehouse counts when required</li>
+        </ul>
+      </article>
+      <article class="two-card-feature-card">
+        <div class="two-card-feature-icon" aria-hidden="true"><span>◌</span></div>
+        <p class="eyebrow">Blind Count Mode</p>
+        <h3>Count without being led by the expected quantity.</h3>
+        <p>Blind count mode supports more unbiased results by helping users count what is physically there before comparing it with system stock.</p>
+        <ul class="feat-checklist">
+          <li>Supports unbiased stock counts</li>
+          <li>Helps reduce copied system quantities</li>
+          <li>Pairs with variance review before posting</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- RELATED FEATURES -->
+<section class="section-sm related-feature-section">
+  <div class="wrap">
+    <div class="related-feature-intro reveal">
+      <p class="eyebrow">Related Inventory App Workflows</p>
+      <h2>Keep the wider inventory process connected.</h2>
+      <p class="lede">Stock Counting works alongside the other Inventory App features used by warehouse and production teams.</p>
+    </div>
+    <div class="related-feature-grid reveal reveal-d1">
+      <article class="related-feature-card">
+        <span class="related-feature-kicker">Goods Receipt</span>
+        <h3>Receive goods and assign lots.</h3>
+        <p>Use the Inventory App to receive goods, scan invoices, confirm quantities, assign lot numbers, and print barcode labels from the loading dock.</p>
+        <a href="goods-receipt.html" class="link-arrow">Learn more here</a>
+      </article>
+      <article class="related-feature-card">
+        <span class="related-feature-kicker">Recipe Production</span>
+        <h3>Record production and deplete ingredient lots.</h3>
+        <p>After ingredients are counted and available, production teams can record recipe runs and deplete ingredient lots through the connected Inventory App workflow.</p>
+        <a href="recipe-production.html" class="link-arrow">Learn more here</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="section-sm" style="background:var(--c-page);border-top:1px solid var(--c-line);border-bottom:1px solid var(--c-line)">
+  <div class="wrap">
+    <p class="section-label reveal">Why bakery teams use it</p>
+    <div class="benefit-grid reveal reveal-d1">
+      <div class="benefit-card"><h3>Less paper handling</h3><p>Counts are recorded directly in the mobile app instead of being written down and entered later.</p></div>
+      <div class="benefit-card"><h3>Cleaner inventory updates</h3><p>Variance review and reason codes help teams understand why stock changed before adjustments are posted.</p></div>
+      <div class="benefit-card"><h3>Better stock visibility</h3><p>Once approved updates sync back to Streamline, warehouse and production teams work from more current stock figures.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section-sm" style="background:var(--c-page);border-top:1px solid var(--c-line)">
+  <div class="wrap">
+    <p class="section-label reveal">Customer Feedback</p>
+    <div class="testi-grid">
+      <div class="testi reveal reveal-d1"><div class="testi-stars">★★★★★</div><p class="testi-quote">"Streamline is fantastic, and the people at Mountain Stream are even better! We get a response easily at any time of the day. It has eliminated a lot of tasks altogether, and made many so much easier."</p><div class="testi-author"><a href="https://www.capterra.com/p/146354/Streamline/#Capterra___6179846" rel="noopener" target="_blank">Ricky — Bluepoint Bakery</a></div></div>
+      <div class="testi reveal reveal-d2"><div class="testi-stars">★★★★★</div><p class="testi-quote">"Streamline saved my life in a time where my business grew exponentially. It's incredible to reach a person that speaks your language and understands your business and its needs."</p><div class="testi-author"><a href="https://www.capterra.com/p/146354/Streamline/#Capterra___4053596/" rel="noopener" target="_blank">Daniela — Tartastic</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section-sm" style="background:var(--c-white);border-top:1px solid var(--c-line)">
+  <div class="wrap-narrow">
+    <p class="section-label reveal">FAQ</p>
+    <div class="faq reveal reveal-d1">
+      <details open><summary>What does Stock Counting do in the Streamline Inventory App?</summary><p>It lets users count stock from a mobile device, enter quantities, review variances, add adjustment reason codes, and sync approved inventory updates back to Streamline ERP.</p></details>
+      <details><summary>Can users count by location?</summary><p>Yes. The Inventory App supports counting by location, by category, or by full warehouse depending on the stock count being run.</p></details>
+      <details><summary>Does the app support blind counts?</summary><p>Yes. Blind count mode is included to support more unbiased counting before users review variances against system stock.</p></details>
+      <details><summary>Is this the same as Goods Receipt?</summary><p>No. Goods Receipt is for receiving incoming goods and assigning lots. Stock Counting is for checking existing stock and posting approved adjustments.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta" id="download">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow" style="justify-content:center">Streamline Inventory App</p>
+      <h2>Accurate inventory starts with cleaner counts.</h2>
+      <p>Use the Streamline Inventory App to count stock, review variances, add reason codes, and keep Streamline ERP inventory more accurate.</p>
+      <div class="btn-group"><a class="btn btn-primary" href="https://mountainstream.co/register-your-company?cta=lp-footer&intent=book-demo">Book a Demo</a></div>
+      <p style="margin-top:20px;font-size:.82rem;color:var(--c-soft)">Built for Streamline ERP users · Inventory App · Stock counting</p>
+    </div>
+  </div>
+</section>
+
+</div>
+<script>
+(function () {
+  var root = document.querySelector('.streamline-app');
+  if (!root) return;
+  var obs = new IntersectionObserver(function (entries, o) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        o.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  root.querySelectorAll('.reveal').forEach(function (el) {
+    var rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.classList.add('in');
+    } else {
+      obs.observe(el);
+    }
+  });
+  requestAnimationFrame(function () {
+    setTimeout(function () {
+      root.querySelectorAll('.hero .reveal').forEach(function (el) {
+        el.classList.add('in');
+      });
+    }, 60);
+  });
+})();
+</script>
+</body>
+</html>

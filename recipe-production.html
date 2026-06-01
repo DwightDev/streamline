@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Recipe Production — Streamline Inventory App</title>
+<meta content="Create recipes, record production runs, confirm ingredient lots, deplete ingredients, and update finished goods inventory with the Streamline Inventory App." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&amp;family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&amp;display=swap" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Streamline Inventory App - Recipe Production",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Android",
+  "description": "Recipe Production feature page for the Streamline Inventory App. Create recipes, record batch quantities, confirm ingredient lots, deplete ingredients, and update finished goods inventory in Streamline.",
+  "provider": {
+    "@type": "Organization",
+    "name": "Mountain Stream",
+    "url": "https://mountainstream.co/"
+  }
+}
+</script>
+<style>
+
+/* ============================================================
+   STREAMLINE INVENTORY APP — Landing Page
+   Scope:    .sl-lp
+   Goal:     Single CTA — Download the app / Book a demo
+   Design:   Minimal, white, generous space, one accent colour
+   Fonts:    Fraunces (display) + DM Sans (body)
+   ============================================================ */
+
+/* ============================================================
+   STREAMLINE APPS — Shared Landing Page Styles
+   Scope:    .streamline-app
+   Covers:   Inventory App + Distribution App
+   Design:   Minimal, white, generous space, one accent colour
+   Fonts:    Fraunces (display) + DM Sans (body)
+   ============================================================ */
+
+/* ── TOKENS ─────────────────────────────────────────── */
+.streamline-app {
+  --c-navy-950: #113058;
+  --c-navy-900: #113058;
+  --c-navy-800: #113058;
+  --c-navy-700: #113058;
+  --c-navy-100: #e4eef9;
+  --c-navy-050: #f2f7fd;
+
+  --c-orange-700: #ff9100;
+  --c-orange-600: #ff9100;
+  --c-orange:     #ff9100;
+  --c-orange-400: #ff9100;
+  --c-orange-100: #fef0d8;
+  --c-orange-050: #fff8ef;
+  --c-orange-glow: rgba(245,135,14,.2);
+
+  --c-sky-500: #4fa6e9;
+  --c-sky-100: #ddf1ff;
+  --c-sky-050: #f0f9ff;
+
+  --c-green-600: #1e7a52;
+  --c-green-100: #e6f7ef;
+
+  --c-text:  #1a2d42;
+  --c-muted: #54647a;
+  --c-soft:  #8a9bae;
+  --c-line:  #e2eaf4;
+  --c-white: #ffffff;
+  --c-page:  #f9fbff;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'DM Sans', system-ui, sans-serif;
+
+  --wrap:    1120px;
+  --gutter:  clamp(20px, 4vw, 48px);
+
+  --r-sm:   8px;
+  --r:      14px;
+  --r-lg:   22px;
+  --r-xl:   32px;
+  --r-pill: 999px;
+
+  --sh-xs:  0 1px 4px rgba(9,30,60,.06);
+  --sh-sm:  0 4px 18px rgba(9,30,60,.09);
+  --sh:     0 12px 40px rgba(9,30,60,.12);
+  --sh-lg:  0 28px 72px rgba(9,30,60,.16);
+  --sh-cta: 0 10px 32px var(--c-orange-glow);
+
+  --ease:   cubic-bezier(.25,.46,.45,.94);
+  --spring: cubic-bezier(.34,1.56,.64,1);
+
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.68;
+  color: var(--c-text);
+  background: var(--c-white);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── RESET ──────────────────────────────────────────── */
+.streamline-app *, .streamline-app *::before, .streamline-app *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.streamline-app img { display: block; max-width: 100%; height: auto; }
+.streamline-app p   { margin-bottom: 1rem; line-height: 1.72; }
+.streamline-app p:last-child { margin-bottom: 0; }
+.streamline-app a   { text-decoration: none; transition: color .15s var(--ease), opacity .15s; }
+
+/* ── LAYOUT ─────────────────────────────────────────── */
+.streamline-app .wrap {
+  width: min(var(--wrap), calc(100% - var(--gutter) * 2));
+  margin-inline: auto;
+}
+.streamline-app .wrap-narrow {
+  width: min(720px, calc(100% - var(--gutter) * 2));
+  margin-inline: auto;
+}
+.streamline-app .section    { padding-block: clamp(72px, 9vw, 112px); }
+.streamline-app .section-sm { padding-block: clamp(48px, 6vw, 72px); }
+.streamline-app .divider    { height: 1px; background: var(--c-line); border: none; }
+
+/* ── TYPOGRAPHY ─────────────────────────────────────── */
+.streamline-app h1, .streamline-app h2, .streamline-app h3 {
+  font-family: var(--f-display);
+  font-weight: 600;
+  letter-spacing: -.04em;
+  line-height: 1.06;
+  color: var(--c-navy-900);
+}
+.streamline-app h1 {
+  font-size: clamp(2.6rem, 5.5vw, 4.8rem);
+  font-weight: 700;
+  letter-spacing: -.055em;
+  line-height: 1;
+}
+.streamline-app h1 em { font-style: italic; color: var(--c-orange-600); }
+.streamline-app h2 {
+  font-size: clamp(1.9rem, 3.5vw, 3rem);
+  letter-spacing: -.04em;
+}
+.streamline-app h2 em { font-style: italic; color: var(--c-orange-600); }
+.streamline-app h3 {
+  font-size: clamp(1.1rem, 1.6vw, 1.45rem);
+  letter-spacing: -.025em;
+  line-height: 1.18;
+}
+
+.streamline-app .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--c-orange-600);
+  margin-bottom: 14px;
+}
+.streamline-app .eyebrow::before {
+  content: "";
+  width: 20px; height: 2px;
+  border-radius: 2px;
+  background: var(--c-orange);
+  flex-shrink: 0;
+}
+.streamline-app .lede {
+  font-size: clamp(1.0625rem, 1.4vw, 1.2rem);
+  color: var(--c-muted);
+  line-height: 1.75;
+  max-width: 560px;
+}
+.streamline-app .section-label {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--c-soft);
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+/* ── BUTTONS ────────────────────────────────────────── */
+.streamline-app .btn-group { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 32px; }
+.streamline-app .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  min-height: 52px;
+  padding: 13px 28px;
+  border: 1.5px solid transparent;
+  border-radius: var(--r-pill);
+  font-family: var(--f-body);
+  font-size: .95rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .18s var(--ease), color .18s var(--ease),
+              border-color .18s var(--ease), box-shadow .18s var(--ease),
+              transform .2s var(--spring);
+}
+.streamline-app .btn:hover  { transform: translateY(-2px); }
+.streamline-app .btn:active { transform: translateY(0); }
+.streamline-app .btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(74,166,232,.4); }
+
+.streamline-app .btn-primary {
+  background: linear-gradient(170deg, var(--c-orange-400) 0%, var(--c-orange-600) 100%);
+  color: #fff;
+  border-color: var(--c-orange-600);
+  box-shadow: var(--sh-cta);
+}
+.streamline-app .btn-primary:hover {
+  background: linear-gradient(170deg, #ffb84a 0%, var(--c-orange-700) 100%);
+  color: #fff;
+  box-shadow: 0 16px 40px var(--c-orange-glow);
+}
+.streamline-app .btn-secondary {
+  background: var(--c-white);
+  color: var(--c-navy-900);
+  border-color: var(--c-line);
+  box-shadow: var(--sh-xs);
+}
+.streamline-app .btn-secondary:hover {
+  background: var(--c-navy-050);
+  border-color: var(--c-sky-500);
+  color: var(--c-navy-900);
+  box-shadow: var(--sh-sm);
+}
+.streamline-app .btn-ghost {
+  background: rgba(255,255,255,.1);
+  color: #fff;
+  border-color: rgba(255,255,255,.25);
+}
+.streamline-app .btn-ghost:hover {
+  background: rgba(255,255,255,.18);
+  color: #fff;
+  border-color: rgba(255,255,255,.45);
+}
+.streamline-app .link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  color: var(--c-navy-700);
+  font-weight: 600;
+  font-size: .9rem;
+}
+.streamline-app .link-arrow::after { content: "→"; transition: transform .16s var(--spring); }
+.streamline-app .link-arrow:hover  { color: var(--c-orange-600); }
+.streamline-app .link-arrow:hover::after { transform: translateX(4px); }
+
+/* ── HERO ───────────────────────────────────────────── */
+.streamline-app .hero {
+  padding: clamp(64px, 9vw, 112px) 0 clamp(48px, 7vw, 80px);
+  background:
+    radial-gradient(ellipse 65% 70% at 90% 5%, rgba(74,166,232,.1), transparent 50%),
+    radial-gradient(ellipse 40% 50% at 5% 90%, rgba(245,135,14,.07), transparent 48%),
+    linear-gradient(165deg, var(--c-navy-050) 0%, var(--c-white) 55%);
+  border-bottom: 1px solid var(--c-line);
+  position: relative;
+  overflow: hidden;
+}
+.streamline-app .hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--c-orange) 30%, var(--c-sky-500) 70%, transparent);
+  opacity: .28;
+}
+.streamline-app .hero-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(48px, 7vw, 96px);
+  align-items: center;
+}
+.streamline-app .hero-content .eyebrow { margin-bottom: 18px; }
+.streamline-app .hero-content h1 { margin-bottom: 20px; }
+.streamline-app .hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+.streamline-app .hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--c-line);
+  background: rgba(255,255,255,.8);
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--c-muted);
+}
+.streamline-app .hero-badge::before {
+  content: "✓";
+  color: var(--c-orange);
+  font-weight: 800;
+}
+
+/* ── CSS PHONE MOCKUP ───────────────────────────────── */
+.streamline-app .phone-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+}
+.streamline-app .phone {
+  width: 260px;
+  background: var(--c-navy-950);
+  border-radius: 36px;
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.08),
+    0 0 0 6px rgba(9,30,60,.6),
+    var(--sh-lg);
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+.streamline-app .phone-notch {
+  width: 90px;
+  height: 26px;
+  background: var(--c-navy-950);
+  border-radius: 0 0 18px 18px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+.streamline-app .phone-screen {
+  background: #0d1f33;
+  min-height: 520px;
+  padding: 0;
+  overflow: hidden;
+}
+.streamline-app .app-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px 10px;
+  background: #091525;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.streamline-app .app-bar-title {
+  font-family: var(--f-display);
+  font-size: .78rem;
+  font-weight: 700;
+  color: rgba(255,255,255,.9);
+  letter-spacing: -.01em;
+}
+.streamline-app .app-bar-icon {
+  width: 26px; height: 26px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--c-sky-500), var(--c-navy-800));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.streamline-app .app-bar-icon svg { width: 12px; height: 12px; }
+.streamline-app .app-tabs {
+  display: flex;
+  gap: 0;
+  background: #091525;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  padding: 0 10px;
+}
+.streamline-app .app-tab {
+  flex: 1;
+  padding: 8px 4px;
+  text-align: center;
+  font-size: .58rem;
+  font-weight: 600;
+  color: rgba(255,255,255,.35);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  position: relative;
+}
+.streamline-app .app-tab.active { color: var(--c-orange-400); }
+.streamline-app .app-tab.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 20%; right: 20%;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--c-orange);
+}
+.streamline-app .app-content { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.streamline-app .app-item {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.streamline-app .app-item-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 6px;
+}
+.streamline-app .app-item-name {
+  font-size: .72rem;
+  font-weight: 700;
+  color: rgba(255,255,255,.9);
+  line-height: 1.3;
+}
+.streamline-app .app-chip {
+  font-size: .56rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+.streamline-app .app-chip.received { background: rgba(30,122,82,.25); color: #4ade80; }
+.streamline-app .app-chip.pending  { background: rgba(245,135,14,.2); color: var(--c-orange-400); }
+.streamline-app .app-chip.counted  { background: rgba(74,166,232,.2); color: #7dd3fc; }
+.streamline-app .app-item-lot {
+  font-size: .6rem;
+  color: rgba(255,255,255,.35);
+  font-weight: 600;
+  letter-spacing: .03em;
+}
+.streamline-app .app-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.streamline-app .app-item-qty {
+  font-size: .65rem;
+  color: rgba(255,255,255,.55);
+  font-weight: 600;
+}
+.streamline-app .app-progress {
+  height: 3px;
+  background: rgba(255,255,255,.08);
+  border-radius: 2px;
+  overflow: hidden;
+  flex: 1;
+  margin-left: 8px;
+}
+.streamline-app .app-progress-bar {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--c-sky-500), var(--c-orange));
+}
+.streamline-app .app-scan-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 4px 0 2px;
+  padding: 10px;
+  border-radius: 10px;
+  background: linear-gradient(170deg, var(--c-orange-400), var(--c-orange-600));
+  box-shadow: 0 4px 16px rgba(245,135,14,.3);
+  font-size: .68rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.streamline-app .app-scan-icon {
+  width: 14px; height: 14px;
+  border: 2px solid rgba(255,255,255,.7);
+  border-radius: 3px;
+  position: relative;
+}
+.streamline-app .app-scan-icon::before,
+.streamline-app .app-scan-icon::after {
+  content: "";
+  position: absolute;
+  background: rgba(255,255,255,.7);
+}
+.streamline-app .app-scan-icon::before { top: 3px; left: 0; right: 0; height: 1px; }
+.streamline-app .app-scan-icon::after  { top: 0; bottom: 0; left: 3px; width: 1px; }
+.streamline-app .phone-home-bar {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  background: #091525;
+}
+.streamline-app .phone-home-bar span {
+  width: 80px; height: 4px;
+  border-radius: 4px;
+  background: rgba(255,255,255,.2);
+  display: block;
+}
+
+/* Floating notification cards */
+.streamline-app .float-card {
+  position: absolute;
+  width: 180px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--c-white);
+  box-shadow: var(--sh);
+  border: 1px solid var(--c-line);
+}
+.streamline-app .float-card-1 { right: -24px; top: 40px; transform: rotate(2.5deg); }
+.streamline-app .float-card-2 { left: -28px;  bottom: 72px; transform: rotate(-2deg); }
+.streamline-app .float-label {
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--c-soft);
+  margin-bottom: 5px;
+}
+.streamline-app .float-value {
+  font-family: var(--f-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -.04em;
+  line-height: 1;
+  color: var(--c-navy-900);
+  margin-bottom: 3px;
+}
+.streamline-app .float-value span { color: var(--c-orange); }
+.streamline-app .float-sub { font-size: .65rem; color: var(--c-muted); }
+.streamline-app .float-dot {
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+.streamline-app .float-dot.green  { background: #22c55e; }
+.streamline-app .float-dot.orange { background: var(--c-orange); }
+
+/* ── SOCIAL PROOF ROW ───────────────────────────────── */
+.streamline-app .proof-row {
+  padding-block: 28px;
+  border-bottom: 1px solid var(--c-line);
+  background: var(--c-white);
+}
+.streamline-app .proof-inner {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 28px;
+  justify-content: space-between;
+}
+.streamline-app .proof-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .84rem;
+  color: var(--c-muted);
+  font-weight: 500;
+}
+.streamline-app .proof-rating img { height: 20px; width: auto; }
+.streamline-app .proof-stars { color: var(--c-orange); letter-spacing: 2px; }
+.streamline-app .proof-stat {
+  text-align: center;
+  padding: 0 20px;
+  border-left: 1px solid var(--c-line);
+}
+.streamline-app .proof-stat:first-of-type { border-left: 0; }
+.streamline-app .proof-stat strong {
+  display: block;
+  font-family: var(--f-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -.03em;
+  color: var(--c-navy-900);
+  line-height: 1.1;
+}
+.streamline-app .proof-stat strong span { color: var(--c-orange); }
+.streamline-app .proof-stat p { font-size: .75rem; color: var(--c-muted); margin-top: 2px; }
+.streamline-app .proof-stats { display: flex; }
+
+/* ── FEATURES — ALTERNATING ROWS ───────────────────── */
+.streamline-app .feat-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(48px, 7vw, 96px);
+  align-items: center;
+  padding-block: clamp(56px, 7vw, 88px);
+  border-top: 1px solid var(--c-line);
+}
+.streamline-app .feat-row:first-of-type { border-top: 0; padding-top: 0; }
+.streamline-app .feat-row--flip { direction: rtl; }
+.streamline-app .feat-row--flip > * { direction: ltr; }
+.streamline-app .feat-text { display: flex; flex-direction: column; gap: 14px; }
+.streamline-app .feat-text h3 { margin-bottom: 4px; }
+.streamline-app .feat-text p { color: var(--c-muted); font-size: 1.0625rem; }
+.streamline-app .feat-checklist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.streamline-app .feat-checklist li {
+  position: relative;
+  padding-left: 24px;
+  font-size: .95rem;
+  color: var(--c-muted);
+  line-height: 1.55;
+}
+.streamline-app .feat-checklist li::before {
+  content: "";
+  position: absolute;
+  top: .54em; left: 0;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--c-orange);
+  box-shadow: 0 0 0 3px var(--c-orange-100);
+}
+.streamline-app .feat-visual {
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: var(--sh-lg);
+  border: 1px solid var(--c-line);
+  background: var(--c-navy-050);
+}
+
+/* Compact supporting feature cards */
+.streamline-app .feature-intro {
+  max-width: 680px;
+  margin: 0 auto clamp(40px, 5vw, 64px);
+  text-align: center;
+}
+.streamline-app .feature-intro .eyebrow { justify-content: center; }
+.streamline-app .feature-intro p { color: var(--c-muted); font-size: 1.0625rem; }
+.streamline-app .feature-support-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(18px, 2.5vw, 28px);
+  padding-top: clamp(48px, 6vw, 72px);
+  border-top: 1px solid var(--c-line);
+}
+.streamline-app .feature-support-card {
+  padding: clamp(22px, 3vw, 30px);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-lg);
+  background: var(--c-white);
+  box-shadow: var(--sh-xs);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: box-shadow .2s, transform .2s var(--ease);
+}
+.streamline-app .feature-support-card:hover { box-shadow: var(--sh); transform: translateY(-3px); }
+.streamline-app .feature-support-card h3 { font-size: clamp(1.05rem, 1.35vw, 1.25rem); }
+.streamline-app .feature-support-card p { color: var(--c-muted); font-size: .95rem; line-height: 1.65; }
+.streamline-app .feature-support-card .feat-checklist { margin-top: 4px; gap: 7px; }
+.streamline-app .feature-support-card .feat-checklist li { font-size: .88rem; }
+.streamline-app .panel { background: var(--c-white); }
+.streamline-app .panel-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  background: var(--c-navy-050);
+  border-bottom: 1px solid var(--c-line);
+}
+.streamline-app .panel-dot { width: 8px; height: 8px; border-radius: 50%; }
+.streamline-app .panel-dot:nth-child(1) { background: #ff5f57; }
+.streamline-app .panel-dot:nth-child(2) { background: #febc2e; }
+.streamline-app .panel-dot:nth-child(3) { background: #28c840; }
+.streamline-app .panel-title { font-size: .7rem; font-weight: 600; color: var(--c-soft); margin-left: 4px; letter-spacing: .03em; }
+.streamline-app .panel-body { padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+.streamline-app .panel-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 4px; }
+.streamline-app .panel-kpi {
+  background: var(--c-page);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-sm);
+  padding: 10px 12px;
+}
+.streamline-app .panel-kpi-label { font-size: .6rem; font-weight: 700; color: var(--c-soft); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
+.streamline-app .panel-kpi-val { font-family: var(--f-display); font-size: 1.2rem; font-weight: 700; color: var(--c-navy-900); letter-spacing: -.03em; line-height: 1; }
+.streamline-app .panel-kpi-delta { font-size: .6rem; font-weight: 700; color: #22c55e; margin-top: 2px; }
+.streamline-app .panel-row {
+  display: grid;
+  grid-template-columns: 1.6fr .8fr .8fr auto;
+  gap: 8px;
+  align-items: center;
+  padding: 9px 10px;
+  border-radius: var(--r-sm);
+  background: var(--c-page);
+  border: 1px solid var(--c-line);
+  font-size: .72rem;
+}
+.streamline-app .panel-row-name { font-weight: 600; color: var(--c-navy-900); }
+.streamline-app .panel-row-lot  { color: var(--c-muted); font-size: .65rem; }
+.streamline-app .panel-row-qty  { color: var(--c-muted); font-size: .7rem; }
+.streamline-app .panel-tag {
+  font-size: .6rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+}
+.streamline-app .panel-tag.green  { background: var(--c-green-100); color: var(--c-green-600); }
+.streamline-app .panel-tag.orange { background: var(--c-orange-100); color: var(--c-orange-700); }
+.streamline-app .panel-tag.blue   { background: var(--c-sky-100); color: #1d7dc0; }
+
+/* Stock count panel */
+.streamline-app .count-list { display: flex; flex-direction: column; gap: 8px; }
+.streamline-app .count-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-sm);
+  background: var(--c-white);
+}
+.streamline-app .count-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: var(--c-orange-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.streamline-app .count-info { flex: 1; min-width: 0; }
+.streamline-app .count-name { font-size: .8rem; font-weight: 600; color: var(--c-navy-900); }
+.streamline-app .count-meta { font-size: .68rem; color: var(--c-muted); margin-top: 1px; }
+.streamline-app .count-val  { font-family: var(--f-display); font-size: 1rem; font-weight: 700; color: var(--c-navy-900); letter-spacing: -.02em; flex-shrink: 0; }
+
+/* ── STEP FLOW ──────────────────────────────────────── */
+.streamline-app .steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  counter-reset: step;
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--c-white);
+  box-shadow: var(--sh-sm);
+}
+.streamline-app .step-item {
+  padding: clamp(20px, 2.5vw, 28px) clamp(16px, 2vw, 22px);
+  border-right: 1px solid var(--c-line);
+  position: relative;
+  transition: background .18s;
+}
+.streamline-app .step-item:last-child { border-right: 0; }
+.streamline-app .step-item:hover { background: var(--c-navy-050); }
+.streamline-app .step-item::after {
+  content: "›";
+  position: absolute;
+  right: -11px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: var(--c-orange);
+  font-weight: 700;
+  z-index: 1;
+  background: var(--c-white);
+  padding: 0 2px;
+  line-height: 1;
+  transition: background .18s;
+}
+.streamline-app .step-item:hover::after { background: var(--c-navy-050); }
+.streamline-app .step-item:last-child::after { display: none; }
+.streamline-app .step-num {
+  counter-increment: step;
+  font-family: var(--f-display);
+  font-size: .7rem;
+  font-weight: 700;
+  color: var(--c-orange);
+  letter-spacing: .04em;
+  margin-bottom: 8px;
+  display: block;
+}
+.streamline-app .step-num::before { content: "0" counter(step); }
+.streamline-app .step-title { font-size: .88rem; font-weight: 700; color: var(--c-navy-900); margin-bottom: 5px; line-height: 1.3; }
+.streamline-app .step-desc  { font-size: .76rem; color: var(--c-muted); line-height: 1.5; }
+
+/* ── TESTIMONIALS ───────────────────────────────────── */
+.streamline-app .testi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(18px, 2.5vw, 28px);
+}
+.streamline-app .testi {
+  padding: clamp(22px, 3vw, 32px);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-lg);
+  background: var(--c-white);
+  box-shadow: var(--sh-xs);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: box-shadow .2s, transform .2s var(--ease);
+}
+.streamline-app .testi:hover { box-shadow: var(--sh); transform: translateY(-3px); }
+.streamline-app .testi-stars { color: var(--c-orange); font-size: .9rem; letter-spacing: 2px; }
+.streamline-app .testi-quote { font-size: .95rem; color: var(--c-muted); line-height: 1.72; font-style: italic; flex: 1; }
+.streamline-app .testi-author { font-weight: 700; font-size: .88rem; color: var(--c-navy-800); }
+.streamline-app .testi-author a { color: inherit; }
+.streamline-app .testi-author a:hover { color: var(--c-orange-600); }
+
+/* ── FAQ ────────────────────────────────────────────── */
+.streamline-app .faq details {
+  padding: 20px 22px;
+  margin-bottom: 10px;
+  border: 1px solid var(--c-line);
+  border-radius: var(--r);
+  background: var(--c-white);
+  box-shadow: var(--sh-xs);
+  transition: border-color .18s, box-shadow .18s;
+}
+.streamline-app .faq details:hover { border-color: #c4d1e2; }
+.streamline-app .faq details[open] { border-color: var(--c-sky-500); box-shadow: var(--sh-sm); }
+.streamline-app .faq summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: .95rem;
+  color: var(--c-navy-900);
+  list-style: none;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  line-height: 1.4;
+}
+.streamline-app .faq summary::-webkit-details-marker { display: none; }
+.streamline-app .faq summary::after {
+  content: "+";
+  flex-shrink: 0;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--c-orange-100);
+  color: var(--c-orange-600);
+  font-weight: 700;
+  font-size: .85rem;
+  display: grid;
+  place-items: center;
+  transition: background .18s, color .18s, transform .22s var(--spring);
+}
+.streamline-app .faq details[open] summary::after { content: "−"; background: var(--c-orange); color: #fff; transform: rotate(180deg); }
+.streamline-app .faq p { margin: 12px 0 0; font-size: .9rem; color: var(--c-muted); line-height: 1.72; }
+
+/* ── FINAL CTA ──────────────────────────────────────── */
+.streamline-app .final-cta {
+  padding-block: clamp(80px, 10vw, 120px);
+  text-align: center;
+  background:
+    radial-gradient(ellipse 60% 80% at 85% 8%, rgba(245,135,14,.1), transparent 50%),
+    radial-gradient(ellipse 50% 60% at 5% 85%, rgba(74,166,232,.08), transparent 48%),
+    linear-gradient(165deg, var(--c-navy-050) 0%, var(--c-white) 55%);
+  border-top: 4px solid var(--c-orange);
+}
+.streamline-app .final-cta h2 { margin-bottom: 14px; }
+.streamline-app .final-cta p  { color: var(--c-muted); max-width: 520px; margin-inline: auto; margin-bottom: 32px; }
+.streamline-app .final-cta .btn-group { justify-content: center; }
+
+/* ── SCROLL REVEAL ──────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .streamline-app .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .55s var(--ease), transform .55s var(--ease);
+    will-change: opacity, transform;
+  }
+  .streamline-app .reveal.in { opacity: 1; transform: none; }
+  .streamline-app .reveal-l  { transform: translateX(-28px); }
+  .streamline-app .reveal-r  { transform: translateX(28px); }
+  .streamline-app .reveal-d1 { transition-delay: .08s; }
+  .streamline-app .reveal-d2 { transition-delay: .16s; }
+  .streamline-app .reveal-d3 { transition-delay: .24s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .streamline-app .reveal { opacity: 1 !important; transform: none !important; }
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────── */
+@media (max-width: 900px) {
+  .streamline-app .hero-layout,
+  .streamline-app .feat-row,
+  .streamline-app .feat-row--flip { grid-template-columns: 1fr; direction: ltr; }
+  .streamline-app .feature-support-grid { grid-template-columns: 1fr; }
+  .streamline-app .phone-wrap { justify-content: center; margin-top: 16px; display: none; }
+  .streamline-app .float-card-1,
+  .streamline-app .float-card-2 { display: none; }
+  .streamline-app .steps { grid-template-columns: 1fr 1fr; }
+  .streamline-app .step-item:nth-child(2)::after { display: none; }
+  .streamline-app .testi-grid { grid-template-columns: 1fr; }
+  .streamline-app .proof-stats { display: none; }
+}
+@media (max-width: 580px) {
+  .streamline-app .steps { grid-template-columns: 1fr; }
+  .streamline-app .step-item::after { display: none; }
+  .streamline-app .btn { width: 100%; justify-content: center; }
+  .streamline-app .btn-group { align-items: stretch; flex-direction: column; }
+  .streamline-app .final-cta .btn-group { flex-direction: column; align-items: center; }
+  .streamline-app .final-cta .btn { width: auto; }
+  .streamline-app .panel-kpis { grid-template-columns: 1fr 1fr; }
+  .streamline-app .panel-row { grid-template-columns: 1fr auto; }
+  .streamline-app .panel-row-lot, .streamline-app .panel-row-qty { display: none; }
+}
+
+/* ── WP CONTAINER FIX ───────────────────────────────── */
+html .container-wrap { padding: 0 !important; }
+ul li { list-style: none; }
+
+/* ── WP PARENT OVERFLOW FIX (sticky header) ─────────── */
+div:has(> .streamline-app),
+div:has(> div:has(> .streamline-app)) {
+  overflow: visible !important;
+}
+
+.section .distribution img{
+	width: auto !important;
+}
+
+/* ── IMPORT STATUS DASHBOARD REDESIGN ADDITIONS ───── */
+.streamline-app .lp-header .btn { min-height: 38px; padding: 8px 18px; font-size: .78rem; }
+.streamline-app .browser-mock {
+  background: var(--c-white);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-xl);
+  box-shadow: var(--sh-lg);
+  overflow: hidden;
+  width: 100%;
+  max-width: 420px;
+  margin-inline: auto;
+}
+.streamline-app .browser-top {
+  height: 38px;
+  background: var(--c-navy-050);
+  border-bottom: 1px solid var(--c-line);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 14px;
+}
+.streamline-app .browser-dot { width: 7px; height: 7px; border-radius: 50%; }
+.streamline-app .browser-dot:nth-child(1) { background: #ff5f57; }
+.streamline-app .browser-dot:nth-child(2) { background: #febc2e; }
+.streamline-app .browser-dot:nth-child(3) { background: #28c840; }
+.streamline-app .browser-url {
+  flex: 1;
+  height: 18px;
+  border: 1px solid var(--c-line);
+  background: var(--c-white);
+  border-radius: var(--r-pill);
+  margin-left: 8px;
+}
+.streamline-app .browser-stage {
+  min-height: 275px;
+  padding: clamp(28px, 4vw, 44px);
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(ellipse 80% 80% at 18% 10%, rgba(74,166,232,.12), transparent 52%),
+    radial-gradient(ellipse 70% 75% at 90% 100%, rgba(245,135,14,.10), transparent 50%),
+    var(--c-page);
+}
+.streamline-app .mini-card {
+  width: min(280px, 100%);
+  padding: 26px 24px;
+  background: rgba(255,255,255,.86);
+  border: 1px dashed #cbd7e6;
+  border-radius: var(--r-lg);
+  text-align: center;
+  box-shadow: var(--sh-xs);
+}
+.streamline-app .mini-card .mini-kicker {
+  color: var(--c-orange-600);
+  font-size: .62rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.streamline-app .mini-card strong {
+  display: block;
+  font-family: var(--f-display);
+  color: var(--c-navy-900);
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  line-height: 1.08;
+  letter-spacing: -.04em;
+  margin-bottom: 8px;
+}
+.streamline-app .mini-card span { display: block; color: var(--c-muted); font-size: .78rem; line-height: 1.5; }
+.streamline-app .feature-intro {
+  max-width: 760px;
+  margin: 0 auto clamp(42px, 6vw, 70px);
+  text-align: center;
+}
+.streamline-app .feature-intro .eyebrow { justify-content: center; }
+.streamline-app .feature-intro p:not(.eyebrow) { color: var(--c-muted); font-size: 1.05rem; }
+.streamline-app .action-panel {
+  background: var(--c-page);
+  border-top: 1px solid var(--c-line);
+  border-bottom: 1px solid var(--c-line);
+}
+.streamline-app .action-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(20px, 3vw, 32px);
+  margin-top: 28px;
+}
+.streamline-app .action-card,
+.streamline-app .benefit-card {
+  background: var(--c-white);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-xs);
+  padding: clamp(22px, 3vw, 30px);
+}
+.streamline-app .action-card h3 { margin-bottom: 12px; }
+.streamline-app .scan-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(28px, 5vw, 56px);
+  align-items: stretch;
+  margin-top: 38px;
+}
+.streamline-app .scan-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  align-content: start;
+}
+.streamline-app .scan-card .browser-mock { max-width: 100%; }
+.streamline-app .benefit-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(18px, 2.5vw, 28px);
+}
+.streamline-app .benefit-card h3 { font-size: 1.05rem; margin-bottom: 8px; }
+.streamline-app .benefit-card p { color: var(--c-muted); font-size: .95rem; }
+.streamline-app .status-pill-row { display: flex; flex-direction: column; gap: 10px; }
+.streamline-app .status-pill {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-sm);
+  background: var(--c-white);
+  font-size: .82rem;
+  font-weight: 700;
+  color: var(--c-navy-900);
+}
+.streamline-app .status-pill span { color: var(--c-muted); font-weight: 600; font-size: .72rem; }
+@media (max-width: 900px) {
+  .streamline-app .action-grid,
+  .streamline-app .scan-grid,
+  .streamline-app .benefit-grid { grid-template-columns: 1fr; }
+}
+
+/* ── TWO-CARD FEATURE TEMPLATE ─────────────────────── */
+.streamline-app .two-card-feature-section {
+  background: var(--c-white);
+  border-top: 1px solid var(--c-line);
+}
+
+.streamline-app .two-card-feature-intro {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 46px;
+}
+
+.streamline-app .two-card-feature-intro .eyebrow {
+  justify-content: center;
+}
+
+.streamline-app .two-card-feature-intro .lede {
+  margin: 16px auto 0;
+}
+
+.streamline-app .two-card-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(22px, 4vw, 36px);
+}
+
+.streamline-app .two-card-feature-card {
+  position: relative;
+  padding: clamp(30px, 4vw, 44px);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-xl);
+  background:
+    radial-gradient(ellipse 70% 70% at 100% 0%, rgba(74,166,232,.08), transparent 52%),
+    radial-gradient(ellipse 60% 70% at 0% 100%, rgba(245,135,14,.07), transparent 50%),
+    var(--c-white);
+  box-shadow: var(--sh-sm);
+  overflow: hidden;
+  transition:
+    transform .2s var(--ease),
+    box-shadow .2s var(--ease),
+    border-color .2s var(--ease);
+}
+
+.streamline-app .two-card-feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sh);
+  border-color: #c8d8ea;
+}
+
+.streamline-app .two-card-feature-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 22px;
+  background: linear-gradient(165deg, var(--c-orange-100), var(--c-sky-050));
+  border: 1px solid var(--c-line);
+  color: var(--c-orange-600);
+  font-size: 1.35rem;
+  font-weight: 800;
+  box-shadow: var(--sh-xs);
+}
+
+.streamline-app .two-card-feature-card .eyebrow {
+  margin-bottom: 12px;
+}
+
+.streamline-app .two-card-feature-card h3 {
+  max-width: 440px;
+  margin-bottom: 14px;
+}
+
+.streamline-app .two-card-feature-card p {
+  color: var(--c-muted);
+  font-size: 1rem;
+  line-height: 1.72;
+  margin-bottom: 22px;
+}
+
+.streamline-app .two-card-feature-card .feat-checklist {
+  gap: 10px;
+}
+
+.streamline-app .two-card-feature-card .feat-checklist li {
+  font-size: .96rem;
+}
+
+@media (max-width: 820px) {
+  .streamline-app .two-card-feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── RELATED FEATURE CARDS ─────────────────────────── */
+.streamline-app .related-feature-section {
+  background: var(--c-page);
+  border-top: 1px solid var(--c-line);
+  border-bottom: 1px solid var(--c-line);
+}
+
+.streamline-app .related-feature-intro {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 42px;
+}
+
+.streamline-app .related-feature-intro .eyebrow {
+  justify-content: center;
+}
+
+.streamline-app .related-feature-intro .lede {
+  margin: 14px auto 0;
+}
+
+.streamline-app .related-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 2.5vw, 24px);
+}
+
+.streamline-app .related-feature-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: clamp(22px, 3vw, 30px);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-lg);
+  background: var(--c-white);
+  box-shadow: var(--sh-xs);
+  transition:
+    transform .2s var(--ease),
+    box-shadow .2s var(--ease),
+    border-color .2s var(--ease);
+}
+
+.streamline-app .related-feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sh-sm);
+  border-color: #c8d8ea;
+}
+
+.streamline-app .related-feature-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  margin-bottom: 14px;
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--c-orange-600);
+}
+
+.streamline-app .related-feature-kicker::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c-orange);
+  box-shadow: 0 0 0 3px var(--c-orange-100);
+}
+
+.streamline-app .related-feature-card h3 {
+  margin-bottom: 12px;
+  font-size: clamp(1.05rem, 1.45vw, 1.28rem);
+}
+
+.streamline-app .related-feature-card p {
+  color: var(--c-muted);
+  font-size: .94rem;
+  line-height: 1.68;
+  margin-bottom: 20px;
+}
+
+.streamline-app .related-feature-card .link-arrow {
+  margin-top: auto;
+}
+
+@media (max-width: 900px) {
+  .streamline-app .related-feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+  
+/* ── RECIPE PRODUCTION PAGE ADDITIONS ─────────────── */
+.streamline-app .recipe-panel {
+  background: var(--c-white);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-xl);
+  box-shadow: var(--sh-lg);
+  overflow: hidden;
+  width: 100%;
+  max-width: 480px;
+  margin-inline: auto;
+}
+.streamline-app .recipe-panel-stage {
+  padding: clamp(24px, 4vw, 38px);
+  background:
+    radial-gradient(ellipse 75% 75% at 12% 5%, rgba(74,166,232,.12), transparent 54%),
+    radial-gradient(ellipse 70% 75% at 90% 100%, rgba(245,135,14,.10), transparent 52%),
+    var(--c-page);
+}
+.streamline-app .recipe-screen-card {
+  background: rgba(255,255,255,.92);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-xs);
+  padding: 18px;
+}
+.streamline-app .recipe-screen-title {
+  font-family: var(--f-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--c-navy-900);
+  letter-spacing: -.03em;
+  margin-bottom: 6px;
+}
+.streamline-app .recipe-screen-sub {
+  color: var(--c-muted);
+  font-size: .78rem;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+.streamline-app .recipe-field {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-sm);
+  background: var(--c-white);
+  margin-bottom: 8px;
+  font-size: .78rem;
+}
+.streamline-app .recipe-field strong { color: var(--c-navy-900); }
+.streamline-app .recipe-field span { color: var(--c-muted); font-weight: 600; }
+.streamline-app .recipe-bar {
+  height: 8px;
+  border-radius: var(--r-pill);
+  background: var(--c-navy-100);
+  overflow: hidden;
+  margin: 14px 0 10px;
+}
+.streamline-app .recipe-bar span {
+  display: block;
+  width: 78%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--c-sky-500), var(--c-orange));
+}
+.streamline-app .recipe-success {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  border-radius: var(--r-pill);
+  background: var(--c-green-100);
+  color: var(--c-green-600);
+  font-size: .72rem;
+  font-weight: 800;
+}
+.streamline-app .compact-note {
+  margin-top: 18px;
+  font-size: .82rem;
+  color: var(--c-soft);
+  text-align: center;
+}
+
+</style>
+</head>
+
+<body class="sl-lp">
+
+<div class="streamline-app">
+
+<!-- HERO -->
+<section aria-labelledby="hero-title" class="hero">
+  <div class="wrap">
+    <div class="hero-layout">
+      <div class="hero-content">
+        <p class="eyebrow reveal" style="transition-delay:.05s">Recipe Production</p>
+        <h1 class="reveal" id="hero-title" style="transition-delay:.1s">Create recipes and record production <em>from the app.</em></h1>
+        <p class="lede reveal" style="transition-delay:.17s;margin-top:16px">The Streamline Inventory App helps bakery teams create recipes, select a recipe, enter the batch quantity, confirm ingredient lots used, and update finished goods without waiting for a desktop workstation.</p>
+        <div class="btn-group reveal" style="transition-delay:.24s">
+          <a class="btn btn-primary" href="https://mountainstream.co/register-your-company?cta=hero&amp;intent=book-demo">Book a Demo</a>
+          <a class="btn btn-secondary" href="#recipe-flow">See how it works</a>
+        </div>
+        <div class="hero-badges reveal" style="transition-delay:.3s">
+          <span class="hero-badge">Create recipes</span>
+          <span class="hero-badge">Record batches</span>
+          <span class="hero-badge">Ingredient lot use</span>
+          <span class="hero-badge">Finished goods updates</span>
+        </div>
+      </div>
+      <div class="phone-wrap reveal" style="transition-delay:.35s">
+        <img src="recipe-production.png" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section class="section-sm" id="recipe-flow" style="background:var(--c-page);border-bottom:1px solid var(--c-line)">
+  <div class="wrap">
+    <p class="section-label reveal">Recipe production flow</p>
+    <div class="steps reveal reveal-d1">
+      <div class="step-item"><span class="step-num"></span><p class="step-title">Create or Select</p><p class="step-desc">Create a recipe in the app or choose an existing recipe for the production run.</p></div>
+      <div class="step-item"><span class="step-num"></span><p class="step-title">Enter Quantity</p><p class="step-desc">Add the batch quantity so ingredient usage and finished output are recorded clearly.</p></div>
+      <div class="step-item"><span class="step-num"></span><p class="step-title">Confirm Lots</p><p class="step-desc">Check which ingredient lots are being used before the run is posted.</p></div>
+      <div class="step-item"><span class="step-num"></span><p class="step-title">Make Product</p><p class="step-desc">Record the production run as the batch moves from ingredients to finished goods.</p></div>
+      <div class="step-item"><span class="step-num"></span><p class="step-title">Update Stock</p><p class="step-desc">Deplete ingredient lots and update finished goods inventory in Streamline.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN OVERVIEW -->
+<section class="section" style="background:var(--c-white)">
+  <div class="wrap">
+    <div class="feature-intro reveal">
+      <p class="eyebrow" style="margin-bottom:10px">Production Recording</p>
+      <h2>Turn recipe work into accurate inventory updates.</h2>
+      <p style="margin-top:16px">Recipe Production is for recording what was made, which recipe was used, and which ingredient lots were consumed. It keeps production and inventory connected from the mobile workflow.</p>
+    </div>
+
+    <div class="feat-row reveal">
+      <div class="feat-text">
+        <p class="eyebrow" style="margin-bottom:10px">Create &amp; Produce</p>
+        <h3>Create a recipe, then use it for a production run.</h3>
+        <p>Teams can create a recipe through the Inventory App, select it for production, enter the batch quantity, and confirm the ingredient lots used. Once recorded, the app helps keep ingredient stock and finished goods aligned with the actual run.</p>
+        <ul class="feat-checklist">
+          <li>Create a recipe directly through the Inventory App</li>
+          <li>Select a recipe before starting production</li>
+          <li>Enter batch quantity for the run</li>
+          <li>Confirm ingredient lots used</li>
+          <li>Record finished goods for inventory accuracy</li>
+        </ul>
+      </div>
+      <div>
+        <img src="streamline-inventory-app-recipe-production-feature.png" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTION SECTION -->
+<section class="section action-panel">
+  <div class="wrap">
+    <div class="feature-intro reveal" style="margin-bottom:36px">
+      <p class="eyebrow" style="margin-bottom:10px">Lot Use &amp; Finished Goods</p>
+      <h2>Keep production records tied to inventory movement.</h2>
+      <p style="margin-top:16px">The feature focuses on the practical production record: what recipe was made, how much was produced, which lots were used, and how inventory should change afterward.</p>
+    </div>
+    <div class="action-grid reveal reveal-d1">
+      <div class="action-card">
+        <h3>Ingredient lots are not an afterthought.</h3>
+        <p>Because ingredient lots are confirmed during the run, teams can record production in a way that supports inventory accuracy and traceability.</p>
+        <ul class="feat-checklist">
+          <li>Confirm the lots used in production</li>
+          <li>Deplete ingredient stock after the run</li>
+          <li>Keep production activity connected to lot history</li>
+        </ul>
+      </div>
+      <div class="action-card">
+        <h3>Finished goods move back into stock.</h3>
+        <p>Once the production run is recorded, finished goods can be added to inventory so warehouse and production teams are working from the same stock position.</p>
+        <ul class="feat-checklist">
+          <li>Record finished product quantities</li>
+          <li>Update inventory after production</li>
+          <li>Reduce manual follow-up between teams</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RELATED FEATURES -->
+<section class="section-sm related-feature-section">
+  <div class="wrap">
+    <div class="related-feature-intro reveal">
+      <p class="eyebrow">Related Inventory App Features</p>
+      <h2>Connect production with the rest of inventory.</h2>
+      <p class="lede">Recipe Production works best when goods receipt and stock counting keep ingredient stock accurate before and after production.</p>
+    </div>
+
+    <div class="related-feature-grid reveal reveal-d1">
+      <article class="related-feature-card">
+        <span class="related-feature-kicker">Goods Receipt</span>
+        <h3>Receive ingredients with lot control</h3>
+        <p>Record incoming goods, assign lot numbers, and keep ingredient stock ready for production use.</p>
+        <a href="goods-receipt.html" class="link-arrow">Learn more here</a>
+      </article>
+
+      <article class="related-feature-card">
+        <span class="related-feature-kicker">Stock Counting</span>
+        <h3>Check what is actually on hand</h3>
+        <p>Count stock by location, review differences, and sync adjustments back to Streamline.</p>
+        <a href="stock-counting.html" class="link-arrow">Learn more here</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="section-sm" style="background:var(--c-page);border-top:1px solid var(--c-line);border-bottom:1px solid var(--c-line)">
+  <div class="wrap">
+    <p class="section-label reveal">Why teams use it daily</p>
+    <div class="benefit-grid reveal reveal-d1">
+      <div class="benefit-card"><h3>Less desktop dependency</h3><p>Production teams can create and record recipe activity from the Inventory App instead of waiting to update records later.</p></div>
+      <div class="benefit-card"><h3>Cleaner stock movement</h3><p>Ingredient lots are consumed and finished goods are recorded as part of the same production workflow.</p></div>
+      <div class="benefit-card"><h3>Better traceability context</h3><p>Lot confirmation during production helps teams understand which ingredients were used in each batch.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section-sm" style="background:var(--c-white);border-top:1px solid var(--c-line)">
+  <div class="wrap-narrow">
+    <p class="section-label reveal">FAQ</p>
+    <div class="faq reveal reveal-d1">
+      <details open><summary>Can users create a recipe through the Inventory App?</summary><p>Yes. Recipe Production includes the ability to create a recipe through the Inventory App, then use recipe details when recording production activity.</p></details>
+      <details><summary>What does Recipe Production record?</summary><p>It records the selected recipe, batch quantity, ingredient lots used, and finished goods produced so inventory can stay aligned with production.</p></details>
+      <details><summary>Does it deplete ingredient stock?</summary><p>Yes. The Inventory App page context describes Recipe Production as recording production runs and depleting ingredient lots automatically.</p></details>
+      <details><summary>How does this support traceability?</summary><p>By confirming ingredient lots used in a production run, teams can keep the finished batch connected to the ingredients that went into it.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta" id="download">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow" style="justify-content:center">Streamline Inventory App</p>
+      <h2>Make production records easier to keep accurate.</h2>
+      <p>Use the Streamline Inventory App to create recipes, record batches, confirm ingredient lots, and keep finished goods inventory updated from the production floor.</p>
+      <div class="btn-group"><a class="btn btn-primary" href="https://mountainstream.co/register-your-company?cta=lp-footer&amp;intent=book-demo">Book a Demo</a></div>
+      <p style="margin-top:20px;font-size:.82rem;color:var(--c-soft)">Built for Streamline ERP users · Inventory App · Recipe Production</p>
+    </div>
+  </div>
+</section>
+
+</div>
+<script>
+(function () {
+  var root = document.querySelector('.streamline-app');
+  if (!root) return;
+
+  var obs = new IntersectionObserver(function (entries, o) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        o.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  root.querySelectorAll('.reveal').forEach(function (el) {
+    var rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.classList.add('in');
+    } else {
+      obs.observe(el);
+    }
+  });
+
+  requestAnimationFrame(function () {
+    setTimeout(function () {
+      root.querySelectorAll('.hero .reveal').forEach(function (el) {
+        el.classList.add('in');
+      });
+    }, 60);
+  });
+})();
+</script>
+
+</body>
+</html>

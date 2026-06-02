@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Streamline Chrome Extension | Automated Gmail Order Entry</title>
+  <meta name="description" content="Automate order entry from Gmail to Streamline. The Streamline Chrome Extension scans approved order emails, validates order details, imports approved orders, and flags exceptions.">
+  <style>
+        /* ============================================================
+   STREAMLINE APPS — Shared Landing Page Styles
+   Scope:    .streamline-app
+   Covers:   Inventory App + Distribution App
+   Design:   Minimal, white, generous space, one accent colour
+   Fonts:    Fraunces (display) + DM Sans (body)
+   ============================================================ */
+
+/* ── TOKENS ─────────────────────────────────────────── */
+.streamline-app {
+  --c-navy-950: #113058;
+  --c-navy-900: #113058;
+  --c-navy-800: #113058;
+  --c-navy-700: #113058;
+  --c-navy-100: #e4eef9;
+  --c-navy-050: #f2f7fd;
+
+  --c-orange-700: #ff9100;
+  --c-orange-600: #ff9100;
+  --c-orange:     #ff9100;
+  --c-orange-400: #ff9100;
+  --c-orange-100: #fef0d8;
+  --c-orange-050: #fff8ef;
+  --c-orange-glow: rgba(245,135,14,.2);
+
+  --c-sky-500: #4fa6e9;
+  --c-sky-100: #ddf1ff;
+  --c-sky-050: #f0f9ff;
+
+  --c-green-600: #1e7a52;
+  --c-green-100: #e6f7ef;
+
+  --c-text:  #1a2d42;
+  --c-muted: #54647a;
+  --c-soft:  #8a9bae;
+  --c-line:  #e2eaf4;
+  --c-white: #ffffff;
+  --c-page:  #f9fbff;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'DM Sans', system-ui, sans-serif;
+
+  --wrap:    1120px;
+  --gutter:  clamp(20px, 4vw, 48px);
+
+  --r-sm:   8px;
+  --r:      14px;
+  --r-lg:   22px;
+  --r-xl:   32px;
+  --r-pill: 999px;
+
+  --sh-xs:  0 1px 4px rgba(9,30,60,.06);
+  --sh-sm:  0 4px 18px rgba(9,30,60,.09);
+  --sh:     0 12px 40px rgba(9,30,60,.12);
+  --sh-lg:  0 28px 72px rgba(9,30,60,.16);
+  --sh-cta: 0 10px 32px var(--c-orange-glow);
+
+  --ease:   cubic-bezier(.25,.46,.45,.94);
+  --spring: cubic-bezier(.34,1.56,.64,1);
+
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.68;
+  color: var(--c-text);
+  background: var(--c-white);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── RESET ──────────────────────────────────────────── */
+.streamline-app *, .streamline-app *::before, .streamline-app *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.streamline-app img { display: block; max-width: 100%; height: auto; }
+.streamline-app p   { margin-bottom: 1rem; line-height: 1.72; }
+.streamline-app p:last-child { margin-bottom: 0; }
+.streamline-app a   { text-decoration: none; transition: color .15s var(--ease), opacity .15s; }
+
+/* ── LAYOUT ─────────────────────────────────────────── */
+.streamline-app .wrap {
+  width: min(var(--wrap), calc(100% - var(--gutter) * 2));
+  margin-inline: auto;
+}
+.streamline-app .wrap-narrow {
+  width: min(720px, calc(100% - var(--gutter) * 2));
+  margin-inline: auto;
+}
+.streamline-app .section    { padding-block: clamp(72px, 9vw, 112px); }
+.streamline-app .section-sm { padding-block: clamp(48px, 6vw, 72px); }
+.streamline-app .divider    { height: 1px; background: var(--c-line); border: none; }
+
+/* ── TYPOGRAPHY ─────────────────────────────────────── */
+.streamline-app h1, .streamline-app h2, .streamline-app h3 {
+  font-family: var(--f-display);
+  font-weight: 600;
+  letter-spacing: -.04em;
+  line-height: 1.06;
+  color: var(--c-navy-900);
+}
+.streamline-app h1 {
+  font-size: clamp(2.6rem, 5.5vw, 4.8rem);
+  font-weight: 700;
+  letter-spacing: -.055em;
+  line-height: 1;
+}
+.streamline-app h1 em { font-style: italic; color: var(--c-orange-600); }
+.streamline-app h2 {
+  font-size: clamp(1.9rem, 3.5vw, 3rem);
+  letter-spacing: -.04em;
+}
+.streamline-app h2 em { font-style: italic; color: var(--c-orange-600); }
+.streamline-app h3 {
+  font-size: clamp(1.1rem, 1.6vw, 1.45rem);
+  letter-spacing: -.025em;
+  line-height: 1.18;
+}
+
+.streamline-app .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--c-orange-600);
+  margin-bottom: 14px;
+}
+.streamline-app .eyebrow::before {
+  content: "";
+  width: 20px; height: 2px;
+  border-radius: 2px;
+  background: var(--c-orange);
+  flex-shrink: 0;
+}
+.streamline-app .lede {
+  font-size: clamp(1.0625rem, 1.4vw, 1.2rem);
+  color: var(--c-muted);
+  line-height: 1.75;
+  max-width: 560px;
+}
+.streamline-app .section-label {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--c-soft);
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+/* ── BUTTONS ────────────────────────────────────────── */
+.streamline-app .btn-group { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 32px; }
+.streamline-app .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  min-height: 52px;
+  padding: 13px 28px;
+  border: 1.5px solid transparent;
+  border-radius: var(--r-pill);
+  font-family: var(--f-body);
+  font-size: .95rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .18s var(--ease), color .18s var(--ease),
+              border-color .18s var(--ease), box-shadow .18s var(--ease),
+              transform .2s var(--spring);
+}
+.streamline-app .btn:hover  { transform: translateY(-2px); }
+.streamline-app .btn:active { transform: translateY(0); }
+.streamline-app .btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(74,166,232,.4); }
+
+.streamline-app .btn-primary {
+  background: linear-gradient(170deg, var(--c-orange-400) 0%, var(--c-orange-600) 100%);
+  color: #fff;
+  border-color: var(--c-orange-600);
+  box-shadow: var(--sh-cta);
+}
+.streamline-app .btn-primary:hover {
+  background: linear-gradient(170deg, #ffb84a 0%, var(--c-orange-700) 100%);
+  color: #fff;
+  box-shadow: 0 16px 40px var(--c-orange-glow);
+}
+.streamline-app .btn-secondary {
+  background: var(--c-white);
+  color: var(--c-navy-900);
+  border-color: var(--c-line);
+  box-shadow: var(--sh-xs);
+}
+.streamline-app .btn-secondary:hover {
+  background: var(--c-navy-050);
+  border-color: var(--c-sky-500);
+  color: var(--c-navy-900);
+  box-shadow: var(--sh-sm);
+}
+.streamline-app .btn-ghost {
+  background: rgba(255,255,255,.1);
+  color: #fff;
+  border-color: rgba(255,255,255,.25);
+}
+.streamline-app .btn-ghost:hover {
+  background: rgba(255,255,255,.18);
+  color: #fff;
+  border-color: rgba(255,255,255,.45);
+}
+.streamline-app .link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  color: var(--c-navy-700);
+  font-weight: 600;
+  font-size: .9rem;
+}
+.streamline-app .link-arrow::after { content: "→"; transition: transform .16s var(--spring); }
+.streamline-app .link-arrow:hover  { color: var(--c-orange-600); }
+.streamline-app .link-arrow:hover::after { transform: translateX(4px); }
+
+/* ── MINIMAL HEADER ─────────────────────────────────── */
+.streamline-app .lp-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,.95);
+  border-bottom: 1px solid var(--c-line);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.streamline-app .lp-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+.streamline-app .lp-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+}
+.streamline-app .lp-logo-mark {
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--c-sky-500), var(--c-navy-800));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.streamline-app .lp-logo-mark svg { width: 16px; height: 16px; }
+.streamline-app .lp-logo-name {
+  font-family: var(--f-display);
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--c-navy-900);
+  letter-spacing: -.02em;
+  line-height: 1.1;
+}
+.streamline-app .lp-logo-name span { color: var(--c-orange); }
+.streamline-app .lp-logo-sub {
+  display: block;
+  font-size: .6rem;
+  font-weight: 500;
+  letter-spacing: .04em;
+  color: var(--c-soft);
+}
+.streamline-app .lp-header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.streamline-app .lp-header-link {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--c-muted);
+}
+.streamline-app .lp-header-link:hover { color: var(--c-navy-900); }
+
+/* ── HERO ───────────────────────────────────────────── */
+.streamline-app .hero {
+  padding: clamp(64px, 9vw, 112px) 0 clamp(48px, 7vw, 80px);
+  background:
+    radial-gradient(ellipse 65% 70% at 90% 5%, rgba(74,166,232,.1), transparent 50%),
+    radial-gradient(ellipse 40% 50% at 5% 90%, rgba(245,135,14,.07), transparent 48%),
+    linear-gradient(165deg, var(--c-navy-050) 0%, var(--c-white) 55%);
+  border-bottom: 1px solid var(--c-line);
+  position: relative;
+  overflow: hidden;
+}
+.streamline-app .hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--c-orange) 30%, var(--c-sky-500) 70%, transparent);
+  opacity: .28;
+}
+.streamline-app .hero-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(48px, 7vw, 96px);
+  align-items: center;
+}
+.streamline-app .hero-content .eyebrow { margin-bottom: 18px; }
+.streamline-app .hero-content h1 { margin-bottom: 20px; }
+.streamline-app .hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+.streamline-app .hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--c-line);
+  background: rgba(255,255,255,.8);
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--c-muted);
+}
+.streamline-app .hero-badge::before {
+  content: "✓";
+  color: var(--c-orange);
+  font-weight: 800;
+}
+
+/* ── CSS PHONE MOCKUP ───────────────────────────────── */
+.streamline-app .phone-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+}
+.streamline-app .phone {
+  width: 260px;
+  background: var(--c-navy-950);
+  border-radius: 36px;
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.08),
+    0 0 0 6px rgba(9,30,60,.6),
+    var(--sh-lg);
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+.streamline-app .phone-notch {
+  width: 90px;
+  height: 26px;
+  background: var(--c-navy-950);
+  border-radius: 0 0 18px 18px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+.streamline-app .phone-screen {
+  background: #0d1f33;
+  min-height: 520px;
+  padding: 0;
+  overflow: hidden;
+}
+.streamline-app .app-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px 10px;
+  background: #091525;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.streamline-app .app-bar-title {
+  font-family: var(--f-display);
+  font-size: .78rem;
+  font-weight: 700;
+  color: rgba(255,255,255,.9);
+  letter-spacing: -.01em;
+}
+.streamline-app .app-bar-icon {
+  width: 26px; height: 26px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--c-sky-500), var(--c-navy-800));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.streamline-app .app-bar-icon svg { width: 12px; height: 12px; }
+.streamline-app .app-tabs {
+  display: flex;
+  gap: 0;
+  background: #091525;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  padding: 0 10px;
+}
+.streamline-app .app-tab {
+  flex: 1;
+  padding: 8px 4px;
+  text-align: center;
+  font-size: .58rem;
+  font-weight: 600;
+  color: rgba(255,255,255,.35);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  position: relative;
+}
+.streamline-app .app-tab.active { color: var(--c-orange-400); }
+.streamline-app .app-tab.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 20%; right: 20%;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--c-orange);
+}
+.streamline-app .app-content { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.streamline-app .app-item {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.streamline-app .app-item-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 6px;
+}
+.streamline-app .app-item-name {
+  font-size: .72rem;
+  font-weight: 700;
+  color: rgba(255,255,255,.9);
+  line-height: 1.3;
+}
+.streamline-app .app-chip {
+  font-size: .56rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+.streamline-app .app-chip.received { background: rgba(30,122,82,.25); color: #4ade80; }
+.streamline-app .app-chip.pending  { background: rgba(245,135,14,.2); color: var(--c-orange-400); }
+.streamline-app .app-chip.counted  { background: rgba(74,166,232,.2); color: #7dd3fc; }
+.streamline-app .app-item-lot {
+  font-size: .6rem;
+  color: rgba(255,255,255,.35);
+  font-weight: 600;
+  letter-spacing: .03em;
+}
+.streamline-app .app-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.streamline-app .app-item-qty {
+  font-size: .65rem;
+  color: rgba(255,255,255,.55);
+  font-weight: 600;
+}
+.streamline-app .app-progress {
+  height: 3px;
+  background: rgba(255,255,255,.08);
+  border-radius: 2px;
+  overflow: hidden;
+  flex: 1;
+  margin-left: 8px;
+}
+.streamline-app .app-progress-bar {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--c-sky-500), var(--c-orange));
+}
+.streamline-app .app-scan-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 4px 0 2px;
+  padding: 10px;
+  border-radius: 10px;
+  background: linear-gradient(170deg, var(--c-orange-400), var(--c-orange-600));
+  box-shadow: 0 4px 16px rgba(245,135,14,.3);
+  font-size: .68rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.streamline-app .app-scan-icon {
+  width: 14px; height: 14px;
+  border: 2px solid rgba(255,255,255,.7);
+  border-radius: 3px;
+  position: relative;
+}
+.streamline-app .app-scan-icon::before,
+.streamline-app .app-scan-icon::after {
+  content: "";
+  position: absolute;
+  background: rgba(255,255,255,.7);
+}
+.streamline-app .app-scan-icon::before { top: 3px; left: 0; right: 0; height: 1px; }
+.streamline-app .app-scan-icon::after  { top: 0; bottom: 0; left: 3px; width: 1px; }
+.streamline-app .phone-home-bar {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  background: #091525;
+}
+.streamline-app .phone-home-bar span {
+  width: 80px; height: 4px;
+  border-radius: 4px;
+  background: rgba(255,255,255,.2);
+  display: block;
+}
+
+/* Floating notification cards */
+.streamline-app .float-card {
+  position: absolute;
+  width: 180px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--c-white);
+  box-shadow: var(--sh);
+  border: 1px solid var(--c-line);
+}
+.streamline-app .float-card-1 { right: -24px; top: 40px; transform: rotate(2.5deg); }
+.streamline-app .float-card-2 { left: -28px;  bottom: 72px; transform: rotate(-2deg); }
+.streamline-app .float-label {
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--c-soft);
+  margin-bottom: 5px;
+}
+.streamline-app .float-value {
+  font-family: var(--f-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -.04em;
+  line-height: 1;
+  color: var(--c-navy-900);
+  margin-bottom: 3px;
+}
+.streamline-app .float-value span { color: var(--c-orange); }
+.streamline-app .float-sub { font-size: .65rem; color: var(--c-muted); }
+.streamline-app .float-dot {
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+.streamline-app .float-dot.green  { background: #22c55e; }
+.streamline-app .float-dot.orange { background: var(--c-orange); }
+
+/* ── SOCIAL PROOF ROW ───────────────────────────────── */
+.streamline-app .proof-row {
+  padding-block: 28px;
+  border-bottom: 1px solid var(--c-line);
+  background: var(--c-white);
+}
+.streamline-app .proof-inner {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 28px;
+  justify-content: space-between;
+}
+.streamline-app .proof-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .84rem;
+  color: var(--c-muted);
+  font-weight: 500;
+}
+.streamline-app .proof-rating img { height: 20px; width: auto; }
+.streamline-app .proof-stars { color: var(--c-orange); letter-spacing: 2px; }
+.streamline-app .proof-stat {
+  text-align: center;
+  padding: 0 20px;
+  border-left: 1px solid var(--c-line);
+}
+.streamline-app .proof-stat:first-of-type { border-left: 0; }
+.streamline-app .proof-stat strong {
+  display: block;
+  font-family: var(--f-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -.03em;
+  color: var(--c-navy-900);
+  line-height: 1.1;
+}
+.streamline-app .proof-stat strong span { color: var(--c-orange); }
+.streamline-app .proof-stat p { font-size: .75rem; color: var(--c-muted); margin-top: 2px; }
+.streamline-app .proof-stats { display: flex; }
+
+/* ── FEATURES — ALTERNATING ROWS ───────────────────── */
+.streamline-app .feat-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(48px, 7vw, 96px);
+  align-items: center;
+  padding-block: clamp(56px, 7vw, 88px);
+  border-top: 1px solid var(--c-line);
+}
+.streamline-app .feat-row:first-of-type { border-top: 0; padding-top: 0; }
+.streamline-app .feat-row--flip { direction: rtl; }
+.streamline-app .feat-row--flip > * { direction: ltr; }
+.streamline-app .feat-text { display: flex; flex-direction: column; gap: 14px; }
+.streamline-app .feat-text h3 { margin-bottom: 4px; }
+.streamline-app .feat-text p { color: var(--c-muted); font-size: 1.0625rem; }
+.streamline-app .feat-checklist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.streamline-app .feat-checklist li {
+  position: relative;
+  padding-left: 24px;
+  font-size: .95rem;
+  color: var(--c-muted);
+  line-height: 1.55;
+}
+.streamline-app .feat-checklist li::before {
+  content: "";
+  position: absolute;
+  top: .54em; left: 0;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--c-orange);
+  box-shadow: 0 0 0 3px var(--c-orange-100);
+}
+.streamline-app .feat-visual {
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: var(--sh-lg);
+  border: 1px solid var(--c-line);
+  background: var(--c-navy-050);
+}
+.streamline-app .panel { background: var(--c-white); }
+.streamline-app .panel-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  background: var(--c-navy-050);
+  border-bottom: 1px solid var(--c-line);
+}
+.streamline-app .panel-dot { width: 8px; height: 8px; border-radius: 50%; }
+.streamline-app .panel-dot:nth-child(1) { background: #ff5f57; }
+.streamline-app .panel-dot:nth-child(2) { background: #febc2e; }
+.streamline-app .panel-dot:nth-child(3) { background: #28c840; }
+.streamline-app .panel-title { font-size: .7rem; font-weight: 600; color: var(--c-soft); margin-left: 4px; letter-spacing: .03em; }
+.streamline-app .panel-body { padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+.streamline-app .panel-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 4px; }
+.streamline-app .panel-kpi {
+  background: var(--c-page);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-sm);
+  padding: 10px 12px;
+}
+.streamline-app .panel-kpi-label { font-size: .6rem; font-weight: 700; color: var(--c-soft); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
+.streamline-app .panel-kpi-val { font-family: var(--f-display); font-size: 1.2rem; font-weight: 700; color: var(--c-navy-900); letter-spacing: -.03em; line-height: 1; }
+.streamline-app .panel-kpi-delta { font-size: .6rem; font-weight: 700; color: #22c55e; margin-top: 2px; }
+.streamline-app .panel-row {
+  display: grid;
+  grid-template-columns: 1.6fr .8fr .8fr auto;
+  gap: 8px;
+  align-items: center;
+  padding: 9px 10px;
+  border-radius: var(--r-sm);
+  background: var(--c-page);
+  border: 1px solid var(--c-line);
+  font-size: .72rem;
+}
+.streamline-app .panel-row-name { font-weight: 600; color: var(--c-navy-900); }
+.streamline-app .panel-row-lot  { color: var(--c-muted); font-size: .65rem; }
+.streamline-app .panel-row-qty  { color: var(--c-muted); font-size: .7rem; }
+.streamline-app .panel-tag {
+  font-size: .6rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+}
+.streamline-app .panel-tag.green  { background: var(--c-green-100); color: var(--c-green-600); }
+.streamline-app .panel-tag.orange { background: var(--c-orange-100); color: var(--c-orange-700); }
+.streamline-app .panel-tag.blue   { background: var(--c-sky-100); color: #1d7dc0; }
+
+/* Stock count panel */
+.streamline-app .count-list { display: flex; flex-direction: column; gap: 8px; }
+.streamline-app .count-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-sm);
+  background: var(--c-white);
+}
+.streamline-app .count-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: var(--c-orange-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.streamline-app .count-info { flex: 1; min-width: 0; }
+.streamline-app .count-name { font-size: .8rem; font-weight: 600; color: var(--c-navy-900); }
+.streamline-app .count-meta { font-size: .68rem; color: var(--c-muted); margin-top: 1px; }
+.streamline-app .count-val  { font-family: var(--f-display); font-size: 1rem; font-weight: 700; color: var(--c-navy-900); letter-spacing: -.02em; flex-shrink: 0; }
+
+/* ── STEP FLOW ──────────────────────────────────────── */
+.streamline-app .steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  counter-reset: step;
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--c-white);
+  box-shadow: var(--sh-sm);
+}
+.streamline-app .step-item {
+  padding: clamp(20px, 2.5vw, 28px) clamp(16px, 2vw, 22px);
+  border-right: 1px solid var(--c-line);
+  position: relative;
+  transition: background .18s;
+}
+.streamline-app .step-item:last-child { border-right: 0; }
+.streamline-app .step-item:hover { background: var(--c-navy-050); }
+.streamline-app .step-item::after {
+  content: "›";
+  position: absolute;
+  right: -11px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: var(--c-orange);
+  font-weight: 700;
+  z-index: 1;
+  background: var(--c-white);
+  padding: 0 2px;
+  line-height: 1;
+  transition: background .18s;
+}
+.streamline-app .step-item:hover::after { background: var(--c-navy-050); }
+.streamline-app .step-item:last-child::after { display: none; }
+.streamline-app .step-num {
+  counter-increment: step;
+  font-family: var(--f-display);
+  font-size: .7rem;
+  font-weight: 700;
+  color: var(--c-orange);
+  letter-spacing: .04em;
+  margin-bottom: 8px;
+  display: block;
+}
+.streamline-app .step-num::before { content: "0" counter(step); }
+.streamline-app .step-title { font-size: .88rem; font-weight: 700; color: var(--c-navy-900); margin-bottom: 5px; line-height: 1.3; }
+.streamline-app .step-desc  { font-size: .76rem; color: var(--c-muted); line-height: 1.5; }
+
+/* ── TESTIMONIALS ───────────────────────────────────── */
+.streamline-app .testi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(18px, 2.5vw, 28px);
+}
+.streamline-app .testi {
+  padding: clamp(22px, 3vw, 32px);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-lg);
+  background: var(--c-white);
+  box-shadow: var(--sh-xs);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: box-shadow .2s, transform .2s var(--ease);
+}
+.streamline-app .testi:hover { box-shadow: var(--sh); transform: translateY(-3px); }
+.streamline-app .testi-stars { color: var(--c-orange); font-size: .9rem; letter-spacing: 2px; }
+.streamline-app .testi-quote { font-size: .95rem; color: var(--c-muted); line-height: 1.72; font-style: italic; flex: 1; }
+.streamline-app .testi-author { font-weight: 700; font-size: .88rem; color: var(--c-navy-800); }
+.streamline-app .testi-author a { color: inherit; }
+.streamline-app .testi-author a:hover { color: var(--c-orange-600); }
+
+/* ── FAQ ────────────────────────────────────────────── */
+.streamline-app .faq details {
+  padding: 20px 22px;
+  margin-bottom: 10px;
+  border: 1px solid var(--c-line);
+  border-radius: var(--r);
+  background: var(--c-white);
+  box-shadow: var(--sh-xs);
+  transition: border-color .18s, box-shadow .18s;
+}
+.streamline-app .faq details:hover { border-color: #c4d1e2; }
+.streamline-app .faq details[open] { border-color: var(--c-sky-500); box-shadow: var(--sh-sm); }
+.streamline-app .faq summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: .95rem;
+  color: var(--c-navy-900);
+  list-style: none;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  line-height: 1.4;
+}
+.streamline-app .faq summary::-webkit-details-marker { display: none; }
+.streamline-app .faq summary::after {
+  content: "+";
+  flex-shrink: 0;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--c-orange-100);
+  color: var(--c-orange-600);
+  font-weight: 700;
+  font-size: .85rem;
+  display: grid;
+  place-items: center;
+  transition: background .18s, color .18s, transform .22s var(--spring);
+}
+.streamline-app .faq details[open] summary::after { content: "−"; background: var(--c-orange); color: #fff; transform: rotate(180deg); }
+.streamline-app .faq p { margin: 12px 0 0; font-size: .9rem; color: var(--c-muted); line-height: 1.72; }
+
+/* ── FINAL CTA ──────────────────────────────────────── */
+.streamline-app .final-cta {
+  padding-block: clamp(80px, 10vw, 120px);
+  text-align: center;
+  background:
+    radial-gradient(ellipse 60% 80% at 85% 8%, rgba(245,135,14,.1), transparent 50%),
+    radial-gradient(ellipse 50% 60% at 5% 85%, rgba(74,166,232,.08), transparent 48%),
+    linear-gradient(165deg, var(--c-navy-050) 0%, var(--c-white) 55%);
+  border-top: 4px solid var(--c-orange);
+}
+.streamline-app .final-cta h2 { margin-bottom: 14px; }
+.streamline-app .final-cta p  { color: var(--c-muted); max-width: 520px; margin-inline: auto; margin-bottom: 32px; }
+.streamline-app .final-cta .btn-group { justify-content: center; }
+
+/* ── SIMPLE FOOTER ──────────────────────────────────── */
+.streamline-app .lp-footer {
+  padding-block: 28px;
+  background: var(--c-navy-050);
+  border-top: 1px solid var(--c-line);
+}
+.streamline-app .lp-footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: .82rem;
+  color: var(--c-muted);
+}
+.streamline-app .lp-footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+.streamline-app .lp-footer-links a { color: var(--c-navy-700); font-weight: 500; }
+.streamline-app .lp-footer-links a:hover { color: var(--c-orange-600); }
+
+/* ── SCROLL REVEAL ──────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .streamline-app .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .55s var(--ease), transform .55s var(--ease);
+    will-change: opacity, transform;
+  }
+  .streamline-app .reveal.in { opacity: 1; transform: none; }
+  .streamline-app .reveal-l  { transform: translateX(-28px); }
+  .streamline-app .reveal-r  { transform: translateX(28px); }
+  .streamline-app .reveal-d1 { transition-delay: .08s; }
+  .streamline-app .reveal-d2 { transition-delay: .16s; }
+  .streamline-app .reveal-d3 { transition-delay: .24s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .streamline-app .reveal { opacity: 1 !important; transform: none !important; }
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────── */
+@media (max-width: 900px) {
+  .streamline-app .hero-layout,
+  .streamline-app .feat-row,
+  .streamline-app .feat-row--flip { grid-template-columns: 1fr; direction: ltr; }
+  .streamline-app .phone-wrap { justify-content: center; margin-top: 16px; display: none; }
+  .streamline-app .float-card-1,
+  .streamline-app .float-card-2 { display: none; }
+  .streamline-app .steps { grid-template-columns: 1fr 1fr; }
+  .streamline-app .step-item:nth-child(2)::after { display: none; }
+  .streamline-app .testi-grid { grid-template-columns: 1fr; }
+  .streamline-app .proof-stats { display: none; }
+}
+@media (max-width: 580px) {
+  .streamline-app .steps { grid-template-columns: 1fr; }
+  .streamline-app .step-item::after { display: none; }
+  .streamline-app .btn { width: 100%; justify-content: center; }
+  .streamline-app .btn-group { align-items: stretch; flex-direction: column; }
+  .streamline-app .final-cta .btn-group { flex-direction: column; align-items: center; }
+  .streamline-app .final-cta .btn { width: auto; }
+  .streamline-app .panel-kpis { grid-template-columns: 1fr 1fr; }
+  .streamline-app .panel-row { grid-template-columns: 1fr auto; }
+  .streamline-app .panel-row-lot, .streamline-app .panel-row-qty { display: none; }
+}
+
+/* ── WP CONTAINER FIX ───────────────────────────────── */
+html .container-wrap { padding: 0 !important; }
+ul li { list-style: none; }
+
+/* ── WP PARENT OVERFLOW FIX (sticky header) ─────────── */
+div:has(> .streamline-app),
+div:has(> div:has(> .streamline-app)) {
+  overflow: visible !important;
+}
+
+.section .distribution img{
+	width: auto !important;
+}
+    
+
+
+/* ============================================================
+   STREAMLINE CHROME EXTENSION - Page-specific additions
+   Scope: .streamline-app
+   Notes: Reuses shared app landing page classes. These additions
+   cover image placeholders, benefit cards, and compact content cards.
+   ============================================================ */
+.streamline-app .image-placeholder {
+  min-height: 360px;
+  border: 1.5px dashed var(--c-border, var(--c-line));
+  border-radius: var(--r-xl);
+  background:
+    linear-gradient(135deg, rgba(74,166,232,.08), rgba(245,135,14,.08)),
+    var(--c-navy-050);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(24px, 4vw, 44px);
+  text-align: center;
+  color: var(--c-muted);
+  box-shadow: var(--sh-sm);
+  position: relative;
+  overflow: hidden;
+}
+.streamline-app .image-placeholder::before {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  border: 1px solid rgba(17,48,88,.08);
+  border-radius: calc(var(--r-xl) - 10px);
+  pointer-events: none;
+}
+.streamline-app .image-placeholder .placeholder-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 420px;
+}
+.streamline-app .image-placeholder .placeholder-kicker {
+  display: inline-flex;
+  padding: 5px 12px;
+  margin-bottom: 12px;
+  border-radius: var(--r-pill);
+  background: var(--c-white);
+  border: 1px solid var(--c-line);
+  color: var(--c-orange-600);
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.streamline-app .image-placeholder strong {
+  display: block;
+  font-family: var(--f-display);
+  color: var(--c-navy-900);
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  letter-spacing: -.03em;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+.streamline-app .image-placeholder span {
+  display: block;
+  font-size: .92rem;
+  line-height: 1.6;
+}
+.streamline-app .content-card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(14px, 2vw, 20px);
+}
+.streamline-app .content-card {
+  padding: clamp(18px, 2.5vw, 24px);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-lg);
+  background: var(--c-white);
+  box-shadow: var(--sh-xs);
+}
+.streamline-app .content-card strong {
+  display: block;
+  font-family: var(--f-display);
+  color: var(--c-navy-900);
+  font-size: 1.05rem;
+  line-height: 1.2;
+  letter-spacing: -.025em;
+  margin-bottom: 6px;
+}
+.streamline-app .content-card p {
+  color: var(--c-muted);
+  font-size: .9rem;
+  line-height: 1.62;
+}
+.streamline-app .benefit-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+}
+.streamline-app .benefit-card {
+  min-height: 150px;
+  padding: 18px 16px;
+  border: 1px solid var(--c-line);
+  border-radius: var(--r);
+  background: var(--c-white);
+  box-shadow: var(--sh-xs);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.streamline-app .benefit-card::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--c-orange);
+  box-shadow: 0 0 0 4px var(--c-orange-100);
+  flex-shrink: 0;
+}
+.streamline-app .benefit-card p {
+  color: var(--c-muted);
+  font-size: .86rem;
+  line-height: 1.5;
+  margin: 0;
+}
+.streamline-app .status-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+}
+.streamline-app .status-card {
+  border: 1px solid var(--c-line);
+  border-radius: var(--r);
+  background: var(--c-white);
+  padding: 16px;
+  box-shadow: var(--sh-xs);
+}
+.streamline-app .status-card strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--c-navy-900);
+  font-size: .9rem;
+  margin-bottom: 6px;
+}
+.streamline-app .status-card strong::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--c-sky-500);
+}
+.streamline-app .status-card.success strong::before { background: #22c55e; }
+.streamline-app .status-card.review strong::before { background: var(--c-orange); }
+.streamline-app .status-card.neutral strong::before { background: var(--c-soft); }
+.streamline-app .status-card p {
+  color: var(--c-muted);
+  font-size: .84rem;
+  line-height: 1.55;
+}
+@media (max-width: 980px) {
+  .streamline-app .content-card-grid,
+  .streamline-app .status-cards { grid-template-columns: 1fr 1fr; }
+  .streamline-app .benefit-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 580px) {
+  .streamline-app .content-card-grid,
+  .streamline-app .status-cards,
+  .streamline-app .benefit-grid { grid-template-columns: 1fr; }
+  .streamline-app .image-placeholder { min-height: 280px; }
+}
+</style>
+  
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Streamline Chrome Extension",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Google Chrome",
+  "description": "The Streamline Chrome Extension scans approved Gmail order emails, processes PDF, HTML, CSV, and Excel order files, validates order details, imports valid orders into Streamline, and flags emails that need attention.",
+  "offers": {
+    "@type": "Offer",
+    "url": "https://mountainstream.co/register-your-company"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Mountain Stream",
+    "url": "https://mountainstream.co/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does the Chrome Extension do?",
+      "acceptedAnswer": {"@type": "Answer", "text": "It scans approved Gmail order emails, processes PDF, HTML, CSV and Excel order files, validates order details, imports valid orders into Streamline, and flags emails that need attention."}
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work with Outlook or other email clients?",
+      "acceptedAnswer": {"@type": "Answer", "text": "The Streamline Chrome Extension only works on Gmail in Google Chrome. If you use another email client, you may create a Gmail address specifically to receive orders. Either autoforward order emails to the new address or ask customers to send orders directly to the new address."}
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work in Edge, Safari, or other browsers?",
+      "acceptedAnswer": {"@type": "Answer", "text": "The Streamline Chrome Extension only works on Google Chrome and it does not work on Edge, Safari or other browsers."}
+    },
+    {
+      "@type": "Question",
+      "name": "What do the order statuses mean?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Statuses show whether an order was successfully imported, needs review, failed, had already been entered in Streamline as a duplicate not entered, was ignored, or has only been scanned."}
+    },
+    {
+      "@type": "Question",
+      "name": "How does this connect to Streamline?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Valid order details are imported into Streamline, while exceptions are flagged so your team can review them before moving forward."}
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<div class="streamline-app">
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap">
+    <div class="hero-layout">
+
+      <div class="hero-content">
+        <p class="eyebrow reveal" style="transition-delay:.05s">Streamline Chrome Extension</p>
+        <h1 id="hero-title" class="reveal" style="transition-delay:.1s">
+          Automate Order Entry from <em>Gmail to Streamline.</em>
+        </h1>
+        <p class="lede reveal" style="transition-delay:.17s;margin-top:16px">
+          Turn incoming customer orders into validated Streamline orders automatically.
+        </p>
+        <p class="reveal" style="transition-delay:.2s;color:var(--c-muted);max-width:620px">
+          The Streamline Chrome Extension monitors approved Gmail senders, reads incoming orders, validates every request, and imports approved orders directly into Streamline&mdash;saving you weeks of manual work every year, while reducing order-entry mistakes.
+        </p>
+        <div class="btn-group reveal" style="transition-delay:.24s">
+          <a href="https://mountainstream.co/register-your-company?cta=chrome-extension-hero&intent=book-demo" class="btn btn-primary">Book a Demo</a>
+          <a href="#faq" class="btn btn-secondary">Read FAQs</a>
+        </div>
+        <!-- <div class="hero-badges reveal" style="transition-delay:.3s">
+          <span class="hero-badge">Gmail + Google Chrome</span>
+          <span class="hero-badge">PDF, HTML, Excel, CSV</span>
+          <span class="hero-badge">Validation before import</span>
+        </div> -->
+      </div>
+
+      <div class="phone-wrap reveal" style="transition-delay:.35s;display:flex">
+        <div class="image-placeholder" role="img" aria-label="Placeholder for Streamline Chrome Extension screenshot">
+          <div class="placeholder-inner">
+            <span class="placeholder-kicker">Image placeholder</span>
+            <strong>Chrome Extension / Gmail workflow screenshot</strong>
+            <span>Replace this area later with a product screenshot showing scanned Gmail orders, color-coded statuses, or the import review flow.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     HOW IT WORKS
+========================================================= -->
+<section class="section-sm" style="background:var(--c-page);border-bottom:1px solid var(--c-line)">
+  <div class="wrap">
+    <p class="section-label reveal">How it works</p>
+    <div class="steps reveal reveal-d1">
+      <div class="step-item">
+        <span class="step-num"></span>
+        <p class="step-title">Monitor approved senders</p>
+        <p class="step-desc">The extension scans approved Gmail inboxes for incoming client order emails.</p>
+      </div>
+      <div class="step-item">
+        <span class="step-num"></span>
+        <p class="step-title">Read attachments</p>
+        <p class="step-desc">It processes order details from HTML, PDF, Excel, and CSV order formats.</p>
+      </div>
+      <div class="step-item">
+        <span class="step-num"></span>
+        <p class="step-title">Validate orders</p>
+        <p class="step-desc">Every order is checked against deadlines, delivery rules, product availability, and required details.</p>
+      </div>
+      <div class="step-item">
+        <span class="step-num"></span>
+        <p class="step-title">Import to Streamline</p>
+        <p class="step-desc">Approved orders are imported directly into Streamline without manual re-keying.</p>
+      </div>
+      <div class="step-item">
+        <span class="step-num"></span>
+        <p class="step-title">Confirm or flag</p>
+        <p class="step-desc">Confirmation emails are sent, while exceptions are color-coded for review in Gmail.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FORMATS
+========================================================= -->
+<section class="section-sm" style="background:var(--c-white);border-bottom:1px solid var(--c-line)">
+  <div class="wrap">
+    <div class="wrap-narrow" style="text-align:center;margin-bottom:34px">
+      <p class="eyebrow reveal" style="justify-content:center">Reads attachments</p>
+      <h2 class="reveal reveal-d1">PDF, HTML, Excel and CSV</h2>
+      <p class="lede reveal reveal-d2" style="margin:16px auto 0">
+        Customers send orders in different formats: HTML, PDFs, Excel files, and CSVs. The extension scans approved inboxes, identifies order details, and checks each order against your business rules before it reaches Streamline.
+      </p>
+    </div>
+    <div class="content-card-grid reveal reveal-d2">
+      <div class="content-card">
+        <strong>PDF</strong>
+        <p>Process order details sent as PDF order files or attachments.</p>
+      </div>
+      <div class="content-card">
+        <strong>HTML</strong>
+        <p>Read structured order information from HTML order emails and files.</p>
+      </div>
+      <div class="content-card">
+        <strong>Excel</strong>
+        <p>Import order details from customer spreadsheets.</p>
+      </div>
+      <div class="content-card">
+        <strong>CSV</strong>
+        <p>Support CSV order files as part of your automated order workflow.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FEATURES
+========================================================= -->
+<section class="section" style="background:var(--c-white)">
+  <div class="wrap">
+
+    <div class="feat-row reveal">
+      <div class="feat-text">
+        <p class="eyebrow" style="margin-bottom:10px">Order capture</p>
+        <h3>From Purchase Order Number to Order Confirmation</h3>
+        <p>The Streamline Chrome Extension captures every detail in the order, including:</p>
+        <ul class="feat-checklist">
+          <li>Purchase Order #</li>
+          <li>Delivery Date</li>
+          <li>Delivery Address</li>
+          <li>Items &amp; quantities</li>
+        </ul>
+        <p>Once an order is approved and imported, a confirmation email is automatically sent to all subscribed users.</p>
+        <div style="margin-top:12px">
+          <!-- <a href="/streamline-features/customers-and-ordering/" class="link-arrow">See customers and ordering</a> -->
+        </div>
+      </div>
+      <div class="image-placeholder" role="img" aria-label="Placeholder for order details capture screenshot">
+        <div class="placeholder-inner">
+          <span class="placeholder-kicker">Image placeholder</span>
+          <strong>Order detail capture</strong>
+          <span>Suggested visual: a Gmail order beside extracted fields for PO number, delivery date, address, items, and quantities.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="feat-row feat-row--flip reveal">
+      <div class="feat-text">
+        <p class="eyebrow" style="margin-bottom:10px">Automatic validation</p>
+        <h3>Validate every request before it becomes an order.</h3>
+        <p>Before an order is imported, the extension checks whether:</p>
+        <ul class="feat-checklist">
+          <li>The order was submitted before the deadline</li>
+          <li>The delivery address is served on the requested delivery date</li>
+          <li>Requested products are available or made on the selected day</li>
+          <li>Required order details are complete</li>
+          <li>The order meets all your business' fulfillment rules</li>
+        </ul>
+      </div>
+      <div class="image-placeholder" role="img" aria-label="Placeholder for automatic order validation screenshot">
+        <div class="placeholder-inner">
+          <span class="placeholder-kicker">Image placeholder</span>
+          <strong>Validation checklist</strong>
+          <span>Suggested visual: validation results for deadline, delivery route, product availability, required fields, and fulfillment rules.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="feat-row reveal">
+      <div class="feat-text">
+        <p class="eyebrow" style="margin-bottom:10px">Streamline import</p>
+        <h3>Approved Orders Flow Straight into Streamline</h3>
+        <p>When an order is validated, it is imported automatically into Streamline. The original Gmail message is then color-coded so you can see at a glance orders that have been imported successfully.</p>
+        <div style="margin-top:12px">
+          <!-- <a href="/streamline-features/integrations/" class="link-arrow">See Streamline integrations</a> -->
+        </div>
+      </div>
+      <div class="feat-visual">
+        <div class="panel">
+          <div class="panel-header">
+            <span class="panel-dot"></span>
+            <span class="panel-dot"></span>
+            <span class="panel-dot"></span>
+            <span class="panel-title">Gmail processing status placeholder</span>
+          </div>
+          <div class="panel-body">
+            <div class="panel-row">
+              <span class="panel-row-name">Windmill Bakery - PO #1048</span>
+              <span class="panel-row-lot">PDF</span>
+              <span class="panel-row-qty">12 items</span>
+              <span class="panel-tag green">Imported</span>
+            </div>
+            <div class="panel-row">
+              <span class="panel-row-name">Bayside Club - Delivery change</span>
+              <span class="panel-row-lot">HTML</span>
+              <span class="panel-row-qty">6 items</span>
+              <span class="panel-tag orange">Review</span>
+            </div>
+            <div class="panel-row">
+              <span class="panel-row-name">Sample Store - Weekly order</span>
+              <span class="panel-row-lot">CSV</span>
+              <span class="panel-row-qty">24 items</span>
+              <span class="panel-tag blue">Scanned</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feat-row feat-row--flip reveal">
+      <div class="feat-text">
+        <p class="eyebrow" style="margin-bottom:10px">Exceptions</p>
+        <h3>Exceptions Are Easy to Spot</h3>
+        <p>When an order needs attention, the extension flags and color-codes the email in Gmail. You can quickly identify the issue, review the order, and take the appropriate action without digging through the inbox.</p>
+        <div class="status-cards">
+          <div class="status-card success">
+            <strong>Imported</strong>
+            <p>The order was validated and created in Streamline.</p>
+          </div>
+          <div class="status-card review">
+            <strong>Needs review</strong>
+            <p>The email needs attention before your team moves forward.</p>
+          </div>
+          <div class="status-card neutral">
+            <strong>Scanned</strong>
+            <p>The message has been scanned or ignored based on status.</p>
+          </div>
+        </div>
+      </div>
+      <div class="image-placeholder" role="img" aria-label="Placeholder for exception review screenshot">
+        <div class="placeholder-inner">
+          <span class="placeholder-kicker">Image placeholder</span>
+          <strong>Color-coded Gmail exceptions</strong>
+          <span>Suggested visual: Gmail labels or inbox rows showing imported, review, failed, duplicate, ignored, and scanned messages.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================================================
+     BENEFITS
+========================================================= -->
+<section class="section-sm" style="background:var(--c-page);border-top:1px solid var(--c-line)">
+  <div class="wrap">
+    <div class="wrap-narrow" style="text-align:center;margin-bottom:34px">
+      <p class="eyebrow reveal" style="justify-content:center">Key Benefits</p>
+      <h2 class="reveal reveal-d1">Less Manual Entry. Fewer Mistakes. Faster Processing.</h2>
+      <p class="lede reveal reveal-d2" style="margin:16px auto 0">
+        The Streamline Chrome Extension helps bakery teams move from inbox chaos to a clear, automated order workflow&mdash;so staff can spend less time copying order details and more time keeping production and delivery on track.
+      </p>
+    </div>
+    <div class="benefit-grid reveal reveal-d2">
+      <div class="benefit-card"><p>Automatically scans approved client order emails</p></div>
+      <div class="benefit-card"><p>Supports HTML, PDF, Excel, and CSV order formats</p></div>
+      <div class="benefit-card"><p>Validates orders before import</p></div>
+      <div class="benefit-card"><p>Imports approved orders directly into Streamline</p></div>
+      <div class="benefit-card"><p>Color-codes Gmail messages by processing status</p></div>
+      <div class="benefit-card"><p>Flags failed validations for quick review</p></div>
+      <div class="benefit-card"><p>Reduces manual order entry and operational errors</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FAQ
+========================================================= -->
+<section class="section-sm" id="faq" style="background:var(--c-white);border-top:1px solid var(--c-line)">
+  <div class="wrap-narrow">
+    <p class="section-label reveal">Frequently Asked Questions</p>
+    <div class="faq reveal reveal-d1">
+      <details open>
+        <summary>What does the Chrome Extension do?</summary>
+        <p>It scans approved Gmail order emails, processes PDF, HTML, CSV and Excel order files, validates order details, imports valid orders into Streamline, and flags emails that need attention.</p>
+      </details>
+      <details>
+        <summary>Does it work with Outlook or other email clients?</summary>
+        <p>The Streamline Chrome Extension only works on Gmail in Google Chrome. If you use another email client, you may easily create a Gmail address, specifically to receive orders. Either autoforward order emails to the new address or ask customers to send orders directly to the new address.</p>
+      </details>
+      <details>
+        <summary>Does it work in Edge, Safari, or other browsers?</summary>
+        <p>The Streamline Chrome Extension only works on Google Chrome and it does not work on Edge, Safari or other browsers. <a href="https://www.google.com/chrome/" target="_blank" rel="noopener" style="color:var(--c-navy-700);font-weight:700">Click here to download Google Chrome.</a></p>
+      </details>
+      <details>
+        <summary>What do the order statuses mean?</summary>
+        <p>Statuses show whether an order was successfully imported, needs review, failed, had already been entered in Streamline (duplicate not entered), was ignored, or has only been scanned.</p>
+      </details>
+      <details>
+        <summary>How does this connect to Streamline?</summary>
+        <p>Valid order details are imported into Streamline, while exceptions are flagged so your team can review them before moving forward.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FINAL CTA
+========================================================= -->
+<section class="final-cta">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow" style="justify-content:center">Get started today</p>
+      <h2>Turn Gmail orders into Streamline orders automatically.</h2>
+      <p>Use the Streamline Chrome Extension to scan approved order emails, validate order details, import approved orders, and flag exceptions before they slow down production or delivery.</p>
+      <div class="btn-group">
+        <a href="https://mountainstream.co/register-your-company?cta=chrome-extension-footer&intent=book-demo" class="btn btn-primary">Book a Demo</a>
+        <a href="/streamline-features/customers-and-ordering/" class="btn btn-secondary">Explore Customers &amp; Ordering</a>
+      </div>
+      <p style="margin-top:20px;font-size:.82rem;color:var(--c-soft)">
+        Built for Streamline ERP &nbsp;&middot;&nbsp; Gmail &nbsp;&middot;&nbsp; Google Chrome &nbsp;&middot;&nbsp; PDF, HTML, Excel, and CSV order formats
+      </p>
+    </div>
+  </div>
+</section>
+
+</div>
+<script>
+    (function () {
+  var root = document.querySelector('.streamline-app');
+  if (!root) return;
+
+  // Scroll reveal — uses 'in' class (not 'visible') per this page's design system
+  var obs = new IntersectionObserver(function (entries, o) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        o.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  root.querySelectorAll('.reveal').forEach(function (el) {
+    // If already in viewport on load, mark visible immediately
+    var rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.classList.add('in');
+    } else {
+      obs.observe(el);
+    }
+  });
+
+  // Fire hero elements immediately
+  requestAnimationFrame(function () {
+    setTimeout(function () {
+      root.querySelectorAll('.hero .reveal').forEach(function (el) {
+        el.classList.add('in');
+      });
+    }, 60);
+  });
+})();
+
+</script>
+</body>
+</html>

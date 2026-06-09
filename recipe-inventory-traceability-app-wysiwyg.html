@@ -1,0 +1,2240 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inventory App — WYSIWYG Editor</title>
+<style>
+        /* ============================================================
+   STREAMLINE APPS — Shared Landing Page Styles
+   Scope:    .streamline-app
+   Covers:   Inventory App + Distribution App
+   Design:   Minimal, white, generous space, one accent colour
+   Fonts:    Fraunces (display) + DM Sans (body)
+   ============================================================ */
+
+/* ── TOKENS ─────────────────────────────────────────── */
+.streamline-app {
+  --c-navy-950: #113058;
+  --c-navy-900: #113058;
+  --c-navy-800: #113058;
+  --c-navy-700: #113058;
+  --c-navy-100: #e4eef9;
+  --c-navy-050: #f2f7fd;
+
+  --c-orange-700: #ff9100;
+  --c-orange-600: #ff9100;
+  --c-orange:     #ff9100;
+  --c-orange-400: #ff9100;
+  --c-orange-100: #fef0d8;
+  --c-orange-050: #fff8ef;
+  --c-orange-glow: rgba(245,135,14,.2);
+
+  --c-sky-500: #4fa6e9;
+  --c-sky-100: #ddf1ff;
+  --c-sky-050: #f0f9ff;
+
+  --c-green-600: #1e7a52;
+  --c-green-100: #e6f7ef;
+
+  --c-text:  #1a2d42;
+  --c-muted: #54647a;
+  --c-soft:  #8a9bae;
+  --c-line:  #e2eaf4;
+  --c-white: #ffffff;
+  --c-page:  #f9fbff;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'DM Sans', system-ui, sans-serif;
+
+  --wrap:    1120px;
+  --gutter:  clamp(20px, 4vw, 48px);
+
+  --r-sm:   8px;
+  --r:      14px;
+  --r-lg:   22px;
+  --r-xl:   32px;
+  --r-pill: 999px;
+
+  --sh-xs:  0 1px 4px rgba(9,30,60,.06);
+  --sh-sm:  0 4px 18px rgba(9,30,60,.09);
+  --sh:     0 12px 40px rgba(9,30,60,.12);
+  --sh-lg:  0 28px 72px rgba(9,30,60,.16);
+  --sh-cta: 0 10px 32px var(--c-orange-glow);
+
+  --ease:   cubic-bezier(.25,.46,.45,.94);
+  --spring: cubic-bezier(.34,1.56,.64,1);
+
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.68;
+  color: var(--c-text);
+  background: var(--c-white);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── RESET ──────────────────────────────────────────── */
+.streamline-app *, .streamline-app *::before, .streamline-app *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.streamline-app img { display: block; max-width: 100%; height: auto; }
+.streamline-app p   { margin-bottom: 1rem; line-height: 1.72; }
+.streamline-app p:last-child { margin-bottom: 0; }
+.streamline-app a   { text-decoration: none; transition: color .15s var(--ease), opacity .15s; }
+
+/* ── LAYOUT ─────────────────────────────────────────── */
+.streamline-app .wrap {
+  width: min(var(--wrap), calc(100% - var(--gutter) * 2));
+  margin-inline: auto;
+}
+.streamline-app .wrap-narrow {
+  width: min(720px, calc(100% - var(--gutter) * 2));
+  margin-inline: auto;
+}
+.streamline-app .section    { padding-block: clamp(72px, 9vw, 112px); }
+.streamline-app .section-sm { padding-block: clamp(48px, 6vw, 72px); }
+.streamline-app .divider    { height: 1px; background: var(--c-line); border: none; }
+
+/* ── TYPOGRAPHY ─────────────────────────────────────── */
+.streamline-app h1, .streamline-app h2, .streamline-app h3 {
+  font-family: var(--f-display);
+  font-weight: 600;
+  letter-spacing: -.04em;
+  line-height: 1.06;
+  color: var(--c-navy-900);
+}
+.streamline-app h1 {
+  font-size: clamp(2.6rem, 5.5vw, 4.8rem);
+  font-weight: 700;
+  letter-spacing: -.055em;
+  line-height: 1;
+}
+.streamline-app h1 em { font-style: italic; color: var(--c-orange-600); }
+.streamline-app h2 {
+  font-size: clamp(1.9rem, 3.5vw, 3rem);
+  letter-spacing: -.04em;
+}
+.streamline-app h2 em { font-style: italic; color: var(--c-orange-600); }
+.streamline-app h3 {
+  font-size: clamp(1.1rem, 1.6vw, 1.45rem);
+  letter-spacing: -.025em;
+  line-height: 1.18;
+}
+
+.streamline-app .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--c-orange-600);
+  margin-bottom: 14px;
+}
+.streamline-app .eyebrow::before {
+  content: "";
+  width: 20px; height: 2px;
+  border-radius: 2px;
+  background: var(--c-orange);
+  flex-shrink: 0;
+}
+.streamline-app .lede {
+  font-size: clamp(1.0625rem, 1.4vw, 1.2rem);
+  color: var(--c-muted);
+  line-height: 1.75;
+  max-width: 560px;
+}
+.streamline-app .section-label {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--c-soft);
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+/* ── BUTTONS ────────────────────────────────────────── */
+.streamline-app .btn-group { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 32px; }
+.streamline-app .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  min-height: 52px;
+  padding: 13px 28px;
+  border: 1.5px solid transparent;
+  border-radius: var(--r-pill);
+  font-family: var(--f-body);
+  font-size: .95rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .18s var(--ease), color .18s var(--ease),
+              border-color .18s var(--ease), box-shadow .18s var(--ease),
+              transform .2s var(--spring);
+}
+.streamline-app .btn:hover  { transform: translateY(-2px); }
+.streamline-app .btn:active { transform: translateY(0); }
+.streamline-app .btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(74,166,232,.4); }
+
+.streamline-app .btn-primary {
+  background: linear-gradient(170deg, var(--c-orange-400) 0%, var(--c-orange-600) 100%);
+  color: #fff;
+  border-color: var(--c-orange-600);
+  box-shadow: var(--sh-cta);
+}
+.streamline-app .btn-primary:hover {
+  background: linear-gradient(170deg, #ffb84a 0%, var(--c-orange-700) 100%);
+  color: #fff;
+  box-shadow: 0 16px 40px var(--c-orange-glow);
+}
+.streamline-app .btn-secondary {
+  background: var(--c-white);
+  color: var(--c-navy-900);
+  border-color: var(--c-line);
+  box-shadow: var(--sh-xs);
+}
+.streamline-app .btn-secondary:hover {
+  background: var(--c-navy-050);
+  border-color: var(--c-sky-500);
+  color: var(--c-navy-900);
+  box-shadow: var(--sh-sm);
+}
+.streamline-app .btn-ghost {
+  background: rgba(255,255,255,.1);
+  color: #fff;
+  border-color: rgba(255,255,255,.25);
+}
+.streamline-app .btn-ghost:hover {
+  background: rgba(255,255,255,.18);
+  color: #fff;
+  border-color: rgba(255,255,255,.45);
+}
+.streamline-app .link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  color: var(--c-navy-700);
+  font-weight: 600;
+  font-size: .9rem;
+}
+.streamline-app .link-arrow::after { content: "→"; transition: transform .16s var(--spring); }
+.streamline-app .link-arrow:hover  { color: var(--c-orange-600); }
+.streamline-app .link-arrow:hover::after { transform: translateX(4px); }
+
+/* ── MINIMAL HEADER ─────────────────────────────────── */
+.streamline-app .lp-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,.95);
+  border-bottom: 1px solid var(--c-line);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.streamline-app .lp-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+.streamline-app .lp-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+}
+.streamline-app .lp-logo-mark {
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--c-sky-500), var(--c-navy-800));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.streamline-app .lp-logo-mark svg { width: 16px; height: 16px; }
+.streamline-app .lp-logo-name {
+  font-family: var(--f-display);
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--c-navy-900);
+  letter-spacing: -.02em;
+  line-height: 1.1;
+}
+.streamline-app .lp-logo-name span { color: var(--c-orange); }
+.streamline-app .lp-logo-sub {
+  display: block;
+  font-size: .6rem;
+  font-weight: 500;
+  letter-spacing: .04em;
+  color: var(--c-soft);
+}
+.streamline-app .lp-header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.streamline-app .lp-header-link {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--c-muted);
+}
+.streamline-app .lp-header-link:hover { color: var(--c-navy-900); }
+
+/* ── HERO ───────────────────────────────────────────── */
+.streamline-app .hero {
+  padding: clamp(64px, 9vw, 112px) 0 clamp(48px, 7vw, 80px);
+  background:
+    radial-gradient(ellipse 65% 70% at 90% 5%, rgba(74,166,232,.1), transparent 50%),
+    radial-gradient(ellipse 40% 50% at 5% 90%, rgba(245,135,14,.07), transparent 48%),
+    linear-gradient(165deg, var(--c-navy-050) 0%, var(--c-white) 55%);
+  border-bottom: 1px solid var(--c-line);
+  position: relative;
+  overflow: hidden;
+}
+.streamline-app .hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--c-orange) 30%, var(--c-sky-500) 70%, transparent);
+  opacity: .28;
+}
+.streamline-app .hero-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(48px, 7vw, 96px);
+  align-items: center;
+}
+.streamline-app .hero-content .eyebrow { margin-bottom: 18px; }
+.streamline-app .hero-content h1 { margin-bottom: 20px; }
+.streamline-app .hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+.streamline-app .hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--c-line);
+  background: rgba(255,255,255,.8);
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--c-muted);
+}
+.streamline-app .hero-badge::before {
+  content: "✓";
+  color: var(--c-orange);
+  font-weight: 800;
+}
+
+/* ── CSS PHONE MOCKUP ───────────────────────────────── */
+.streamline-app .phone-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+}
+.streamline-app .phone {
+  width: 260px;
+  background: var(--c-navy-950);
+  border-radius: 36px;
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.08),
+    0 0 0 6px rgba(9,30,60,.6),
+    var(--sh-lg);
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+.streamline-app .phone-notch {
+  width: 90px;
+  height: 26px;
+  background: var(--c-navy-950);
+  border-radius: 0 0 18px 18px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+.streamline-app .phone-screen {
+  background: #0d1f33;
+  min-height: 520px;
+  padding: 0;
+  overflow: hidden;
+}
+.streamline-app .app-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px 10px;
+  background: #091525;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.streamline-app .app-bar-title {
+  font-family: var(--f-display);
+  font-size: .78rem;
+  font-weight: 700;
+  color: rgba(255,255,255,.9);
+  letter-spacing: -.01em;
+}
+.streamline-app .app-bar-icon {
+  width: 26px; height: 26px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--c-sky-500), var(--c-navy-800));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.streamline-app .app-bar-icon svg { width: 12px; height: 12px; }
+.streamline-app .app-tabs {
+  display: flex;
+  gap: 0;
+  background: #091525;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  padding: 0 10px;
+}
+.streamline-app .app-tab {
+  flex: 1;
+  padding: 8px 4px;
+  text-align: center;
+  font-size: .58rem;
+  font-weight: 600;
+  color: rgba(255,255,255,.35);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  position: relative;
+}
+.streamline-app .app-tab.active { color: var(--c-orange-400); }
+.streamline-app .app-tab.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 20%; right: 20%;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--c-orange);
+}
+.streamline-app .app-content { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.streamline-app .app-item {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.streamline-app .app-item-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 6px;
+}
+.streamline-app .app-item-name {
+  font-size: .72rem;
+  font-weight: 700;
+  color: rgba(255,255,255,.9);
+  line-height: 1.3;
+}
+.streamline-app .app-chip {
+  font-size: .56rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+.streamline-app .app-chip.received { background: rgba(30,122,82,.25); color: #4ade80; }
+.streamline-app .app-chip.pending  { background: rgba(245,135,14,.2); color: var(--c-orange-400); }
+.streamline-app .app-chip.counted  { background: rgba(74,166,232,.2); color: #7dd3fc; }
+.streamline-app .app-item-lot {
+  font-size: .6rem;
+  color: rgba(255,255,255,.35);
+  font-weight: 600;
+  letter-spacing: .03em;
+}
+.streamline-app .app-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.streamline-app .app-item-qty {
+  font-size: .65rem;
+  color: rgba(255,255,255,.55);
+  font-weight: 600;
+}
+.streamline-app .app-progress {
+  height: 3px;
+  background: rgba(255,255,255,.08);
+  border-radius: 2px;
+  overflow: hidden;
+  flex: 1;
+  margin-left: 8px;
+}
+.streamline-app .app-progress-bar {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--c-sky-500), var(--c-orange));
+}
+.streamline-app .app-scan-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 4px 0 2px;
+  padding: 10px;
+  border-radius: 10px;
+  background: linear-gradient(170deg, var(--c-orange-400), var(--c-orange-600));
+  box-shadow: 0 4px 16px rgba(245,135,14,.3);
+  font-size: .68rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.streamline-app .app-scan-icon {
+  width: 14px; height: 14px;
+  border: 2px solid rgba(255,255,255,.7);
+  border-radius: 3px;
+  position: relative;
+}
+.streamline-app .app-scan-icon::before,
+.streamline-app .app-scan-icon::after {
+  content: "";
+  position: absolute;
+  background: rgba(255,255,255,.7);
+}
+.streamline-app .app-scan-icon::before { top: 3px; left: 0; right: 0; height: 1px; }
+.streamline-app .app-scan-icon::after  { top: 0; bottom: 0; left: 3px; width: 1px; }
+.streamline-app .phone-home-bar {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  background: #091525;
+}
+.streamline-app .phone-home-bar span {
+  width: 80px; height: 4px;
+  border-radius: 4px;
+  background: rgba(255,255,255,.2);
+  display: block;
+}
+
+/* Floating notification cards */
+.streamline-app .float-card {
+  position: absolute;
+  width: 180px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--c-white);
+  box-shadow: var(--sh);
+  border: 1px solid var(--c-line);
+}
+.streamline-app .float-card-1 { right: -24px; top: 40px; transform: rotate(2.5deg); }
+.streamline-app .float-card-2 { left: -28px;  bottom: 72px; transform: rotate(-2deg); }
+.streamline-app .float-label {
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--c-soft);
+  margin-bottom: 5px;
+}
+.streamline-app .float-value {
+  font-family: var(--f-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -.04em;
+  line-height: 1;
+  color: var(--c-navy-900);
+  margin-bottom: 3px;
+}
+.streamline-app .float-value span { color: var(--c-orange); }
+.streamline-app .float-sub { font-size: .65rem; color: var(--c-muted); }
+.streamline-app .float-dot {
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+.streamline-app .float-dot.green  { background: #22c55e; }
+.streamline-app .float-dot.orange { background: var(--c-orange); }
+
+/* ── SOCIAL PROOF ROW ───────────────────────────────── */
+.streamline-app .proof-row {
+  padding-block: 28px;
+  border-bottom: 1px solid var(--c-line);
+  background: var(--c-white);
+}
+.streamline-app .proof-inner {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 28px;
+  justify-content: space-between;
+}
+.streamline-app .proof-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .84rem;
+  color: var(--c-muted);
+  font-weight: 500;
+}
+.streamline-app .proof-rating img { height: 20px; width: auto; }
+.streamline-app .proof-stars { color: var(--c-orange); letter-spacing: 2px; }
+.streamline-app .proof-stat {
+  text-align: center;
+  padding: 0 20px;
+  border-left: 1px solid var(--c-line);
+}
+.streamline-app .proof-stat:first-of-type { border-left: 0; }
+.streamline-app .proof-stat strong {
+  display: block;
+  font-family: var(--f-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -.03em;
+  color: var(--c-navy-900);
+  line-height: 1.1;
+}
+.streamline-app .proof-stat strong span { color: var(--c-orange); }
+.streamline-app .proof-stat p { font-size: .75rem; color: var(--c-muted); margin-top: 2px; }
+.streamline-app .proof-stats { display: flex; }
+
+/* ── FEATURES — ALTERNATING ROWS ───────────────────── */
+.streamline-app .feat-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(48px, 7vw, 96px);
+  align-items: center;
+  padding-block: clamp(56px, 7vw, 88px);
+  border-top: 1px solid var(--c-line);
+}
+.streamline-app .feat-row:first-of-type { border-top: 0; padding-top: 0; }
+.streamline-app .feat-row--flip { direction: rtl; }
+.streamline-app .feat-row--flip > * { direction: ltr; }
+.streamline-app .feat-text { display: flex; flex-direction: column; gap: 14px; }
+.streamline-app .feat-text h3 { margin-bottom: 4px; }
+.streamline-app .feat-text p { color: var(--c-muted); font-size: 1.0625rem; }
+.streamline-app .feat-checklist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.streamline-app .feat-checklist li {
+  position: relative;
+  padding-left: 24px;
+  font-size: .95rem;
+  color: var(--c-muted);
+  line-height: 1.55;
+}
+.streamline-app .feat-checklist li::before {
+  content: "";
+  position: absolute;
+  top: .54em; left: 0;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--c-orange);
+  box-shadow: 0 0 0 3px var(--c-orange-100);
+}
+.streamline-app .feat-visual {
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: var(--sh-lg);
+  border: 1px solid var(--c-line);
+  background: var(--c-navy-050);
+}
+.streamline-app .panel { background: var(--c-white); }
+.streamline-app .panel-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  background: var(--c-navy-050);
+  border-bottom: 1px solid var(--c-line);
+}
+.streamline-app .panel-dot { width: 8px; height: 8px; border-radius: 50%; }
+.streamline-app .panel-dot:nth-child(1) { background: #ff5f57; }
+.streamline-app .panel-dot:nth-child(2) { background: #febc2e; }
+.streamline-app .panel-dot:nth-child(3) { background: #28c840; }
+.streamline-app .panel-title { font-size: .7rem; font-weight: 600; color: var(--c-soft); margin-left: 4px; letter-spacing: .03em; }
+.streamline-app .panel-body { padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+.streamline-app .panel-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 4px; }
+.streamline-app .panel-kpi {
+  background: var(--c-page);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-sm);
+  padding: 10px 12px;
+}
+.streamline-app .panel-kpi-label { font-size: .6rem; font-weight: 700; color: var(--c-soft); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
+.streamline-app .panel-kpi-val { font-family: var(--f-display); font-size: 1.2rem; font-weight: 700; color: var(--c-navy-900); letter-spacing: -.03em; line-height: 1; }
+.streamline-app .panel-kpi-delta { font-size: .6rem; font-weight: 700; color: #22c55e; margin-top: 2px; }
+.streamline-app .panel-row {
+  display: grid;
+  grid-template-columns: 1.6fr .8fr .8fr auto;
+  gap: 8px;
+  align-items: center;
+  padding: 9px 10px;
+  border-radius: var(--r-sm);
+  background: var(--c-page);
+  border: 1px solid var(--c-line);
+  font-size: .72rem;
+}
+.streamline-app .panel-row-name { font-weight: 600; color: var(--c-navy-900); }
+.streamline-app .panel-row-lot  { color: var(--c-muted); font-size: .65rem; }
+.streamline-app .panel-row-qty  { color: var(--c-muted); font-size: .7rem; }
+.streamline-app .panel-tag {
+  font-size: .6rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+}
+.streamline-app .panel-tag.green  { background: var(--c-green-100); color: var(--c-green-600); }
+.streamline-app .panel-tag.orange { background: var(--c-orange-100); color: var(--c-orange-700); }
+.streamline-app .panel-tag.blue   { background: var(--c-sky-100); color: #1d7dc0; }
+
+/* Stock count panel */
+.streamline-app .count-list { display: flex; flex-direction: column; gap: 8px; }
+.streamline-app .count-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-sm);
+  background: var(--c-white);
+}
+.streamline-app .count-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: var(--c-orange-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.streamline-app .count-info { flex: 1; min-width: 0; }
+.streamline-app .count-name { font-size: .8rem; font-weight: 600; color: var(--c-navy-900); }
+.streamline-app .count-meta { font-size: .68rem; color: var(--c-muted); margin-top: 1px; }
+.streamline-app .count-val  { font-family: var(--f-display); font-size: 1rem; font-weight: 700; color: var(--c-navy-900); letter-spacing: -.02em; flex-shrink: 0; }
+
+/* ── STEP FLOW ──────────────────────────────────────── */
+.streamline-app .steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  counter-reset: step;
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--c-white);
+  box-shadow: var(--sh-sm);
+}
+.streamline-app .step-item {
+  padding: clamp(20px, 2.5vw, 28px) clamp(16px, 2vw, 22px);
+  border-right: 1px solid var(--c-line);
+  position: relative;
+  transition: background .18s;
+}
+.streamline-app .step-item:last-child { border-right: 0; }
+.streamline-app .step-item:hover { background: var(--c-navy-050); }
+.streamline-app .step-item::after {
+  content: "›";
+  position: absolute;
+  right: -11px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: var(--c-orange);
+  font-weight: 700;
+  z-index: 1;
+  background: var(--c-white);
+  padding: 0 2px;
+  line-height: 1;
+  transition: background .18s;
+}
+.streamline-app .step-item:hover::after { background: var(--c-navy-050); }
+.streamline-app .step-item:last-child::after { display: none; }
+.streamline-app .step-num {
+  counter-increment: step;
+  font-family: var(--f-display);
+  font-size: .7rem;
+  font-weight: 700;
+  color: var(--c-orange);
+  letter-spacing: .04em;
+  margin-bottom: 8px;
+  display: block;
+}
+.streamline-app .step-num::before { content: "0" counter(step); }
+.streamline-app .step-title { font-size: .88rem; font-weight: 700; color: var(--c-navy-900); margin-bottom: 5px; line-height: 1.3; }
+.streamline-app .step-desc  { font-size: .76rem; color: var(--c-muted); line-height: 1.5; }
+
+/* ── TESTIMONIALS ───────────────────────────────────── */
+.streamline-app .testi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(18px, 2.5vw, 28px);
+}
+.streamline-app .testi {
+  padding: clamp(22px, 3vw, 32px);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-lg);
+  background: var(--c-white);
+  box-shadow: var(--sh-xs);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: box-shadow .2s, transform .2s var(--ease);
+}
+.streamline-app .testi:hover { box-shadow: var(--sh); transform: translateY(-3px); }
+.streamline-app .testi-stars { color: var(--c-orange); font-size: .9rem; letter-spacing: 2px; }
+.streamline-app .testi-quote { font-size: .95rem; color: var(--c-muted); line-height: 1.72; font-style: italic; flex: 1; }
+.streamline-app .testi-author { font-weight: 700; font-size: .88rem; color: var(--c-navy-800); }
+.streamline-app .testi-author a { color: inherit; }
+.streamline-app .testi-author a:hover { color: var(--c-orange-600); }
+
+/* ── FAQ ────────────────────────────────────────────── */
+.streamline-app .faq details {
+  padding: 20px 22px;
+  margin-bottom: 10px;
+  border: 1px solid var(--c-line);
+  border-radius: var(--r);
+  background: var(--c-white);
+  box-shadow: var(--sh-xs);
+  transition: border-color .18s, box-shadow .18s;
+}
+.streamline-app .faq details:hover { border-color: #c4d1e2; }
+.streamline-app .faq details[open] { border-color: var(--c-sky-500); box-shadow: var(--sh-sm); }
+.streamline-app .faq summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: .95rem;
+  color: var(--c-navy-900);
+  list-style: none;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  line-height: 1.4;
+}
+.streamline-app .faq summary::-webkit-details-marker { display: none; }
+.streamline-app .faq summary::after {
+  content: "+";
+  flex-shrink: 0;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--c-orange-100);
+  color: var(--c-orange-600);
+  font-weight: 700;
+  font-size: .85rem;
+  display: grid;
+  place-items: center;
+  transition: background .18s, color .18s, transform .22s var(--spring);
+}
+.streamline-app .faq details[open] summary::after { content: "−"; background: var(--c-orange); color: #fff; transform: rotate(180deg); }
+.streamline-app .faq p { margin: 12px 0 0; font-size: .9rem; color: var(--c-muted); line-height: 1.72; }
+
+/* ── FINAL CTA ──────────────────────────────────────── */
+.streamline-app .final-cta {
+  padding-block: clamp(80px, 10vw, 120px);
+  text-align: center;
+  background:
+    radial-gradient(ellipse 60% 80% at 85% 8%, rgba(245,135,14,.1), transparent 50%),
+    radial-gradient(ellipse 50% 60% at 5% 85%, rgba(74,166,232,.08), transparent 48%),
+    linear-gradient(165deg, var(--c-navy-050) 0%, var(--c-white) 55%);
+  border-top: 4px solid var(--c-orange);
+}
+.streamline-app .final-cta h2 { margin-bottom: 14px; }
+.streamline-app .final-cta p  { color: var(--c-muted); max-width: 520px; margin-inline: auto; margin-bottom: 32px; }
+.streamline-app .final-cta .btn-group { justify-content: center; }
+
+/* ── SIMPLE FOOTER ──────────────────────────────────── */
+.streamline-app .lp-footer {
+  padding-block: 28px;
+  background: var(--c-navy-050);
+  border-top: 1px solid var(--c-line);
+}
+.streamline-app .lp-footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: .82rem;
+  color: var(--c-muted);
+}
+.streamline-app .lp-footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+.streamline-app .lp-footer-links a { color: var(--c-navy-700); font-weight: 500; }
+.streamline-app .lp-footer-links a:hover { color: var(--c-orange-600); }
+
+/* ── SCROLL REVEAL ──────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .streamline-app .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .55s var(--ease), transform .55s var(--ease);
+    will-change: opacity, transform;
+  }
+  .streamline-app .reveal.in { opacity: 1; transform: none; }
+  .streamline-app .reveal-l  { transform: translateX(-28px); }
+  .streamline-app .reveal-r  { transform: translateX(28px); }
+  .streamline-app .reveal-d1 { transition-delay: .08s; }
+  .streamline-app .reveal-d2 { transition-delay: .16s; }
+  .streamline-app .reveal-d3 { transition-delay: .24s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .streamline-app .reveal { opacity: 1 !important; transform: none !important; }
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────── */
+@media (max-width: 900px) {
+  .streamline-app .hero-layout,
+  .streamline-app .feat-row,
+  .streamline-app .feat-row--flip { grid-template-columns: 1fr; direction: ltr; }
+  .streamline-app .phone-wrap { justify-content: center; margin-top: 16px; display: none; }
+  .streamline-app .float-card-1,
+  .streamline-app .float-card-2 { display: none; }
+  .streamline-app .steps { grid-template-columns: 1fr 1fr; }
+  .streamline-app .step-item:nth-child(2)::after { display: none; }
+  .streamline-app .testi-grid { grid-template-columns: 1fr; }
+  .streamline-app .proof-stats { display: none; }
+}
+@media (max-width: 580px) {
+  .streamline-app .steps { grid-template-columns: 1fr; }
+  .streamline-app .step-item::after { display: none; }
+  .streamline-app .btn { width: 100%; justify-content: center; }
+  .streamline-app .btn-group { align-items: stretch; flex-direction: column; }
+  .streamline-app .final-cta .btn-group { flex-direction: column; align-items: center; }
+  .streamline-app .final-cta .btn { width: auto; }
+  .streamline-app .panel-kpis { grid-template-columns: 1fr 1fr; }
+  .streamline-app .panel-row { grid-template-columns: 1fr auto; }
+  .streamline-app .panel-row-lot, .streamline-app .panel-row-qty { display: none; }
+}
+
+/* ── WP CONTAINER FIX ───────────────────────────────── */
+html .container-wrap { padding: 0 !important; }
+ul li { list-style: none; }
+
+/* ── WP PARENT OVERFLOW FIX (sticky header) ─────────── */
+div:has(> .streamline-app),
+div:has(> div:has(> .streamline-app)) {
+  overflow: visible !important;
+}
+
+.section .distribution img{
+	width: auto !important;
+}
+    </style>
+<style id="ms-wysiwyg-editor-style">
+  :root { --ms-editor-toolbar-height: 86px; }
+  body { padding-top: var(--ms-editor-toolbar-height) !important; }
+  .ms-editor-toolbar {
+    position: fixed;
+    z-index: 2147483600;
+    top: 0;
+    left: 0;
+    right: 0;
+    min-height: var(--ms-editor-toolbar-height);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #0b1726 0%, #113058 100%);
+    color: #fff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    box-shadow: 0 10px 30px rgba(0,0,0,.22);
+    overflow: visible;
+  }
+
+  .ms-editor-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 210px;
+    padding-right: 12px;
+    border-right: 1px solid rgba(255,255,255,.14);
+  }
+
+  .ms-editor-logo {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: #ff9100;
+    color: #111;
+    font-weight: 900;
+    box-shadow: 0 8px 22px rgba(255,145,0,.25);
+  }
+
+  .ms-editor-title {
+    display: grid;
+    gap: 1px;
+    line-height: 1.1;
+  }
+
+  .ms-editor-title strong {
+    display: block;
+    font-size: 14px;
+    line-height: 1.15;
+    letter-spacing: -.01em;
+  }
+
+  .ms-editor-title span {
+    display: block;
+    margin-top: 2px;
+    font-size: 11px;
+    color: rgba(255,255,255,.64);
+  }
+
+  .ms-editor-actions {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .ms-editor-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px;
+    border: 1px solid rgba(255,255,255,.11);
+    border-radius: 14px;
+    background: rgba(255,255,255,.06);
+  }
+
+  .ms-editor-toolbar button,
+  .ms-editor-toolbar summary {
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 10px;
+    background: rgba(255,255,255,.10);
+    color: #fff;
+    padding: 8px 10px;
+    font: inherit;
+    font-size: 13px;
+    line-height: 1;
+    cursor: pointer;
+    list-style: none;
+    white-space: nowrap;
+    transition: background .15s, border-color .15s, transform .15s;
+  }
+
+  .ms-editor-toolbar summary::-webkit-details-marker { display: none; }
+  .ms-editor-toolbar button:hover,
+  .ms-editor-toolbar summary:hover {
+    background: rgba(255,255,255,.18);
+    border-color: rgba(255,255,255,.30);
+  }
+
+  .ms-editor-toolbar button:active,
+  .ms-editor-toolbar summary:active {
+    transform: translateY(1px);
+  }
+
+  .ms-editor-toolbar button:focus-visible,
+  .ms-editor-toolbar summary:focus-visible {
+    outline: 2px solid #ff9100;
+    outline-offset: 2px;
+  }
+
+  .ms-editor-toolbar .ms-editor-primary {
+    background: #ff9100;
+    border-color: #ff9100;
+    color: #111;
+    font-weight: 800;
+  }
+
+  .ms-editor-toolbar .ms-editor-primary:hover {
+    background: #ff9f22;
+    border-color: #ff9f22;
+  }
+
+  .ms-color-palette {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding-inline: 4px;
+  }
+
+  .ms-color-palette span {
+    color: rgba(255,255,255,.65);
+    font-size: 12px;
+    margin-right: 2px;
+  }
+
+  .ms-color-btn {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    border-radius: 999px !important;
+    padding: 0 !important;
+    border: 2px solid rgba(255,255,255,.38) !important;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.12);
+  }
+
+  .ms-color-btn:hover {
+    transform: translateY(-1px);
+    border-color: #fff !important;
+  }
+
+  .ms-drafts-menu {
+    position: relative;
+  }
+
+  .ms-draft-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 19px;
+    height: 19px;
+    margin-left: 6px;
+    padding: 0 6px;
+    border-radius: 999px;
+    background: #ff9100;
+    color: #111;
+    font-size: 11px;
+    font-weight: 800;
+  }
+
+  .ms-drafts-panel {
+    position: fixed;
+    top: calc(var(--ms-editor-toolbar-height) + 10px);
+    right: 16px;
+    width: min(430px, calc(100vw - 32px));
+    max-height: calc(100vh - var(--ms-editor-toolbar-height) - 24px);
+    overflow: auto;
+    padding: 14px;
+    border: 1px solid rgba(17,48,88,.14);
+    border-radius: 18px;
+    background: #fff;
+    color: #1a2d42;
+    box-shadow: 0 20px 60px rgba(5,16,32,.28);
+  }
+
+  .ms-drafts-menu:not([open]) .ms-drafts-panel { display: none; }
+
+  .ms-drafts-panel h3 {
+    margin: 0 0 4px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.2;
+    color: #113058;
+  }
+
+  .ms-drafts-panel p {
+    margin: 0 0 12px;
+    font-size: 12px;
+    line-height: 1.45;
+    color: #54647a;
+  }
+
+  .ms-drafts-panel .ms-draft-panel-actions {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .ms-drafts-panel button {
+    color: #113058;
+    background: #f3f7fc;
+    border: 1px solid #dbe4ef;
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .ms-drafts-panel button:hover {
+    background: #ecf4ff;
+    border-color: #bcd4ee;
+  }
+
+  .ms-drafts-panel .ms-save-version-btn {
+    background: #ff9100;
+    border-color: #ff9100;
+    color: #111;
+    font-weight: 800;
+  }
+
+  .ms-draft-list {
+    display: grid;
+    gap: 10px;
+  }
+
+  .ms-draft-card {
+    padding: 12px;
+    border: 1px solid #dbe4ef;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(9,30,60,.05);
+  }
+
+  .ms-draft-card-title {
+    margin-bottom: 4px;
+    color: #113058;
+    font-weight: 800;
+    font-size: 13px;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  .ms-draft-card-meta {
+    margin-bottom: 10px;
+    color: #6d7d90;
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .ms-draft-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .ms-draft-empty {
+    padding: 18px;
+    border: 1px dashed #c4d1e2;
+    border-radius: 14px;
+    background: #f8fbff;
+    color: #54647a;
+    font-size: 13px;
+    line-height: 1.45;
+    text-align: center;
+  }
+
+  [data-ms-editable="true"] {
+    outline: 1px dashed rgba(255,145,0,.50);
+    outline-offset: 3px;
+    border-radius: 4px;
+    cursor: text;
+  }
+
+  [data-ms-editable="true"]:hover,
+  [data-ms-editable="true"]:focus {
+    outline: 2px solid #ff9100;
+    background: rgba(255,145,0,.08);
+  }
+
+  body.ms-hide-edit-outlines [data-ms-editable="true"],
+  body.ms-preview-mode [data-ms-editable="true"] {
+    outline: none !important;
+    background: transparent !important;
+  }
+
+  body.ms-preview-mode .ms-editor-toolbar,
+  body.ms-preview-mode .ms-edit-toast,
+  body.ms-preview-mode .ms-instruction-modal {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .ms-edit-toast {
+    position: fixed;
+    z-index: 2147483602;
+    right: 16px;
+    bottom: 16px;
+    max-width: 390px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: #0d1b2d;
+    color: #fff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 13px;
+    box-shadow: 0 12px 34px rgba(0,0,0,.25);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .18s, transform .18s;
+  }
+
+  .ms-edit-toast.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ms-instruction-modal[hidden] { display: none !important; }
+
+  .ms-instruction-modal {
+    position: fixed;
+    z-index: 2147483601;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 22px;
+    background: rgba(3,11,22,.56);
+  }
+
+  .ms-instruction-dialog {
+    width: min(620px, 100%);
+    max-height: min(760px, calc(100vh - 44px));
+    overflow: auto;
+    border-radius: 22px;
+    background: #fff;
+    color: #1a2d42;
+    box-shadow: 0 24px 80px rgba(0,0,0,.35);
+  }
+
+  .ms-instruction-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px 24px;
+    border-bottom: 1px solid #dbe4ef;
+    background: linear-gradient(135deg, #ecf4ff, #fff8ef);
+  }
+
+  .ms-instruction-header h2 {
+    margin: 0;
+    color: #113058;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .ms-instruction-header p {
+    margin: 6px 0 0;
+    color: #54647a;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .ms-instruction-close {
+    border: 0;
+    border-radius: 999px;
+    width: 34px;
+    height: 34px;
+    background: #113058;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  .ms-instruction-body {
+    padding: 22px 24px 24px;
+  }
+
+  .ms-instruction-body ol {
+    margin: 0;
+    padding-left: 22px;
+  }
+
+  .ms-instruction-body li {
+    margin-bottom: 10px;
+    color: #3a4a5e;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .ms-instruction-note {
+    margin-top: 18px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: #f8fbff;
+    border: 1px solid #dbe4ef;
+    color: #54647a;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 980px) {
+    :root { --ms-editor-toolbar-height: 140px; }
+    .ms-editor-toolbar {
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .ms-editor-actions {
+      flex-basis: 100%;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+  }
+
+  @media (max-width: 620px) {
+    :root { --ms-editor-toolbar-height: 176px; }
+    .ms-editor-brand {
+      width: 100%;
+    }
+    .ms-editor-actions {
+      flex-wrap: wrap;
+      overflow: visible;
+    }
+    .ms-editor-group {
+      flex-wrap: wrap;
+    }
+    .ms-drafts-panel {
+      left: 12px;
+      right: 12px;
+      width: auto;
+    }
+  }
+
+  @media print {
+    body { padding-top: 0 !important; }
+    .ms-editor-toolbar,
+    .ms-edit-toast,
+    .ms-instruction-modal {
+      display: none !important;
+    }
+    [data-ms-editable="true"] {
+      outline: none !important;
+      background: transparent !important;
+    }
+  }
+
+
+  /* Page-specific editor adjustment: keep the feature section nav below the fixed editor toolbar while editing. */
+  body:not(.ms-preview-mode) #ms-editor-content .ms-feature-cluster .ms-nav,
+  body:not(.ms-preview-mode) #ms-editor-content .ms-nav {
+    top: var(--ms-editor-toolbar-height) !important;
+  }
+
+
+  /* Page-specific editor adjustment: keep sticky app headers below the fixed editor toolbar while editing. */
+  body:not(.ms-preview-mode) #ms-editor-content .streamline-app .lp-header {
+    top: var(--ms-editor-toolbar-height) !important;
+  }
+</style></head>
+<body><div class="ms-editor-toolbar" data-ms-editor-ui="true" id="ms-editor-toolbar">
+<div aria-label="Editor navigation" class="ms-editor-brand">
+<div class="ms-editor-logo">MS</div>
+<div class="ms-editor-title">
+<strong>Inventory App Editor</strong>
+<span>WYSIWYG draft workspace</span>
+</div>
+</div>
+<div class="ms-editor-actions">
+<details class="ms-drafts-menu" id="ms-drafts-menu">
+<summary>☰ Drafts <span class="ms-draft-count" id="ms-draft-count">0</span></summary>
+<div class="ms-drafts-panel">
+<h3>Draft history</h3>
+<p>Save named versions here, then load, rename, or delete them later on this same browser/device.</p>
+<div class="ms-draft-panel-actions">
+<button class="ms-save-version-btn" id="ms-save-draft-btn" type="button">Save current version</button>
+<button id="ms-clear-history-btn" type="button">Clear history</button>
+</div>
+<div class="ms-draft-list" id="ms-draft-list"></div>
+</div>
+</details>
+<div aria-label="Text formatting" class="ms-editor-group">
+<button id="ms-bold-btn" type="button"><b>Bold</b></button>
+<button id="ms-italic-btn" type="button"><i>Italic</i></button>
+<button id="ms-list-btn" type="button">Bullet list</button>
+<button id="ms-edit-link-btn" type="button">Edit link</button>
+</div>
+<div aria-label="Text color palette" class="ms-editor-group">
+<div class="ms-color-palette">
+<span>Color</span>
+<button class="ms-color-btn" data-ms-color="#ff9100" style="background:#ff9100" title="#ff9100" type="button"></button>
+<button class="ms-color-btn" data-ms-color="#4fa6e9" style="background:#4fa6e9" title="#4fa6e9" type="button"></button>
+<button class="ms-color-btn" data-ms-color="#113058" style="background:#113058" title="#113058" type="button"></button>
+<button class="ms-color-btn" data-ms-color="#ee924f" style="background:#ee924f" title="#ee924f" type="button"></button>
+<button class="ms-color-btn" data-ms-color="#111" style="background:#111" title="#111" type="button"></button>
+<button class="ms-color-btn" data-ms-color="#ecf4ff" style="background:#ecf4ff" title="#ecf4ff" type="button"></button>
+</div>
+</div>
+<div aria-label="Editor actions" class="ms-editor-group">
+<button id="ms-instructions-btn" type="button">Instructions</button>
+<button id="ms-preview-btn" type="button">Preview</button>
+<button id="ms-outlines-btn" type="button">Outlines</button>
+<button id="ms-reset-links-btn" type="button">Restore links</button>
+<button class="ms-editor-primary" id="ms-download-btn" type="button">Download clean HTML</button>
+</div>
+</div>
+</div>
+<div aria-live="polite" class="ms-edit-toast" data-ms-editor-ui="true" id="ms-edit-toast" role="status"></div>
+<div class="ms-instruction-modal" data-ms-editor-ui="true" hidden="" id="ms-instruction-modal">
+<div aria-labelledby="ms-instruction-title" aria-modal="true" class="ms-instruction-dialog" role="dialog">
+<div class="ms-instruction-header">
+<div>
+<h2 id="ms-instruction-title">How to use this editor</h2>
+<p>Edit the Inventory App page directly in the browser, save versions, then export clean HTML.</p>
+</div>
+<button aria-label="Close instructions" class="ms-instruction-close" id="ms-instruction-close" type="button">×</button>
+</div>
+<div class="ms-instruction-body">
+<ol>
+<li>Click any outlined text on the page and type your changes.</li>
+<li>Select text, then use Bold, Italic, Bullet list, or the color palette.</li>
+<li>Use <strong>☰ Drafts</strong> to save a version. Drafts can be loaded, renamed, or deleted.</li>
+<li>Use <strong>Edit link</strong> while your cursor is inside a button/link to change its URL.</li>
+<li>Use <strong>Preview</strong> to temporarily hide the editor toolbar and outlines. Press Esc to return.</li>
+<li>Use <strong>Download clean HTML</strong> when you are ready to export the page without editor controls.</li>
+</ol>
+<div class="ms-instruction-note">
+        Drafts are saved in this browser using localStorage. They will work tomorrow on the same computer/browser, but they will not automatically sync to another device.
+      </div>
+</div>
+</div>
+</div>
+<div data-ms-editor-root="true" id="ms-editor-content">
+<div class="streamline-app">
+<!-- ══════════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════════ -->
+<section aria-labelledby="hero-title" class="hero">
+<div class="wrap">
+<div class="hero-layout">
+<!-- Left: copy -->
+<div class="hero-content">
+<p class="eyebrow reveal" style="transition-delay:.05s">Inventory Management App</p>
+<h1 class="reveal" id="hero-title" style="transition-delay:.1s">
+          Keep bakery inventory <em>always accurate.</em>
+</h1>
+<p class="lede reveal" style="transition-delay:.17s;margin-top:16px">
+          Scan invoices, receive goods, assign lot numbers, print barcode labels, count stock, and make recipes — all from a mobile app built for warehouse and production teams.
+        </p>
+<div class="btn-group reveal" style="transition-delay:.24s">
+<a href="https://play.google.com/store/apps/details?id=io.ionic.streamline.inventoryManagementApp" rel="noopener" style="width:175px" target="_blank">
+<img alt="Download on Google Play" class="ms-app-badge" loading="lazy" src="https://mountainstream.co/wp-content/uploads/2026/03/visual-identity_badges_880x572-1.width-1440.png"/>
+</a>
+<a class="btn btn-secondary" href="https://mountainstream.co/register-your-company?cta=hero&amp;intent=book-demo">Book a Demo</a>
+</div>
+<div class="hero-badges reveal" style="transition-delay:.3s">
+<span class="hero-badge">Free with Streamline ERP</span>
+<span class="hero-badge">Barcode scanning</span>
+<span class="hero-badge">Lot tracking</span>
+</div>
+</div>
+<div class="phone-wrap">
+<img alt="Streamline Inventory Management App preview" class="hero-phone reveal" src="https://mountainstream.co/wp-content/uploads/2026/05/streamline-inventory-app-by-mountainstream.png" style="transition-delay:.35s"/>
+</div>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════
+     WORKFLOW STEPS
+════════════════════════════════════════════════════ -->
+<section class="section-sm" style="background:var(--c-page);border-bottom:1px solid var(--c-line)">
+<div class="wrap">
+<p class="section-label reveal">How it works</p>
+<div class="steps reveal reveal-d1">
+<div class="step-item">
+<span class="step-num"></span>
+<p class="step-title">Receive goods</p>
+<p class="step-desc">Scan the vendor invoice, confirm quantities, and capture delivery details on your phone.</p>
+</div>
+<div class="step-item">
+<span class="step-num"></span>
+<p class="step-title">Assign lot numbers</p>
+<p class="step-desc">Generate internal lot numbers linked to vendor references — automatically.</p>
+</div>
+<div class="step-item">
+<span class="step-num"></span>
+<p class="step-title">Print barcode labels</p>
+<p class="step-desc">Send lot-specific labels straight to your connected label printer from the app.</p>
+</div>
+<div class="step-item">
+<span class="step-num"></span>
+<p class="step-title">Count &amp; adjust stock</p>
+<p class="step-desc">Run stock counts by location, confirm variances, and post adjustments instantly.</p>
+</div>
+<div class="step-item">
+<span class="step-num"></span>
+<p class="step-title">Make recipes</p>
+<p class="step-desc">Record production runs that automatically deplete ingredient lots and update stock.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════
+     FEATURES — ALTERNATING ROWS
+════════════════════════════════════════════════════ -->
+<section class="section" style="background:var(--c-white)">
+<div class="wrap">
+<!-- Feature 1: Receive & scan -->
+<div class="feat-row reveal">
+<div class="feat-text">
+<p class="eyebrow" style="margin-bottom:10px">Goods receipt</p>
+<h3>Receive goods and assign lots — on the loading dock.</h3>
+<p>No more paper delivery sheets or laptop at the door. Your team opens the app, scans the invoice, confirms quantities, records the use-by date and delivery temperature, and assigns a lot number — all in one flow.</p>
+<ul class="feat-checklist">
+<li>Invoice scanning with automatic item matching</li>
+<li>Internal lot number generated on receipt</li>
+<li>Vendor lot reference linked for traceability</li>
+<li>Use-by date and delivery temperature recorded</li>
+<li>Stock levels updated in real time</li>
+</ul>
+<div style="margin-top:12px">
+<a class="link-arrow" href="/streamline-features/inventory-and-traceability/">See inventory management</a>
+</div>
+</div>
+<div>
+<img alt="Goods receipt on the Streamline Inventory App" src="https://mountainstream.co/wp-content/uploads/2026/06/streamline-inventory-app-goods-in-feature.png"/>
+</div>
+</div>
+<!-- Feature 2: Stock counts (flipped) -->
+<div class="feat-row feat-row--flip reveal">
+<div class="feat-text">
+<p class="eyebrow" style="margin-bottom:10px">Stock counting</p>
+<h3>Count inventory accurately — without clipboards.</h3>
+<p>Run a stock count from your phone. Scan items by location, enter quantities, review variances against system stock, and post adjustments with a reason code. Everything syncs back to Streamline instantly.</p>
+<ul class="feat-checklist">
+<li>Count by location, category, or full warehouse</li>
+<li>Blind count mode for unbiased results</li>
+<li>Variance review before posting adjustments</li>
+<li>Adjustment reason codes for audit trail</li>
+<li>Syncs in real time to Streamline ERP</li>
+</ul>
+<div style="margin-top:12px">
+<a class="link-arrow" href="/streamline-features/inventory-and-traceability/">See stock management</a>
+</div>
+</div>
+<div>
+<img alt="Stock counting on the Streamline Inventory App" src="https://mountainstream.co/wp-content/uploads/2026/06/streamline-inventory-app-stock-adjustments-feature.png"/>
+</div>
+</div>
+<!-- Feature 3: Make recipes -->
+<div class="feat-row reveal">
+<div class="feat-text">
+<p class="eyebrow" style="margin-bottom:10px">Recipe production</p>
+<h3>Record production runs and deplete ingredient lots automatically.</h3>
+<p>Select a recipe, enter the batch quantity, and confirm ingredient lots. The app automatically depletes stock, creates the production lot record, and links ingredient lots to your finished goods — feeding directly into traceability.</p>
+<ul class="feat-checklist">
+<li>Select recipes and enter batch quantity</li>
+<li>Confirm which ingredient lots are used</li>
+<li>Automatic stock depletion on confirmation</li>
+<li>Finished goods lot created and linked</li>
+<li>Full production record for traceability audits</li>
+</ul>
+<div style="margin-top:12px">
+<a class="link-arrow" href="/streamline-features/production-and-recipes#recipe-management/">See recipe management</a>
+</div>
+</div>
+<div>
+<img alt="Recipe production on the Streamline Inventory App" src="https://mountainstream.co/wp-content/uploads/2026/06/streamline-inventory-app-recipe-production-feature.png"/>
+</div>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════
+     TESTIMONIALS
+════════════════════════════════════════════════════ -->
+<section class="section-sm" style="background:var(--c-page);border-top:1px solid var(--c-line)">
+<div class="wrap">
+<p class="section-label reveal">What customers say</p>
+<div class="testi-grid">
+<div class="testi reveal reveal-d1">
+<div class="testi-stars">★★★★★</div>
+<p class="testi-quote">"Streamline is fantastic, and the people at Mountain Stream are even better! We get a response easily at any time of the day. It has eliminated a lot of tasks altogether, and made many so much easier."</p>
+<div class="testi-author"><a href="https://www.capterra.com/p/146354/Streamline/#Capterra___6179846" rel="noopener" target="_blank">Ricky — Bluepoint Bakery</a></div>
+</div>
+<div class="testi reveal reveal-d2">
+<div class="testi-stars">★★★★★</div>
+<p class="testi-quote">"Streamline saved my life in a time where my business grew exponentially. It's incredible to reach a person that speaks your language and understands your business and its needs."</p>
+<div class="testi-author"><a href="https://www.capterra.com/p/146354/Streamline/#Capterra___4053596/" rel="noopener" target="_blank">Daniela — Tartastic</a></div>
+</div>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════
+     FAQ
+════════════════════════════════════════════════════ -->
+<section class="section-sm" style="background:var(--c-white);border-top:1px solid var(--c-line)">
+<div class="wrap-narrow">
+<p class="section-label reveal">Common questions</p>
+<div class="faq reveal reveal-d1">
+<details open="">
+<summary>What does the Streamline Inventory App do?</summary>
+<p>The Streamline Inventory App lets your warehouse and production team receive goods, assign internal lot numbers, link vendor lot references, print barcode labels, count stock by location, move inventory, and record recipe production runs — all from an Android mobile device.</p>
+</details>
+<details>
+<summary>Is the app included with Streamline ERP?</summary>
+<p>Yes. The Streamline Inventory App is included at no extra cost as part of your Streamline ERP subscription. It connects directly to your live operational data.</p>
+</details>
+<details>
+<summary>Does the app work offline?</summary>
+<p>The app supports core scanning and data entry functions in low-connectivity environments, with automatic sync when connection is restored.</p>
+</details>
+<details>
+<summary>Can the app print barcode labels directly?</summary>
+<p>Yes. The app connects to compatible label printers and can print lot-specific barcode labels at goods receipt, during stock movements, and at recipe production time.</p>
+</details>
+<details>
+<summary>How does the app connect to traceability?</summary>
+<p>Every lot assigned at goods receipt, every stock movement, and every recipe production run recorded in the app automatically updates the traceability record in Streamline ERP — creating an unbroken chain from supplier to customer delivery.</p>
+</details>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════
+     FINAL CTA
+════════════════════════════════════════════════════ -->
+<section class="final-cta" id="download">
+<div class="wrap">
+<div class="reveal">
+<p class="eyebrow" style="justify-content:center">Get started today</p>
+<h2>Accurate inventory starts at the loading dock.</h2>
+<p>Download the Streamline Inventory App and connect your warehouse, production, and traceability in one place.</p>
+<div class="btn-group">
+<a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=io.ionic.streamline.inventoryManagementApp" rel="noopener" target="_blank">
+          ↓ Download on Android
+        </a>
+<a class="btn btn-secondary" href="https://mountainstream.co/register-your-company?cta=lp-footer&amp;intent=book-demo">
+          Book a Demo
+        </a>
+</div>
+<p style="margin-top:20px;font-size:.82rem;color:var(--c-soft)">
+        Included free with Streamline ERP  ·  Android  · 
+        <a href="/streamline-features/inventory-and-traceability/" style="color:var(--c-navy-700);font-weight:600">Learn more about inventory management →</a>
+</p>
+</div>
+</div>
+</section>
+</div>
+<script>
+    (function () {
+  var root = document.querySelector('.streamline-app');
+  if (!root) return;
+
+  // Scroll reveal — uses 'in' class (not 'visible') per this page's design system
+  var obs = new IntersectionObserver(function (entries, o) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        o.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  root.querySelectorAll('.reveal').forEach(function (el) {
+    // If already in viewport on load, mark visible immediately
+    var rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.classList.add('in');
+    } else {
+      obs.observe(el);
+    }
+  });
+
+  // Fire hero elements immediately
+  requestAnimationFrame(function () {
+    setTimeout(function () {
+      root.querySelectorAll('.hero .reveal').forEach(function (el) {
+        el.classList.add('in');
+      });
+    }, 60);
+  });
+})();
+
+</script>
+</div><script id="ms-wysiwyg-editor-script">
+(function(){
+  var HISTORY_KEY = 'ms-wysiwyg-inventory-app-draft-history-v1';
+  var AUTOSAVE_KEY = 'ms-wysiwyg-inventory-app-autosave-v1';
+  var MAX_HISTORY = 30;
+  var currentDownloadName = 'inventory-app-edited.html';
+  var savedRange = null;
+  var autosaveTimer = null;
+
+  function $(id){ return document.getElementById(id); }
+  function root(){ return $('ms-editor-content'); }
+
+  function toast(message){
+    var t = $('ms-edit-toast');
+    if(!t) return;
+    t.textContent = message;
+    t.classList.add('visible');
+    clearTimeout(window.__msToastTimer);
+    window.__msToastTimer = setTimeout(function(){ t.classList.remove('visible'); }, 2800);
+  }
+
+  function setToolbarOffset(){
+    var tb = $('ms-editor-toolbar');
+    if(!tb) return;
+    document.documentElement.style.setProperty('--ms-editor-toolbar-height', (tb.offsetHeight || 86) + 'px');
+  }
+
+  function hasText(el){
+    return !!(el && el.textContent && el.textContent.replace(/\s+/g,' ').trim());
+  }
+
+  function isUnsafe(el){
+    return !!(el.closest('script,style,noscript,svg,canvas,form,select,textarea,[data-ms-editor-ui="true"]'));
+  }
+
+  function hasMediaControl(el){
+    return !!el.querySelector('img,video,iframe,input,textarea,select,button');
+  }
+
+  function markEditable(scope){
+    if(!scope) return;
+
+    scope.querySelectorAll('[contenteditable],[data-ms-editable]').forEach(function(el){
+      el.removeAttribute('contenteditable');
+      el.removeAttribute('data-ms-editable');
+      el.removeAttribute('spellcheck');
+    });
+
+    var selector = [
+      'h1','h2','h3','h4','h5','h6',
+      'p','li','summary',
+      'a[href]','button',
+      'strong','em','span',
+      '.eyebrow','.lede','.section-label',
+      '.hero-badge','.btn','.link-arrow',
+      '.step-title','.step-desc',
+      '.testi-quote','.testi-author','.testi-stars',
+      '.app-tab','.app-item-name','.app-item-lot','.app-item-qty',
+      '.panel-title','.panel-kpi-label','.panel-kpi-val','.panel-row-name','.panel-row-lot','.panel-row-qty',
+      '.count-name','.count-meta','.count-val'
+    ].join(',');
+
+    function hasCandidateChild(el){
+      return Array.prototype.some.call(el.children || [], function(child){
+        return child.matches && (child.matches(selector) || child.querySelector(selector));
+      });
+    }
+
+    function make(el){
+      el.setAttribute('contenteditable','true');
+      el.setAttribute('data-ms-editable','true');
+      el.setAttribute('spellcheck','true');
+    }
+
+    Array.prototype.forEach.call(scope.querySelectorAll(selector), function(el){
+      if(!hasText(el) || isUnsafe(el)) return;
+      if(el.closest('[data-ms-editable="true"]')) return;
+      if(hasMediaControl(el)) return;
+
+      var tag = el.tagName ? el.tagName.toLowerCase() : '';
+      var alwaysOk = /^(h1|h2|h3|h4|h5|h6|p|li|summary|a|button|strong|em|span)$/.test(tag);
+      if(!alwaysOk && hasCandidateChild(el)) return;
+      make(el);
+    });
+
+    scope.querySelectorAll('a[href]').forEach(function(a){
+      if(!a.hasAttribute('data-original-href')) {
+        a.setAttribute('data-original-href', a.getAttribute('href') || '#');
+      }
+      a.setAttribute('title','Ctrl/Cmd-click to open link. Use Edit link to change this URL.');
+      if(hasText(a) && !hasMediaControl(a) && !a.closest('[data-ms-editable="true"]')) make(a);
+    });
+  }
+
+  function bindPaste(scope){
+    scope.querySelectorAll('[data-ms-editable="true"]').forEach(function(el){
+      el.onpaste = function(e){
+        e.preventDefault();
+        var text = (e.clipboardData || window.clipboardData).getData('text/plain');
+        document.execCommand('insertText', false, text);
+        scheduleAutosave();
+      };
+    });
+  }
+
+  function prepare(){
+    setToolbarOffset();
+    markEditable(root());
+    bindPaste(root());
+
+    root().querySelectorAll('details').forEach(function(d){
+      if(!d.hasAttribute('data-ms-original-open')) d.setAttribute('data-ms-original-open', d.open ? 'true' : 'false');
+      d.open = true;
+    });
+
+    root().querySelectorAll('.reveal,.reveal-l,.reveal-r,.reveal-d1,.reveal-d2,.reveal-d3').forEach(function(el){
+      el.classList.add('in','is-visible','visible');
+    });
+
+    renderDrafts();
+  }
+
+  function getHistory(){
+    try {
+      var parsed = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+      return Array.isArray(parsed) ? parsed : [];
+    } catch(e) {
+      return [];
+    }
+  }
+
+  function setHistory(list){
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(list.slice(0, MAX_HISTORY)));
+    renderDrafts();
+  }
+
+  function formatDate(iso){
+    try {
+      return new Date(iso).toLocaleString([], {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit'
+      });
+    } catch(e) {
+      return iso || '';
+    }
+  }
+
+  function getEditableHTML(){
+    return root() ? root().innerHTML : '';
+  }
+
+  function saveDraft(type){
+    var history = getHistory();
+    var now = new Date();
+    var defaultName = 'Inventory draft — ' + formatDate(now.toISOString());
+    var name = prompt('Draft name:', defaultName);
+    if(name === null) return;
+    name = (name || defaultName).trim() || defaultName;
+
+    history.unshift({
+      id: String(now.getTime()) + '-' + Math.random().toString(36).slice(2,8),
+      name: name,
+      createdAt: now.toISOString(),
+      type: type || 'manual',
+      fileName: currentDownloadName,
+      html: getEditableHTML()
+    });
+
+    setHistory(history);
+    localStorage.setItem(AUTOSAVE_KEY, JSON.stringify({
+      createdAt: now.toISOString(),
+      html: getEditableHTML()
+    }));
+
+    var menu = $('ms-drafts-menu');
+    if(menu) menu.open = true;
+    toast('Draft saved: ' + name);
+  }
+
+  function loadDraft(id){
+    var draft = getHistory().find(function(item){ return item.id === id; });
+    if(!draft) {
+      toast('Draft not found.');
+      return;
+    }
+    if(!confirm('Load "' + (draft.name || 'Untitled draft') + '"? Your current unsaved edits will be replaced.')) return;
+
+    root().innerHTML = draft.html || '';
+    prepare();
+    toast('Draft loaded: ' + (draft.name || 'Untitled draft'));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function renameDraft(id){
+    var history = getHistory();
+    var draft = history.find(function(item){ return item.id === id; });
+    if(!draft) return;
+
+    var next = prompt('Rename draft:', draft.name || 'Untitled draft');
+    if(next === null) return;
+    next = next.trim();
+    if(!next) {
+      toast('Draft name was not changed.');
+      return;
+    }
+
+    draft.name = next;
+    setHistory(history);
+    toast('Draft renamed.');
+  }
+
+  function deleteDraft(id){
+    var history = getHistory();
+    var draft = history.find(function(item){ return item.id === id; });
+    var label = draft ? (draft.name || 'this draft') : 'this draft';
+    if(!confirm('Delete "' + label + '"?')) return;
+    setHistory(history.filter(function(item){ return item.id !== id; }));
+    toast('Draft deleted.');
+  }
+
+  function clearHistory(){
+    if(!confirm('Clear all saved draft history for this page?')) return;
+    localStorage.removeItem(HISTORY_KEY);
+    renderDrafts();
+    toast('Draft history cleared.');
+  }
+
+  function renderDrafts(){
+    var list = $('ms-draft-list');
+    var count = $('ms-draft-count');
+    if(!list) return;
+
+    var history = getHistory();
+    if(count) count.textContent = String(history.length);
+
+    if(!history.length){
+      list.innerHTML = '<div class="ms-draft-empty">No drafts saved yet. Click <strong>Save current version</strong> to create the first one.</div>';
+      return;
+    }
+
+    list.innerHTML = '';
+    history.forEach(function(draft){
+      var card = document.createElement('div');
+      card.className = 'ms-draft-card';
+
+      var title = document.createElement('div');
+      title.className = 'ms-draft-card-title';
+      title.textContent = draft.name || 'Untitled draft';
+
+      var meta = document.createElement('div');
+      meta.className = 'ms-draft-card-meta';
+      var size = draft.html ? Math.round(draft.html.length / 1024) + ' KB' : '0 KB';
+      meta.textContent = formatDate(draft.createdAt) + ' · ' + (draft.type || 'manual') + ' · ' + size;
+
+      var actions = document.createElement('div');
+      actions.className = 'ms-draft-card-actions';
+
+      var load = document.createElement('button');
+      load.type = 'button';
+      load.textContent = 'Load this version';
+      load.addEventListener('click', function(){ loadDraft(draft.id); });
+
+      var rename = document.createElement('button');
+      rename.type = 'button';
+      rename.textContent = 'Rename';
+      rename.addEventListener('click', function(){ renameDraft(draft.id); });
+
+      var del = document.createElement('button');
+      del.type = 'button';
+      del.textContent = 'Delete';
+      del.addEventListener('click', function(){ deleteDraft(draft.id); });
+
+      actions.append(load, rename, del);
+      card.append(title, meta, actions);
+      list.appendChild(card);
+    });
+  }
+
+  function scheduleAutosave(){
+    clearTimeout(autosaveTimer);
+    autosaveTimer = setTimeout(function(){
+      try {
+        localStorage.setItem(AUTOSAVE_KEY, JSON.stringify({
+          createdAt: new Date().toISOString(),
+          html: getEditableHTML()
+        }));
+      } catch(e) {}
+    }, 900);
+  }
+
+  function restoreSelection(){
+    if(!savedRange) return false;
+    var sel = window.getSelection();
+    if(!sel) return false;
+    sel.removeAllRanges();
+    sel.addRange(savedRange);
+    return true;
+  }
+
+  function saveSelection(){
+    var sel = window.getSelection();
+    if(!sel || !sel.rangeCount) return;
+    var node = sel.anchorNode;
+    if(!node) return;
+    var el = node.nodeType === 1 ? node : node.parentElement;
+    if(el && root() && root().contains(el)) {
+      savedRange = sel.getRangeAt(0).cloneRange();
+    }
+  }
+
+  function exec(cmd, value){
+    restoreSelection();
+    document.execCommand(cmd, false, value || null);
+    scheduleAutosave();
+  }
+
+  function applyTextColor(color){
+    restoreSelection();
+
+    var sel = window.getSelection();
+    if(sel && sel.rangeCount && !sel.isCollapsed && root().contains(sel.anchorNode)) {
+      document.execCommand('foreColor', false, color);
+      scheduleAutosave();
+      toast('Text color applied: ' + color);
+      return;
+    }
+
+    var active = document.activeElement;
+    if(active && active.matches && active.matches('[data-ms-editable="true"]')) {
+      active.style.color = color;
+      scheduleAutosave();
+      toast('Element color applied: ' + color);
+      return;
+    }
+
+    toast('Select text first, then choose a color.');
+  }
+
+  function editLink(){
+    var node = window.getSelection && window.getSelection().anchorNode;
+    var el = node && (node.nodeType === 1 ? node : node.parentElement);
+    var link = el && el.closest ? el.closest('a') : null;
+    if(!link && document.activeElement && document.activeElement.closest) {
+      link = document.activeElement.closest('a');
+    }
+    if(!link || !root().contains(link)) {
+      toast('Place your cursor inside a link or button first.');
+      return;
+    }
+
+    var next = prompt('Edit link URL:', link.getAttribute('href') || '');
+    if(next !== null) {
+      link.setAttribute('href', next.trim());
+      scheduleAutosave();
+      toast('Link URL updated.');
+    }
+  }
+
+  function togglePreview(){
+    document.body.classList.toggle('ms-preview-mode');
+    var preview = document.body.classList.contains('ms-preview-mode');
+    document.querySelectorAll('[data-ms-editable="true"]').forEach(function(el){
+      el.setAttribute('contenteditable', preview ? 'false' : 'true');
+    });
+    toast(preview ? 'Preview mode enabled. Press Esc to return.' : 'Edit mode enabled.');
+  }
+
+  function toggleOutlines(){
+    document.body.classList.toggle('ms-hide-edit-outlines');
+    toast(document.body.classList.contains('ms-hide-edit-outlines') ? 'Edit outlines hidden.' : 'Edit outlines visible.');
+  }
+
+  function resetLinks(){
+    root().querySelectorAll('a[data-original-href]').forEach(function(a){
+      a.setAttribute('href', a.getAttribute('data-original-href') || '#');
+    });
+    scheduleAutosave();
+    toast('Link URLs restored.');
+  }
+
+  function cleanExport(){
+    var clone = document.documentElement.cloneNode(true);
+
+    clone.querySelectorAll('[data-ms-editor-ui="true"],#ms-wysiwyg-editor-style,#ms-wysiwyg-editor-script').forEach(function(el){
+      el.remove();
+    });
+
+    clone.querySelectorAll('[contenteditable],[data-ms-editable]').forEach(function(el){
+      el.removeAttribute('contenteditable');
+      el.removeAttribute('data-ms-editable');
+      el.removeAttribute('spellcheck');
+    });
+
+    clone.querySelectorAll('a[data-original-href]').forEach(function(a){
+      a.removeAttribute('data-original-href');
+      if(a.getAttribute('title') === 'Ctrl/Cmd-click to open link. Use Edit link to change this URL.') {
+        a.removeAttribute('title');
+      }
+    });
+
+    clone.querySelectorAll('[data-ms-original-open]').forEach(function(el){
+      if(el.getAttribute('data-ms-original-open') === 'true') {
+        el.setAttribute('open','');
+      } else {
+        el.removeAttribute('open');
+      }
+      el.removeAttribute('data-ms-original-open');
+    });
+
+    var body = clone.querySelector('body');
+    if(body) {
+      body.classList.remove('ms-hide-edit-outlines','ms-preview-mode');
+      body.removeAttribute('style');
+    }
+
+    var wrap = clone.querySelector('#ms-editor-content');
+    if(wrap) {
+      var parent = wrap.parentNode;
+      while(wrap.firstChild) parent.insertBefore(wrap.firstChild, wrap);
+      wrap.remove();
+    }
+
+    return '<!DOCTYPE html>\n' + clone.outerHTML;
+  }
+
+  function downloadCleanHTML(){
+    var html = cleanExport();
+    var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = currentDownloadName;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+    toast('Clean HTML downloaded.');
+  }
+
+  function openInstructions(){
+    var modal = $('ms-instruction-modal');
+    if(modal) modal.hidden = false;
+  }
+
+  function closeInstructions(){
+    var modal = $('ms-instruction-modal');
+    if(modal) modal.hidden = true;
+  }
+
+  document.addEventListener('selectionchange', saveSelection);
+
+  document.addEventListener('input', function(e){
+    if(root() && root().contains(e.target)) scheduleAutosave();
+  });
+
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('#ms-editor-content a');
+    if(a && !document.body.classList.contains('ms-preview-mode') && !(e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
+      toast('Link click blocked while editing. Ctrl/Cmd-click to open, or use Edit link.');
+    }
+  }, true);
+
+  $('ms-bold-btn')?.addEventListener('click', function(){ exec('bold'); });
+  $('ms-italic-btn')?.addEventListener('click', function(){ exec('italic'); });
+  $('ms-list-btn')?.addEventListener('click', function(){ exec('insertUnorderedList'); });
+  $('ms-edit-link-btn')?.addEventListener('click', editLink);
+  $('ms-preview-btn')?.addEventListener('click', togglePreview);
+  $('ms-outlines-btn')?.addEventListener('click', toggleOutlines);
+  $('ms-reset-links-btn')?.addEventListener('click', resetLinks);
+  $('ms-download-btn')?.addEventListener('click', downloadCleanHTML);
+  $('ms-save-draft-btn')?.addEventListener('click', function(){ saveDraft('manual'); });
+  $('ms-clear-history-btn')?.addEventListener('click', clearHistory);
+  $('ms-instructions-btn')?.addEventListener('click', openInstructions);
+  $('ms-instruction-close')?.addEventListener('click', closeInstructions);
+  $('ms-instruction-modal')?.addEventListener('click', function(e){
+    if(e.target === this) closeInstructions();
+  });
+
+  document.querySelectorAll('.ms-color-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      applyTextColor(btn.getAttribute('data-ms-color'));
+    });
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') {
+      if(!$('ms-instruction-modal')?.hidden) {
+        closeInstructions();
+        return;
+      }
+      if(document.body.classList.contains('ms-preview-mode')) togglePreview();
+    }
+    if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+      e.preventDefault();
+      saveDraft('keyboard');
+    }
+  });
+
+  window.addEventListener('resize', setToolbarOffset);
+  window.addEventListener('load', setToolbarOffset);
+
+  prepare();
+  toast('Inventory App editor ready. Click outlined text to edit.');
+})();
+</script></body>
+</html>

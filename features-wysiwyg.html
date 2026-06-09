@@ -1,10 +1,12 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Streamline Features Master — WYSIWYG Editor</title>
+<style>
         /*
   Streamline Bakery ERP — Feature Hub
   Scope: class="ms-feature-page" on <body>
@@ -1183,595 +1185,1075 @@ div:has(> div:has(> .ms-feature-page)) {
   }
 }
     </style>
-</head>
-<body>
-    <div class="ms-feature-page">
+<style id="ms-wysiwyg-editor-style">
+  :root { --ms-editor-toolbar-height: 86px; }
+  body { padding-top: var(--ms-editor-toolbar-height) !important; }
+  .ms-editor-toolbar {
+    position: fixed;
+    z-index: 2147483600;
+    top: 0;
+    left: 0;
+    right: 0;
+    min-height: var(--ms-editor-toolbar-height);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #0b1726 0%, #113058 100%);
+    color: #fff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    box-shadow: 0 10px 30px rgba(0,0,0,.22);
+    overflow: visible;
+  }
+
+  .ms-editor-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 210px;
+    padding-right: 12px;
+    border-right: 1px solid rgba(255,255,255,.14);
+  }
+
+  .ms-editor-logo {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: #ff9100;
+    color: #111;
+    font-weight: 900;
+    box-shadow: 0 8px 22px rgba(255,145,0,.25);
+  }
+
+  .ms-editor-title {
+    display: grid;
+    gap: 1px;
+    line-height: 1.1;
+  }
+
+  .ms-editor-title strong {
+    display: block;
+    font-size: 14px;
+    line-height: 1.15;
+    letter-spacing: -.01em;
+  }
+
+  .ms-editor-title span {
+    display: block;
+    margin-top: 2px;
+    font-size: 11px;
+    color: rgba(255,255,255,.64);
+  }
+
+  .ms-editor-actions {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .ms-editor-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px;
+    border: 1px solid rgba(255,255,255,.11);
+    border-radius: 14px;
+    background: rgba(255,255,255,.06);
+  }
+
+  .ms-editor-toolbar button,
+  .ms-editor-toolbar summary {
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 10px;
+    background: rgba(255,255,255,.10);
+    color: #fff;
+    padding: 8px 10px;
+    font: inherit;
+    font-size: 13px;
+    line-height: 1;
+    cursor: pointer;
+    list-style: none;
+    white-space: nowrap;
+    transition: background .15s, border-color .15s, transform .15s;
+  }
+
+  .ms-editor-toolbar summary::-webkit-details-marker { display: none; }
+  .ms-editor-toolbar button:hover,
+  .ms-editor-toolbar summary:hover {
+    background: rgba(255,255,255,.18);
+    border-color: rgba(255,255,255,.30);
+  }
+
+  .ms-editor-toolbar button:active,
+  .ms-editor-toolbar summary:active {
+    transform: translateY(1px);
+  }
+
+  .ms-editor-toolbar button:focus-visible,
+  .ms-editor-toolbar summary:focus-visible {
+    outline: 2px solid #ff9100;
+    outline-offset: 2px;
+  }
+
+  .ms-editor-toolbar .ms-editor-primary {
+    background: #ff9100;
+    border-color: #ff9100;
+    color: #111;
+    font-weight: 800;
+  }
+
+  .ms-editor-toolbar .ms-editor-primary:hover {
+    background: #ff9f22;
+    border-color: #ff9f22;
+  }
+
+  .ms-color-palette {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding-inline: 4px;
+  }
+
+  .ms-color-palette span {
+    color: rgba(255,255,255,.65);
+    font-size: 12px;
+    margin-right: 2px;
+  }
+
+  .ms-color-btn {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    border-radius: 999px !important;
+    padding: 0 !important;
+    border: 2px solid rgba(255,255,255,.38) !important;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.12);
+  }
+
+  .ms-color-btn:hover {
+    transform: translateY(-1px);
+    border-color: #fff !important;
+  }
+
+  .ms-drafts-menu {
+    position: relative;
+  }
+
+  .ms-draft-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 19px;
+    height: 19px;
+    margin-left: 6px;
+    padding: 0 6px;
+    border-radius: 999px;
+    background: #ff9100;
+    color: #111;
+    font-size: 11px;
+    font-weight: 800;
+  }
+
+  .ms-drafts-panel {
+    position: fixed;
+    top: calc(var(--ms-editor-toolbar-height) + 10px);
+    right: 16px;
+    width: min(430px, calc(100vw - 32px));
+    max-height: calc(100vh - var(--ms-editor-toolbar-height) - 24px);
+    overflow: auto;
+    padding: 14px;
+    border: 1px solid rgba(17,48,88,.14);
+    border-radius: 18px;
+    background: #fff;
+    color: #1a2d42;
+    box-shadow: 0 20px 60px rgba(5,16,32,.28);
+  }
+
+  .ms-drafts-menu:not([open]) .ms-drafts-panel { display: none; }
+
+  .ms-drafts-panel h3 {
+    margin: 0 0 4px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.2;
+    color: #113058;
+  }
+
+  .ms-drafts-panel p {
+    margin: 0 0 12px;
+    font-size: 12px;
+    line-height: 1.45;
+    color: #54647a;
+  }
+
+  .ms-drafts-panel .ms-draft-panel-actions {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .ms-drafts-panel button {
+    color: #113058;
+    background: #f3f7fc;
+    border: 1px solid #dbe4ef;
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .ms-drafts-panel button:hover {
+    background: #ecf4ff;
+    border-color: #bcd4ee;
+  }
+
+  .ms-drafts-panel .ms-save-version-btn {
+    background: #ff9100;
+    border-color: #ff9100;
+    color: #111;
+    font-weight: 800;
+  }
+
+  .ms-draft-list {
+    display: grid;
+    gap: 10px;
+  }
+
+  .ms-draft-card {
+    padding: 12px;
+    border: 1px solid #dbe4ef;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(9,30,60,.05);
+  }
+
+  .ms-draft-card-title {
+    margin-bottom: 4px;
+    color: #113058;
+    font-weight: 800;
+    font-size: 13px;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  .ms-draft-card-meta {
+    margin-bottom: 10px;
+    color: #6d7d90;
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .ms-draft-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .ms-draft-empty {
+    padding: 18px;
+    border: 1px dashed #c4d1e2;
+    border-radius: 14px;
+    background: #f8fbff;
+    color: #54647a;
+    font-size: 13px;
+    line-height: 1.45;
+    text-align: center;
+  }
+
+  [data-ms-editable="true"] {
+    outline: 1px dashed rgba(255,145,0,.50);
+    outline-offset: 3px;
+    border-radius: 4px;
+    cursor: text;
+  }
+
+  [data-ms-editable="true"]:hover,
+  [data-ms-editable="true"]:focus {
+    outline: 2px solid #ff9100;
+    background: rgba(255,145,0,.08);
+  }
+
+  body.ms-hide-edit-outlines [data-ms-editable="true"],
+  body.ms-preview-mode [data-ms-editable="true"] {
+    outline: none !important;
+    background: transparent !important;
+  }
+
+  body.ms-preview-mode .ms-editor-toolbar,
+  body.ms-preview-mode .ms-edit-toast,
+  body.ms-preview-mode .ms-instruction-modal {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .ms-edit-toast {
+    position: fixed;
+    z-index: 2147483602;
+    right: 16px;
+    bottom: 16px;
+    max-width: 390px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: #0d1b2d;
+    color: #fff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 13px;
+    box-shadow: 0 12px 34px rgba(0,0,0,.25);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .18s, transform .18s;
+  }
+
+  .ms-edit-toast.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ms-instruction-modal[hidden] { display: none !important; }
+
+  .ms-instruction-modal {
+    position: fixed;
+    z-index: 2147483601;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 22px;
+    background: rgba(3,11,22,.56);
+  }
+
+  .ms-instruction-dialog {
+    width: min(620px, 100%);
+    max-height: min(760px, calc(100vh - 44px));
+    overflow: auto;
+    border-radius: 22px;
+    background: #fff;
+    color: #1a2d42;
+    box-shadow: 0 24px 80px rgba(0,0,0,.35);
+  }
+
+  .ms-instruction-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px 24px;
+    border-bottom: 1px solid #dbe4ef;
+    background: linear-gradient(135deg, #ecf4ff, #fff8ef);
+  }
+
+  .ms-instruction-header h2 {
+    margin: 0;
+    color: #113058;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .ms-instruction-header p {
+    margin: 6px 0 0;
+    color: #54647a;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .ms-instruction-close {
+    border: 0;
+    border-radius: 999px;
+    width: 34px;
+    height: 34px;
+    background: #113058;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  .ms-instruction-body {
+    padding: 22px 24px 24px;
+  }
+
+  .ms-instruction-body ol {
+    margin: 0;
+    padding-left: 22px;
+  }
+
+  .ms-instruction-body li {
+    margin-bottom: 10px;
+    color: #3a4a5e;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .ms-instruction-note {
+    margin-top: 18px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: #f8fbff;
+    border: 1px solid #dbe4ef;
+    color: #54647a;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 980px) {
+    :root { --ms-editor-toolbar-height: 140px; }
+    .ms-editor-toolbar {
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .ms-editor-actions {
+      flex-basis: 100%;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+  }
+
+  @media (max-width: 620px) {
+    :root { --ms-editor-toolbar-height: 176px; }
+    .ms-editor-brand {
+      width: 100%;
+    }
+    .ms-editor-actions {
+      flex-wrap: wrap;
+      overflow: visible;
+    }
+    .ms-editor-group {
+      flex-wrap: wrap;
+    }
+    .ms-drafts-panel {
+      left: 12px;
+      right: 12px;
+      width: auto;
+    }
+  }
+
+  @media print {
+    body { padding-top: 0 !important; }
+    .ms-editor-toolbar,
+    .ms-edit-toast,
+    .ms-instruction-modal {
+      display: none !important;
+    }
+    [data-ms-editable="true"] {
+      outline: none !important;
+      background: transparent !important;
+    }
+  }
+
+
+  /* Page-specific editor adjustment: keep the feature section nav below the fixed editor toolbar while editing. */
+  body:not(.ms-preview-mode) #ms-editor-content .ms-nav {
+    top: var(--ms-editor-toolbar-height) !important;
+  }
+</style></head>
+<body><div class="ms-editor-toolbar" data-ms-editor-ui="true" id="ms-editor-toolbar">
+<div aria-label="Editor navigation" class="ms-editor-brand">
+<div class="ms-editor-logo">MS</div>
+<div class="ms-editor-title">
+<strong>Features Master Editor</strong>
+<span>WYSIWYG draft workspace</span>
+</div>
+</div>
+<div class="ms-editor-actions">
+<details class="ms-drafts-menu" id="ms-drafts-menu">
+<summary>☰ Drafts <span class="ms-draft-count" id="ms-draft-count">0</span></summary>
+<div class="ms-drafts-panel">
+<h3>Draft history</h3>
+<p>Save named versions here, then load, rename, or delete them later on this same browser/device.</p>
+<div class="ms-draft-panel-actions">
+<button class="ms-save-version-btn" id="ms-save-draft-btn" type="button">Save current version</button>
+<button id="ms-clear-history-btn" type="button">Clear history</button>
+</div>
+<div class="ms-draft-list" id="ms-draft-list"></div>
+</div>
+</details>
+<div aria-label="Text formatting" class="ms-editor-group">
+<button id="ms-bold-btn" type="button"><b>Bold</b></button>
+<button id="ms-italic-btn" type="button"><i>Italic</i></button>
+<button id="ms-list-btn" type="button">Bullet list</button>
+<button id="ms-edit-link-btn" type="button">Edit link</button>
+</div>
+<div aria-label="Text color palette" class="ms-editor-group">
+<div class="ms-color-palette">
+<span>Color</span>
+<button class="ms-color-btn" data-ms-color="#ff9100" style="background:#ff9100" title="#ff9100" type="button"></button>
+<button class="ms-color-btn" data-ms-color="#4fa6e9" style="background:#4fa6e9" title="#4fa6e9" type="button"></button>
+<button class="ms-color-btn" data-ms-color="#113058" style="background:#113058" title="#113058" type="button"></button>
+<button class="ms-color-btn" data-ms-color="#ee924f" style="background:#ee924f" title="#ee924f" type="button"></button>
+<button class="ms-color-btn" data-ms-color="#111" style="background:#111" title="#111" type="button"></button>
+<button class="ms-color-btn" data-ms-color="#ecf4ff" style="background:#ecf4ff" title="#ecf4ff" type="button"></button>
+</div>
+</div>
+<div aria-label="Editor actions" class="ms-editor-group">
+<button id="ms-instructions-btn" type="button">Instructions</button>
+<button id="ms-preview-btn" type="button">Preview</button>
+<button id="ms-outlines-btn" type="button">Outlines</button>
+<button id="ms-reset-links-btn" type="button">Restore links</button>
+<button class="ms-editor-primary" id="ms-download-btn" type="button">Download clean HTML</button>
+</div>
+</div>
+</div>
+<div aria-live="polite" class="ms-edit-toast" data-ms-editor-ui="true" id="ms-edit-toast" role="status"></div>
+<div class="ms-instruction-modal" data-ms-editor-ui="true" hidden="" id="ms-instruction-modal">
+<div aria-labelledby="ms-instruction-title" aria-modal="true" class="ms-instruction-dialog" role="dialog">
+<div class="ms-instruction-header">
+<div>
+<h2 id="ms-instruction-title">How to use this editor</h2>
+<p>Edit the Streamline Features Master page directly in the browser, save versions, then export clean HTML.</p>
+</div>
+<button aria-label="Close instructions" class="ms-instruction-close" id="ms-instruction-close" type="button">×</button>
+</div>
+<div class="ms-instruction-body">
+<ol>
+<li>Click any outlined text on the page and type your changes.</li>
+<li>Select text, then use Bold, Italic, Bullet list, or the color palette.</li>
+<li>Use <strong>☰ Drafts</strong> to save a version. Drafts can be loaded, renamed, or deleted.</li>
+<li>Use <strong>Edit link</strong> while your cursor is inside a button/link to change its URL.</li>
+<li>Use <strong>Preview</strong> to temporarily hide the editor toolbar and outlines. Press Esc to return.</li>
+<li>Use <strong>Download clean HTML</strong> when you are ready to export the page without editor controls.</li>
+</ol>
+<div class="ms-instruction-note">
+        Drafts are saved in this browser using localStorage. They will work tomorrow on the same computer/browser, but they will not automatically sync to another device.
+      </div>
+</div>
+</div>
+</div>
+<div data-ms-editor-root="true" id="ms-editor-content">
+<div class="ms-feature-page">
 <!-- ══════════════════════════════════════════════════════════
      HERO
 ═══════════════════════════════════════════════════════════════ -->
 <header class="ms-hero">
-  <div class="ms-wrap">
-    <p class="ms-eyebrow">Streamline ERP</p>
-    <h1>Revolutionize the <em> way you run </em>your business.</h1>
-    <p class="ms-lede">Streamline brings wholesale ordering, production planning, recipe management, inventory, lot traceability, delivery, invoicing, finance, reporting, and integrations into one bakery management system.</p>
-    <div class="ms-actions">
-      <a class="ms-btn ms-btn-primary" href="https://mountainstream.co/register-your-company?cta=hero&intent=Book%20a%20demo">Book a Demo</a>
-      <a class="ms-btn ms-btn-secondary" href="https://mountainstream.co/pricing/">View Pricing</a>
-      <!-- <a class="ms-btn ms-btn-secondary" href="/case-study/">Read Case Studies</a> -->
-    </div>
-  </div>
+<div class="ms-wrap">
+<p class="ms-eyebrow">Streamline ERP</p>
+<h1>Revolutionize the <em> way you run </em>your business.</h1>
+<p class="ms-lede">Streamline brings wholesale ordering, production planning, recipe management, inventory, lot traceability, delivery, invoicing, finance, reporting, and integrations into one bakery management system.</p>
+<div class="ms-actions">
+<a class="ms-btn ms-btn-primary" href="https://mountainstream.co/register-your-company?cta=hero&amp;intent=Book%20a%20demo">Book a Demo</a>
+<a class="ms-btn ms-btn-secondary" href="https://mountainstream.co/pricing/">View Pricing</a>
+<!-- <a class="ms-btn ms-btn-secondary" href="/case-study/">Read Case Studies</a> -->
+</div>
+</div>
 </header>
-
 <!-- ══════════════════════════════════════════════════════════
      STICKY SECTION NAV
 ═══════════════════════════════════════════════════════════════ -->
-<nav class="ms-nav" aria-label="Feature sections">
-  <div class="ms-wrap">
-    <a href="#overview">Overview</a>
-    <a href="#customers">Customers & Ordering</a>
-    <a href="#production">Production & Recipes</a>
-    <a href="#inventory">Inventory & Traceability</a>
-    <a href="#delivery">Delivery</a>
-    <a href="#finance">Finance</a>
-    <a href="#reporting">Reporting</a>
-    <a href="#integrations">Integrations</a>
-    <a href="#faq">FAQ</a>
-  </div>
+<nav aria-label="Feature sections" class="ms-nav">
+<div class="ms-wrap">
+<a href="#overview">Overview</a>
+<a href="#customers">Customers &amp; Ordering</a>
+<a href="#production">Production &amp; Recipes</a>
+<a href="#inventory">Inventory &amp; Traceability</a>
+<a href="#delivery">Delivery</a>
+<a href="#finance">Finance</a>
+<a href="#reporting">Reporting</a>
+<a href="#integrations">Integrations</a>
+<a href="#faq">FAQ</a>
+</div>
 </nav>
-
 <main>
-
 <!-- ══════════════════════════════════════════════════════════
      OVERVIEW
 ═══════════════════════════════════════════════════════════════ -->
-<section id="overview" class="ms-section">
-  <div class="ms-wrap">
-    <p class="ms-kicker ms-reveal">Streamline Feature</p>
-    <h2 class="ms-reveal ms-reveal-d1">Bakery ERP software built around the full wholesale bakery workflow.</h2>
-    <p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline is designed for bakeries that have outgrown disconnected order forms, spreadsheets, production sheets, inventory files, and accounting handoffs. It turns daily bakery work into one connected operational system.</p>
-
-    <div class="ms-answer ms-reveal ms-reveal-d2">
-      <p><strong>Overview:</strong> Streamline is bakery ERP software for wholesale bakeries. It manages online ordering, customer accounts, CRM, sales catalogues, production planning, recipe costing, inventory, lot tracking, supply chain traceability, delivery, proof of delivery, invoicing, finance, reporting, automation, Shopify, and integrations.</p>
-    </div>
-
-    <div class="ms-process ms-reveal ms-reveal-d3" aria-label="Streamline workflow">
-      <div class="ms-step">Customers order online.</div>
-      <div class="ms-step">Orders feed production.</div>
-      <div class="ms-step">Recipes calculate needs.</div>
-      <div class="ms-step">Inventory and lots update.</div>
-      <div class="ms-step">Routes and packing are organized.</div>
-      <div class="ms-step">Invoices and reports generate.</div>
-    </div>
-  </div>
+<section class="ms-section" id="overview">
+<div class="ms-wrap">
+<p class="ms-kicker ms-reveal">Streamline Feature</p>
+<h2 class="ms-reveal ms-reveal-d1">Bakery ERP software built around the full wholesale bakery workflow.</h2>
+<p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline is designed for bakeries that have outgrown disconnected order forms, spreadsheets, production sheets, inventory files, and accounting handoffs. It turns daily bakery work into one connected operational system.</p>
+<div class="ms-answer ms-reveal ms-reveal-d2">
+<p><strong>Overview:</strong> Streamline is bakery ERP software for wholesale bakeries. It manages online ordering, customer accounts, CRM, sales catalogues, production planning, recipe costing, inventory, lot tracking, supply chain traceability, delivery, proof of delivery, invoicing, finance, reporting, automation, Shopify, and integrations.</p>
+</div>
+<div aria-label="Streamline workflow" class="ms-process ms-reveal ms-reveal-d3">
+<div class="ms-step">Customers order online.</div>
+<div class="ms-step">Orders feed production.</div>
+<div class="ms-step">Recipes calculate needs.</div>
+<div class="ms-step">Inventory and lots update.</div>
+<div class="ms-step">Routes and packing are organized.</div>
+<div class="ms-step">Invoices and reports generate.</div>
+</div>
+</div>
 </section>
-
 <!-- ══════════════════════════════════════════════════════════
      CUSTOMERS & ORDERING
 ═══════════════════════════════════════════════════════════════ -->
-<section id="customers" class="ms-section">
-  <div class="ms-wrap">
-    <p class="ms-kicker ms-reveal">Customers and ordering</p>
-    <h2 class="ms-reveal ms-reveal-d1">Reduce order admin and make customer service easier.</h2>
-    <p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline lets customers place orders while your team controls catalogues, prices, visibility, contacts, addresses, payment settings, and delivery rules.</p>
-
-    <article class="ms-feature-block ms-reveal">
-      <div>
-        <h3>Customer Management</h3>
-        <p>Manage customer users, roles, permissions, delivery addresses, driver notes, delivery days, delivery charges, invoice contacts, and onboarding invitations in one system.</p>
-        <ul class="ms-list">
-          <li>Unlimited customer users</li>
-          <li>Chef, manager, bookkeeper, and owner contacts</li>
-          <li>Page and address-level permissions</li>
-          <li>Customer-specific SKUs</li>
-          <li>Address-level delivery notes</li>
-          <li>Customer invitations with tutorials</li>
-        </ul>
-        <div class="ms-btn-group" style="margin-top:32px">
-            <a href="https://mountainstream.co/streamline-features/customers-and-ordering/#customer-management" class="ms-link-arrow">Learn more about Customer Management</a>
-          </div>
-      </div>
-      <aside>
-        <img src="https://mountainstream.co/wp-content/uploads/2026/05/customers-and-ordering-streamline-feature.png" alt="Customer management interface showing a list of customers and their details.">
-      </aside>
-    </article>
-
-    <article class="ms-feature-block ms-reveal">
-      <div>
-        <h3>Online Ordering and Personalized Catalogues</h3>
-        <p>Let customers manage standing orders, place one-off orders, save carts as templates, reorder frequently purchased items, and order from a personalized catalogue that respects pricing, visibility, deadlines, and lead times.</p>
-        <ul class="ms-list">
-          <li>Standing orders</li>
-          <li>One-off orders</li>
-          <li>Saved carts</li>
-          <li>Mobile ordering</li>
-          <li>Order deadlines</li>
-          <li>Product lead times</li>
-          <li>Customer-specific pricing</li>
-          <li>Item visibility by customer and address</li>
-        </ul>
-        <div class="ms-btn-group" style="margin-top:32px">
-            <a href="https://mountainstream.co/streamline-features/customers-and-ordering/#catalogue-pricing" class="ms-link-arrow">Learn more about Catalogue Pricing</a>
-          </div>
-      </div>
-      <aside>
-        <img src="https://mountainstream.co/wp-content/uploads/2026/05/online-ordering.png" alt="Online ordering interface showing a customer browsing and adding items to their cart.">
-      </aside>
-    </article>
-
-    <article class="ms-feature-block ms-reveal">
-      <div>
-        <h3>CRM, Samples, and Customer Follow-up</h3>
-        <p>Streamline includes CRM features for leads, samples, customer appointments, complaints, customer history, reminders, and follow-up automation.</p>
-        <ul class="ms-list">
-          <li>Sales leads</li>
-          <li>Sample orders</li>
-          <li>Complaints</li>
-          <li>Appointments</li>
-          <li>Customer history</li>
-          <li>Shared events</li>
-          <li>Follow-up reminders</li>
-          <li>Credit account applications</li>
-        </ul>
-        <div class="ms-btn-group" style="margin-top:32px">
-            <a href="https://mountainstream.co/streamline-features/customers-and-ordering/#crm-samples" class="ms-link-arrow">Learn more about CRM, Samples, and Customer Follow-up</a>
-          </div>
-      </div>
-      <aside>
-        <!-- <h4>Credit Account Application</h4> -->
-        <img src="https://mountainstream.co/wp-content/uploads/2026/05/credit-account-application.png" alt="Credit account application interface showing a customer submitting an application and receiving an instant response.">
-        <!-- <p>CRM is connected to the same bakery ERP data used for orders, pricing, finance, and delivery.</p> -->
-        <!-- <a href="/streamline-features/crm/">CRM page</a> -->
-      </aside>
-    </article>
-  </div>
+<section class="ms-section" id="customers">
+<div class="ms-wrap">
+<p class="ms-kicker ms-reveal">Customers and ordering</p>
+<h2 class="ms-reveal ms-reveal-d1">Reduce order admin and make customer service easier.</h2>
+<p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline lets customers place orders while your team controls catalogues, prices, visibility, contacts, addresses, payment settings, and delivery rules.</p>
+<article class="ms-feature-block ms-reveal">
+<div>
+<h3>Customer Management</h3>
+<p>Manage customer users, roles, permissions, delivery addresses, driver notes, delivery days, delivery charges, invoice contacts, and onboarding invitations in one system.</p>
+<ul class="ms-list">
+<li>Unlimited customer users</li>
+<li>Chef, manager, bookkeeper, and owner contacts</li>
+<li>Page and address-level permissions</li>
+<li>Customer-specific SKUs</li>
+<li>Address-level delivery notes</li>
+<li>Customer invitations with tutorials</li>
+</ul>
+<div class="ms-btn-group" style="margin-top:32px">
+<a class="ms-link-arrow" href="https://mountainstream.co/streamline-features/customers-and-ordering/#customer-management">Learn more about Customer Management</a>
+</div>
+</div>
+<aside>
+<img alt="Customer management interface showing a list of customers and their details." src="https://mountainstream.co/wp-content/uploads/2026/05/customers-and-ordering-streamline-feature.png"/>
+</aside>
+</article>
+<article class="ms-feature-block ms-reveal">
+<div>
+<h3>Online Ordering and Personalized Catalogues</h3>
+<p>Let customers manage standing orders, place one-off orders, save carts as templates, reorder frequently purchased items, and order from a personalized catalogue that respects pricing, visibility, deadlines, and lead times.</p>
+<ul class="ms-list">
+<li>Standing orders</li>
+<li>One-off orders</li>
+<li>Saved carts</li>
+<li>Mobile ordering</li>
+<li>Order deadlines</li>
+<li>Product lead times</li>
+<li>Customer-specific pricing</li>
+<li>Item visibility by customer and address</li>
+</ul>
+<div class="ms-btn-group" style="margin-top:32px">
+<a class="ms-link-arrow" href="https://mountainstream.co/streamline-features/customers-and-ordering/#catalogue-pricing">Learn more about Catalogue Pricing</a>
+</div>
+</div>
+<aside>
+<img alt="Online ordering interface showing a customer browsing and adding items to their cart." src="https://mountainstream.co/wp-content/uploads/2026/05/online-ordering.png"/>
+</aside>
+</article>
+<article class="ms-feature-block ms-reveal">
+<div>
+<h3>CRM, Samples, and Customer Follow-up</h3>
+<p>Streamline includes CRM features for leads, samples, customer appointments, complaints, customer history, reminders, and follow-up automation.</p>
+<ul class="ms-list">
+<li>Sales leads</li>
+<li>Sample orders</li>
+<li>Complaints</li>
+<li>Appointments</li>
+<li>Customer history</li>
+<li>Shared events</li>
+<li>Follow-up reminders</li>
+<li>Credit account applications</li>
+</ul>
+<div class="ms-btn-group" style="margin-top:32px">
+<a class="ms-link-arrow" href="https://mountainstream.co/streamline-features/customers-and-ordering/#crm-samples">Learn more about CRM, Samples, and Customer Follow-up</a>
+</div>
+</div>
+<aside>
+<!-- <h4>Credit Account Application</h4> -->
+<img alt="Credit account application interface showing a customer submitting an application and receiving an instant response." src="https://mountainstream.co/wp-content/uploads/2026/05/credit-account-application.png"/>
+<!-- <p>CRM is connected to the same bakery ERP data used for orders, pricing, finance, and delivery.</p> -->
+<!-- <a href="/streamline-features/crm/">CRM page</a> -->
+</aside>
+</article>
+</div>
 </section>
-
 <!-- ══════════════════════════════════════════════════════════
      PRODUCTION & RECIPES
 ═══════════════════════════════════════════════════════════════ -->
-<section id="production" class="ms-section ms-section-light">
-  <div class="ms-wrap">
-    <p class="ms-kicker ms-reveal">Production and recipes</p>
-    <h2 class="ms-reveal ms-reveal-d1">Turn live bakery demand into clear production work.</h2>
-    <p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline connects order totals, stock, par levels, recipes, costings, allergens, nutrition facts, labels, shopping lists, and traceability records.</p>
-
-    <article class="ms-feature-block ms-reveal">
-      <div>
-        <h3>Production Planning and Scheduling</h3>
-        <p>Plan production at a glance with the information production teams need: order quantity, current stock, par levels, forecasts, maximum stock limits, recipe requirements, and label needs.</p>
-        <ul class="ms-list">
-          <li>Total quantity on order</li>
-          <li>Current stock</li>
-          <li>Par levels</li>
-          <li>Forecasts</li>
-          <li>Maximum stock limits</li>
-          <li>Recipe-driven production</li>
-          <li>Label output</li>
-          <li>Traceability records</li>
-        </ul>
-        <div class="ms-btn-group" style="margin-top:32px">
-            <a href="https://mountainstream.co/streamline-features/production-and-recipes/#production-planning" class="ms-link-arrow">Learn more about Production Planning</a>
-          </div>
-      </div>
-      <aside class="">
-        <img src="https://mountainstream.co/wp-content/uploads/2026/05/production-planning.png" alt="Production planning interface showing a visual representation of upcoming production tasks and resource allocation.">
-      </aside>
-    </article>
-
-    <article class="ms-feature-block ms-reveal">
-      <div>
-        <h3>Recipe Management, Costing, and Batch Control</h3>
-        <p>Manage the recipe book as the operational source of truth for ingredients, sub-recipes, sales items, costing, nutrition facts, allergens, recipe cards, and batch instructions.</p>
-        <ul class="ms-list">
-          <li>Raw materials</li>
-          <li>Sales items as ingredients</li>
-          <li>Sub-recipes</li>
-          <li>Recipe costings</li>
-          <li>Nutrition facts</li>
-          <li>Allergens</li>
-          <li>Recipe card templates</li>
-          <li>Capacity-based mix splitting</li>
-        </ul>
-                <div class="ms-btn-group" style="margin-top:32px">
-            <a href="https://mountainstream.co/streamline-features/production-and-recipes#recipe-management" class="ms-link-arrow">Learn more about Recipe Management</a>
-          </div>
-      </div>
-      <aside>
-        <img src="https://mountainstream.co/wp-content/uploads/2026/05/recipe-management.png" alt="Recipe management interface showing a list of recipes and their details.">
-      </aside>
-    </article>
-  </div>
+<section class="ms-section ms-section-light" id="production">
+<div class="ms-wrap">
+<p class="ms-kicker ms-reveal">Production and recipes</p>
+<h2 class="ms-reveal ms-reveal-d1">Turn live bakery demand into clear production work.</h2>
+<p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline connects order totals, stock, par levels, recipes, costings, allergens, nutrition facts, labels, shopping lists, and traceability records.</p>
+<article class="ms-feature-block ms-reveal">
+<div>
+<h3>Production Planning and Scheduling</h3>
+<p>Plan production at a glance with the information production teams need: order quantity, current stock, par levels, forecasts, maximum stock limits, recipe requirements, and label needs.</p>
+<ul class="ms-list">
+<li>Total quantity on order</li>
+<li>Current stock</li>
+<li>Par levels</li>
+<li>Forecasts</li>
+<li>Maximum stock limits</li>
+<li>Recipe-driven production</li>
+<li>Label output</li>
+<li>Traceability records</li>
+</ul>
+<div class="ms-btn-group" style="margin-top:32px">
+<a class="ms-link-arrow" href="https://mountainstream.co/streamline-features/production-and-recipes/#production-planning">Learn more about Production Planning</a>
+</div>
+</div>
+<aside class="">
+<img alt="Production planning interface showing a visual representation of upcoming production tasks and resource allocation." src="https://mountainstream.co/wp-content/uploads/2026/05/production-planning.png"/>
+</aside>
+</article>
+<article class="ms-feature-block ms-reveal">
+<div>
+<h3>Recipe Management, Costing, and Batch Control</h3>
+<p>Manage the recipe book as the operational source of truth for ingredients, sub-recipes, sales items, costing, nutrition facts, allergens, recipe cards, and batch instructions.</p>
+<ul class="ms-list">
+<li>Raw materials</li>
+<li>Sales items as ingredients</li>
+<li>Sub-recipes</li>
+<li>Recipe costings</li>
+<li>Nutrition facts</li>
+<li>Allergens</li>
+<li>Recipe card templates</li>
+<li>Capacity-based mix splitting</li>
+</ul>
+<div class="ms-btn-group" style="margin-top:32px">
+<a class="ms-link-arrow" href="https://mountainstream.co/streamline-features/production-and-recipes#recipe-management">Learn more about Recipe Management</a>
+</div>
+</div>
+<aside>
+<img alt="Recipe management interface showing a list of recipes and their details." src="https://mountainstream.co/wp-content/uploads/2026/05/recipe-management.png"/>
+</aside>
+</article>
+</div>
 </section>
-
 <!-- ══════════════════════════════════════════════════════════
      INVENTORY & TRACEABILITY
 ═════════════════════════════════════════════════════════════ -->
-<section id="inventory" class="ms-section" >
-  <div class="ms-wrap">
-    <p class="ms-kicker ms-reveal">Inventory and traceability</p>
-    <h2 class="ms-reveal ms-reveal-d1">Control ingredients, lots, labels, finished goods, and recalls.</h2>
-    <p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline connects inventory management and supply chain traceability so bakeries can receive goods, assign lot numbers, use ingredients in recipes, print labels, and trace products through packing slips and delivery.</p>
-
-    <article class="ms-feature-block ms-reveal">
-      <div>
-        <h3>Inventory Management</h3>
-        <p>Receive goods, capture invoice items and quantities, assign lot numbers, print barcode labels, move stock, make recipes, count inventory, and replenish ingredients from shopping lists and purchase orders.</p>
-        <ul class="ms-list">
-          <li>Purchase and replenish</li>
-          <li>Receive goods</li>
-          <li>Invoice scanning</li>
-          <li>Use-by dates</li>
-          <li>Delivery temperatures</li>
-          <li>Barcode labels</li>
-          <li>Stock counts</li>
-          <li>Stock adjustments</li>
-          <li>Ingredient depletion</li>
-          <li>Purchase orders</li>
-        </ul>
-        <div class="ms-btn-group" style="margin-top:32px">
-            <a href="https://mountainstream.co/streamline-features/inventory-and-traceability/#inventory-management" class="ms-link-arrow">Learn more about Inventory Management</a>
-          </div>
-      </div>
-      <aside>
-        <img src="https://mountainstream.co/wp-content/uploads/2026/05/inventory-management.png" alt="Inventory management interface showing a list of inventory items and their details.">
-      </aside>
-    </article>
-
-    <article class="ms-feature-block ms-reveal">
-      <div>
-        <h3>Supply Chain Traceability and Lot Tracking</h3>
-        <p>Trace lots from vendor invoice to goods-in, recipes, finished goods, packing slips, customer delivery, and recall messages.</p>
-        <ul class="ms-list">
-          <li>Internal lot numbers</li>
-          <li>Vendor lot relationships</li>
-          <li>Barcode confirmation</li>
-          <li>Recipe lot records</li>
-          <li>Packing slip traceability</li>
-          <li>Recall emails</li>
-          <li>Custom lot protocol options</li>
-          <li>Dispatch scanning</li>
-        </ul>
-        <div class="ms-btn-group" style="margin-top:32px">
-            <a href="https://mountainstream.co/streamline-features/inventory-and-traceability/#supply-chain" class="ms-link-arrow">Learn more about Supply Chain Traceability</a>
-          </div>
-      </div>
-      <aside class="">
-        <img src="https://mountainstream.co/wp-content/uploads/2026/05/supply-chain-traceability.png" alt="Supply chain traceability interface showing lot tracking information from vendor invoice to customer delivery.">
-      </aside>
-    </article>
-
-    <article class="ms-feature-block ms-reveal">
-      <div>
-        <h3>Streamline Inventory App</h3>
-        <p>Scan invoices, manage ingredients, create recipes, and print labels—all from a single app built for busy bakers.</p>
-        <ul class="ms-list">
-          <li>Goods in</li>
-          <li>Make prep recipes and sales items</li>
-          <li>Stock count</li>
-          <li>Labels</li>
-        </ul>
-        <div class="ms-btn-group" style="margin-top:32px">
-            <a href="https://mountainstream.co/streamline-inventory-app/" class="ms-link-arrow">See how Streamline Inventory App Works</a>
-          </div>
-      </div>
-      <aside class="">
-        <img src="https://mountainstream.co/wp-content/uploads/2026/05/streamline-inventory-app.png" alt="Streamline Inventory App interface showing a list of inventory items and their details.">
-      </aside>
-    </article>
-  </div>
+<section class="ms-section" id="inventory">
+<div class="ms-wrap">
+<p class="ms-kicker ms-reveal">Inventory and traceability</p>
+<h2 class="ms-reveal ms-reveal-d1">Control ingredients, lots, labels, finished goods, and recalls.</h2>
+<p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline connects inventory management and supply chain traceability so bakeries can receive goods, assign lot numbers, use ingredients in recipes, print labels, and trace products through packing slips and delivery.</p>
+<article class="ms-feature-block ms-reveal">
+<div>
+<h3>Inventory Management</h3>
+<p>Receive goods, capture invoice items and quantities, assign lot numbers, print barcode labels, move stock, make recipes, count inventory, and replenish ingredients from shopping lists and purchase orders.</p>
+<ul class="ms-list">
+<li>Purchase and replenish</li>
+<li>Receive goods</li>
+<li>Invoice scanning</li>
+<li>Use-by dates</li>
+<li>Delivery temperatures</li>
+<li>Barcode labels</li>
+<li>Stock counts</li>
+<li>Stock adjustments</li>
+<li>Ingredient depletion</li>
+<li>Purchase orders</li>
+</ul>
+<div class="ms-btn-group" style="margin-top:32px">
+<a class="ms-link-arrow" href="https://mountainstream.co/streamline-features/inventory-and-traceability/#inventory-management">Learn more about Inventory Management</a>
+</div>
+</div>
+<aside>
+<img alt="Inventory management interface showing a list of inventory items and their details." src="https://mountainstream.co/wp-content/uploads/2026/05/inventory-management.png"/>
+</aside>
+</article>
+<article class="ms-feature-block ms-reveal">
+<div>
+<h3>Supply Chain Traceability and Lot Tracking</h3>
+<p>Trace lots from vendor invoice to goods-in, recipes, finished goods, packing slips, customer delivery, and recall messages.</p>
+<ul class="ms-list">
+<li>Internal lot numbers</li>
+<li>Vendor lot relationships</li>
+<li>Barcode confirmation</li>
+<li>Recipe lot records</li>
+<li>Packing slip traceability</li>
+<li>Recall emails</li>
+<li>Custom lot protocol options</li>
+<li>Dispatch scanning</li>
+</ul>
+<div class="ms-btn-group" style="margin-top:32px">
+<a class="ms-link-arrow" href="https://mountainstream.co/streamline-features/inventory-and-traceability/#supply-chain">Learn more about Supply Chain Traceability</a>
+</div>
+</div>
+<aside class="">
+<img alt="Supply chain traceability interface showing lot tracking information from vendor invoice to customer delivery." src="https://mountainstream.co/wp-content/uploads/2026/05/supply-chain-traceability.png"/>
+</aside>
+</article>
+<article class="ms-feature-block ms-reveal">
+<div>
+<h3>Streamline Inventory App</h3>
+<p>Scan invoices, manage ingredients, create recipes, and print labels—all from a single app built for busy bakers.</p>
+<ul class="ms-list">
+<li>Goods in</li>
+<li>Make prep recipes and sales items</li>
+<li>Stock count</li>
+<li>Labels</li>
+</ul>
+<div class="ms-btn-group" style="margin-top:32px">
+<a class="ms-link-arrow" href="https://mountainstream.co/streamline-inventory-app/">See how Streamline Inventory App Works</a>
+</div>
+</div>
+<aside class="">
+<img alt="Streamline Inventory App interface showing a list of inventory items and their details." src="https://mountainstream.co/wp-content/uploads/2026/05/streamline-inventory-app.png"/>
+</aside>
+</article>
+</div>
 </section>
-
 <!-- ══════════════════════════════════════════════════════════
      DISTRIBUTION & ROUTE MANAGEMENT
 ═══════════════════════════════════════════════════════════════ -->
-<section id="delivery" class="ms-section ms-section-light" style="">
-  <div class="ms-wrap">
-    <p class="ms-kicker ms-reveal">Delivery and distribution</p>
-    <h2 class="ms-reveal ms-reveal-d1">Get bakery orders packed, routed, delivered, and confirmed.</h2>
-    <p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline supports route management, packing slip templates, delivery charging, route optimization, truck sales, delivery assets, and electronic proof of delivery.</p>
-
-    <article class="ms-feature-block ms-reveal">
-      <div>
-        <h3>Route Management and POD</h3>
-        <p>Organize delivery by weekday, specific dates, addresses, sub-routes, and delivery order.</p>
-        <ul class="ms-list">
-          <li>Route planning</li>
-          <li>Driver assignments</li>
-          <li>Delivery scheduling</li>
-          <li>Delivery charging</li>
-          <li>Integrates with OptimoRoute and Detrack</li>
-          <li>Instant, electronic proof of delivery</li>
-          <li>Capture pictures, signatures, geotags, timestamps, delivered assets, collected assets, and emailed PDFs.</li>
-        </ul>
-        <div class="ms-btn-group" style="margin-top:32px">
-            <a href="https://mountainstream.co/streamline-features/delivery-and-distribution" class="ms-link-arrow">Learn more about Route Management and POD</a>
-          </div>
-      </div>
-      <aside class="">
-        <img src="https://mountainstream.co/wp-content/uploads/2026/05/streamline-distribution-app.png" alt="Streamline Distribution App">
-      </aside>
-    </article>
-
-    <article class="ms-feature-block ms-reveal">
-      <div>
-        <h3>Packing Slips Templates</h3>
-        <p>Attach templates by address, show customer SKUs, include driver notes, hide or show prices, and sort in packing order.</p>
-        <ul class="ms-list">
-          <li>Attach by address</li>
-          <li>Option to show customer own SKUs</li>
-          <li>Notes for driver on delivery</li>
-          <li>Show / hide prices</li>
-          <li>Sort items in packing order</li>
-          <li>Filter by item attribute</li>
-        </ul>
-        <div class="ms-btn-group" style="margin-top:32px">
-            <a href="https://mountainstream.co/streamline-features/delivery-and-distribution/" class="ms-link-arrow">Learn more about Packing Slips Templates</a>
-          </div>
-      </div>
-      <aside class="">
-        <img src="https://mountainstream.co/wp-content/uploads/2026/05/packing-slip-template.png" alt="Packing Slip Template">
-      </aside>
-    </article>
-    <article class="ms-feature-block ms-reveal">
-      <div>
-        <h3>Streamline Distribution App</h3>
-        <p>Keep track of when, where, and by whom a tray was delivered to your customers. Easily monitor how many trays are at specific addresses, how many need to be collected, and generate proof of delivery.</p>
-        <ul class="ms-list">
-          <li>One way packing</li>
-          <li>Reusable delivery assets</li>
-          <li>Proof of deliveries</li>
-          <li>Accurate labor costings</li>
-        </ul>
-        <div class="ms-btn-group" style="margin-top:32px">
-            <a href="https://mountainstream.co/streamline-distribution-app/" class="ms-link-arrow">Learn more about Streamline Distribution App</a>
-          </div>
-      </div>
-      <aside>
-        <img src="https://mountainstream.co/wp-content/uploads/2026/05/streamline-delivery-app.png" alt="Streamline Delivery App interface showing route management and proof of delivery features.">
-      </aside>
-    </article>
-    
-  </div>
+<section class="ms-section ms-section-light" id="delivery" style="">
+<div class="ms-wrap">
+<p class="ms-kicker ms-reveal">Delivery and distribution</p>
+<h2 class="ms-reveal ms-reveal-d1">Get bakery orders packed, routed, delivered, and confirmed.</h2>
+<p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline supports route management, packing slip templates, delivery charging, route optimization, truck sales, delivery assets, and electronic proof of delivery.</p>
+<article class="ms-feature-block ms-reveal">
+<div>
+<h3>Route Management and POD</h3>
+<p>Organize delivery by weekday, specific dates, addresses, sub-routes, and delivery order.</p>
+<ul class="ms-list">
+<li>Route planning</li>
+<li>Driver assignments</li>
+<li>Delivery scheduling</li>
+<li>Delivery charging</li>
+<li>Integrates with OptimoRoute and Detrack</li>
+<li>Instant, electronic proof of delivery</li>
+<li>Capture pictures, signatures, geotags, timestamps, delivered assets, collected assets, and emailed PDFs.</li>
+</ul>
+<div class="ms-btn-group" style="margin-top:32px">
+<a class="ms-link-arrow" href="https://mountainstream.co/streamline-features/delivery-and-distribution">Learn more about Route Management and POD</a>
+</div>
+</div>
+<aside class="">
+<img alt="Streamline Distribution App" src="https://mountainstream.co/wp-content/uploads/2026/05/streamline-distribution-app.png"/>
+</aside>
+</article>
+<article class="ms-feature-block ms-reveal">
+<div>
+<h3>Packing Slips Templates</h3>
+<p>Attach templates by address, show customer SKUs, include driver notes, hide or show prices, and sort in packing order.</p>
+<ul class="ms-list">
+<li>Attach by address</li>
+<li>Option to show customer own SKUs</li>
+<li>Notes for driver on delivery</li>
+<li>Show / hide prices</li>
+<li>Sort items in packing order</li>
+<li>Filter by item attribute</li>
+</ul>
+<div class="ms-btn-group" style="margin-top:32px">
+<a class="ms-link-arrow" href="https://mountainstream.co/streamline-features/delivery-and-distribution/">Learn more about Packing Slips Templates</a>
+</div>
+</div>
+<aside class="">
+<img alt="Packing Slip Template" src="https://mountainstream.co/wp-content/uploads/2026/05/packing-slip-template.png"/>
+</aside>
+</article>
+<article class="ms-feature-block ms-reveal">
+<div>
+<h3>Streamline Distribution App</h3>
+<p>Keep track of when, where, and by whom a tray was delivered to your customers. Easily monitor how many trays are at specific addresses, how many need to be collected, and generate proof of delivery.</p>
+<ul class="ms-list">
+<li>One way packing</li>
+<li>Reusable delivery assets</li>
+<li>Proof of deliveries</li>
+<li>Accurate labor costings</li>
+</ul>
+<div class="ms-btn-group" style="margin-top:32px">
+<a class="ms-link-arrow" href="https://mountainstream.co/streamline-distribution-app/">Learn more about Streamline Distribution App</a>
+</div>
+</div>
+<aside>
+<img alt="Streamline Delivery App interface showing route management and proof of delivery features." src="https://mountainstream.co/wp-content/uploads/2026/05/streamline-delivery-app.png"/>
+</aside>
+</article>
+</div>
 </section>
-
-
 <!-- ══════════════════════════════════════════════════════════
      FINANCE
 ═══════════════════════════════════════════════════════════════ -->
-<section id="finance" class="ms-section">
-  <div class="ms-wrap">
-    <p class="ms-kicker ms-reveal">Finance</p>
-    <h2 class="ms-reveal ms-reveal-d1">Connect orders, deliveries, invoices, payments, and accounting.</h2>
-    <p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline turns bakery operations into cleaner finance workflows: invoices, credit notes, statements, credit control, payment collection, customer settings, accounting exports, and profitability analysis.</p>
-    <div class="ms-grid" style="margin-top: 2.5rem;">
-      <article class="ms-card ms-reveal ms-reveal-d1">
-        <h3>Invoices and Statements</h3>
-        <p>Generate invoices, credit notes, self-service statements, invoice emails, and route or alphabetic invoice batches.</p>
-        <!-- <a href="/streamline-features/invoicing-statements/">Invoicing page</a> -->
-      </article>
-      <article class="ms-card ms-reveal ms-reveal-d2">
-        <h3>Payment Collection</h3>
-        <p>Set collection rules, collect through Stripe, support WholeSail, Melio, ACH, and CSV workflows.</p>
-        <!-- <a href="/streamline-features/payment-collection/">Payment collection page</a> -->
-      </article>
-      <article class="ms-card ms-reveal ms-reveal-d3">
-        <h3>Accounting and Menu Engineering</h3>
-        <p>Connect QuickBooks, Xero, sales ledger exports, order minimums, billing settings, and item profitability analysis.</p>
-        <!-- <a href="/streamline-features/finance/">Finance page</a> -->
-      </article>
-    </div>
-    <div class="ms-btn-group" style="margin-top:32px">
-      <a href="https://mountainstream.co/streamline-features/finance-and-reporting/" class="ms-link-arrow">Learn more about Finance</a>
-    </div>
-  </div>
+<section class="ms-section" id="finance">
+<div class="ms-wrap">
+<p class="ms-kicker ms-reveal">Finance</p>
+<h2 class="ms-reveal ms-reveal-d1">Connect orders, deliveries, invoices, payments, and accounting.</h2>
+<p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline turns bakery operations into cleaner finance workflows: invoices, credit notes, statements, credit control, payment collection, customer settings, accounting exports, and profitability analysis.</p>
+<div class="ms-grid" style="margin-top: 2.5rem;">
+<article class="ms-card ms-reveal ms-reveal-d1">
+<h3>Invoices and Statements</h3>
+<p>Generate invoices, credit notes, self-service statements, invoice emails, and route or alphabetic invoice batches.</p>
+<!-- <a href="/streamline-features/invoicing-statements/">Invoicing page</a> -->
+</article>
+<article class="ms-card ms-reveal ms-reveal-d2">
+<h3>Payment Collection</h3>
+<p>Set collection rules, collect through Stripe, support WholeSail, Melio, ACH, and CSV workflows.</p>
+<!-- <a href="/streamline-features/payment-collection/">Payment collection page</a> -->
+</article>
+<article class="ms-card ms-reveal ms-reveal-d3">
+<h3>Accounting and Menu Engineering</h3>
+<p>Connect QuickBooks, Xero, sales ledger exports, order minimums, billing settings, and item profitability analysis.</p>
+<!-- <a href="/streamline-features/finance/">Finance page</a> -->
+</article>
+</div>
+<div class="ms-btn-group" style="margin-top:32px">
+<a class="ms-link-arrow" href="https://mountainstream.co/streamline-features/finance-and-reporting/">Learn more about Finance</a>
+</div>
+</div>
 </section>
-
 <!-- ══════════════════════════════════════════════════════════
      REPORTING & AUTOMATION
 ═══════════════════════════════════════════════════════════════ -->
-<section id="reporting" class="ms-section ms-section-light">
-  <div class="ms-wrap">
-    <p class="ms-kicker ms-reveal">Reporting and automation</p>
-    <h2 class="ms-reveal ms-reveal-d1">Build bakery reports around how your production actually works.</h2>
-    <p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline reporting supports pivot tables, charts, shortcuts, production logic, attributes, scheduled emails, deviation reports, shopping lists, bills of materials, weekly orders, and custom report formats.</p>
-    <div class="ms-grid" style="margin-top: 2.5rem;">
-      <article class="ms-card ms-reveal ms-reveal-d1">
-        <h3>Reporting Architecture</h3>
-        <p>Create unlimited pivot tables and charts, filter and group by attributes, clone reports, hide columns, and save shortcuts.</p>
-        <!-- <a href="/streamline-features/reporting/">Reporting page</a> -->
-      </article>
-      <article class="ms-card ms-reveal ms-reveal-d2">
-        <h3>Flexible Data Structure</h3>
-        <p>Add attributes to items, customers, and addresses to structure production, delivery, labels, and custom reports.</p>
-        <!-- <a href="/streamline-features/flexible-data-structure/">Attributes page</a> -->
-      </article>
-      <article class="ms-card ms-reveal ms-reveal-d3">
-        <h3>Automations and Forecasting</h3>
-        <p>Schedule reports, send customer emails, automate statements, detect order deviations, and support forecasting workflows.</p>
-        <!-- <a href="/streamline-features/automation-forecasting/">Automation page</a> -->
-      </article>
-    </div>
-    <div class="ms-btn-group" style="margin-top:32px">
-      <a href="https://mountainstream.co/streamline-features/finance-and-reporting/" class="ms-link-arrow">Learn more about Reporting</a>
-    </div>
-  </div>
+<section class="ms-section ms-section-light" id="reporting">
+<div class="ms-wrap">
+<p class="ms-kicker ms-reveal">Reporting and automation</p>
+<h2 class="ms-reveal ms-reveal-d1">Build bakery reports around how your production actually works.</h2>
+<p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline reporting supports pivot tables, charts, shortcuts, production logic, attributes, scheduled emails, deviation reports, shopping lists, bills of materials, weekly orders, and custom report formats.</p>
+<div class="ms-grid" style="margin-top: 2.5rem;">
+<article class="ms-card ms-reveal ms-reveal-d1">
+<h3>Reporting Architecture</h3>
+<p>Create unlimited pivot tables and charts, filter and group by attributes, clone reports, hide columns, and save shortcuts.</p>
+<!-- <a href="/streamline-features/reporting/">Reporting page</a> -->
+</article>
+<article class="ms-card ms-reveal ms-reveal-d2">
+<h3>Flexible Data Structure</h3>
+<p>Add attributes to items, customers, and addresses to structure production, delivery, labels, and custom reports.</p>
+<!-- <a href="/streamline-features/flexible-data-structure/">Attributes page</a> -->
+</article>
+<article class="ms-card ms-reveal ms-reveal-d3">
+<h3>Automations and Forecasting</h3>
+<p>Schedule reports, send customer emails, automate statements, detect order deviations, and support forecasting workflows.</p>
+<!-- <a href="/streamline-features/automation-forecasting/">Automation page</a> -->
+</article>
+</div>
+<div class="ms-btn-group" style="margin-top:32px">
+<a class="ms-link-arrow" href="https://mountainstream.co/streamline-features/finance-and-reporting/">Learn more about Reporting</a>
+</div>
+</div>
 </section>
-
 <!-- ══════════════════════════════════════════════════════════
      INTEGRATIONS
 ═══════════════════════════════════════════════════════════════ -->
-<section id="integrations" class="ms-section">
-  <div class="ms-wrap">
-    <p class="ms-kicker ms-reveal">Integrations and extensibility</p>
-    <h2 class="ms-reveal ms-reveal-d1">Connect the systems your bakery already uses.</h2>
-    <p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline integrates with finance, payments, route optimization, EDI, retail ordering, and e-commerce tools while keeping one operational database at the center.</p>
-    <div class="ms-grid" style="margin-top: 2.5rem;">
-      <article class="ms-card ms-reveal ms-reveal-d1">
-        <h3>Accounting and Payments</h3>
-        <p>QuickBooks Desktop, QuickBooks Online, Xero, Stripe, WholeSail, Melio, ACH Bank, and CSV workflows.</p>
-        <!-- <a href="/streamline-features/integrations/">Integrations page</a> -->
-      </article>
-      <article class="ms-card ms-reveal ms-reveal-d2">
-        <h3>EDI and Delivery</h3>
-        <p>Whole Foods, Compeat Radar, Coupa, OptimoRoute, and Detrack.</p>
-        <!-- <a href="/streamline-features/edi/">EDI page</a> -->
-      </article>
-      <article class="ms-card ms-reveal ms-reveal-d3">
-        <h3>Boomerang and Shopify</h3>
-        <p>Consolidate retail and wholesale orders for production, sync Shopify items, import orders, and respect lead times.</p>
-      </article>
-    </div>
-    <div class="ms-btn-group" style="margin-top:32px">
-      <a href="https://mountainstream.co/streamline-features/integrations/" class="ms-link-arrow">Learn more about Integrations</a>
-    </div>
-  </div>
+<section class="ms-section" id="integrations">
+<div class="ms-wrap">
+<p class="ms-kicker ms-reveal">Integrations and extensibility</p>
+<h2 class="ms-reveal ms-reveal-d1">Connect the systems your bakery already uses.</h2>
+<p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline integrates with finance, payments, route optimization, EDI, retail ordering, and e-commerce tools while keeping one operational database at the center.</p>
+<div class="ms-grid" style="margin-top: 2.5rem;">
+<article class="ms-card ms-reveal ms-reveal-d1">
+<h3>Accounting and Payments</h3>
+<p>QuickBooks Desktop, QuickBooks Online, Xero, Stripe, WholeSail, Melio, ACH Bank, and CSV workflows.</p>
+<!-- <a href="/streamline-features/integrations/">Integrations page</a> -->
+</article>
+<article class="ms-card ms-reveal ms-reveal-d2">
+<h3>EDI and Delivery</h3>
+<p>Whole Foods, Compeat Radar, Coupa, OptimoRoute, and Detrack.</p>
+<!-- <a href="/streamline-features/edi/">EDI page</a> -->
+</article>
+<article class="ms-card ms-reveal ms-reveal-d3">
+<h3>Boomerang and Shopify</h3>
+<p>Consolidate retail and wholesale orders for production, sync Shopify items, import orders, and respect lead times.</p>
+</article>
+</div>
+<div class="ms-btn-group" style="margin-top:32px">
+<a class="ms-link-arrow" href="https://mountainstream.co/streamline-features/integrations/">Learn more about Integrations</a>
+</div>
+</div>
 </section>
-
-
 <!-- ══════════════════════════════════════════════════════════
      FAQ
 ═══════════════════════════════════════════════════════════════ -->
-<section id="faq" class="ms-section ms-faq">
-  <div class="ms-wrap-narrow">
-    <p class="ms-kicker ms-reveal">FAQ</p>
-    <h2 class="ms-reveal ms-reveal-d1">Bakery ERP feature questions, answered.</h2>
-
-    <div class="ms-reveal ms-reveal-d2" style="margin-top: 2rem;">
-      <details open>
-        <summary>What is Streamline?</summary>
-        <p>Streamline is bakery ERP software that helps wholesale bakeries manage online ordering, production planning, recipe management, inventory, lot traceability, distribution, invoicing, finance, reporting, and integrations.</p>
-      </details>
-      <details>
-        <summary>Does Streamline include production planning software?</summary>
-        <p>Yes. Streamline uses order quantities, current stock, par levels, forecasts, maximum stock limits, recipes, labels, and inventory data to help bakeries plan production.</p>
-      </details>
-      <details>
-        <summary>Does Streamline include inventory management?</summary>
-        <p>Yes. Streamline supports goods-in, purchase invoice scanning, lot assignment, barcode labels, inventory moves, stock counts, stock adjustments, recipe production, ingredient depletion, and replenishment.</p>
-      </details>
-      <details>
-        <summary>Does Streamline support traceability?</summary>
-        <p>Yes. Streamline tracks lots from vendor purchase information through goods-in, production, recipe lots, packing slips, dispatch, and recall communication.</p>
-      </details>
-      <details>
-        <summary>How should this hub link to feature pages?</summary>
-        <p>Each module summary should link to a dedicated child feature page. Each child page should link back to this hub, pricing, book a demo, relevant documentation, and related sibling feature pages.</p>
-      </details>
-    </div>
-  </div>
+<section class="ms-section ms-faq" id="faq">
+<div class="ms-wrap-narrow">
+<p class="ms-kicker ms-reveal">FAQ</p>
+<h2 class="ms-reveal ms-reveal-d1">Bakery ERP feature questions, answered.</h2>
+<div class="ms-reveal ms-reveal-d2" style="margin-top: 2rem;">
+<details open="">
+<summary>What is Streamline?</summary>
+<p>Streamline is bakery ERP software that helps wholesale bakeries manage online ordering, production planning, recipe management, inventory, lot traceability, distribution, invoicing, finance, reporting, and integrations.</p>
+</details>
+<details>
+<summary>Does Streamline include production planning software?</summary>
+<p>Yes. Streamline uses order quantities, current stock, par levels, forecasts, maximum stock limits, recipes, labels, and inventory data to help bakeries plan production.</p>
+</details>
+<details>
+<summary>Does Streamline include inventory management?</summary>
+<p>Yes. Streamline supports goods-in, purchase invoice scanning, lot assignment, barcode labels, inventory moves, stock counts, stock adjustments, recipe production, ingredient depletion, and replenishment.</p>
+</details>
+<details>
+<summary>Does Streamline support traceability?</summary>
+<p>Yes. Streamline tracks lots from vendor purchase information through goods-in, production, recipe lots, packing slips, dispatch, and recall communication.</p>
+</details>
+<details>
+<summary>How should this hub link to feature pages?</summary>
+<p>Each module summary should link to a dedicated child feature page. Each child page should link back to this hub, pricing, book a demo, relevant documentation, and related sibling feature pages.</p>
+</details>
+</div>
+</div>
 </section>
-
 <!-- ══════════════════════════════════════════════════════════
      PILLAR PAGE REVIEWS
 ═══════════════════════════════════════════════════════════════ -->
-<section id="pillar-reviews" class="ms-feature-page ms-section ms-section-light ms-reviews">
-  <div class="ms-wrap">
-    <div class="ms-reviews__header">
-      <div>
-        <p class="ms-kicker ms-reveal">Customer reviews</p>
-        <h2 class="ms-reveal ms-reveal-d1">Real feedback from teams using Streamline across daily operations.</h2>
-        <p class="ms-section-intro ms-reveal ms-reveal-d2">
+<section class="ms-feature-page ms-section ms-section-light ms-reviews" id="pillar-reviews">
+<div class="ms-wrap">
+<div class="ms-reviews__header">
+<div>
+<p class="ms-kicker ms-reveal">Customer reviews</p>
+<h2 class="ms-reveal ms-reveal-d1">Real feedback from teams using Streamline across daily operations.</h2>
+<p class="ms-section-intro ms-reveal ms-reveal-d2">
           Streamline connects customer ordering, production planning, recipes, inventory, delivery, invoicing, accounting, and reporting in one flexible ERP system. These Capterra reviews highlight how bakeries use Streamline as a connected operational platform, not just a single-purpose ordering or inventory tool.
         </p>
-      </div>
-
-      <aside class="ms-reviews__summary ms-reveal ms-reveal-d2" aria-label="Review rating summary">
-        <div class="ms-reviews__score">
-          <strong>4.8</strong>
-          <span>/ 5</span>
-        </div>
-        <div class="ms-reviews__stars" aria-label="Rated 4.8 out of 5 stars">★★★★★</div>
-        <p>Customer reviews from Capterra for Mountain Stream Bakery Software.</p>
-      </aside>
-    </div>
-
-    <div class="ms-review-grid">
-      <article class="ms-review-card ms-reveal ms-reveal-d1">
-        <div class="ms-review-card__meta">
-          <span class="ms-review-card__rating" aria-label="5 out of 5 rating">★★★★★ 5.0</span>
-          <span class="ms-review-card__source">Capterra review</span>
-        </div>
-
-        <h3>A connected workflow from orders to production, delivery, and invoicing.</h3>
-
-        <blockquote>
-          <p>
+</div>
+<aside aria-label="Review rating summary" class="ms-reviews__summary ms-reveal ms-reveal-d2">
+<div class="ms-reviews__score">
+<strong>4.8</strong>
+<span>/ 5</span>
+</div>
+<div aria-label="Rated 4.8 out of 5 stars" class="ms-reviews__stars">★★★★★</div>
+<p>Customer reviews from Capterra for Mountain Stream Bakery Software.</p>
+</aside>
+</div>
+<div class="ms-review-grid">
+<article class="ms-review-card ms-reveal ms-reveal-d1">
+<div class="ms-review-card__meta">
+<span aria-label="5 out of 5 rating" class="ms-review-card__rating">★★★★★ 5.0</span>
+<span class="ms-review-card__source">Capterra review</span>
+</div>
+<h3>A connected workflow from orders to production, delivery, and invoicing.</h3>
+<blockquote>
+<p>
             “We use Mountain Stream from customer order placement, to production, delivery routes, route sheets, and invoicing. We made the switch and it has been one of our best business decisions.”
           </p>
-        </blockquote>
-
-        <div class="ms-review-card__footer">
-          <div class="ms-review-card__person">
-            <strong>Elizabeth L.</strong>
-            <span>Bakery Operations</span>
-          </div>
-
-          <a
-            class="ms-review-card__link"
-            href="PASTE_ELIZABETH_CAPTERRA_REVIEW_LINK_HERE"
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-            aria-label="Read Elizabeth L.'s Capterra review for Mountain Stream Bakery Software"
-          >
+</blockquote>
+<div class="ms-review-card__footer">
+<div class="ms-review-card__person">
+<strong>Elizabeth L.</strong>
+<span>Bakery Operations</span>
+</div>
+<a aria-label="Read Elizabeth L.'s Capterra review for Mountain Stream Bakery Software" class="ms-review-card__link" href="PASTE_ELIZABETH_CAPTERRA_REVIEW_LINK_HERE" rel="noopener noreferrer nofollow" target="_blank">
             Read review
           </a>
-        </div>
-      </article>
-
-      <article class="ms-review-card ms-reveal ms-reveal-d2">
-        <div class="ms-review-card__meta">
-          <span class="ms-review-card__rating" aria-label="5 out of 5 rating">★★★★★ 5.0</span>
-          <span class="ms-review-card__source">Capterra review</span>
-        </div>
-
-        <h3>Built around the real bakery workflow.</h3>
-
-        <blockquote>
-          <p>
+</div>
+</article>
+<article class="ms-review-card ms-reveal ms-reveal-d2">
+<div class="ms-review-card__meta">
+<span aria-label="5 out of 5 rating" class="ms-review-card__rating">★★★★★ 5.0</span>
+<span class="ms-review-card__source">Capterra review</span>
+</div>
+<h3>Built around the real bakery workflow.</h3>
+<blockquote>
+<p>
             “Mountain Stream covers the majority of the baking process, from taking orders to production fulfillment and delivery.”
           </p>
-        </blockquote>
-
-        <div class="ms-review-card__footer">
-          <div class="ms-review-card__person">
-            <strong>Jean B.</strong>
-            <span>Food &amp; Beverages</span>
-          </div>
-
-          <a
-            class="ms-review-card__link"
-            href="PASTE_JEAN_CAPTERRA_REVIEW_LINK_HERE"
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-            aria-label="Read Jean B.'s Capterra review for Mountain Stream Bakery Software"
-          >
+</blockquote>
+<div class="ms-review-card__footer">
+<div class="ms-review-card__person">
+<strong>Jean B.</strong>
+<span>Food &amp; Beverages</span>
+</div>
+<a aria-label="Read Jean B.'s Capterra review for Mountain Stream Bakery Software" class="ms-review-card__link" href="PASTE_JEAN_CAPTERRA_REVIEW_LINK_HERE" rel="noopener noreferrer nofollow" target="_blank">
             Read review
           </a>
-        </div>
-      </article>
-    </div>
-  </div>
+</div>
+</article>
+</div>
+</div>
 </section>
-
 <!-- ══════════════════════════════════════════════════════════
      CTA
 ═══════════════════════════════════════════════════════════════ -->
 <section class="ms-cta">
-  <div class="ms-wrap ms-reveal">
-    <p class="ms-kicker">Book a demo</p>
-    <h2>See how Streamline connects your bakery from order to invoice.</h2>
-    <p>Bring your online ordering, production planning, recipes, inventory, traceability, delivery, finance, and reporting into one bakery ERP system.</p>
-    <div class="ms-actions">
-      <a class="ms-btn ms-btn-primary" href="https://mountainstream.co/register-your-company?cta=hero&intent=Book%20a%20demo">Book a Demo</a>
-      <a class="ms-btn ms-btn-secondary" href="https://mountainstream.co/pricing/">View Pricing</a>
-    </div>
-  </div>
+<div class="ms-wrap ms-reveal">
+<p class="ms-kicker">Book a demo</p>
+<h2>See how Streamline connects your bakery from order to invoice.</h2>
+<p>Bring your online ordering, production planning, recipes, inventory, traceability, delivery, finance, and reporting into one bakery ERP system.</p>
+<div class="ms-actions">
+<a class="ms-btn ms-btn-primary" href="https://mountainstream.co/register-your-company?cta=hero&amp;intent=Book%20a%20demo">Book a Demo</a>
+<a class="ms-btn ms-btn-secondary" href="https://mountainstream.co/pricing/">View Pricing</a>
+</div>
+</div>
 </section>
-
 </main>
-  </div>
-
-  <script>
+</div>
+<script>
     (function () {
   var root = document.querySelector('.ms-feature-page');
   if (!root) return;
@@ -1824,5 +2306,515 @@ div:has(> div:has(> .ms-feature-page)) {
   sections.forEach(function (s) { navObserver.observe(s); });
 })();
   </script>
+</div>
+<script id="ms-wysiwyg-editor-script">
+(function(){
+  var HISTORY_KEY = 'ms-wysiwyg-features-master-draft-history-v1';
+  var AUTOSAVE_KEY = 'ms-wysiwyg-features-master-autosave-v1';
+  var MAX_HISTORY = 30;
+  var currentDownloadName = 'streamline-features-master-edited.html';
+  var savedRange = null;
+  var autosaveTimer = null;
+
+  function $(id){ return document.getElementById(id); }
+  function root(){ return $('ms-editor-content'); }
+
+  function toast(message){
+    var t = $('ms-edit-toast');
+    if(!t) return;
+    t.textContent = message;
+    t.classList.add('visible');
+    clearTimeout(window.__msToastTimer);
+    window.__msToastTimer = setTimeout(function(){ t.classList.remove('visible'); }, 2800);
+  }
+
+  function setToolbarOffset(){
+    var tb = $('ms-editor-toolbar');
+    if(!tb) return;
+    document.documentElement.style.setProperty('--ms-editor-toolbar-height', (tb.offsetHeight || 86) + 'px');
+  }
+
+  function hasText(el){
+    return !!(el && el.textContent && el.textContent.replace(/\s+/g,' ').trim());
+  }
+
+  function isUnsafe(el){
+    return !!(el.closest('script,style,noscript,svg,canvas,form,select,textarea,[data-ms-editor-ui="true"]'));
+  }
+
+  function hasMediaControl(el){
+    return !!el.querySelector('img,video,iframe,input,textarea,select,button');
+  }
+
+  function markEditable(scope){
+    if(!scope) return;
+
+    scope.querySelectorAll('[contenteditable],[data-ms-editable]').forEach(function(el){
+      el.removeAttribute('contenteditable');
+      el.removeAttribute('data-ms-editable');
+      el.removeAttribute('spellcheck');
+    });
+
+    var selector = [
+      'h1','h2','h3','h4','h5','h6',
+      'p','li','summary',
+      'a[href]','button',
+      'strong','em','span',
+      '.eyebrow','.lede','.section-label',
+      '.hero-badge','.btn','.link-arrow',
+      '.step-title','.step-desc',
+      '.testi-quote','.testi-author','.testi-stars',
+      '.app-tab','.app-item-name','.app-item-lot','.app-item-qty',
+      '.panel-title','.panel-kpi-label','.panel-kpi-val','.panel-row-name','.panel-row-lot','.panel-row-qty',
+      '.count-name','.count-meta','.count-val'
+    ].join(',');
+
+    function hasCandidateChild(el){
+      return Array.prototype.some.call(el.children || [], function(child){
+        return child.matches && (child.matches(selector) || child.querySelector(selector));
+      });
+    }
+
+    function make(el){
+      el.setAttribute('contenteditable','true');
+      el.setAttribute('data-ms-editable','true');
+      el.setAttribute('spellcheck','true');
+    }
+
+    Array.prototype.forEach.call(scope.querySelectorAll(selector), function(el){
+      if(!hasText(el) || isUnsafe(el)) return;
+      if(el.closest('[data-ms-editable="true"]')) return;
+      if(hasMediaControl(el)) return;
+
+      var tag = el.tagName ? el.tagName.toLowerCase() : '';
+      var alwaysOk = /^(h1|h2|h3|h4|h5|h6|p|li|summary|a|button|strong|em|span)$/.test(tag);
+      if(!alwaysOk && hasCandidateChild(el)) return;
+      make(el);
+    });
+
+    scope.querySelectorAll('a[href]').forEach(function(a){
+      if(!a.hasAttribute('data-original-href')) {
+        a.setAttribute('data-original-href', a.getAttribute('href') || '#');
+      }
+      a.setAttribute('title','Ctrl/Cmd-click to open link. Use Edit link to change this URL.');
+      if(hasText(a) && !hasMediaControl(a) && !a.closest('[data-ms-editable="true"]')) make(a);
+    });
+  }
+
+  function bindPaste(scope){
+    scope.querySelectorAll('[data-ms-editable="true"]').forEach(function(el){
+      el.onpaste = function(e){
+        e.preventDefault();
+        var text = (e.clipboardData || window.clipboardData).getData('text/plain');
+        document.execCommand('insertText', false, text);
+        scheduleAutosave();
+      };
+    });
+  }
+
+  function prepare(){
+    setToolbarOffset();
+    markEditable(root());
+    bindPaste(root());
+
+    root().querySelectorAll('details').forEach(function(d){
+      if(!d.hasAttribute('data-ms-original-open')) d.setAttribute('data-ms-original-open', d.open ? 'true' : 'false');
+      d.open = true;
+    });
+
+    root().querySelectorAll('.reveal,.reveal-l,.reveal-r,.reveal-d1,.reveal-d2,.reveal-d3').forEach(function(el){
+      el.classList.add('in','is-visible','visible');
+    });
+
+    renderDrafts();
+  }
+
+  function getHistory(){
+    try {
+      var parsed = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+      return Array.isArray(parsed) ? parsed : [];
+    } catch(e) {
+      return [];
+    }
+  }
+
+  function setHistory(list){
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(list.slice(0, MAX_HISTORY)));
+    renderDrafts();
+  }
+
+  function formatDate(iso){
+    try {
+      return new Date(iso).toLocaleString([], {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit'
+      });
+    } catch(e) {
+      return iso || '';
+    }
+  }
+
+  function getEditableHTML(){
+    return root() ? root().innerHTML : '';
+  }
+
+  function saveDraft(type){
+    var history = getHistory();
+    var now = new Date();
+    var defaultName = 'Inventory draft — ' + formatDate(now.toISOString());
+    var name = prompt('Draft name:', defaultName);
+    if(name === null) return;
+    name = (name || defaultName).trim() || defaultName;
+
+    history.unshift({
+      id: String(now.getTime()) + '-' + Math.random().toString(36).slice(2,8),
+      name: name,
+      createdAt: now.toISOString(),
+      type: type || 'manual',
+      fileName: currentDownloadName,
+      html: getEditableHTML()
+    });
+
+    setHistory(history);
+    localStorage.setItem(AUTOSAVE_KEY, JSON.stringify({
+      createdAt: now.toISOString(),
+      html: getEditableHTML()
+    }));
+
+    var menu = $('ms-drafts-menu');
+    if(menu) menu.open = true;
+    toast('Draft saved: ' + name);
+  }
+
+  function loadDraft(id){
+    var draft = getHistory().find(function(item){ return item.id === id; });
+    if(!draft) {
+      toast('Draft not found.');
+      return;
+    }
+    if(!confirm('Load "' + (draft.name || 'Untitled draft') + '"? Your current unsaved edits will be replaced.')) return;
+
+    root().innerHTML = draft.html || '';
+    prepare();
+    toast('Draft loaded: ' + (draft.name || 'Untitled draft'));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function renameDraft(id){
+    var history = getHistory();
+    var draft = history.find(function(item){ return item.id === id; });
+    if(!draft) return;
+
+    var next = prompt('Rename draft:', draft.name || 'Untitled draft');
+    if(next === null) return;
+    next = next.trim();
+    if(!next) {
+      toast('Draft name was not changed.');
+      return;
+    }
+
+    draft.name = next;
+    setHistory(history);
+    toast('Draft renamed.');
+  }
+
+  function deleteDraft(id){
+    var history = getHistory();
+    var draft = history.find(function(item){ return item.id === id; });
+    var label = draft ? (draft.name || 'this draft') : 'this draft';
+    if(!confirm('Delete "' + label + '"?')) return;
+    setHistory(history.filter(function(item){ return item.id !== id; }));
+    toast('Draft deleted.');
+  }
+
+  function clearHistory(){
+    if(!confirm('Clear all saved draft history for this page?')) return;
+    localStorage.removeItem(HISTORY_KEY);
+    renderDrafts();
+    toast('Draft history cleared.');
+  }
+
+  function renderDrafts(){
+    var list = $('ms-draft-list');
+    var count = $('ms-draft-count');
+    if(!list) return;
+
+    var history = getHistory();
+    if(count) count.textContent = String(history.length);
+
+    if(!history.length){
+      list.innerHTML = '<div class="ms-draft-empty">No drafts saved yet. Click <strong>Save current version</strong> to create the first one.</div>';
+      return;
+    }
+
+    list.innerHTML = '';
+    history.forEach(function(draft){
+      var card = document.createElement('div');
+      card.className = 'ms-draft-card';
+
+      var title = document.createElement('div');
+      title.className = 'ms-draft-card-title';
+      title.textContent = draft.name || 'Untitled draft';
+
+      var meta = document.createElement('div');
+      meta.className = 'ms-draft-card-meta';
+      var size = draft.html ? Math.round(draft.html.length / 1024) + ' KB' : '0 KB';
+      meta.textContent = formatDate(draft.createdAt) + ' · ' + (draft.type || 'manual') + ' · ' + size;
+
+      var actions = document.createElement('div');
+      actions.className = 'ms-draft-card-actions';
+
+      var load = document.createElement('button');
+      load.type = 'button';
+      load.textContent = 'Load this version';
+      load.addEventListener('click', function(){ loadDraft(draft.id); });
+
+      var rename = document.createElement('button');
+      rename.type = 'button';
+      rename.textContent = 'Rename';
+      rename.addEventListener('click', function(){ renameDraft(draft.id); });
+
+      var del = document.createElement('button');
+      del.type = 'button';
+      del.textContent = 'Delete';
+      del.addEventListener('click', function(){ deleteDraft(draft.id); });
+
+      actions.append(load, rename, del);
+      card.append(title, meta, actions);
+      list.appendChild(card);
+    });
+  }
+
+  function scheduleAutosave(){
+    clearTimeout(autosaveTimer);
+    autosaveTimer = setTimeout(function(){
+      try {
+        localStorage.setItem(AUTOSAVE_KEY, JSON.stringify({
+          createdAt: new Date().toISOString(),
+          html: getEditableHTML()
+        }));
+      } catch(e) {}
+    }, 900);
+  }
+
+  function restoreSelection(){
+    if(!savedRange) return false;
+    var sel = window.getSelection();
+    if(!sel) return false;
+    sel.removeAllRanges();
+    sel.addRange(savedRange);
+    return true;
+  }
+
+  function saveSelection(){
+    var sel = window.getSelection();
+    if(!sel || !sel.rangeCount) return;
+    var node = sel.anchorNode;
+    if(!node) return;
+    var el = node.nodeType === 1 ? node : node.parentElement;
+    if(el && root() && root().contains(el)) {
+      savedRange = sel.getRangeAt(0).cloneRange();
+    }
+  }
+
+  function exec(cmd, value){
+    restoreSelection();
+    document.execCommand(cmd, false, value || null);
+    scheduleAutosave();
+  }
+
+  function applyTextColor(color){
+    restoreSelection();
+
+    var sel = window.getSelection();
+    if(sel && sel.rangeCount && !sel.isCollapsed && root().contains(sel.anchorNode)) {
+      document.execCommand('foreColor', false, color);
+      scheduleAutosave();
+      toast('Text color applied: ' + color);
+      return;
+    }
+
+    var active = document.activeElement;
+    if(active && active.matches && active.matches('[data-ms-editable="true"]')) {
+      active.style.color = color;
+      scheduleAutosave();
+      toast('Element color applied: ' + color);
+      return;
+    }
+
+    toast('Select text first, then choose a color.');
+  }
+
+  function editLink(){
+    var node = window.getSelection && window.getSelection().anchorNode;
+    var el = node && (node.nodeType === 1 ? node : node.parentElement);
+    var link = el && el.closest ? el.closest('a') : null;
+    if(!link && document.activeElement && document.activeElement.closest) {
+      link = document.activeElement.closest('a');
+    }
+    if(!link || !root().contains(link)) {
+      toast('Place your cursor inside a link or button first.');
+      return;
+    }
+
+    var next = prompt('Edit link URL:', link.getAttribute('href') || '');
+    if(next !== null) {
+      link.setAttribute('href', next.trim());
+      scheduleAutosave();
+      toast('Link URL updated.');
+    }
+  }
+
+  function togglePreview(){
+    document.body.classList.toggle('ms-preview-mode');
+    var preview = document.body.classList.contains('ms-preview-mode');
+    document.querySelectorAll('[data-ms-editable="true"]').forEach(function(el){
+      el.setAttribute('contenteditable', preview ? 'false' : 'true');
+    });
+    toast(preview ? 'Preview mode enabled. Press Esc to return.' : 'Edit mode enabled.');
+  }
+
+  function toggleOutlines(){
+    document.body.classList.toggle('ms-hide-edit-outlines');
+    toast(document.body.classList.contains('ms-hide-edit-outlines') ? 'Edit outlines hidden.' : 'Edit outlines visible.');
+  }
+
+  function resetLinks(){
+    root().querySelectorAll('a[data-original-href]').forEach(function(a){
+      a.setAttribute('href', a.getAttribute('data-original-href') || '#');
+    });
+    scheduleAutosave();
+    toast('Link URLs restored.');
+  }
+
+  function cleanExport(){
+    var clone = document.documentElement.cloneNode(true);
+
+    clone.querySelectorAll('[data-ms-editor-ui="true"],#ms-wysiwyg-editor-style,#ms-wysiwyg-editor-script').forEach(function(el){
+      el.remove();
+    });
+
+    clone.querySelectorAll('[contenteditable],[data-ms-editable]').forEach(function(el){
+      el.removeAttribute('contenteditable');
+      el.removeAttribute('data-ms-editable');
+      el.removeAttribute('spellcheck');
+    });
+
+    clone.querySelectorAll('a[data-original-href]').forEach(function(a){
+      a.removeAttribute('data-original-href');
+      if(a.getAttribute('title') === 'Ctrl/Cmd-click to open link. Use Edit link to change this URL.') {
+        a.removeAttribute('title');
+      }
+    });
+
+    clone.querySelectorAll('[data-ms-original-open]').forEach(function(el){
+      if(el.getAttribute('data-ms-original-open') === 'true') {
+        el.setAttribute('open','');
+      } else {
+        el.removeAttribute('open');
+      }
+      el.removeAttribute('data-ms-original-open');
+    });
+
+    var body = clone.querySelector('body');
+    if(body) {
+      body.classList.remove('ms-hide-edit-outlines','ms-preview-mode');
+      body.removeAttribute('style');
+    }
+
+    var wrap = clone.querySelector('#ms-editor-content');
+    if(wrap) {
+      var parent = wrap.parentNode;
+      while(wrap.firstChild) parent.insertBefore(wrap.firstChild, wrap);
+      wrap.remove();
+    }
+
+    return '<!DOCTYPE html>\n' + clone.outerHTML;
+  }
+
+  function downloadCleanHTML(){
+    var html = cleanExport();
+    var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = currentDownloadName;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+    toast('Clean HTML downloaded.');
+  }
+
+  function openInstructions(){
+    var modal = $('ms-instruction-modal');
+    if(modal) modal.hidden = false;
+  }
+
+  function closeInstructions(){
+    var modal = $('ms-instruction-modal');
+    if(modal) modal.hidden = true;
+  }
+
+  document.addEventListener('selectionchange', saveSelection);
+
+  document.addEventListener('input', function(e){
+    if(root() && root().contains(e.target)) scheduleAutosave();
+  });
+
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('#ms-editor-content a');
+    if(a && !document.body.classList.contains('ms-preview-mode') && !(e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
+      toast('Link click blocked while editing. Ctrl/Cmd-click to open, or use Edit link.');
+    }
+  }, true);
+
+  $('ms-bold-btn')?.addEventListener('click', function(){ exec('bold'); });
+  $('ms-italic-btn')?.addEventListener('click', function(){ exec('italic'); });
+  $('ms-list-btn')?.addEventListener('click', function(){ exec('insertUnorderedList'); });
+  $('ms-edit-link-btn')?.addEventListener('click', editLink);
+  $('ms-preview-btn')?.addEventListener('click', togglePreview);
+  $('ms-outlines-btn')?.addEventListener('click', toggleOutlines);
+  $('ms-reset-links-btn')?.addEventListener('click', resetLinks);
+  $('ms-download-btn')?.addEventListener('click', downloadCleanHTML);
+  $('ms-save-draft-btn')?.addEventListener('click', function(){ saveDraft('manual'); });
+  $('ms-clear-history-btn')?.addEventListener('click', clearHistory);
+  $('ms-instructions-btn')?.addEventListener('click', openInstructions);
+  $('ms-instruction-close')?.addEventListener('click', closeInstructions);
+  $('ms-instruction-modal')?.addEventListener('click', function(e){
+    if(e.target === this) closeInstructions();
+  });
+
+  document.querySelectorAll('.ms-color-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      applyTextColor(btn.getAttribute('data-ms-color'));
+    });
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') {
+      if(!$('ms-instruction-modal')?.hidden) {
+        closeInstructions();
+        return;
+      }
+      if(document.body.classList.contains('ms-preview-mode')) togglePreview();
+    }
+    if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+      e.preventDefault();
+      saveDraft('keyboard');
+    }
+  });
+
+  window.addEventListener('resize', setToolbarOffset);
+  window.addEventListener('load', setToolbarOffset);
+
+  prepare();
+  toast('Features Master editor ready. Click outlined text to edit.');
+})();
+</script>
 </body>
 </html>

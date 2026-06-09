@@ -1,0 +1,1951 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pricing Master — WYSIWYG Editor</title>
+<style>
+
+body{
+  margin: 0 ;
+}
+.container-wrap{
+padding-top:0px !important;
+}
+.ms-pricing {
+  --ms-navy:         #0f2f5a;
+  --ms-navy-mid:     #173a6a;
+  --ms-navy-dark:    #091e3c;
+  --ms-blue:         #4fa6e9;
+  --ms-orange:       #f7931a;
+  --ms-orange-dark:  #e8820e;
+  --ms-orange-light: #fff4e6;
+  --ms-text:         #1e2a38;
+  --ms-muted:        #5a6778;
+  --ms-border:       #e4e9f0;
+  --ms-bg:           #f7f9fc;
+  --ms-white:        #ffffff;
+  --ms-light-blue:   #ecf4ff;
+  --ms-font:         -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  font-family: var(--ms-font);
+  font-size: 16px;
+  color: var(--ms-text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: var(--ms-white);
+}
+
+.ms-pricing *, .ms-pricing *::before, .ms-pricing *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.ms-pricing a                     { text-decoration: none !important; color: inherit !important; }
+.ms-pricing ul, .ms-pricing ol    { list-style: none !important; margin: 0 !important; padding: 0 !important; }
+.ms-pricing img                   { max-width: 100%; display: block; }
+.ms-pricing h1, .ms-pricing h2,
+.ms-pricing h3, .ms-pricing h4   {
+  font-family: var(--ms-font) !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: var(--ms-navy) !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  border: none !important;
+}
+.ms-pricing p      { margin: 0 !important; padding: 0 !important; }
+.ms-pricing button { font-family: var(--ms-font) !important; }
+.ms-pricing svg    { display: block; }
+
+.ms-pricing .ms-container {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.ms-pricing .ms-btn-orange {
+  display: inline-block;
+  background: var(--ms-orange);
+  color: #fff !important;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.75rem 1.75rem;
+  border-radius: 8px;
+  border: none !important;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+  text-align: center;
+}
+.ms-pricing .ms-btn-orange:hover { background: var(--ms-orange-dark) !important; }
+
+.ms-pricing .ms-eyebrow {
+  display: inline-block;
+  background: var(--ms-orange-light);
+  color: #b86200;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.3rem 0.85rem;
+  border-radius: 99px;
+  margin-bottom: 1rem;
+}
+
+.ms-pricing .ms-hero {
+  padding: 5rem 0 4rem;
+  text-align: center;
+  border-bottom: 1px solid var(--ms-border);
+  background: var(--ms-light-blue);
+}
+.ms-pricing .ms-hero h1 {
+  font-size: clamp(1.7rem, 4vw, 3rem) !important;
+  letter-spacing: -0.025em !important;
+  margin-bottom: 1rem !important;
+}
+.ms-pricing .ms-hero h1 em { color: var(--ms-orange); font-style: normal; font-weight:bold }
+.ms-pricing .ms-hero p {
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  color: var(--ms-muted);
+  max-width: 480px;
+  margin: 0 auto !important;
+  line-height: 1.8;
+}
+
+.ms-pricing .ms-pricing-main { padding: 3.5rem 0 4.5rem; background: var(--ms-white); }
+.ms-pricing .ms-pricing-card {
+  border: 1px solid var(--ms-border);
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--ms-white);
+}
+
+.ms-pricing .ms-pricing-top {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr 1px 1fr;
+  padding: 3rem;
+}
+.ms-pricing .ms-p-divider { background: var(--ms-border); }
+.ms-pricing .ms-p-col     { padding: 0 2rem; }
+.ms-pricing .ms-p-col:first-child { padding-left: 0; }
+.ms-pricing .ms-p-col:last-child  { padding-right: 0; }
+
+.ms-pricing .ms-p-label {
+  font-size: 0.68rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--ms-muted); margin-bottom: 0.65rem;
+}
+.ms-pricing .ms-p-price {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 800; line-height: 1;
+  letter-spacing: -0.05em; color: var(--ms-orange); margin-bottom: 0.4rem;
+}
+.ms-pricing .ms-p-unit { font-size: 0.92rem; color: var(--ms-muted); margin-bottom: 1rem; }
+.ms-pricing .ms-p-min-tag {
+  display: inline-block; background: var(--ms-bg);
+  border: 1px solid var(--ms-border); border-radius: 6px;
+  padding: 0.3rem 0.75rem; font-size: 0.88rem; color: var(--ms-muted);
+}
+.ms-pricing .ms-p-min-tag strong { color: var(--ms-text); font-weight: 700; }
+
+.ms-pricing .ms-p-setup-amount {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 700; color: var(--ms-navy);
+  letter-spacing: -0.03em; margin-bottom: 0.4rem;
+}
+.ms-pricing .ms-p-setup-sub { font-size: 0.9rem; color: var(--ms-muted); line-height: 1.65; }
+.ms-pricing .ms-p-setup-link {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  color: var(--ms-orange) !important; font-size: 0.9rem;
+  font-weight: 600; margin-top: 1rem;
+}
+.ms-pricing .ms-p-setup-link::after { content: '→'; }
+.ms-pricing .ms-p-setup-link:hover  { opacity: 0.75; }
+
+.ms-pricing .ms-pay-list { display: flex; flex-direction: column; gap: 0.6rem; }
+.ms-pricing .ms-pay-list li {
+  font-size: 0.9rem; color: var(--ms-muted);
+  display: flex; align-items: flex-start; gap: 0.5rem; line-height: 1.5;
+}
+.ms-pricing .ms-pay-list li::before { content: '–'; color: var(--ms-blue); flex-shrink: 0; }
+.ms-pricing .ms-pay-list li.ms-note { font-style: italic; font-size: 0.8rem; color: #aab2bc; }
+.ms-pricing .ms-pay-list li.ms-note::before { color: #c8d0da; }
+
+/* ── CHART ── */
+.ms-pricing .ms-chart-wrap {
+  border-top: 1px solid var(--ms-border);
+  padding: 2rem 3rem 1.5rem;
+  background: var(--ms-bg);
+}
+.ms-pricing .ms-chart-meta {
+  display: flex; justify-content: space-between;
+  align-items: center; margin-bottom: 1.25rem;
+  flex-wrap: wrap; gap: 0.75rem;
+}
+.ms-pricing .ms-chart-title {
+  font-size: 0.68rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em; color: var(--ms-muted);
+}
+.ms-pricing .ms-chart-legend { display: flex; gap: 1.25rem; }
+.ms-pricing .ms-cl-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; color: var(--ms-muted); }
+.ms-pricing .ms-cl-dot  { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+.ms-pricing .ms-chart-canvas-wrap { position: relative; width: 100%; height: 260px; }
+
+/* ── CTA STRIP ── */
+.ms-pricing .ms-cta-strip {
+  background: var(--ms-bg);
+  border-top: 1px solid var(--ms-border);
+  padding: 1.5rem 3rem;
+  display: flex; align-items: center;
+  justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap;
+}
+.ms-pricing .ms-cta-strip p        { font-size: 0.97rem; color: var(--ms-muted); }
+.ms-pricing .ms-cta-strip p strong { color: var(--ms-text); }
+.ms-pricing .ms-cta-btns { display: flex; gap: 0.75rem; flex-shrink: 0; }
+
+.ms-pricing .ms-includes { padding: 4.5rem 0 5rem; background: var(--ms-bg); }
+.ms-pricing .ms-section-head { text-align: center; margin-bottom: 3rem; }
+.ms-pricing .ms-section-head h2 { font-size: clamp(1.4rem, 2.5vw, 2.2rem) !important; margin-top: 0.5rem !important; }
+
+.ms-pricing .ms-inc-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 4rem;
+}
+.ms-pricing .ms-inc-card {
+  background: var(--ms-white); border: 1px solid var(--ms-border);
+  border-radius: 14px; padding: 2rem;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.ms-pricing .ms-inc-card:hover { box-shadow: 0 6px 28px rgba(15,47,90,0.08); transform: translateY(-2px); }
+.ms-pricing .ms-inc-card h3    { font-size: 0.97rem !important; margin-bottom: 1rem !important; }
+.ms-pricing .ms-inc-list       { display: flex; flex-direction: column; gap: 0.55rem; }
+.ms-pricing .ms-inc-list li    { font-size: 0.88rem; color: var(--ms-muted); display: flex; align-items: flex-start; gap: 0.55rem; line-height: 1.5; }
+.ms-pricing .ms-ck             { width: 16px; height: 16px; border-radius: 50%; background: var(--ms-orange-dark); color: white; font-size: 0.5rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.18em; }
+.ms-pricing .ms-ck.ms-warn     { background: #c0392b; }
+.ms-pricing .ms-inc-list li.ms-warn-item span { font-style: italic; color: #c0392b; font-size: 0.82rem; }
+
+.ms-pricing .ms-testi { padding: 5rem 0; background: var(--ms-white); }
+.ms-pricing .ms-testi-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
+}
+.ms-pricing .ms-testi-card {
+  background: var(--ms-white); border: 1px solid var(--ms-border);
+  border-radius: 14px; padding: 2rem;
+  transition: box-shadow 0.2s; display: flex; flex-direction: column;
+}
+.ms-pricing .ms-testi-card:hover { box-shadow: 0 4px 20px rgba(15,47,90,0.07); }
+.ms-pricing .ms-testi-stars  { color: var(--ms-orange); font-size: 0.85rem; margin-bottom: 0.8rem; }
+.ms-pricing .ms-testi-quote  { font-size: 0.9rem; color: var(--ms-text); line-height: 1.8; font-style: italic; margin-bottom: 1.3rem !important; flex: 1; }
+.ms-pricing .ms-testi-author { display: flex; align-items: center; gap: 0.65rem; }
+.ms-pricing .ms-tav   { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; color: white; flex-shrink: 0; }
+.ms-pricing .ms-t-name { font-size: 0.82rem; font-weight: 700; color: var(--ms-navy); }
+.ms-pricing .ms-t-role { font-size: 0.74rem; color: var(--ms-muted); }
+
+.ms-pricing .ms-faq { padding: 5rem 0; background: var(--ms-bg); }
+.ms-pricing .ms-faq-list { max-width: 700px; margin: 0 auto; }
+.ms-pricing .ms-faq-item { border-bottom: 1px solid var(--ms-border); }
+.ms-pricing .ms-faq-item:first-child { border-top: 1px solid var(--ms-border); }
+.ms-pricing .ms-faq-btn {
+  width: 100%; background: none; border: none !important; box-shadow: none !important;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.15rem 0; font-family: var(--ms-font) !important;
+  font-size: 1.125rem; font-weight: 600; color: var(--ms-text) !important;
+  cursor: pointer; text-align: left; gap: 1rem; transition: color 0.2s;
+}
+.ms-pricing .ms-faq-btn:hover { color: var(--ms-navy) !important; }
+.ms-pricing .ms-faq-ico {
+  width: 24px; height: 24px; border-radius: 50%;
+  border: 1.5px solid var(--ms-border) !important;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; color: var(--ms-muted); flex-shrink: 0; transition: all 0.3s;
+}
+.ms-pricing .ms-faq-item.ms-open .ms-faq-ico {
+  background: var(--ms-navy); border-color: var(--ms-navy) !important; color: white; transform: rotate(45deg);
+}
+.ms-pricing .ms-faq-answer {
+  max-height: 0; overflow: hidden;
+  font-size: 1.125rem; color: var(--ms-muted); line-height: 1.8;
+  transition: max-height 0.4s ease, padding 0.3s;
+}
+.ms-pricing .ms-faq-item.ms-open .ms-faq-answer { max-height: 300px; padding-bottom: 1.15rem; }
+
+.ms-pricing .ms-cta-band {
+  /* background: linear-gradient(135deg, var(--ms-navy-dark), var(--ms-navy-mid)); */
+  padding: 5rem 0;
+}
+.ms-pricing .ms-cta-inner    { text-align: center; }
+/* .ms-pricing .ms-cta-inner h2 { font-size: clamp(1.5rem, 3vw, 2.3rem) !important; color: #fff !important; margin-bottom: 0.85rem !important; }
+.ms-pricing .ms-cta-inner p  { color: rgba(255,255,255,0.6); font-size: 1rem; margin-bottom: 2rem !important; max-width: 480px; margin-left: auto !important; margin-right: auto !important; line-height: 1.75; } */
+.ms-pricing .ms-cta-btns     { display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; }
+.ms-pricing .ms-cta-inner h2 { font-size: clamp(1.5rem, 3vw, 2.3rem) !important; color: #113058 !important; margin-bottom: 0.85rem !important; }
+.ms-pricing .ms-cta-inner p  { color: 113058; font-size: 1rem; margin-bottom: 2rem !important; max-width: 480px; margin-left: auto !important; margin-right: auto !important; line-height: 1.75; }
+
+.ms-pricing .ms-footer {
+  background: var(--ms-navy-dark); padding: 2.25rem 0;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+.ms-pricing .ms-footer-inner  { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.ms-pricing .ms-footer-logo   { font-size: 1rem; font-weight: 700; color: #fff; }
+.ms-pricing .ms-footer-logo span { color: var(--ms-orange); }
+.ms-pricing .ms-footer-links  { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+.ms-pricing .ms-footer-links a { font-size: 0.82rem; color: rgba(255,255,255,0.4) !important; transition: color 0.2s; }
+.ms-pricing .ms-footer-links a:hover { color: rgba(255,255,255,0.8) !important; }
+.ms-pricing .ms-footer-copy   { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+
+.ms-pricing .ms-reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.ms-pricing .ms-reveal.ms-visible { opacity: 1; transform: none; }
+
+@media (max-width: 860px) {
+  .ms-pricing .ms-pricing-top { grid-template-columns: 1fr; padding: 2rem; }
+  .ms-pricing .ms-p-divider   { display: none; }
+  .ms-pricing .ms-p-col       { padding: 1.5rem 0 !important; border-bottom: 1px solid var(--ms-border); }
+  .ms-pricing .ms-p-col:last-child { border-bottom: none; }
+  .ms-pricing .ms-chart-wrap  { padding: 1.5rem 2rem 1.25rem; }
+  .ms-pricing .ms-cta-strip   { padding: 1.25rem 2rem; flex-direction: column; align-items: flex-start; }
+  .ms-pricing .ms-cta-btns    { width: 100%; }
+  .ms-pricing .ms-cta-btns .ms-btn-orange { width: 100%; display: block; }
+  .ms-pricing .ms-inc-grid    { grid-template-columns: 1fr 1fr; }
+  .ms-pricing .ms-testi-grid  { grid-template-columns: 1fr 1fr; }
+  .ms-pricing .ms-hero        { padding: 3.5rem 0 3rem; }
+  .ms-pricing .ms-includes,
+  .ms-pricing .ms-testi,
+  .ms-pricing .ms-faq,
+  .ms-pricing .ms-cta-band    { padding: 3.5rem 0; }
+}
+
+@media (max-width: 600px) {
+  .ms-pricing .ms-container    { padding: 0 1.25rem; }
+  .ms-pricing .ms-pricing-card { border-radius: 14px; }
+  .ms-pricing .ms-pricing-top  { padding: 1.5rem; }
+  .ms-pricing .ms-chart-wrap   { padding: 1.25rem 1.5rem 1rem; }
+  .ms-pricing .ms-cta-strip    { padding: 1.25rem 1.5rem; }
+  .ms-pricing .ms-inc-grid    { grid-template-columns: 1fr; }
+  .ms-pricing .ms-testi-grid  { grid-template-columns: 1fr; }
+  .ms-pricing .ms-inc-card,
+  .ms-pricing .ms-testi-card  { padding: 1.5rem; }
+  .ms-pricing .ms-hero        { padding: 3rem 0 2.5rem; }
+  .ms-pricing .ms-includes,
+  .ms-pricing .ms-testi,
+  .ms-pricing .ms-faq,
+  .ms-pricing .ms-cta-band    { padding: 3rem 0; }
+  .ms-pricing .ms-chart-meta  { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  .ms-pricing .ms-footer-inner { flex-direction: column; align-items: flex-start; }
+  .ms-pricing .ms-footer-links { gap: 1rem; }
+  .ms-pricing .ms-faq-btn     { font-size: 1.25rem !important; }
+}
+
+@media (max-width: 400px) {
+  .ms-pricing .ms-container    { padding: 0 1rem; }
+  .ms-pricing .ms-chart-legend { flex-wrap: wrap; gap: 0.6rem; }
+}
+</style>
+<style id="ms-wysiwyg-editor-style">
+  :root { --ms-editor-toolbar-height: 86px; }
+  body { padding-top: var(--ms-editor-toolbar-height) !important; }
+  .ms-editor-toolbar {
+    position: fixed;
+    z-index: 2147483600;
+    top: 0;
+    left: 0;
+    right: 0;
+    min-height: var(--ms-editor-toolbar-height);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #0b1726 0%, #113058 100%);
+    color: #fff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    box-shadow: 0 10px 30px rgba(0,0,0,.22);
+    overflow: visible;
+  }
+
+  .ms-editor-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 210px;
+    padding-right: 12px;
+    border-right: 1px solid rgba(255,255,255,.14);
+  }
+
+  .ms-editor-logo {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: #ff9100;
+    color: #111;
+    font-weight: 900;
+    box-shadow: 0 8px 22px rgba(255,145,0,.25);
+  }
+
+  .ms-editor-title {
+    display: grid;
+    gap: 1px;
+    line-height: 1.1;
+  }
+
+  .ms-editor-title strong {
+    display: block;
+    font-size: 14px;
+    line-height: 1.15;
+    letter-spacing: -.01em;
+  }
+
+  .ms-editor-title span {
+    display: block;
+    margin-top: 2px;
+    font-size: 11px;
+    color: rgba(255,255,255,.64);
+  }
+
+  .ms-editor-actions {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .ms-editor-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px;
+    border: 1px solid rgba(255,255,255,.11);
+    border-radius: 14px;
+    background: rgba(255,255,255,.06);
+  }
+
+  .ms-editor-toolbar button,
+  .ms-editor-toolbar summary {
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 10px;
+    background: rgba(255,255,255,.10);
+    color: #fff;
+    padding: 8px 10px;
+    font: inherit;
+    font-size: 13px;
+    line-height: 1;
+    cursor: pointer;
+    list-style: none;
+    white-space: nowrap;
+    transition: background .15s, border-color .15s, transform .15s;
+  }
+
+  .ms-editor-toolbar summary::-webkit-details-marker { display: none; }
+  .ms-editor-toolbar button:hover,
+  .ms-editor-toolbar summary:hover {
+    background: rgba(255,255,255,.18);
+    border-color: rgba(255,255,255,.30);
+  }
+
+  .ms-editor-toolbar button:active,
+  .ms-editor-toolbar summary:active {
+    transform: translateY(1px);
+  }
+
+  .ms-editor-toolbar button:focus-visible,
+  .ms-editor-toolbar summary:focus-visible {
+    outline: 2px solid #ff9100;
+    outline-offset: 2px;
+  }
+
+  .ms-editor-toolbar .ms-editor-primary {
+    background: #ff9100;
+    border-color: #ff9100;
+    color: #111;
+    font-weight: 800;
+  }
+
+  .ms-editor-toolbar .ms-editor-primary:hover {
+    background: #ff9f22;
+    border-color: #ff9f22;
+  }
+
+  .ms-color-palette {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding-inline: 4px;
+  }
+
+  .ms-color-palette span {
+    color: rgba(255,255,255,.65);
+    font-size: 12px;
+    margin-right: 2px;
+  }
+
+  .ms-color-btn {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    border-radius: 999px !important;
+    padding: 0 !important;
+    border: 2px solid rgba(255,255,255,.38) !important;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.12);
+  }
+
+  .ms-color-btn:hover {
+    transform: translateY(-1px);
+    border-color: #fff !important;
+  }
+
+  .ms-drafts-menu {
+    position: relative;
+  }
+
+  .ms-draft-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 19px;
+    height: 19px;
+    margin-left: 6px;
+    padding: 0 6px;
+    border-radius: 999px;
+    background: #ff9100;
+    color: #111;
+    font-size: 11px;
+    font-weight: 800;
+  }
+
+  .ms-drafts-panel {
+    position: fixed;
+    top: calc(var(--ms-editor-toolbar-height) + 10px);
+    right: 16px;
+    width: min(430px, calc(100vw - 32px));
+    max-height: calc(100vh - var(--ms-editor-toolbar-height) - 24px);
+    overflow: auto;
+    padding: 14px;
+    border: 1px solid rgba(17,48,88,.14);
+    border-radius: 18px;
+    background: #fff;
+    color: #1a2d42;
+    box-shadow: 0 20px 60px rgba(5,16,32,.28);
+  }
+
+  .ms-drafts-menu:not([open]) .ms-drafts-panel { display: none; }
+
+  .ms-drafts-panel h3 {
+    margin: 0 0 4px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.2;
+    color: #113058;
+  }
+
+  .ms-drafts-panel p {
+    margin: 0 0 12px;
+    font-size: 12px;
+    line-height: 1.45;
+    color: #54647a;
+  }
+
+  .ms-drafts-panel .ms-draft-panel-actions {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .ms-drafts-panel button {
+    color: #113058;
+    background: #f3f7fc;
+    border: 1px solid #dbe4ef;
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .ms-drafts-panel button:hover {
+    background: #ecf4ff;
+    border-color: #bcd4ee;
+  }
+
+  .ms-drafts-panel .ms-save-version-btn {
+    background: #ff9100;
+    border-color: #ff9100;
+    color: #111;
+    font-weight: 800;
+  }
+
+  .ms-draft-list {
+    display: grid;
+    gap: 10px;
+  }
+
+  .ms-draft-card {
+    padding: 12px;
+    border: 1px solid #dbe4ef;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(9,30,60,.05);
+  }
+
+  .ms-draft-card-title {
+    margin-bottom: 4px;
+    color: #113058;
+    font-weight: 800;
+    font-size: 13px;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  .ms-draft-card-meta {
+    margin-bottom: 10px;
+    color: #6d7d90;
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .ms-draft-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .ms-draft-empty {
+    padding: 18px;
+    border: 1px dashed #c4d1e2;
+    border-radius: 14px;
+    background: #f8fbff;
+    color: #54647a;
+    font-size: 13px;
+    line-height: 1.45;
+    text-align: center;
+  }
+
+  [data-ms-editable="true"] {
+    outline: 1px dashed rgba(255,145,0,.50);
+    outline-offset: 3px;
+    border-radius: 4px;
+    cursor: text;
+  }
+
+  [data-ms-editable="true"]:hover,
+  [data-ms-editable="true"]:focus {
+    outline: 2px solid #ff9100;
+    background: rgba(255,145,0,.08);
+  }
+
+  body.ms-hide-edit-outlines [data-ms-editable="true"],
+  body.ms-preview-mode [data-ms-editable="true"] {
+    outline: none !important;
+    background: transparent !important;
+  }
+
+  body.ms-preview-mode .ms-editor-toolbar,
+  body.ms-preview-mode .ms-edit-toast,
+  body.ms-preview-mode .ms-instruction-modal {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .ms-edit-toast {
+    position: fixed;
+    z-index: 2147483602;
+    right: 16px;
+    bottom: 16px;
+    max-width: 390px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: #0d1b2d;
+    color: #fff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 13px;
+    box-shadow: 0 12px 34px rgba(0,0,0,.25);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .18s, transform .18s;
+  }
+
+  .ms-edit-toast.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ms-instruction-modal[hidden] { display: none !important; }
+
+  .ms-instruction-modal {
+    position: fixed;
+    z-index: 2147483601;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 22px;
+    background: rgba(3,11,22,.56);
+  }
+
+  .ms-instruction-dialog {
+    width: min(620px, 100%);
+    max-height: min(760px, calc(100vh - 44px));
+    overflow: auto;
+    border-radius: 22px;
+    background: #fff;
+    color: #1a2d42;
+    box-shadow: 0 24px 80px rgba(0,0,0,.35);
+  }
+
+  .ms-instruction-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px 24px;
+    border-bottom: 1px solid #dbe4ef;
+    background: linear-gradient(135deg, #ecf4ff, #fff8ef);
+  }
+
+  .ms-instruction-header h2 {
+    margin: 0;
+    color: #113058;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .ms-instruction-header p {
+    margin: 6px 0 0;
+    color: #54647a;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .ms-instruction-close {
+    border: 0;
+    border-radius: 999px;
+    width: 34px;
+    height: 34px;
+    background: #113058;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  .ms-instruction-body {
+    padding: 22px 24px 24px;
+  }
+
+  .ms-instruction-body ol {
+    margin: 0;
+    padding-left: 22px;
+  }
+
+  .ms-instruction-body li {
+    margin-bottom: 10px;
+    color: #3a4a5e;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .ms-instruction-note {
+    margin-top: 18px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: #f8fbff;
+    border: 1px solid #dbe4ef;
+    color: #54647a;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 980px) {
+    :root { --ms-editor-toolbar-height: 140px; }
+    .ms-editor-toolbar {
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .ms-editor-actions {
+      flex-basis: 100%;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+  }
+
+  @media (max-width: 620px) {
+    :root { --ms-editor-toolbar-height: 176px; }
+    .ms-editor-brand {
+      width: 100%;
+    }
+    .ms-editor-actions {
+      flex-wrap: wrap;
+      overflow: visible;
+    }
+    .ms-editor-group {
+      flex-wrap: wrap;
+    }
+    .ms-drafts-panel {
+      left: 12px;
+      right: 12px;
+      width: auto;
+    }
+  }
+
+  @media print {
+    body { padding-top: 0 !important; }
+    .ms-editor-toolbar,
+    .ms-edit-toast,
+    .ms-instruction-modal {
+      display: none !important;
+    }
+    [data-ms-editable="true"] {
+      outline: none !important;
+      background: transparent !important;
+    }
+  }
+
+
+  /* Page-specific editor adjustment: keep the feature section nav below the fixed editor toolbar while editing. */
+  body:not(.ms-preview-mode) #ms-editor-content .ms-feature-cluster .ms-nav,
+  body:not(.ms-preview-mode) #ms-editor-content .ms-nav {
+    top: var(--ms-editor-toolbar-height) !important;
+  }
+
+
+  /* Page-specific editor adjustment: keep pricing page controls readable while editing. */
+  body:not(.ms-preview-mode) #ms-editor-content .ms-pricing .ms-faq-btn[data-ms-editable="true"] {
+    cursor: text;
+  }
+  body:not(.ms-preview-mode) #ms-editor-content .ms-pricing .ms-ck,
+  body:not(.ms-preview-mode) #ms-editor-content .ms-pricing .ms-cl-dot,
+  body:not(.ms-preview-mode) #ms-editor-content .ms-pricing .ms-faq-ico {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+</style></head>
+<body><div class="ms-editor-toolbar" data-ms-editor-ui="true" id="ms-editor-toolbar">
+<div aria-label="Editor navigation" class="ms-editor-brand">
+<div class="ms-editor-logo">MS</div>
+<div class="ms-editor-title">
+<strong>Pricing Master Editor</strong>
+<span>WYSIWYG draft workspace</span>
+</div>
+</div>
+<div class="ms-editor-actions">
+<details class="ms-drafts-menu" id="ms-drafts-menu">
+<summary>☰ Drafts <span class="ms-draft-count" id="ms-draft-count">0</span></summary>
+<div class="ms-drafts-panel">
+<h3>Draft history</h3>
+<p>Save named versions here, then load, rename, or delete them later on this same browser/device.</p>
+<div class="ms-draft-panel-actions">
+<button class="ms-save-version-btn" id="ms-save-draft-btn" type="button">Save current version</button>
+<button id="ms-clear-history-btn" type="button">Clear history</button>
+</div>
+<div class="ms-draft-list" id="ms-draft-list"></div>
+</div>
+</details>
+<div aria-label="Text formatting" class="ms-editor-group">
+<button id="ms-bold-btn" type="button"><b>Bold</b></button>
+<button id="ms-italic-btn" type="button"><i>Italic</i></button>
+<button id="ms-list-btn" type="button">Bullet list</button>
+<button id="ms-edit-link-btn" type="button">Edit link</button>
+</div>
+<div aria-label="Text color palette" class="ms-editor-group">
+<div class="ms-color-palette">
+<span>Color</span>
+<button class="ms-color-btn" data-ms-color="#ff9100" style="background:#ff9100" title="#ff9100" type="button"></button>
+<button class="ms-color-btn" data-ms-color="#4fa6e9" style="background:#4fa6e9" title="#4fa6e9" type="button"></button>
+<button class="ms-color-btn" data-ms-color="#113058" style="background:#113058" title="#113058" type="button"></button>
+<button class="ms-color-btn" data-ms-color="#ee924f" style="background:#ee924f" title="#ee924f" type="button"></button>
+<button class="ms-color-btn" data-ms-color="#111" style="background:#111" title="#111" type="button"></button>
+<button class="ms-color-btn" data-ms-color="#ecf4ff" style="background:#ecf4ff" title="#ecf4ff" type="button"></button>
+</div>
+</div>
+<div aria-label="Editor actions" class="ms-editor-group">
+<button id="ms-instructions-btn" type="button">Instructions</button>
+<button id="ms-preview-btn" type="button">Preview</button>
+<button id="ms-outlines-btn" type="button">Outlines</button>
+<button id="ms-reset-links-btn" type="button">Restore links</button>
+<button class="ms-editor-primary" id="ms-download-btn" type="button">Download clean HTML</button>
+</div>
+</div>
+</div>
+<div aria-live="polite" class="ms-edit-toast" data-ms-editor-ui="true" id="ms-edit-toast" role="status"></div>
+<div class="ms-instruction-modal" data-ms-editor-ui="true" hidden="" id="ms-instruction-modal">
+<div aria-labelledby="ms-instruction-title" aria-modal="true" class="ms-instruction-dialog" role="dialog">
+<div class="ms-instruction-header">
+<div>
+<h2 id="ms-instruction-title">How to use this editor</h2>
+<p>Edit the Pricing Master page directly in the browser, save versions, then export clean HTML.</p>
+</div>
+<button aria-label="Close instructions" class="ms-instruction-close" id="ms-instruction-close" type="button">×</button>
+</div>
+<div class="ms-instruction-body">
+<ol>
+<li>Click any outlined text on the page and type your changes.</li>
+<li>Select text, then use Bold, Italic, Bullet list, or the color palette.</li>
+<li>Use <strong>☰ Drafts</strong> to save a version. Drafts can be loaded, renamed, or deleted.</li>
+<li>Use <strong>Edit link</strong> while your cursor is inside a button/link to change its URL.</li>
+<li>Use <strong>Preview</strong> to temporarily hide the editor toolbar and outlines. Press Esc to return.</li>
+<li>Use <strong>Download clean HTML</strong> when you are ready to export the page without editor controls.</li>
+</ol>
+<div class="ms-instruction-note">
+        Drafts are saved in this browser using localStorage. They will work tomorrow on the same computer/browser, but they will not automatically sync to another device.
+      </div>
+</div>
+</div>
+</div>
+<div data-ms-editor-root="true" id="ms-editor-content">
+<div class="ms-pricing">
+<!-- HERO -->
+<section class="ms-hero">
+<div class="ms-container">
+<h1>Clean, honest pricing. <em>No contracts.*</em></h1>
+<p>Pay only for what you process. One flat rate per delivery, a one-time setup fee, and nothing hidden.</p>
+</div>
+</section>
+<!-- PRICING CARD -->
+<section class="ms-pricing-main">
+<div class="ms-container">
+<div class="ms-pricing-card ms-reveal">
+<div class="ms-pricing-top">
+<div class="ms-p-col">
+<div class="ms-p-label">ONE-TIME SETUP  + TRAINING</div>
+<div class="ms-p-setup-amount">From $499</div>
+<p class="ms-p-setup-sub">Data migration, full reports configuration &amp; complete team training. <strong>Set up costs depend on the size of your data</strong></p>
+<!-- <a href="#" class="ms-p-setup-link">Talk about volume discounts</a> -->
+</div>
+<div class="ms-p-divider"></div>
+<div class="ms-p-col">
+<div class="ms-p-label">Per Delivery</div>
+<div class="ms-p-price">50¢</div>
+<div class="ms-p-unit">per order processed</div>
+<div class="ms-p-min-tag"><strong>$299.50 minimum</strong> is waived after <strong>600 orders </strong>and all orders are charge at <strong>50¢</strong></div>
+</div>
+<div class="ms-p-divider"></div>
+<div class="ms-p-col">
+<div class="ms-p-label">Monthly Payment</div>
+<ul class="ms-pay-list">
+<li>Invoices sent at month-end</li>
+<li>ACH transfer/Credit Card</li>
+<li>Billed in USD, CAD, EUR, GBP, AUD, and NZ</li>
+<!-- <li>Card fees: $0.30 + 3.9% of total</li>
+              <li class="ms-note">Verify suitability for your country's regulatory standards.</li> -->
+</ul>
+</div>
+</div>
+<!-- CHART -->
+<div class="ms-chart-wrap">
+<div class="ms-chart-meta">
+<div class="ms-chart-title">Estimated monthly cost by delivery volume</div>
+<div class="ms-chart-legend">
+<div class="ms-cl-item">
+<div class="ms-cl-dot" style="background:#f7931a"></div>Price cost
+              </div>
+<div class="ms-cl-item">
+<div class="ms-cl-dot" style="background:#4fa6e9"></div>Minimum floor
+              </div>
+</div>
+</div>
+<div class="ms-chart-canvas-wrap">
+<canvas aria-label="Line chart: price cost is flat at $299.50 up to 599 deliveries, then rises at $0.50 per delivery. At 1,000 deliveries cost is $500, at 2,000 it is $1,000." id="ms-delivery-chart" role="img">Estimated monthly cost: $299.50 minimum up to 599 deliveries, then $0.50 per delivery above that.</canvas>
+</div>
+</div>
+<!-- CTA STRIP -->
+<div class="ms-cta-strip">
+<p><strong>No contracts, no lock-in.</strong> Cancel any time. Data export always included.</p>
+<div class="ms-cta-btns">
+<a class="ms-btn-orange" href="https://mountainstream.co/register-your-company/">Get Started Today</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- INCLUDES -->
+<section class="ms-includes">
+<div class="ms-container">
+<div class="ms-section-head ms-reveal">
+<div class="ms-eyebrow">Everything included</div>
+<h2>Your 50¢ per delivery covers everything in Streamline</h2>
+</div>
+<div class="ms-inc-grid ms-reveal">
+<div class="ms-inc-card">
+<h3>50¢ per delivery includes</h3>
+<ul class="ms-inc-list">
+<li><span class="ms-ck">✓</span><span>Complete suite of functionality including
+<strong>The Driver App, Inventory &amp; Traceability App</strong></span></li>
+<li><span class="ms-ck">✓</span><span>24/7 support by phone and email</span></li>
+<li><span class="ms-ck">✓</span><span>All software upgrades</span></li>
+<li><span class="ms-ck">✓</span><span>Data &amp; software maintenance</span></li>
+<!-- <li><span class="ms-ck">✓</span><span>Microsoft Azure Hosting</span></li> -->
+<li><span class="ms-ck">✓</span><span>Per-minute backups saved for 7 days</span></li>
+<li><span class="ms-ck">✓</span><span>4 daily backups saved for 3 months</span></li>
+</ul>
+</div>
+<div class="ms-inc-card">
+<h3>Initial setup fee includes</h3>
+<ul class="ms-inc-list">
+<li><span class="ms-ck">✓</span><span>Complete Data + Reports setup</span></li>
+<li><span class="ms-ck">✓</span><span>Full team training</span></li>
+<li><span class="ms-ck">✓</span><span>Products, Recipes, Ingredients &amp; Suppliers import</span></li>
+<li><span class="ms-ck">✓</span><span>Indefinite ongoing training by phone &amp; email</span></li>
+</ul>
+</div>
+<!-- <div class="ms-inc-card">
+          <h3>Monthly payment process</h3>
+          <ul class="ms-inc-list">
+            <li><span class="ms-ck">✓</span><span>Monthly invoices sent at month-end</span></li>
+            <li><span class="ms-ck">✓</span><span>Wire transfer or Credit Card</span></li>
+            <li><span class="ms-ck">✓</span><span>Transaction costs are the account of client</span></li>
+            <li><span class="ms-ck">✓</span><span>Card fees: $0.30 + 3.9% of total</span></li>
+            <li class="ms-warn-item"><span class="ms-ck ms-warn">!</span><span>Verify suitability for your country's regulations</span></li>
+          </ul>
+        </div> -->
+</div>
+</div>
+</section>
+<!-- TESTIMONIALS -->
+<section class="ms-testi">
+<div class="ms-container">
+<div class="ms-section-head ms-reveal">
+<div class="ms-eyebrow">Trusted worldwide</div>
+<h2>Bakeries that made the switch</h2>
+</div>
+<div class="ms-testi-grid ms-reveal">
+<div class="ms-testi-card">
+<div class="ms-testi-stars">★★★★★</div>
+<p class="ms-testi-quote">"We've been extremely happy with the system, it's cut down our phone calls by 85% or more. Just about everyone is ordering on time now. Late orders have become a thing of the past."</p>
+<div class="ms-testi-author">
+<div class="ms-tav" style="background:#0f2f5a">KM</div>
+<div>
+<div class="ms-t-name">Kathy Mulen</div>
+<div class="ms-t-role">Owner — Grateful Bread, Denver, CO</div>
+</div>
+</div>
+</div>
+<div class="ms-testi-card">
+<div class="ms-testi-stars">★★★★★</div>
+<p class="ms-testi-quote">"Streamline is fantastic, and the people at Mountain Stream are even better! We get a response easily at any time of the day. It has eliminated a lot of tasks altogether, and made many so much easier."</p>
+<div class="ms-testi-author">
+<div class="ms-tav" style="background:#f7931a">RR</div>
+<div>
+<div class="ms-t-name">Ricky R.</div>
+<div class="ms-t-role">Controller — Bluepoint Bakery</div>
+</div>
+</div>
+</div>
+<div class="ms-testi-card">
+<div class="ms-testi-stars">★★★★★</div>
+<p class="ms-testi-quote">"Streamline saved my life in a time where my business grew exponentially. When I need customer support, I am always able to reach help quickly and efficiently."</p>
+<div class="ms-testi-author">
+<div class="ms-tav" style="background:#1a8a57">DC</div>
+<div>
+<div class="ms-t-name">Daniela C.</div>
+<div class="ms-t-role">Owner — Tartastic</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ -->
+<section class="ms-faq">
+<div class="ms-container">
+<div class="ms-section-head ms-reveal">
+<div class="ms-eyebrow">FAQ</div>
+<h2>Frequently asked questions</h2>
+</div>
+<div class="ms-faq-list ms-reveal">
+<div class="ms-faq-item">
+<button class="ms-faq-btn">What is Streamline, and how is it different from other bakery software? <span class="ms-faq-ico">+</span></button>
+<div class="ms-faq-answer">Streamline is purpose-built for bakeries — recipes, production, delivery, and financials in one platform. Unlike generic ERP tools, every feature is designed around how a bakery actually operates day-to-day.</div>
+</div>
+<div class="ms-faq-item">
+<button class="ms-faq-btn">How does Streamline help improve efficiency and accuracy? <span class="ms-faq-ico">+</span></button>
+<div class="ms-faq-answer">Automation replaces manual data entry across your full workflow — from batch scaling and production sheets to driver routing and invoice generation. Less admin time means fewer errors and more time baking.</div>
+</div>
+<div class="ms-faq-item">
+<button class="ms-faq-btn">Is there a limit to the number of users? <span class="ms-faq-ico">+</span></button>
+<div class="ms-faq-answer">No. Your 50¢ per delivery fee covers unlimited user seats — bakers, drivers, admin, and managers can all log in at no extra cost.</div>
+</div>
+<div class="ms-faq-item">
+<button class="ms-faq-btn">Do I need to manage the technical side myself? <span class="ms-faq-ico">+</span></button>
+<div class="ms-faq-answer">Not at all. We manage all hosting on Microsoft Azure, automated backups, software updates, and maintenance. You focus on baking — we handle the infrastructure.</div>
+</div>
+<div class="ms-faq-item">
+<button class="ms-faq-btn">How does pricing scale as my bakery grows? <span class="ms-faq-ico">+</span></button>
+<div class="ms-faq-answer">Linearly — 50¢ per order, always. As your volume grows we offer custom discount tiers too. Reach out and we'll tailor something for your size.</div>
+</div>
+<div class="ms-faq-item ms-open">
+<button class="ms-faq-btn">Does Streamline provide customer support? <span class="ms-faq-ico">+</span></button>
+<div class="ms-faq-answer">Yes. Support extends not only to your team but also to your end customers interacting with the system. By using Streamline, you're outsourcing both the technology and the support — that's central to the pricing model.</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA BAND -->
+<section class="ms-cta-band ms-reveal">
+<div class="ms-container">
+<div class="ms-cta-inner">
+<h2>Get started without the stress</h2>
+<p>We handle data migration, full training, and setup so you're running in days — not months. No contracts, cancel any time.</p>
+<div class="ms-cta-btns">
+<a class="ms-btn-orange" href="https://mountainstream.co/register-your-company/">Book your free demo</a>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- /.ms-pricing -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+(function () {
+
+  /* ── Chart ── */
+  var RATE = 0.50;
+  var MIN  = 299.50;
+  /* Breakeven: the delivery count where RATE × d = MIN → d = 599 */
+  /* Below or at 599 deliveries, the minimum floor applies.        */
+
+  var labels        = [];
+  var priceCostData = [];
+  var floorData     = [];
+
+  for (var d = 0; d <= 2000; d += 25) {
+    labels.push(d);
+    /* Actual monthly charge: max of minimum floor or per-delivery rate */
+    var cost = Math.max(MIN, d * RATE);
+    priceCostData.push(parseFloat(cost.toFixed(2)));
+    /* Floor line: constant $299.50 — shows where the minimum sits */
+    floorData.push(MIN);
+  }
+
+  var ctx = document.getElementById('ms-delivery-chart');
+  if (ctx) {
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            /* Blue shaded area fills from the floor line down to zero.
+               Drawn first (order 2) so the orange line sits on top.   */
+            label: 'Minimum floor',
+            data: floorData,
+            borderColor: 'rgba(79,166,233,0.5)',
+            borderWidth: 1,
+            borderDash: [5, 4],
+            backgroundColor: 'rgba(79,166,233,0.10)',
+            fill: 'origin',
+            pointRadius: 0,
+            pointHoverRadius: 0,
+            tension: 0,
+            order: 2
+          },
+          {
+            /* Orange price-cost line drawn on top */
+            label: 'Price cost',
+            data: priceCostData,
+            borderColor: '#f7931a',
+            borderWidth: 2.5,
+            backgroundColor: 'transparent',
+            fill: false,
+            pointRadius: 0,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: '#f7931a',
+            pointHoverBorderColor: '#ffffff',
+            pointHoverBorderWidth: 2,
+            tension: 0,
+            order: 1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#1e2a38',
+            titleColor: '#ffffff',
+            bodyColor: '#c8d4e0',
+            padding: 12,
+            cornerRadius: 8,
+            borderColor: 'rgba(255,255,255,0.08)',
+            borderWidth: 1,
+            titleFont: { size: 13, weight: '700' },
+            bodyFont: { size: 12 },
+            filter: function(item) {
+              /* Only show the Price cost line in the tooltip */
+              return item.dataset.label === 'Price cost';
+            },
+            callbacks: {
+              title: function(items) {
+                return items[0].parsed.x.toLocaleString() + ' deliveries';
+              },
+              label: function(item) {
+                var d   = item.parsed.x;
+                var val = item.parsed.y;
+                var note = d <= 599 ? ' (minimum applies)' : '';
+                return '  Monthly cost:  $' + val.toFixed(2) + note;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            type: 'linear',
+            min: 0,
+            max: 2000,
+            ticks: {
+              stepSize: 500,
+              color: '#aab2bc',
+              font: { size: 11 },
+              callback: function(v) { return v.toLocaleString(); }
+            },
+            grid: { color: '#dde4ee', lineWidth: 1 },
+            title: {
+              display: true,
+              text: 'Deliveries',
+              color: '#aab2bc',
+              font: { size: 11 },
+              padding: { top: 8 }
+            }
+          },
+          y: {
+            min: 0,
+            max: 1000,
+            ticks: {
+              stepSize: 200,
+              color: '#aab2bc',
+              font: { size: 11 },
+              callback: function(v) { return '$' + v; }
+            },
+            grid: { color: '#dde4ee', lineWidth: 1 },
+            title: {
+              display: true,
+              text: 'Price per month',
+              color: '#aab2bc',
+              font: { size: 11 },
+              padding: { bottom: 8 }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  /* ── FAQ accordion ── */
+  var root = document.querySelector('.ms-pricing');
+  if (!root) return;
+
+  root.querySelectorAll('.ms-faq-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item   = btn.closest('.ms-faq-item');
+      var isOpen = item.classList.contains('ms-open');
+      root.querySelectorAll('.ms-faq-item.ms-open').forEach(function(i) { i.classList.remove('ms-open'); });
+      if (!isOpen) item.classList.add('ms-open');
+    });
+  });
+
+  /* ── Scroll reveal ── */
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('ms-visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  root.querySelectorAll('.ms-reveal').forEach(function(el) { obs.observe(el); });
+
+})();
+</script>
+</div><script id="ms-wysiwyg-editor-script">
+(function(){
+  var HISTORY_KEY = 'ms-wysiwyg-pricing-master-draft-history-v1';
+  var AUTOSAVE_KEY = 'ms-wysiwyg-pricing-master-autosave-v1';
+  var MAX_HISTORY = 30;
+  var currentDownloadName = 'pricing-master-edited.html';
+  var savedRange = null;
+  var autosaveTimer = null;
+
+  function $(id){ return document.getElementById(id); }
+  function root(){ return $('ms-editor-content'); }
+
+  function toast(message){
+    var t = $('ms-edit-toast');
+    if(!t) return;
+    t.textContent = message;
+    t.classList.add('visible');
+    clearTimeout(window.__msToastTimer);
+    window.__msToastTimer = setTimeout(function(){ t.classList.remove('visible'); }, 2800);
+  }
+
+  function setToolbarOffset(){
+    var tb = $('ms-editor-toolbar');
+    if(!tb) return;
+    document.documentElement.style.setProperty('--ms-editor-toolbar-height', (tb.offsetHeight || 86) + 'px');
+  }
+
+  function hasText(el){
+    return !!(el && el.textContent && el.textContent.replace(/\s+/g,' ').trim());
+  }
+
+  function isUnsafe(el){
+    return !!(el.closest('script,style,noscript,svg,canvas,form,select,textarea,[data-ms-editor-ui="true"]'));
+  }
+
+  function hasMediaControl(el){
+    return !!el.querySelector('img,video,iframe,input,textarea,select,button');
+  }
+
+  function markEditable(scope){
+    if(!scope) return;
+
+    scope.querySelectorAll('[contenteditable],[data-ms-editable]').forEach(function(el){
+      el.removeAttribute('contenteditable');
+      el.removeAttribute('data-ms-editable');
+      el.removeAttribute('spellcheck');
+    });
+
+    var selector = [
+      'h1','h2','h3','h4','h5','h6',
+      'p','li','summary',
+      'a[href]','button',
+      'strong','em','span',
+      '.eyebrow','.lede','.section-label',
+      '.hero-badge','.btn','.link-arrow',
+      '.step-title','.step-desc',
+      '.testi-quote','.testi-author','.testi-stars',
+      '.app-tab','.app-item-name','.app-item-lot','.app-item-qty',
+      '.panel-title','.panel-kpi-label','.panel-kpi-val','.panel-row-name','.panel-row-lot','.panel-row-qty',
+      '.count-name','.count-meta','.count-val'
+    ].join(',');
+
+    function hasCandidateChild(el){
+      return Array.prototype.some.call(el.children || [], function(child){
+        return child.matches && (child.matches(selector) || child.querySelector(selector));
+      });
+    }
+
+    function make(el){
+      el.setAttribute('contenteditable','true');
+      el.setAttribute('data-ms-editable','true');
+      el.setAttribute('spellcheck','true');
+    }
+
+    Array.prototype.forEach.call(scope.querySelectorAll(selector), function(el){
+      if(!hasText(el) || isUnsafe(el)) return;
+      if(el.closest('[data-ms-editable="true"]')) return;
+      if(hasMediaControl(el)) return;
+
+      var tag = el.tagName ? el.tagName.toLowerCase() : '';
+      var alwaysOk = /^(h1|h2|h3|h4|h5|h6|p|li|summary|a|button|strong|em|span)$/.test(tag);
+      if(!alwaysOk && hasCandidateChild(el)) return;
+      make(el);
+    });
+
+    scope.querySelectorAll('a[href]').forEach(function(a){
+      if(!a.hasAttribute('data-original-href')) {
+        a.setAttribute('data-original-href', a.getAttribute('href') || '#');
+      }
+      a.setAttribute('title','Ctrl/Cmd-click to open link. Use Edit link to change this URL.');
+      if(hasText(a) && !hasMediaControl(a) && !a.closest('[data-ms-editable="true"]')) make(a);
+    });
+  }
+
+  function bindPaste(scope){
+    scope.querySelectorAll('[data-ms-editable="true"]').forEach(function(el){
+      el.onpaste = function(e){
+        e.preventDefault();
+        var text = (e.clipboardData || window.clipboardData).getData('text/plain');
+        document.execCommand('insertText', false, text);
+        scheduleAutosave();
+      };
+    });
+  }
+
+
+  function markPricingEditable(scope){
+    if(!scope) return;
+    var selector = [
+      '.ms-pricing .ms-p-label',
+      '.ms-pricing .ms-p-price',
+      '.ms-pricing .ms-p-unit',
+      '.ms-pricing .ms-p-min-tag',
+      '.ms-pricing .ms-p-setup-amount',
+      '.ms-pricing .ms-p-setup-sub',
+      '.ms-pricing .ms-chart-title',
+      '.ms-pricing .ms-cl-item',
+      '.ms-pricing .ms-cta-strip p',
+      '.ms-pricing .ms-inc-list li > span:not(.ms-ck)',
+      '.ms-pricing .ms-tav',
+      '.ms-pricing .ms-testi-quote',
+      '.ms-pricing .ms-t-name',
+      '.ms-pricing .ms-t-role',
+      '.ms-pricing .ms-faq-btn',
+      '.ms-pricing .ms-faq-answer',
+      '.ms-pricing .ms-cta-inner p',
+      '.ms-pricing .ms-footer-logo',
+      '.ms-pricing .ms-footer-copy'
+    ].join(',');
+
+    scope.querySelectorAll(selector).forEach(function(el){
+      if(isUnsafe(el)) return;
+      el.querySelectorAll('[contenteditable],[data-ms-editable]').forEach(function(child){
+        child.removeAttribute('contenteditable');
+        child.removeAttribute('data-ms-editable');
+        child.removeAttribute('spellcheck');
+      });
+      el.setAttribute('contenteditable','true');
+      el.setAttribute('data-ms-editable','true');
+      el.setAttribute('spellcheck','true');
+    });
+
+    scope.querySelectorAll('.ms-pricing .ms-ck,.ms-pricing .ms-cl-dot,.ms-pricing .ms-faq-ico').forEach(function(el){
+      el.removeAttribute('contenteditable');
+      el.removeAttribute('data-ms-editable');
+      el.removeAttribute('spellcheck');
+      el.setAttribute('contenteditable','false');
+    });
+  }
+
+  function initPricingPage(){
+    var scope = root();
+    if(!scope) return;
+    var pricingRoot = scope.querySelector('.ms-pricing');
+    if(!pricingRoot) return;
+
+    pricingRoot.querySelectorAll('.ms-reveal').forEach(function(el){
+      el.classList.add('ms-visible');
+    });
+
+    pricingRoot.querySelectorAll('.ms-faq-btn').forEach(function(btn){
+      if(btn.getAttribute('data-ms-pricing-faq-bound') === 'true') return;
+      btn.setAttribute('data-ms-pricing-faq-bound','true');
+      btn.addEventListener('click', function(){
+        var item = btn.closest('.ms-faq-item');
+        if(!item) return;
+        var isOpen = item.classList.contains('ms-open');
+        pricingRoot.querySelectorAll('.ms-faq-item.ms-open').forEach(function(i){ i.classList.remove('ms-open'); });
+        if(!isOpen) item.classList.add('ms-open');
+      });
+    });
+
+    var canvas = scope.querySelector('#ms-delivery-chart');
+    if(!canvas || !window.Chart) return;
+    try {
+      if(window.Chart.getChart) {
+        var existing = window.Chart.getChart(canvas);
+        if(existing) existing.destroy();
+      }
+      var RATE = 0.50;
+      var MIN = 299.50;
+      var labels = [];
+      var priceCostData = [];
+      var floorData = [];
+      for (var d = 0; d <= 2000; d += 25) {
+        labels.push(d);
+        var cost = Math.max(MIN, d * RATE);
+        priceCostData.push(parseFloat(cost.toFixed(2)));
+        floorData.push(MIN);
+      }
+      new window.Chart(canvas, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Minimum floor',
+              data: floorData,
+              borderColor: 'rgba(79,166,233,0.5)',
+              borderWidth: 1,
+              borderDash: [5, 4],
+              backgroundColor: 'rgba(79,166,233,0.10)',
+              fill: 'origin',
+              pointRadius: 0,
+              pointHoverRadius: 0,
+              tension: 0,
+              order: 2
+            },
+            {
+              label: 'Price cost',
+              data: priceCostData,
+              borderColor: '#f7931a',
+              borderWidth: 2.5,
+              backgroundColor: 'transparent',
+              fill: false,
+              pointRadius: 0,
+              pointHoverRadius: 5,
+              pointHoverBackgroundColor: '#f7931a',
+              pointHoverBorderColor: '#ffffff',
+              pointHoverBorderWidth: 2,
+              tension: 0,
+              order: 1
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#1e2a38',
+              titleColor: '#ffffff',
+              bodyColor: '#c8d4e0',
+              padding: 12,
+              cornerRadius: 8,
+              borderColor: 'rgba(255,255,255,0.08)',
+              borderWidth: 1,
+              titleFont: { size: 13, weight: '700' },
+              bodyFont: { size: 12 },
+              filter: function(item) { return item.dataset.label === 'Price cost'; },
+              callbacks: {
+                title: function(items) { return items[0].parsed.x.toLocaleString() + ' deliveries'; },
+                label: function(item) {
+                  var d = item.parsed.x;
+                  var val = item.parsed.y;
+                  var note = d <= 599 ? ' (minimum applies)' : '';
+                  return '  Monthly cost:  $' + val.toFixed(2) + note;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              type: 'linear',
+              min: 0,
+              max: 2000,
+              ticks: {
+                stepSize: 500,
+                color: '#aab2bc',
+                font: { size: 11 },
+                callback: function(v) { return v.toLocaleString(); }
+              },
+              grid: { color: '#dde4ee', lineWidth: 1 },
+              title: { display: true, text: 'Deliveries', color: '#aab2bc', font: { size: 11 }, padding: { top: 8 } }
+            },
+            y: {
+              min: 0,
+              max: 1000,
+              ticks: {
+                stepSize: 200,
+                color: '#aab2bc',
+                font: { size: 11 },
+                callback: function(v) { return '$' + v; }
+              },
+              grid: { color: '#dde4ee', lineWidth: 1 },
+              title: { display: true, text: 'Price per month', color: '#aab2bc', font: { size: 11 }, padding: { bottom: 8 } }
+            }
+          }
+        }
+      });
+    } catch(e) {}
+  }
+
+  function prepare(){
+    setToolbarOffset();
+    markEditable(root());
+    markPricingEditable(root());
+    bindPaste(root());
+
+    root().querySelectorAll('details').forEach(function(d){
+      if(!d.hasAttribute('data-ms-original-open')) d.setAttribute('data-ms-original-open', d.open ? 'true' : 'false');
+      d.open = true;
+    });
+
+    root().querySelectorAll('.reveal,.reveal-l,.reveal-r,.reveal-d1,.reveal-d2,.reveal-d3').forEach(function(el){
+      el.classList.add('in','is-visible','visible');
+    });
+
+    initPricingPage();
+    renderDrafts();
+  }
+
+  function getHistory(){
+    try {
+      var parsed = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+      return Array.isArray(parsed) ? parsed : [];
+    } catch(e) {
+      return [];
+    }
+  }
+
+  function setHistory(list){
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(list.slice(0, MAX_HISTORY)));
+    renderDrafts();
+  }
+
+  function formatDate(iso){
+    try {
+      return new Date(iso).toLocaleString([], {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit'
+      });
+    } catch(e) {
+      return iso || '';
+    }
+  }
+
+  function getEditableHTML(){
+    return root() ? root().innerHTML : '';
+  }
+
+  function saveDraft(type){
+    var history = getHistory();
+    var now = new Date();
+    var defaultName = 'Pricing draft — ' + formatDate(now.toISOString());
+    var name = prompt('Draft name:', defaultName);
+    if(name === null) return;
+    name = (name || defaultName).trim() || defaultName;
+
+    history.unshift({
+      id: String(now.getTime()) + '-' + Math.random().toString(36).slice(2,8),
+      name: name,
+      createdAt: now.toISOString(),
+      type: type || 'manual',
+      fileName: currentDownloadName,
+      html: getEditableHTML()
+    });
+
+    setHistory(history);
+    localStorage.setItem(AUTOSAVE_KEY, JSON.stringify({
+      createdAt: now.toISOString(),
+      html: getEditableHTML()
+    }));
+
+    var menu = $('ms-drafts-menu');
+    if(menu) menu.open = true;
+    toast('Draft saved: ' + name);
+  }
+
+  function loadDraft(id){
+    var draft = getHistory().find(function(item){ return item.id === id; });
+    if(!draft) {
+      toast('Draft not found.');
+      return;
+    }
+    if(!confirm('Load "' + (draft.name || 'Untitled draft') + '"? Your current unsaved edits will be replaced.')) return;
+
+    root().innerHTML = draft.html || '';
+    prepare();
+    toast('Draft loaded: ' + (draft.name || 'Untitled draft'));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function renameDraft(id){
+    var history = getHistory();
+    var draft = history.find(function(item){ return item.id === id; });
+    if(!draft) return;
+
+    var next = prompt('Rename draft:', draft.name || 'Untitled draft');
+    if(next === null) return;
+    next = next.trim();
+    if(!next) {
+      toast('Draft name was not changed.');
+      return;
+    }
+
+    draft.name = next;
+    setHistory(history);
+    toast('Draft renamed.');
+  }
+
+  function deleteDraft(id){
+    var history = getHistory();
+    var draft = history.find(function(item){ return item.id === id; });
+    var label = draft ? (draft.name || 'this draft') : 'this draft';
+    if(!confirm('Delete "' + label + '"?')) return;
+    setHistory(history.filter(function(item){ return item.id !== id; }));
+    toast('Draft deleted.');
+  }
+
+  function clearHistory(){
+    if(!confirm('Clear all saved draft history for this page?')) return;
+    localStorage.removeItem(HISTORY_KEY);
+    renderDrafts();
+    toast('Draft history cleared.');
+  }
+
+  function renderDrafts(){
+    var list = $('ms-draft-list');
+    var count = $('ms-draft-count');
+    if(!list) return;
+
+    var history = getHistory();
+    if(count) count.textContent = String(history.length);
+
+    if(!history.length){
+      list.innerHTML = '<div class="ms-draft-empty">No drafts saved yet. Click <strong>Save current version</strong> to create the first one.</div>';
+      return;
+    }
+
+    list.innerHTML = '';
+    history.forEach(function(draft){
+      var card = document.createElement('div');
+      card.className = 'ms-draft-card';
+
+      var title = document.createElement('div');
+      title.className = 'ms-draft-card-title';
+      title.textContent = draft.name || 'Untitled draft';
+
+      var meta = document.createElement('div');
+      meta.className = 'ms-draft-card-meta';
+      var size = draft.html ? Math.round(draft.html.length / 1024) + ' KB' : '0 KB';
+      meta.textContent = formatDate(draft.createdAt) + ' · ' + (draft.type || 'manual') + ' · ' + size;
+
+      var actions = document.createElement('div');
+      actions.className = 'ms-draft-card-actions';
+
+      var load = document.createElement('button');
+      load.type = 'button';
+      load.textContent = 'Load this version';
+      load.addEventListener('click', function(){ loadDraft(draft.id); });
+
+      var rename = document.createElement('button');
+      rename.type = 'button';
+      rename.textContent = 'Rename';
+      rename.addEventListener('click', function(){ renameDraft(draft.id); });
+
+      var del = document.createElement('button');
+      del.type = 'button';
+      del.textContent = 'Delete';
+      del.addEventListener('click', function(){ deleteDraft(draft.id); });
+
+      actions.append(load, rename, del);
+      card.append(title, meta, actions);
+      list.appendChild(card);
+    });
+  }
+
+  function scheduleAutosave(){
+    clearTimeout(autosaveTimer);
+    autosaveTimer = setTimeout(function(){
+      try {
+        localStorage.setItem(AUTOSAVE_KEY, JSON.stringify({
+          createdAt: new Date().toISOString(),
+          html: getEditableHTML()
+        }));
+      } catch(e) {}
+    }, 900);
+  }
+
+  function restoreSelection(){
+    if(!savedRange) return false;
+    var sel = window.getSelection();
+    if(!sel) return false;
+    sel.removeAllRanges();
+    sel.addRange(savedRange);
+    return true;
+  }
+
+  function saveSelection(){
+    var sel = window.getSelection();
+    if(!sel || !sel.rangeCount) return;
+    var node = sel.anchorNode;
+    if(!node) return;
+    var el = node.nodeType === 1 ? node : node.parentElement;
+    if(el && root() && root().contains(el)) {
+      savedRange = sel.getRangeAt(0).cloneRange();
+    }
+  }
+
+  function exec(cmd, value){
+    restoreSelection();
+    document.execCommand(cmd, false, value || null);
+    scheduleAutosave();
+  }
+
+  function applyTextColor(color){
+    restoreSelection();
+
+    var sel = window.getSelection();
+    if(sel && sel.rangeCount && !sel.isCollapsed && root().contains(sel.anchorNode)) {
+      document.execCommand('foreColor', false, color);
+      scheduleAutosave();
+      toast('Text color applied: ' + color);
+      return;
+    }
+
+    var active = document.activeElement;
+    if(active && active.matches && active.matches('[data-ms-editable="true"]')) {
+      active.style.color = color;
+      scheduleAutosave();
+      toast('Element color applied: ' + color);
+      return;
+    }
+
+    toast('Select text first, then choose a color.');
+  }
+
+  function editLink(){
+    var node = window.getSelection && window.getSelection().anchorNode;
+    var el = node && (node.nodeType === 1 ? node : node.parentElement);
+    var link = el && el.closest ? el.closest('a') : null;
+    if(!link && document.activeElement && document.activeElement.closest) {
+      link = document.activeElement.closest('a');
+    }
+    if(!link || !root().contains(link)) {
+      toast('Place your cursor inside a link or button first.');
+      return;
+    }
+
+    var next = prompt('Edit link URL:', link.getAttribute('href') || '');
+    if(next !== null) {
+      link.setAttribute('href', next.trim());
+      scheduleAutosave();
+      toast('Link URL updated.');
+    }
+  }
+
+  function togglePreview(){
+    document.body.classList.toggle('ms-preview-mode');
+    var preview = document.body.classList.contains('ms-preview-mode');
+    document.querySelectorAll('[data-ms-editable="true"]').forEach(function(el){
+      el.setAttribute('contenteditable', preview ? 'false' : 'true');
+    });
+    toast(preview ? 'Preview mode enabled. Press Esc to return.' : 'Edit mode enabled.');
+  }
+
+  function toggleOutlines(){
+    document.body.classList.toggle('ms-hide-edit-outlines');
+    toast(document.body.classList.contains('ms-hide-edit-outlines') ? 'Edit outlines hidden.' : 'Edit outlines visible.');
+  }
+
+  function resetLinks(){
+    root().querySelectorAll('a[data-original-href]').forEach(function(a){
+      a.setAttribute('href', a.getAttribute('data-original-href') || '#');
+    });
+    scheduleAutosave();
+    toast('Link URLs restored.');
+  }
+
+  function cleanExport(){
+    var clone = document.documentElement.cloneNode(true);
+
+    clone.querySelectorAll('[data-ms-editor-ui="true"],#ms-wysiwyg-editor-style,#ms-wysiwyg-editor-script').forEach(function(el){
+      el.remove();
+    });
+
+    clone.querySelectorAll('[contenteditable],[data-ms-editable]').forEach(function(el){
+      el.removeAttribute('contenteditable');
+      el.removeAttribute('data-ms-editable');
+      el.removeAttribute('spellcheck');
+    });
+
+    clone.querySelectorAll('a[data-original-href]').forEach(function(a){
+      a.removeAttribute('data-original-href');
+      if(a.getAttribute('title') === 'Ctrl/Cmd-click to open link. Use Edit link to change this URL.') {
+        a.removeAttribute('title');
+      }
+    });
+
+    clone.querySelectorAll('[data-ms-original-open]').forEach(function(el){
+      if(el.getAttribute('data-ms-original-open') === 'true') {
+        el.setAttribute('open','');
+      } else {
+        el.removeAttribute('open');
+      }
+      el.removeAttribute('data-ms-original-open');
+    });
+
+    var body = clone.querySelector('body');
+    if(body) {
+      body.classList.remove('ms-hide-edit-outlines','ms-preview-mode');
+      body.removeAttribute('style');
+    }
+
+    var wrap = clone.querySelector('#ms-editor-content');
+    if(wrap) {
+      var parent = wrap.parentNode;
+      while(wrap.firstChild) parent.insertBefore(wrap.firstChild, wrap);
+      wrap.remove();
+    }
+
+    return '<!DOCTYPE html>\n' + clone.outerHTML;
+  }
+
+  function downloadCleanHTML(){
+    var html = cleanExport();
+    var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = currentDownloadName;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+    toast('Clean HTML downloaded.');
+  }
+
+  function openInstructions(){
+    var modal = $('ms-instruction-modal');
+    if(modal) modal.hidden = false;
+  }
+
+  function closeInstructions(){
+    var modal = $('ms-instruction-modal');
+    if(modal) modal.hidden = true;
+  }
+
+  document.addEventListener('selectionchange', saveSelection);
+
+  document.addEventListener('input', function(e){
+    if(root() && root().contains(e.target)) scheduleAutosave();
+  });
+
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('#ms-editor-content a');
+    if(a && !document.body.classList.contains('ms-preview-mode') && !(e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
+      toast('Link click blocked while editing. Ctrl/Cmd-click to open, or use Edit link.');
+    }
+  }, true);
+
+  $('ms-bold-btn')?.addEventListener('click', function(){ exec('bold'); });
+  $('ms-italic-btn')?.addEventListener('click', function(){ exec('italic'); });
+  $('ms-list-btn')?.addEventListener('click', function(){ exec('insertUnorderedList'); });
+  $('ms-edit-link-btn')?.addEventListener('click', editLink);
+  $('ms-preview-btn')?.addEventListener('click', togglePreview);
+  $('ms-outlines-btn')?.addEventListener('click', toggleOutlines);
+  $('ms-reset-links-btn')?.addEventListener('click', resetLinks);
+  $('ms-download-btn')?.addEventListener('click', downloadCleanHTML);
+  $('ms-save-draft-btn')?.addEventListener('click', function(){ saveDraft('manual'); });
+  $('ms-clear-history-btn')?.addEventListener('click', clearHistory);
+  $('ms-instructions-btn')?.addEventListener('click', openInstructions);
+  $('ms-instruction-close')?.addEventListener('click', closeInstructions);
+  $('ms-instruction-modal')?.addEventListener('click', function(e){
+    if(e.target === this) closeInstructions();
+  });
+
+  document.querySelectorAll('.ms-color-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      applyTextColor(btn.getAttribute('data-ms-color'));
+    });
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') {
+      if(!$('ms-instruction-modal')?.hidden) {
+        closeInstructions();
+        return;
+      }
+      if(document.body.classList.contains('ms-preview-mode')) togglePreview();
+    }
+    if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+      e.preventDefault();
+      saveDraft('keyboard');
+    }
+  });
+
+  window.addEventListener('resize', setToolbarOffset);
+  window.addEventListener('load', setToolbarOffset);
+
+  prepare();
+  toast('Pricing Master editor ready. Click outlined text to edit.');
+})();
+</script></body>
+</html>

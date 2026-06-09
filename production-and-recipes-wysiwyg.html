@@ -1,0 +1,2631 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Production &amp; Recipes — WYSIWYG Editor</title>
+<style>
+        /* ── 1. TOKENS & BASE ─────────────────────────────────────── */
+.ms-feature-cluster {
+  --ms-primary-950: #113058;
+  --ms-primary-900: #113058;
+  --ms-primary-800: #113058;
+  --ms-primary-700: #113058;
+  --ms-primary-600: #113058;
+  --ms-primary-100: #e4eef9;
+  --ms-primary-050: #f2f7fd;
+  --ms-accent-700:  #ff9100;
+  --ms-accent-600:  #ff9100;
+  --ms-accent-500:  #ff9100;
+  --ms-accent-400:  #ff9100;
+  --ms-accent-100:  #fef0d8;
+  --ms-accent-050:  #fff8ef;
+  --ms-accent-glow: rgba(245,135,14,.22);
+  --ms-sky-600:     #1d7dc0;
+  --ms-sky-500:     #4aa6e8;
+  --ms-sky-100:     #ddf1ff;
+  --ms-sky-050:     #f0f9ff;
+  --ms-success-600: #1e7a52;
+  --ms-success-100: #e6f7ef;
+  --ms-ink:         #101b2a;
+  --ms-text:        #1e2f42;
+  --ms-muted:       #54647a;
+  --ms-soft:        #7a8b9e;
+  --ms-line:        #dbe4ef;
+  --ms-line-strong: #c4d1e2;
+  --ms-surface:     #ffffff;
+  --ms-surface-soft:#f6faff;
+  --ms-surface-warm:#fffaf4;
+  --ms-page:        #f9fbff;
+  --ms-font-display:'Fraunces', Georgia, serif;
+  --ms-font-body:   'DM Sans', system-ui, sans-serif;
+  --ms-wrap:        1180px;
+  --ms-wrap-narrow: 860px;
+  --ms-gutter:      clamp(20px, 4vw, 48px);
+  --ms-section-y:   clamp(72px, 9vw, 120px);
+  --ms-section-y-sm:clamp(48px, 6vw, 80px);
+  --ms-gap:         clamp(18px, 2.4vw, 28px);
+  --ms-r-xs:   6px;
+  --ms-r-sm:   12px;
+  --ms-r-md:   18px;
+  --ms-r-lg:   28px;
+  --ms-r-pill: 999px;
+  --ms-shadow-xs:    0 1px 3px rgba(9,30,60,.07);
+  --ms-shadow-sm:    0 4px 16px rgba(9,30,60,.09);
+  --ms-shadow-md:    0 14px 40px rgba(9,30,60,.13);
+  --ms-shadow-lg:    0 24px 64px rgba(9,30,60,.17);
+  --ms-shadow-focus: 0 0 0 4px rgba(74,166,232,.28);
+  --ms-ease:         cubic-bezier(.25,.46,.45,.94);
+  --ms-ease-spring:  cubic-bezier(.34,1.56,.64,1);
+  color: var(--ms-text);
+  background-color: var(--ms-page);
+  font-family: var(--ms-font-body);
+  font-size: 16px;
+  line-height: 1.68;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── 2. RESET ─────────────────────────────────────────────── */
+.ms-feature-cluster,
+.ms-feature-cluster * { box-sizing: border-box; }
+.ms-feature-cluster :where(h1,h2,h3,h4,p,ul,ol,figure) { margin-top: 0; }
+.ms-feature-cluster :where(img,svg) { max-width: 100%; height: auto; }
+.ms-feature-cluster a {
+  color: var(--ms-primary-800);
+  text-underline-offset: .2em;
+  transition: color .16s var(--ms-ease), background-color .16s var(--ms-ease),
+              border-color .16s var(--ms-ease), box-shadow .16s var(--ms-ease),
+              transform .2s var(--ms-ease-spring);
+}
+.ms-feature-cluster a:hover { color: var(--ms-accent-700); }
+.ms-feature-cluster :where(a,button,summary):focus-visible {
+  outline: none;
+  box-shadow: var(--ms-shadow-focus);
+  border-radius: var(--ms-r-xs);
+}
+
+/* ── 3. LAYOUT ────────────────────────────────────────────── */
+.ms-feature-cluster .ms-wrap {
+  width: min(var(--ms-wrap), calc(100% - var(--ms-gutter) * 2));
+  margin-inline: auto;
+}
+.ms-feature-cluster .ms-wrap-narrow {
+  width: min(var(--ms-wrap-narrow), calc(100% - var(--ms-gutter) * 2));
+  margin-inline: auto;
+}
+
+/* ── 4. TYPOGRAPHY ────────────────────────────────────────── */
+.ms-feature-cluster .ms-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  margin-bottom: 16px;
+  color: var(--ms-accent-600);
+  font-family: var(--ms-font-body);
+  font-size: .73rem;
+  font-weight: 600;
+  letter-spacing: .11em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.ms-feature-cluster .ms-kicker::before {
+  content: "";
+  flex-shrink: 0;
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ms-accent-500);
+}
+.ms-feature-cluster h1,
+.ms-feature-cluster h2,
+.ms-feature-cluster h3,
+.ms-feature-cluster h4 {
+  font-family: var(--ms-font-display);
+  font-weight: 600;
+  letter-spacing: -.035em;
+  color: var(--ms-primary-900);
+}
+.ms-feature-cluster h1 {
+  max-width: 860px;
+  margin-bottom: 20px;
+  font-size: clamp(2.4rem, 5.5vw, 4.6rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.05em;
+}
+.ms-feature-cluster h1 em {
+  font-style: italic;
+  color: var(--ms-accent-600);
+}
+.ms-feature-cluster h2 {
+  max-width: 820px;
+  margin-bottom: 18px;
+  font-size: clamp(1.8rem, 3.8vw, 3.2rem);
+  line-height: 1.05;
+  letter-spacing: -.04em;
+}
+.ms-feature-cluster h3 {
+  margin-bottom: 10px;
+  font-size: clamp(1.1rem, 1.8vw, 1.6rem);
+  line-height: 1.14;
+  letter-spacing: -.025em;
+}
+.ms-feature-cluster h4 {
+  margin-bottom: 8px;
+  font-size: .95rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -.01em;
+}
+.ms-feature-cluster p { margin-bottom: 1rem; }
+.ms-feature-cluster .ms-section-intro {
+  max-width: 760px;
+  color: var(--ms-muted);
+  font-size: clamp(1rem, 1.4vw, 1.16rem);
+  line-height: 1.78;
+}
+.ms-feature-cluster .ms-lede {
+  max-width: 680px;
+  color: var(--ms-muted);
+  font-size: clamp(1rem, 1.3vw, 1.12rem);
+  line-height: 1.75;
+}
+
+/* ── 5. BREADCRUMB ────────────────────────────────────────── */
+.ms-feature-cluster .ms-breadcrumb {
+  padding-block: 14px;
+  border-bottom: 1px solid var(--ms-line);
+  background: var(--ms-surface);
+}
+.ms-feature-cluster .ms-breadcrumb nav {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .82rem;
+  color: var(--ms-soft);
+}
+.ms-feature-cluster .ms-breadcrumb a {
+  color: var(--ms-muted);
+  text-decoration: none;
+  font-weight: 500;
+}
+.ms-feature-cluster .ms-breadcrumb a:hover { color: var(--ms-primary-800); }
+.ms-feature-cluster .ms-breadcrumb-sep { color: var(--ms-line-strong); }
+.ms-feature-cluster .ms-breadcrumb-current {
+  color: var(--ms-text);
+  font-weight: 600;
+}
+
+/* ── 6. COMPACT HERO ──────────────────────────────────────── */
+.ms-feature-cluster .ms-hero-compact {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(56px, 8vw, 96px) 0 clamp(48px, 7vw, 80px);
+  background:
+    radial-gradient(ellipse 65% 80% at 88% 8%, rgba(74,166,232,.12), transparent 52%),
+    radial-gradient(ellipse 45% 55% at 4% 92%, rgba(245,135,14,.08), transparent 48%),
+    linear-gradient(160deg, var(--ms-primary-050) 0%, #ffffff 52%, var(--ms-surface-warm) 100%);
+  border-bottom: 1px solid var(--ms-line);
+}
+.ms-feature-cluster .ms-hero-compact::before {
+  content: "";
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(74,166,232,.09) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+.ms-feature-cluster .ms-hero-compact::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  opacity: .3;
+}
+.ms-feature-cluster .ms-hero-compact__inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+.ms-feature-cluster .ms-hero-compact__stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.ms-feature-cluster .ms-hero-stat {
+  padding: 16px 20px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: rgba(255,255,255,.9);
+  box-shadow: var(--ms-shadow-sm);
+  text-align: center;
+  min-width: 140px;
+}
+.ms-feature-cluster .ms-hero-stat__number {
+  display: block;
+  font-family: var(--ms-font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -.04em;
+  line-height: 1;
+  color: var(--ms-primary-900);
+}
+.ms-feature-cluster .ms-hero-stat__number span { color: var(--ms-accent-500); }
+.ms-feature-cluster .ms-hero-stat__label {
+  display: block;
+  margin-top: 4px;
+  font-size: .78rem;
+  font-weight: 500;
+  color: var(--ms-muted);
+  line-height: 1.3;
+}
+
+/* ── 7. STICKY NAV ────────────────────────────────────────── */
+.ms-feature-cluster .ms-nav {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  background: rgba(255,255,255,.9);
+  border-bottom: 1px solid rgba(219,228,239,.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.ms-feature-cluster .ms-nav .ms-wrap {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding-block: 10px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.ms-feature-cluster .ms-nav .ms-wrap::-webkit-scrollbar { display: none; }
+.ms-feature-cluster .ms-nav a {
+  flex: 0 0 auto;
+  padding: 7px 14px;
+  border: 1px solid transparent;
+  border-radius: var(--ms-r-pill);
+  color: var(--ms-muted);
+  font-size: .84rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .15s, background .15s, border-color .15s;
+}
+.ms-feature-cluster .ms-nav a:hover,
+.ms-feature-cluster .ms-nav a.active {
+  color: var(--ms-primary-900);
+  background: var(--ms-primary-050);
+  border-color: var(--ms-line);
+}
+.ms-feature-cluster .ms-nav__back {
+  color: var(--ms-muted) !important;
+  border-color: var(--ms-line) !important;
+  background: var(--ms-surface) !important;
+}
+.ms-feature-cluster .ms-nav__back::before { content: "← "; }
+.ms-feature-cluster .ms-nav__divider {
+  align-self: center;
+  width: 1px;
+  height: 18px;
+  background: var(--ms-line);
+  flex-shrink: 0;
+}
+
+/* ── 8. SECTIONS ──────────────────────────────────────────── */
+.ms-feature-cluster .ms-section { padding-block: var(--ms-section-y); }
+.ms-feature-cluster .ms-section-sm { padding-block: var(--ms-section-y-sm); }
+.ms-feature-cluster .ms-section-light {
+  background:
+    radial-gradient(ellipse 70% 60% at 4% 20%, rgba(74,166,232,.09), transparent),
+    linear-gradient(180deg, var(--ms-surface-soft) 0%, #fff 100%);
+}
+.ms-feature-cluster .ms-section-warm {
+  background:
+    radial-gradient(ellipse 60% 70% at 90% 15%, rgba(245,135,14,.11), transparent),
+    linear-gradient(180deg, var(--ms-accent-050) 0%, #fff 100%);
+}
+.ms-feature-cluster .ms-section-ruled {
+  border-top: 1px solid var(--ms-line);
+  border-bottom: 1px solid var(--ms-line);
+  background:
+    radial-gradient(ellipse 55% 70% at 90% 15%, rgba(74,166,232,.07), transparent),
+    linear-gradient(170deg, var(--ms-primary-050) 0%, #ffffff 60%, var(--ms-sky-050) 100%);
+}
+
+/* ── 9. GRIDS ─────────────────────────────────────────────── */
+.ms-feature-cluster .ms-grid   { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--ms-gap); }
+.ms-feature-cluster .ms-grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--ms-gap); }
+.ms-feature-cluster .ms-grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: var(--ms-gap); }
+.ms-feature-cluster .ms-stack  { display: grid; gap: var(--ms-gap); }
+
+/* ── 10. SPLIT ────────────────────────────────────────────── */
+.ms-feature-cluster .ms-split {
+  display: grid;
+  grid-template-columns: 1fr minmax(300px, .85fr);
+  gap: clamp(32px, 6vw, 80px);
+  align-items: center;
+}
+.ms-feature-cluster .ms-split--flip { direction: rtl; }
+.ms-feature-cluster .ms-split--flip > * { direction: ltr; }
+
+/* ── 11. CARDS ────────────────────────────────────────────── */
+.ms-feature-cluster .ms-card {
+  position: relative;
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  gap: .5rem;
+  padding: clamp(22px, 2.8vw, 32px);
+  overflow: hidden;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: rgba(255,255,255,.9);
+  box-shadow: var(--ms-shadow-xs);
+  transition: transform .22s var(--ms-ease), border-color .22s var(--ms-ease),
+              box-shadow .22s var(--ms-ease), background .22s var(--ms-ease);
+}
+.ms-feature-cluster .ms-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: #4fa6e9;
+  opacity: 0;
+  transition: opacity .22s var(--ms-ease);
+}
+.ms-feature-cluster .ms-card:hover { transform: translateY(-5px); border-color: var(--ms-line-strong); background: #fff; box-shadow: var(--ms-shadow-md); }
+.ms-feature-cluster .ms-card:hover::before { opacity: 1; }
+.ms-feature-cluster .ms-card h3 { font-size: clamp(1.05rem, 1.4vw, 1.3rem); letter-spacing: -.02em; }
+.ms-feature-cluster .ms-card p { color: var(--ms-muted); flex: 1; }
+.ms-feature-cluster .ms-card a:not(.ms-btn) {
+  margin-top: auto;
+  padding-top: .75rem;
+  color: var(--ms-primary-700);
+  font-size: .875rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+}
+.ms-feature-cluster .ms-card a:not(.ms-btn)::after { content: "→"; transition: transform .18s var(--ms-ease-spring); }
+.ms-feature-cluster .ms-card a:not(.ms-btn):hover::after { transform: translateX(4px); }
+.ms-feature-cluster .ms-card a:not(.ms-btn):hover { color: var(--ms-accent-700); }
+.ms-feature-cluster .ms-card-accent {
+  background: linear-gradient(160deg, #fff 60%, var(--ms-accent-050));
+  border-color: rgba(245,135,14,.22);
+}
+.ms-feature-cluster .ms-card-sky {
+  background: linear-gradient(160deg, #fff 60%, var(--ms-sky-050));
+  border-color: rgba(74,166,232,.25);
+}
+.ms-feature-cluster .ms-card-quiet { box-shadow: none; }
+
+/* Benefit card */
+.ms-feature-cluster .ms-benefit {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  padding: clamp(20px, 2.5vw, 28px);
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: var(--ms-surface);
+  box-shadow: var(--ms-shadow-xs);
+  transition: transform .2s var(--ms-ease), box-shadow .2s var(--ms-ease), border-color .2s;
+}
+.ms-feature-cluster .ms-benefit:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--ms-shadow-md);
+  border-color: var(--ms-line-strong);
+}
+.ms-feature-cluster .ms-benefit__icon {
+  width: 44px; height: 44px;
+  border-radius: var(--ms-r-sm);
+  background: var(--ms-accent-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+  transition: background .2s;
+}
+.ms-feature-cluster .ms-benefit:hover .ms-benefit__icon { background: var(--ms-accent-500); }
+.ms-feature-cluster .ms-benefit h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -.015em;
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+.ms-feature-cluster .ms-benefit p {
+  font-size: .875rem;
+  color: var(--ms-muted);
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+
+/* ── 12. FEATURE BLOCKS ───────────────────────────────────── */
+.ms-feature-cluster .ms-feature-block {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(260px, .7fr);
+  gap: clamp(24px, 4.5vw, 56px);
+  align-items: start;
+  padding-block: clamp(36px, 5.5vw, 62px);
+  border-top: 1px solid var(--ms-line);
+}
+.ms-feature-cluster .ms-feature-block:first-of-type { border-top: 0; padding-top: 0; }
+.ms-feature-cluster .ms-feature-block p { color: var(--ms-muted); }
+
+.ms-feature-cluster .ms-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 9px 22px;
+  padding: 0;
+  margin: 20px 0 0;
+  list-style: none;
+}
+.ms-feature-cluster .ms-list li {
+  position: relative;
+  padding-left: 22px;
+  color: var(--ms-text);
+  font-size: .92rem;
+  line-height: 1.5;
+}
+.ms-feature-cluster .ms-list li::before {
+  content: "";
+  position: absolute;
+  top: .55em; left: 0;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--ms-accent-500);
+  box-shadow: 0 0 0 4px var(--ms-accent-100);
+}
+
+.ms-feature-cluster .ms-mini {
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: rgba(255,255,255,.94);
+  box-shadow: var(--ms-shadow-sm);
+  padding: 22px;
+}
+.ms-feature-cluster .ms-mini h4 { color: var(--ms-primary-800); }
+.ms-feature-cluster .ms-mini p { color: var(--ms-muted); font-size: .875rem; }
+.ms-feature-cluster .ms-mini a {
+  display: block;
+  margin-top: 10px;
+  color: var(--ms-primary-700);
+  font-size: .875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.ms-feature-cluster .ms-mini a::after { content: " →"; }
+.ms-feature-cluster .ms-mini a:hover { color: var(--ms-accent-700); }
+
+/* ── 13. CALLOUT / ANSWER ─────────────────────────────────── */
+.ms-feature-cluster .ms-answer {
+  margin: 28px 0;
+  padding: clamp(20px, 3vw, 28px);
+  border: 1px solid var(--ms-sky-100);
+  border-left: 4px solid var(--ms-sky-500);
+  border-radius: var(--ms-r-md);
+  background: var(--ms-sky-050);
+  box-shadow: var(--ms-shadow-xs);
+}
+.ms-feature-cluster .ms-answer strong { color: var(--ms-primary-900); }
+.ms-feature-cluster .ms-answer p { color: var(--ms-muted); margin-bottom: 0; }
+
+.ms-feature-cluster .ms-callout {
+  padding: clamp(24px, 3.5vw, 36px);
+  border: 1px solid var(--ms-accent-100);
+  border-left: 4px solid var(--ms-accent-500);
+  border-radius: var(--ms-r-md);
+  background:
+    radial-gradient(ellipse 80% 60% at 100% 0%, rgba(245,135,14,.08), transparent),
+    var(--ms-accent-050);
+}
+.ms-feature-cluster .ms-callout h4 { color: var(--ms-primary-900); margin-bottom: 6px; }
+.ms-feature-cluster .ms-callout p { color: var(--ms-muted); margin-bottom: 0; font-size: .92rem; }
+
+/* ── 14. STAT BLOCKS ──────────────────────────────────────── */
+.ms-feature-cluster .ms-stat {
+  padding: 22px 24px;
+  border-left: 4px solid var(--ms-accent-500);
+  border-radius: var(--ms-r-sm);
+  background: var(--ms-accent-050);
+  border: 1px solid var(--ms-accent-100);
+  border-left-width: 4px;
+}
+.ms-feature-cluster .ms-stat strong {
+  display: block;
+  font-family: var(--ms-font-display);
+  font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -.04em;
+  color: var(--ms-primary-900);
+  line-height: 1.1;
+}
+.ms-feature-cluster .ms-stat p { margin-top: 5px; margin-bottom: 0; font-size: .875rem; color: var(--ms-muted); }
+
+/* ── 15. PROCESS STEPS ────────────────────────────────────── */
+.ms-feature-cluster .ms-process {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0,1fr));
+  gap: 10px;
+  counter-reset: ms-step;
+  margin-top: 32px;
+}
+.ms-feature-cluster .ms-step {
+  position: relative;
+  min-height: 120px;
+  padding: 18px 16px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-sm);
+  background: #fff;
+  box-shadow: var(--ms-shadow-xs);
+  color: var(--ms-text);
+  font-size: .875rem;
+  font-weight: 500;
+  line-height: 1.45;
+  transition: border-color .2s, box-shadow .2s, transform .2s var(--ms-ease);
+}
+.ms-feature-cluster .ms-step:hover {
+  border-color: var(--ms-accent-500);
+  box-shadow: var(--ms-shadow-sm);
+  transform: translateY(-3px);
+}
+.ms-feature-cluster .ms-step::before {
+  counter-increment: ms-step;
+  content: counter(ms-step);
+  display: grid;
+  width: 30px; height: 30px;
+  margin-bottom: 12px;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--ms-primary-900);
+  background: var(--ms-accent-100);
+  font-family: var(--ms-font-display);
+  font-size: .82rem;
+  font-weight: 700;
+}
+
+/* ── 16. BADGES ───────────────────────────────────────────── */
+.ms-feature-cluster .ms-badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-block: 18px 0; }
+.ms-feature-cluster .ms-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 5px 11px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-pill);
+  color: var(--ms-primary-800);
+  background: var(--ms-surface);
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  transition: background .15s, border-color .15s;
+}
+.ms-feature-cluster .ms-badge:hover { background: var(--ms-primary-050); border-color: var(--ms-sky-500); }
+
+/* ── 17. RELATED LINKS ────────────────────────────────────── */
+.ms-feature-cluster .ms-related-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.ms-feature-cluster .ms-related-links a {
+  display: inline-flex;
+  padding: 8px 14px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-pill);
+  background: var(--ms-surface);
+  color: var(--ms-primary-800);
+  font-size: .84rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .15s, border-color .15s;
+}
+.ms-feature-cluster .ms-related-links a:hover { border-color: var(--ms-sky-500); background: var(--ms-sky-050); }
+
+/* ── 18. USE CASE BLOCKS ──────────────────────────────────── */
+.ms-feature-cluster .ms-use-case {
+  padding: clamp(22px, 3vw, 32px);
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: linear-gradient(160deg, #fff 60%, var(--ms-primary-050));
+  box-shadow: var(--ms-shadow-xs);
+  transition: box-shadow .2s, transform .2s var(--ms-ease), border-color .2s;
+}
+.ms-feature-cluster .ms-use-case:hover {
+  box-shadow: var(--ms-shadow-md);
+  transform: translateY(-4px);
+  border-color: var(--ms-line-strong);
+}
+.ms-feature-cluster .ms-use-case h3 { font-size: 1.05rem; margin-bottom: 8px; }
+.ms-feature-cluster .ms-use-case p { font-size: .875rem; color: var(--ms-muted); margin-bottom: 0; }
+
+/* ── 19. BUTTONS ──────────────────────────────────────────── */
+.ms-feature-cluster .ms-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-top: 28px;
+}
+.ms-feature-cluster .ms-btn {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: 12px 22px;
+  border: 1.5px solid transparent;
+  border-radius: var(--ms-r-sm);
+  font-family: var(--ms-font-body);
+  font-size: .9rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: .01em;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .18s var(--ms-ease), color .18s var(--ms-ease),
+              border-color .18s var(--ms-ease), box-shadow .18s var(--ms-ease),
+              transform .2s var(--ms-ease-spring);
+}
+.ms-feature-cluster .ms-btn:hover { transform: translateY(-2px); }
+.ms-feature-cluster .ms-btn:active { transform: translateY(0); }
+.ms-feature-cluster .ms-btn-primary {
+  color: #fff !important;
+  background: linear-gradient(180deg, var(--ms-accent-400) 0%, var(--ms-accent-600) 100%);
+  border-color: var(--ms-accent-600);
+  box-shadow: 0 8px 24px var(--ms-accent-glow);
+}
+.ms-feature-cluster .ms-btn-primary:hover {
+  color: #fff !important;
+  background: linear-gradient(180deg, #ffaf3e 0%, var(--ms-accent-700) 100%);
+  box-shadow: 0 14px 32px var(--ms-accent-glow);
+}
+.ms-feature-cluster .ms-btn-secondary {
+  color: var(--ms-primary-900);
+  background: var(--ms-surface);
+  border-color: var(--ms-line-strong);
+  box-shadow: var(--ms-shadow-xs);
+}
+.ms-feature-cluster .ms-btn-secondary:hover {
+  color: var(--ms-primary-900);
+  background: var(--ms-primary-050);
+  border-color: var(--ms-sky-500);
+  box-shadow: var(--ms-shadow-sm);
+}
+.ms-feature-cluster .ms-link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  color: var(--ms-primary-700);
+  font-weight: 600;
+  font-size: .9rem;
+  text-decoration: none;
+}
+.ms-feature-cluster .ms-link-arrow::after { content: "→"; transition: transform .18s var(--ms-ease-spring); }
+.ms-feature-cluster .ms-link-arrow:hover { color: var(--ms-accent-700); }
+.ms-feature-cluster .ms-link-arrow:hover::after { transform: translateX(4px); }
+
+/* ── 20. FAQ ──────────────────────────────────────────────── */
+.ms-feature-cluster .ms-faq details {
+  padding: 20px 24px;
+  margin-bottom: 10px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-sm);
+  background: var(--ms-surface);
+  box-shadow: var(--ms-shadow-xs);
+  transition: border-color .18s, box-shadow .18s;
+}
+.ms-feature-cluster .ms-faq details:hover { border-color: var(--ms-line-strong); }
+.ms-feature-cluster .ms-faq details[open] { border-color: var(--ms-sky-500); box-shadow: var(--ms-shadow-sm); }
+.ms-feature-cluster .ms-faq summary {
+  cursor: pointer;
+  color: var(--ms-primary-900);
+  font-weight: 600;
+  font-size: 1rem;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.ms-feature-cluster .ms-faq summary::-webkit-details-marker { display: none; }
+.ms-feature-cluster .ms-faq summary::after {
+  content: "+";
+  flex-shrink: 0;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--ms-accent-100);
+  color: var(--ms-accent-600);
+  font-weight: 700;
+  font-size: .9rem;
+  display: grid;
+  place-items: center;
+  transition: background .18s, color .18s, transform .25s var(--ms-ease-spring);
+}
+.ms-feature-cluster .ms-faq details[open] summary::after {
+  content: "−";
+  background: var(--ms-accent-500);
+  color: #fff;
+  transform: rotate(180deg);
+}
+.ms-feature-cluster .ms-faq p { margin: 14px 0 0; color: var(--ms-muted); line-height: 1.72; }
+
+/* ── 21. CTA ──────────────────────────────────────────────── */
+.ms-feature-cluster .ms-cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: clamp(72px, 9vw, 112px);
+  background:
+    radial-gradient(ellipse 60% 80% at 90% 10%, rgba(245,135,14,.12), transparent 50%),
+    radial-gradient(ellipse 50% 60% at 5% 85%, rgba(74,166,232,.1), transparent 50%),
+    linear-gradient(160deg, var(--ms-primary-050) 0%, #ffffff 50%, var(--ms-accent-050) 100%);
+  border-top: 1px solid var(--ms-line);
+  border-bottom: 1px solid var(--ms-line);
+}
+.ms-feature-cluster .ms-cta::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: #ff9100;
+}
+.ms-feature-cluster .ms-cta h2 { color: var(--ms-primary-900); }
+.ms-feature-cluster .ms-cta p { max-width: 680px; color: var(--ms-muted); }
+
+/* ── 22. FOOTER ───────────────────────────────────────────── */
+.ms-feature-cluster .ms-footer {
+  padding-block: 28px;
+  background: var(--ms-primary-050);
+  color: var(--ms-muted);
+  font-size: .88rem;
+  border-top: 1px solid var(--ms-line);
+}
+.ms-feature-cluster .ms-footer a { color: var(--ms-primary-700); text-decoration: none; }
+.ms-feature-cluster .ms-footer a:hover { color: var(--ms-accent-700); }
+
+/* ── 23. SCROLL REVEAL ────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .ms-feature-cluster .ms-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .5s var(--ms-ease), transform .5s var(--ms-ease);
+  }
+  .ms-feature-cluster .ms-reveal.visible { opacity: 1; transform: translateY(0); }
+  .ms-feature-cluster .ms-reveal-d1 { transition-delay: .08s; }
+  .ms-feature-cluster .ms-reveal-d2 { transition-delay: .16s; }
+  .ms-feature-cluster .ms-reveal-d3 { transition-delay: .24s; }
+  .ms-feature-cluster .ms-reveal-d4 { transition-delay: .32s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ms-feature-cluster .ms-reveal { opacity: 1; transform: none; }
+}
+
+/* ── 24. RESPONSIVE ───────────────────────────────────────── */
+@media (max-width: 1040px) {
+  .ms-feature-cluster .ms-grid-4 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .ms-feature-cluster .ms-grid   { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .ms-feature-cluster .ms-process { grid-template-columns: repeat(3, minmax(0,1fr)); }
+}
+@media (max-width: 820px) {
+  .ms-feature-cluster .ms-split,
+  .ms-feature-cluster .ms-split--flip,
+  .ms-feature-cluster .ms-grid,
+  .ms-feature-cluster .ms-grid-2,
+  .ms-feature-cluster .ms-grid-4,
+  .ms-feature-cluster .ms-feature-block { grid-template-columns: 1fr; direction: ltr; }
+  .ms-feature-cluster .ms-list { grid-template-columns: 1fr; }
+  .ms-feature-cluster .ms-process { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .ms-feature-cluster .ms-hero-compact__inner { grid-template-columns: 1fr; }
+  .ms-feature-cluster .ms-hero-compact__stats { flex-direction: row; flex-wrap: wrap; display: none; }
+}
+@media (max-width: 520px) {
+  .ms-feature-cluster .ms-process { grid-template-columns: 1fr; }
+  .ms-feature-cluster .ms-btn { width: 100%; justify-content: center; }
+  .ms-feature-cluster .ms-actions { align-items: stretch; }
+  .ms-feature-cluster .ms-hero-compact__stats { flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ms-feature-cluster *,
+  .ms-feature-cluster *::before,
+  .ms-feature-cluster *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+.container-wrap{
+	padding: 0 !important;
+}
+
+html, body {
+	overflow-x: clip;
+  overflow-y: visible !important;
+}
+
+body.js-page-trans-loaded {
+  overflow-x:clip;
+overflow-y: visible !important;
+}
+
+ul li {
+    list-style: none;
+}
+
+
+div:has(> .ms-feature-cluster),
+div:has(> div:has(> .ms-feature-cluster)) {
+  overflow-x: clip !important;
+  overflow-y: visible !important;
+}
+
+/* ── REVIEWS SECTION ─────────────────────────────────────── */
+
+.ms-feature-cluster .ms-reviews {
+  position: relative;
+  overflow: hidden;
+}
+
+.ms-feature-cluster .ms-reviews__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: end;
+  margin-bottom: clamp(34px, 5vw, 56px);
+}
+
+.ms-feature-cluster .ms-reviews__summary {
+  padding: 22px 24px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: rgba(255,255,255,.94);
+  box-shadow: var(--ms-shadow-sm);
+}
+
+.ms-feature-cluster .ms-reviews__score {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.ms-feature-cluster .ms-reviews__score strong {
+  font-family: var(--ms-font-display);
+  font-size: clamp(2.2rem, 4vw, 3.1rem);
+  line-height: 1;
+  letter-spacing: -.05em;
+  color: var(--ms-primary-900);
+}
+
+.ms-feature-cluster .ms-reviews__score span {
+  color: var(--ms-primary-800);
+  font-size: .9rem;
+  font-weight: 700;
+}
+
+.ms-feature-cluster .ms-reviews__stars {
+  display: inline-flex;
+  gap: 2px;
+  color: var(--ms-accent-600);
+  font-size: 1rem;
+  letter-spacing: .04em;
+}
+
+.ms-feature-cluster .ms-reviews__summary p {
+  margin: 10px 0 0;
+  color: var(--ms-muted);
+  font-size: .84rem;
+  line-height: 1.55;
+}
+
+.ms-feature-cluster .ms-review-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ms-gap);
+}
+
+.ms-feature-cluster .ms-review-card {
+  position: relative;
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  padding: clamp(24px, 3vw, 34px);
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-lg);
+  background:
+    radial-gradient(ellipse 85% 70% at 100% 0%, rgba(74,166,232,.08), transparent 52%),
+    #ffffff;
+  box-shadow: var(--ms-shadow-sm);
+  transition:
+    transform .22s var(--ms-ease),
+    border-color .22s var(--ms-ease),
+    box-shadow .22s var(--ms-ease);
+}
+
+.ms-feature-cluster .ms-review-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--ms-line-strong);
+  box-shadow: var(--ms-shadow-md);
+}
+
+.ms-feature-cluster .ms-review-card::before {
+  content: "“";
+  position: absolute;
+  top: 14px;
+  right: 24px;
+  color: var(--ms-primary-050);
+  font-family: var(--ms-font-display);
+  font-size: 6rem;
+  font-weight: 700;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.ms-feature-cluster .ms-review-card__meta {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.ms-feature-cluster .ms-review-card__rating,
+.ms-feature-cluster .ms-review-card__source {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 5px 10px;
+  border-radius: var(--ms-r-pill);
+  font-size: .76rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.ms-feature-cluster .ms-review-card__rating {
+  border: 1px solid var(--ms-accent-100);
+  background: var(--ms-accent-050);
+  color: var(--ms-accent-700);
+}
+
+.ms-feature-cluster .ms-review-card__source {
+  border: 1px solid var(--ms-line);
+  background: var(--ms-primary-050);
+  color: var(--ms-primary-800);
+}
+
+.ms-feature-cluster .ms-review-card h3 {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 14px;
+  font-size: clamp(1.2rem, 1.8vw, 1.55rem);
+  line-height: 1.15;
+}
+
+.ms-feature-cluster .ms-review-card blockquote {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  flex: 1;
+  color: var(--ms-text);
+  font-size: clamp(.98rem, 1.2vw, 1.08rem);
+  line-height: 1.75;
+}
+
+.ms-feature-cluster .ms-review-card blockquote p {
+  margin: 0;
+  color: inherit;
+	font-family: var(--ms-font-body) !important;
+}
+
+.ms-feature-cluster .ms-review-card__footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid var(--ms-line);
+  background: transparent !important;
+}
+
+.ms-feature-cluster .ms-review-card__person {
+  display: grid;
+  gap: 3px;
+}
+
+.ms-feature-cluster .ms-review-card__person strong {
+  color: var(--ms-primary-900);
+  font-size: .95rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.ms-feature-cluster .ms-review-card__person span {
+  color: var(--ms-muted);
+  font-size: .82rem;
+  line-height: 1.35;
+}
+
+.ms-feature-cluster .ms-review-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 7px 12px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-pill);
+  background: var(--ms-surface);
+  color: var(--ms-primary-800);
+  font-size: .82rem;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.ms-feature-cluster .ms-review-card__link::after {
+  content: "↗";
+  font-size: .78rem;
+  transition: transform .18s var(--ms-ease-spring);
+}
+
+.ms-feature-cluster .ms-review-card__link:hover {
+  border-color: var(--ms-accent-500);
+  background: var(--ms-accent-050);
+  color: var(--ms-accent-700);
+}
+
+.ms-feature-cluster .ms-review-card__link:hover::after {
+  transform: translate(2px, -2px);
+}
+
+.ms-feature-cluster .ms-reviews__note {
+  margin-top: 22px;
+  color: var(--ms-soft);
+  font-size: .78rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 820px) {
+  .ms-feature-cluster .ms-reviews__header,
+  .ms-feature-cluster .ms-review-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ms-feature-cluster .ms-reviews__summary {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .ms-feature-cluster .ms-review-card__footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .ms-feature-cluster .ms-review-card__link {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+
+
+    </style>
+<style id="ms-wysiwyg-editor-style">
+  :root { --ms-editor-toolbar-height: 86px; }
+  body { padding-top: var(--ms-editor-toolbar-height) !important; }
+  .ms-editor-toolbar {
+    position: fixed;
+    z-index: 2147483600;
+    top: 0;
+    left: 0;
+    right: 0;
+    min-height: var(--ms-editor-toolbar-height);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #0b1726 0%, #113058 100%);
+    color: #fff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    box-shadow: 0 10px 30px rgba(0,0,0,.22);
+    overflow: visible;
+  }
+
+  .ms-editor-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 210px;
+    padding-right: 12px;
+    border-right: 1px solid rgba(255,255,255,.14);
+  }
+
+  .ms-editor-logo {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: #ff9100;
+    color: #111;
+    font-weight: 900;
+    box-shadow: 0 8px 22px rgba(255,145,0,.25);
+  }
+
+  .ms-editor-title {
+    display: grid;
+    gap: 1px;
+    line-height: 1.1;
+  }
+
+  .ms-editor-title strong {
+    display: block;
+    font-size: 14px;
+    line-height: 1.15;
+    letter-spacing: -.01em;
+  }
+
+  .ms-editor-title span {
+    display: block;
+    margin-top: 2px;
+    font-size: 11px;
+    color: rgba(255,255,255,.64);
+  }
+
+  .ms-editor-actions {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .ms-editor-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px;
+    border: 1px solid rgba(255,255,255,.11);
+    border-radius: 14px;
+    background: rgba(255,255,255,.06);
+  }
+
+  .ms-editor-toolbar button,
+  .ms-editor-toolbar summary {
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 10px;
+    background: rgba(255,255,255,.10);
+    color: #fff;
+    padding: 8px 10px;
+    font: inherit;
+    font-size: 13px;
+    line-height: 1;
+    cursor: pointer;
+    list-style: none;
+    white-space: nowrap;
+    transition: background .15s, border-color .15s, transform .15s;
+  }
+
+  .ms-editor-toolbar summary::-webkit-details-marker { display: none; }
+  .ms-editor-toolbar button:hover,
+  .ms-editor-toolbar summary:hover {
+    background: rgba(255,255,255,.18);
+    border-color: rgba(255,255,255,.30);
+  }
+
+  .ms-editor-toolbar button:active,
+  .ms-editor-toolbar summary:active {
+    transform: translateY(1px);
+  }
+
+  .ms-editor-toolbar button:focus-visible,
+  .ms-editor-toolbar summary:focus-visible {
+    outline: 2px solid #ff9100;
+    outline-offset: 2px;
+  }
+
+  .ms-editor-toolbar .ms-editor-primary {
+    background: #ff9100;
+    border-color: #ff9100;
+    color: #111;
+    font-weight: 800;
+  }
+
+  .ms-editor-toolbar .ms-editor-primary:hover {
+    background: #ff9f22;
+    border-color: #ff9f22;
+  }
+
+  .ms-color-palette {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding-inline: 4px;
+  }
+
+  .ms-color-palette span {
+    color: rgba(255,255,255,.65);
+    font-size: 12px;
+    margin-right: 2px;
+  }
+
+  .ms-color-btn {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    border-radius: 999px !important;
+    padding: 0 !important;
+    border: 2px solid rgba(255,255,255,.38) !important;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.12);
+  }
+
+  .ms-color-btn:hover {
+    transform: translateY(-1px);
+    border-color: #fff !important;
+  }
+
+  .ms-drafts-menu {
+    position: relative;
+  }
+
+  .ms-draft-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 19px;
+    height: 19px;
+    margin-left: 6px;
+    padding: 0 6px;
+    border-radius: 999px;
+    background: #ff9100;
+    color: #111;
+    font-size: 11px;
+    font-weight: 800;
+  }
+
+  .ms-drafts-panel {
+    position: fixed;
+    top: calc(var(--ms-editor-toolbar-height) + 10px);
+    right: 16px;
+    width: min(430px, calc(100vw - 32px));
+    max-height: calc(100vh - var(--ms-editor-toolbar-height) - 24px);
+    overflow: auto;
+    padding: 14px;
+    border: 1px solid rgba(17,48,88,.14);
+    border-radius: 18px;
+    background: #fff;
+    color: #1a2d42;
+    box-shadow: 0 20px 60px rgba(5,16,32,.28);
+  }
+
+  .ms-drafts-menu:not([open]) .ms-drafts-panel { display: none; }
+
+  .ms-drafts-panel h3 {
+    margin: 0 0 4px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.2;
+    color: #113058;
+  }
+
+  .ms-drafts-panel p {
+    margin: 0 0 12px;
+    font-size: 12px;
+    line-height: 1.45;
+    color: #54647a;
+  }
+
+  .ms-drafts-panel .ms-draft-panel-actions {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .ms-drafts-panel button {
+    color: #113058;
+    background: #f3f7fc;
+    border: 1px solid #dbe4ef;
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .ms-drafts-panel button:hover {
+    background: #ecf4ff;
+    border-color: #bcd4ee;
+  }
+
+  .ms-drafts-panel .ms-save-version-btn {
+    background: #ff9100;
+    border-color: #ff9100;
+    color: #111;
+    font-weight: 800;
+  }
+
+  .ms-draft-list {
+    display: grid;
+    gap: 10px;
+  }
+
+  .ms-draft-card {
+    padding: 12px;
+    border: 1px solid #dbe4ef;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(9,30,60,.05);
+  }
+
+  .ms-draft-card-title {
+    margin-bottom: 4px;
+    color: #113058;
+    font-weight: 800;
+    font-size: 13px;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  .ms-draft-card-meta {
+    margin-bottom: 10px;
+    color: #6d7d90;
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .ms-draft-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .ms-draft-empty {
+    padding: 18px;
+    border: 1px dashed #c4d1e2;
+    border-radius: 14px;
+    background: #f8fbff;
+    color: #54647a;
+    font-size: 13px;
+    line-height: 1.45;
+    text-align: center;
+  }
+
+  [data-ms-editable="true"] {
+    outline: 1px dashed rgba(255,145,0,.50);
+    outline-offset: 3px;
+    border-radius: 4px;
+    cursor: text;
+  }
+
+  [data-ms-editable="true"]:hover,
+  [data-ms-editable="true"]:focus {
+    outline: 2px solid #ff9100;
+    background: rgba(255,145,0,.08);
+  }
+
+  body.ms-hide-edit-outlines [data-ms-editable="true"],
+  body.ms-preview-mode [data-ms-editable="true"] {
+    outline: none !important;
+    background: transparent !important;
+  }
+
+  body.ms-preview-mode .ms-editor-toolbar,
+  body.ms-preview-mode .ms-edit-toast,
+  body.ms-preview-mode .ms-instruction-modal {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .ms-edit-toast {
+    position: fixed;
+    z-index: 2147483602;
+    right: 16px;
+    bottom: 16px;
+    max-width: 390px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: #0d1b2d;
+    color: #fff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 13px;
+    box-shadow: 0 12px 34px rgba(0,0,0,.25);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .18s, transform .18s;
+  }
+
+  .ms-edit-toast.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ms-instruction-modal[hidden] { display: none !important; }
+
+  .ms-instruction-modal {
+    position: fixed;
+    z-index: 2147483601;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 22px;
+    background: rgba(3,11,22,.56);
+  }
+
+  .ms-instruction-dialog {
+    width: min(620px, 100%);
+    max-height: min(760px, calc(100vh - 44px));
+    overflow: auto;
+    border-radius: 22px;
+    background: #fff;
+    color: #1a2d42;
+    box-shadow: 0 24px 80px rgba(0,0,0,.35);
+  }
+
+  .ms-instruction-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px 24px;
+    border-bottom: 1px solid #dbe4ef;
+    background: linear-gradient(135deg, #ecf4ff, #fff8ef);
+  }
+
+  .ms-instruction-header h2 {
+    margin: 0;
+    color: #113058;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .ms-instruction-header p {
+    margin: 6px 0 0;
+    color: #54647a;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .ms-instruction-close {
+    border: 0;
+    border-radius: 999px;
+    width: 34px;
+    height: 34px;
+    background: #113058;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  .ms-instruction-body {
+    padding: 22px 24px 24px;
+  }
+
+  .ms-instruction-body ol {
+    margin: 0;
+    padding-left: 22px;
+  }
+
+  .ms-instruction-body li {
+    margin-bottom: 10px;
+    color: #3a4a5e;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .ms-instruction-note {
+    margin-top: 18px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: #f8fbff;
+    border: 1px solid #dbe4ef;
+    color: #54647a;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 980px) {
+    :root { --ms-editor-toolbar-height: 140px; }
+    .ms-editor-toolbar {
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .ms-editor-actions {
+      flex-basis: 100%;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+  }
+
+  @media (max-width: 620px) {
+    :root { --ms-editor-toolbar-height: 176px; }
+    .ms-editor-brand {
+      width: 100%;
+    }
+    .ms-editor-actions {
+      flex-wrap: wrap;
+      overflow: visible;
+    }
+    .ms-editor-group {
+      flex-wrap: wrap;
+    }
+    .ms-drafts-panel {
+      left: 12px;
+      right: 12px;
+      width: auto;
+    }
+  }
+
+  @media print {
+    body { padding-top: 0 !important; }
+    .ms-editor-toolbar,
+    .ms-edit-toast,
+    .ms-instruction-modal {
+      display: none !important;
+    }
+    [data-ms-editable="true"] {
+      outline: none !important;
+      background: transparent !important;
+    }
+  }
+
+
+  /* Page-specific editor adjustment: keep the feature section nav below the fixed editor toolbar while editing. */
+  body:not(.ms-preview-mode) #ms-editor-content .ms-feature-cluster .ms-nav,
+  body:not(.ms-preview-mode) #ms-editor-content .ms-nav {
+    top: var(--ms-editor-toolbar-height) !important;
+  }
+</style></head>
+<body><div class="ms-editor-toolbar" data-ms-editor-ui="true" id="ms-editor-toolbar">
+<div aria-label="Editor navigation" class="ms-editor-brand">
+<div class="ms-editor-logo">MS</div>
+<div class="ms-editor-title">
+<strong>Production &amp; Recipes Editor</strong>
+<span>WYSIWYG draft workspace</span>
+</div>
+</div>
+<div class="ms-editor-actions">
+<details class="ms-drafts-menu" id="ms-drafts-menu">
+<summary>☰ Drafts <span class="ms-draft-count" id="ms-draft-count">0</span></summary>
+<div class="ms-drafts-panel">
+<h3>Draft history</h3>
+<p>Save named versions here, then load, rename, or delete them later on this same browser/device.</p>
+<div class="ms-draft-panel-actions">
+<button class="ms-save-version-btn" id="ms-save-draft-btn" type="button">Save current version</button>
+<button id="ms-clear-history-btn" type="button">Clear history</button>
+</div>
+<div class="ms-draft-list" id="ms-draft-list"></div>
+</div>
+</details>
+<div aria-label="Text formatting" class="ms-editor-group">
+<button id="ms-bold-btn" type="button"><b>Bold</b></button>
+<button id="ms-italic-btn" type="button"><i>Italic</i></button>
+<button id="ms-list-btn" type="button">Bullet list</button>
+<button id="ms-edit-link-btn" type="button">Edit link</button>
+</div>
+<div aria-label="Text color palette" class="ms-editor-group">
+<div class="ms-color-palette">
+<span>Color</span>
+<button class="ms-color-btn" data-ms-color="#ff9100" style="background:#ff9100" title="#ff9100" type="button"></button>
+<button class="ms-color-btn" data-ms-color="#4fa6e9" style="background:#4fa6e9" title="#4fa6e9" type="button"></button>
+<button class="ms-color-btn" data-ms-color="#113058" style="background:#113058" title="#113058" type="button"></button>
+<button class="ms-color-btn" data-ms-color="#ee924f" style="background:#ee924f" title="#ee924f" type="button"></button>
+<button class="ms-color-btn" data-ms-color="#111" style="background:#111" title="#111" type="button"></button>
+<button class="ms-color-btn" data-ms-color="#ecf4ff" style="background:#ecf4ff" title="#ecf4ff" type="button"></button>
+</div>
+</div>
+<div aria-label="Editor actions" class="ms-editor-group">
+<button id="ms-instructions-btn" type="button">Instructions</button>
+<button id="ms-preview-btn" type="button">Preview</button>
+<button id="ms-outlines-btn" type="button">Outlines</button>
+<button id="ms-reset-links-btn" type="button">Restore links</button>
+<button class="ms-editor-primary" id="ms-download-btn" type="button">Download clean HTML</button>
+</div>
+</div>
+</div>
+<div aria-live="polite" class="ms-edit-toast" data-ms-editor-ui="true" id="ms-edit-toast" role="status"></div>
+<div class="ms-instruction-modal" data-ms-editor-ui="true" hidden="" id="ms-instruction-modal">
+<div aria-labelledby="ms-instruction-title" aria-modal="true" class="ms-instruction-dialog" role="dialog">
+<div class="ms-instruction-header">
+<div>
+<h2 id="ms-instruction-title">How to use this editor</h2>
+<p>Edit the Production &amp; Recipes page directly in the browser, save versions, then export clean HTML.</p>
+</div>
+<button aria-label="Close instructions" class="ms-instruction-close" id="ms-instruction-close" type="button">×</button>
+</div>
+<div class="ms-instruction-body">
+<ol>
+<li>Click any outlined text on the page and type your changes.</li>
+<li>Select text, then use Bold, Italic, Bullet list, or the color palette.</li>
+<li>Use <strong>☰ Drafts</strong> to save a version. Drafts can be loaded, renamed, or deleted.</li>
+<li>Use <strong>Edit link</strong> while your cursor is inside a button/link to change its URL.</li>
+<li>Use <strong>Preview</strong> to temporarily hide the editor toolbar and outlines. Press Esc to return.</li>
+<li>Use <strong>Download clean HTML</strong> when you are ready to export the page without editor controls.</li>
+</ol>
+<div class="ms-instruction-note">
+        Drafts are saved in this browser using localStorage. They will work tomorrow on the same computer/browser, but they will not automatically sync to another device.
+      </div>
+</div>
+</div>
+</div>
+<div data-ms-editor-root="true" id="ms-editor-content">
+<div class="ms-feature-cluster">
+<!-- ── BREADCRUMB ─────────────────────────────────────────── -->
+<div class="ms-breadcrumb">
+<div class="ms-wrap">
+<nav aria-label="Breadcrumb">
+<a href="/">Home</a>
+<span aria-hidden="true" class="ms-breadcrumb-sep">›</span>
+<a href="/streamline-features/">Features</a>
+<span aria-hidden="true" class="ms-breadcrumb-sep">›</span>
+<span class="ms-breadcrumb-current">Production Management</span>
+</nav>
+</div>
+</div>
+<!-- ── COMPACT HERO ───────────────────────────────────────── -->
+<header class="ms-hero-compact">
+<div class="ms-wrap">
+<div class="ms-hero-compact__inner">
+<div>
+<p class="ms-kicker">Production Management</p>
+<h1>Bakery production, <em>from order to oven.</em></h1>
+<p class="ms-lede">Plan what to make, scale recipes, track ingredients, manage allergens, and keep packaging in sync — all inside one connected bakery ERP software system.</p>
+<div class="ms-actions">
+<a class="ms-btn ms-btn-primary" href="https://mountainstream.co/register-your-company?cta=hero&amp;intent=Book%20a%20demo">Book a Demo</a>
+<a class="ms-btn ms-btn-secondary" href="https://mountainstream.co/pricing/">View Pricing</a>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- ── STICKY NAV ─────────────────────────────────────────── -->
+<nav aria-label="Page sections" class="ms-nav">
+<div class="ms-wrap">
+<a class="ms-nav__back" href="https://mountainstream.co/streamline-features/">All Features</a>
+<span aria-hidden="true" class="ms-nav__divider"></span>
+<a href="#overview">Overview</a>
+<a href="#production-planning">Production Planning</a>
+<a href="#recipe-management">Recipe Management</a>
+<a href="#nutrition-allergens">Nutrition &amp; Allergens</a>
+<a href="#packaging-recipes">Packaging Recipes</a>
+<a href="#customer-reviews">Reviews</a>
+<a href="#faq">FAQ</a>
+</div>
+</nav>
+<main>
+<!-- ══════════════════════════════════════════════════════════
+     OVERVIEW
+═══════════════════════════════════════════════════════════════ -->
+<section class="ms-section" id="overview">
+<div class="ms-wrap">
+<p class="ms-kicker ms-reveal">What it does</p>
+<h2 class="ms-reveal ms-reveal-d1">Plan production without spreadsheets, whiteboards, or guesswork.</h2>
+<p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline connects bakery production software with live wholesale orders, standing orders, forecasts, recipes, ingredients, allergens, packaging, inventory, traceability, delivery, and invoicing.</p>
+<p class="ms-section-intro ms-reveal ms-reveal-d2">Instead of working from whiteboards, spreadsheets, printed sheets, and last-minute order exports, production teams can see what needs to be made, when it needs to be ready, and what ingredients and packaging are required.</p>
+<div class="ms-answer ms-reveal ms-reveal-d2">
+<p><strong>Overview:</strong> Streamline is bakery production planning software that connects orders, production scheduling, recipe management, recipe costing, nutrition facts, allergens, packaging recipes, inventory, traceability, delivery, invoicing, and reporting in one bakery management software platform.</p>
+</div>
+<div aria-label="Production workflow" class="ms-process ms-reveal ms-reveal-d3">
+<div class="ms-step"><strong>Plan from live orders</strong></div>
+<div class="ms-step"><strong>Schedule the work</strong></div>
+<div class="ms-step"><strong>Scale recipes fast</strong></div>
+<div class="ms-step"><strong>Track allergens and generate nutrition facts</strong></div>
+<div class="ms-step"><strong>Keep production connected</strong></div>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════════════
+     BENEFITS GRID
+═══════════════════════════════════════════════════════════════ -->
+<section class="ms-section ms-section-light">
+<div class="ms-wrap">
+<p class="ms-kicker ms-reveal">Why it matters</p>
+<h2 class="ms-reveal ms-reveal-d1">Everything your bakery needs to manage production.</h2>
+<p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline is connected bakery ERP software that helps bakeries plan production, manage recipes, track allergens, update inventory, and move from order demand to finished goods without spreadsheets or disconnected systems.</p>
+<div class="ms-grid-4" style="margin-top: 2.5rem;">
+<div class="ms-benefit ms-reveal ms-reveal-d1">
+<div class="ms-benefit__icon">🧠</div>
+<h3>Plan from orders</h3>
+<p>Turn wholesale orders, standing orders, forecasts, stock levels, and par levels into clear production requirements.</p>
+</div>
+<div class="ms-benefit ms-reveal ms-reveal-d2">
+<div class="ms-benefit__icon">🔢</div>
+<h3>Scale recipes</h3>
+<p>Adjust recipes based on production quantities and split mixes when a batch exceeds machine capacity.</p>
+</div>
+<div class="ms-benefit ms-reveal ms-reveal-d3">
+<div class="ms-benefit__icon">📲</div>
+<h3>Track ingredients</h3>
+<p>Connect recipes to raw materials, sales items, and other recipes so ingredient usage stays visible.</p>
+</div>
+<div class="ms-benefit ms-reveal ms-reveal-d4">
+<div class="ms-benefit__icon">🧮</div>
+<h3>Calculate costings</h3>
+<p>Use recipe data to calculate costs, ingredient usage, nutrition facts, and allergen information.</p>
+</div>
+<div class="ms-benefit ms-reveal ms-reveal-d1">
+<div class="ms-benefit__icon">🏷️</div>
+<h3>Manage labels</h3>
+<p>Generate labels from recipes, including nutrition facts, allergens, and production details.</p>
+</div>
+<div class="ms-benefit ms-reveal ms-reveal-d2">
+<div class="ms-benefit__icon">📋</div>
+<h3>Support label workflows</h3>
+<p>Use recipe data, nutrition facts, allergens, lot details, and finished product information to support production and label creation.</p>
+</div>
+<div class="ms-benefit ms-reveal ms-reveal-d3">
+<div class="ms-benefit__icon">🔗</div>
+<h3>Reduce re-entry</h3>
+<p>Move from order demand to recipe cards, production quantities, labels, inventory updates, and traceability records without rebuilding the same data.</p>
+</div>
+<div class="ms-benefit ms-reveal ms-reveal-d4">
+<div class="ms-benefit__icon">⚙️</div>
+<h3>Connect every team</h3>
+<p>Keep production aligned with ordering, inventory, traceability, delivery, finance, reporting, and integrations in one bakery ERP software system.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════════════
+     PRODUCTION PLANNING
+═══════════════════════════════════════════════════════════════ -->
+<section class="ms-section" id="production-planning">
+<div class="ms-wrap">
+<p class="ms-kicker ms-reveal">Production planning</p>
+<h2 class="ms-reveal ms-reveal-d1">Know what to make before the mixing starts.</h2>
+<div class="ms-split" style="margin-top: 3rem;">
+<div class="ms-reveal">
+<p class="ms-section-intro" style="max-width:100%">Streamline gives production teams a live view of order demand, current stock, par levels, forecasts, and maximum stock limits. Teams can plan production at a glance and move from order demand to recipe, label, inventory update, and traceability record.</p>
+<ul class="ms-list" style="margin-top: 1.5rem;">
+<li>Plan production from wholesale orders, standing orders, and forecasts</li>
+<li>View order quantity, current stock, par levels, and forecast demand</li>
+<li>Set production quantities and generate the right recipe</li>
+<li>Mark production done and update inventory</li>
+<li>Add ingredients used to shopping lists automatically</li>
+<li>Create traceability records as production is completed</li>
+</ul>
+<div class="ms-actions">
+<a class="ms-btn ms-btn-primary" href="https://mountainstream.co/register-your-company?cta=hero&amp;intent=Book%20a%20demo">See it in action</a>
+</div>
+</div>
+<div class="ms-reveal ms-reveal-d1">
+<div class="ms-callout">
+<h4>Connected to orders</h4>
+<p>Customer orders flow into production planning, helping teams make the right products at the right time without re-keying data.</p>
+</div>
+<div class="ms-callout" style="margin-top: var(--ms-gap); border-color: var(--ms-sky-100); border-left-color: var(--ms-sky-500); background: var(--ms-sky-050);">
+<h4>Connected to inventory</h4>
+<p>Production uses ingredient inventory, updates stock, and helps purchasing understand what needs replenishment.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════════════
+     RECIPE MANAGEMENT
+═══════════════════════════════════════════════════════════════ -->
+<section class="ms-section ms-section-light" id="recipe-management">
+<div class="ms-wrap">
+<p class="ms-kicker ms-reveal">Recipe management</p>
+<h2 class="ms-reveal ms-reveal-d1">Recipes that scale with production.</h2>
+<div class="ms-split ms-split--flip" style="margin-top: 3rem;">
+<div class="ms-reveal">
+<p class="ms-section-intro" style="max-width:100%">Streamline recipe management helps bakery teams manage formulas, ingredients, yields, recipe cards, costings, nutrition facts, allergens, and batch scaling in one place. When production quantities change, recipes can scale with demand.</p>
+<ul class="ms-list" style="margin-top: 1.5rem;">
+<li>Store raw materials, sales items, and other recipes as ingredients</li>
+<li>Generate recipe cards with the actual mix to be made</li>
+<li>Split recipes into multiple mixes when quantity exceeds machine capacity</li>
+<li>Call sub-recipes when recipes or items are used inside other recipes</li>
+<li>Respect lead times for recipes used as ingredients</li>
+<li>Calculate costings, nutrition facts, and allergens from recipe data</li>
+<li>Configure recipe card templates by recipe</li>
+</ul>
+</div>
+<div class="ms-reveal ms-reveal-d1">
+<div class="ms-grid-2" style="gap: 14px;">
+<div class="ms-stat">
+<strong>Recipe costing built in</strong>
+<p>Use current ingredient data to support bakery recipe costing software workflows without separating recipes from production.</p>
+</div>
+<div class="ms-stat" style="border-left-color: var(--ms-sky-500); background: var(--ms-sky-050); border-color: var(--ms-sky-100);">
+<strong>Built for real bakeries</strong>
+<p>From doughs and fillings to prep recipes and finished goods, Streamline supports the way bakeries actually build products.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════════════
+     NUTRITION & ALLERGENS
+═══════════════════════════════════════════════════════════════ -->
+<section class="ms-section ms-section-warm" id="nutrition-allergens">
+<div class="ms-wrap">
+<p class="ms-kicker ms-reveal">Nutrition &amp; Allergens</p>
+<h2 class="ms-reveal ms-reveal-d1">Product data that follows the recipe.</h2>
+<p class="ms-section-intro ms-reveal ms-reveal-d2">Nutrition facts and allergens are taken from ingredients and connected to finished recipes. That means product information stays closer to the source instead of living in separate files, spreadsheets, or label templates.</p>
+<div class="ms-grid" style="margin-top: 2.5rem;">
+<div class="ms-use-case ms-reveal ms-reveal-d1">
+<h3>Allergen management</h3>
+<p>Streamline supports bakery allergen management software workflows by connecting ingredient data, recipes, finished products, and labels.</p>
+</div>
+<div class="ms-use-case ms-reveal ms-reveal-d2">
+<h3>Label-ready data</h3>
+<p>Nutrition facts and allergens can flow into labels generated from recipes, helping reduce duplicate entry.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════════════
+     PACKAGING RECIPES
+═══════════════════════════════════════════════════════════════ -->
+<section class="ms-section ms-section-ruled" id="packaging-recipes">
+<div class="ms-wrap">
+<p class="ms-kicker ms-reveal">Packaging Recipes</p>
+<h2 class="ms-reveal ms-reveal-d1">Packaging belongs in production too.</h2>
+<p class="ms-section-intro ms-reveal ms-reveal-d2">Packaging is part of the product. Streamline lets bakeries create packaging recipes, attach them to multiple items, and track packaging materials, costs, inventory, labels, and production workflows.</p>
+<div class="ms-grid" style="margin-top: 2.5rem;">
+<article class="ms-card ms-card-sky ms-reveal ms-reveal-d1">
+<h3>Packaging linked to products</h3>
+<p>Create packaging recipes for finished items and attach them to multiple products, so teams know exactly what packaging is needed when production runs.</p>
+</article>
+<article class="ms-card ms-card-sky ms-reveal ms-reveal-d2">
+<h3>Packaging costs and inventory</h3>
+<p>Track packaging materials, packaging inventory, and packaging costs alongside ingredients, helping teams keep product costing and stock visibility in one bakery ERP software system.</p>
+</article>
+<article class="ms-card ms-card-sky ms-reveal ms-reveal-d3">
+<h3>Production to packed goods</h3>
+<p>Keep packaging connected to production, finished goods, and label workflows so teams can move from bake to pack with fewer manual steps and less guesswork.</p>
+</article>
+</div>
+<div class="ms-answer" style="margin-top: 2.5rem;">
+<p><strong>Packaging workflow support:</strong> Streamline helps bakeries manage packaging recipes, packaging materials, packaging inventory, packaging costs, finished goods workflows, and connected production records — all inside one bakery management software platform instead of separate lists and disconnected tools.</p>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════════════
+     PRODUCTION & RECIPES REVIEWS
+═══════════════════════════════════════════════════════════════ -->
+<section class="ms-section ms-section-light ms-reviews" id="production-reviews">
+<div class="ms-wrap">
+<div class="ms-reviews__header">
+<div>
+<p class="ms-kicker ms-reveal">Customer reviews</p>
+<h2 class="ms-reveal ms-reveal-d1">Real feedback from bakeries using Streamline for production and recipes.</h2>
+<p class="ms-section-intro ms-reveal ms-reveal-d2">
+          Bakeries use Streamline to connect customer demand with production reports, recipes, labelling, nutrition information, and daily bakery workflows. These Capterra reviews highlight the practical impact of production reporting, recipe management, and bakery-specific operational control.
+        </p>
+</div>
+<aside aria-label="Review rating summary" class="ms-reviews__summary ms-reveal ms-reveal-d2">
+<div class="ms-reviews__score">
+<strong>4.8</strong>
+<span>/ 5</span>
+</div>
+<div aria-label="Rated 4.8 out of 5 stars" class="ms-reviews__stars">★★★★★</div>
+<p>Customer reviews from Capterra for Mountain Stream Bakery Software.</p>
+</aside>
+</div>
+<div class="ms-review-grid">
+<article class="ms-review-card ms-reveal ms-reveal-d1">
+<div class="ms-review-card__meta">
+<span aria-label="4 out of 5 rating" class="ms-review-card__rating">★★★★☆ 4.0</span>
+<span class="ms-review-card__source">Capterra review</span>
+</div>
+<h3>Recipe management, labelling, nutrition, and audit trail support.</h3>
+<blockquote>
+<p>
+            “Low Cost, Feature Set, Recipe Management, Customer Online Ordering, Constant Improvements / Updates / Bug Fixes, Accounting Software Integration, Open to Development Work Specific to our Needs, Natasha Law Labelling with Automatic Use By Date, Nutritional Information generated from ingredients / recipes, Friendly support team, Audit Trail so you can see when things happen if something goes wrong,”
+          </p>
+</blockquote>
+<div class="ms-review-card__footer">
+<div class="ms-review-card__person">
+<strong>Brett G.</strong>
+<span>Director · Food Production</span>
+</div>
+<a aria-label="Read Brett G.'s Capterra review for Mountain Stream Bakery Software" class="ms-review-card__link" href="https://www.capterra.com/p/146354/Streamline/#Capterra___6180432" rel="noopener noreferrer nofollow" target="_blank">
+            Read review
+          </a>
+</div>
+</article>
+<article class="ms-review-card ms-reveal ms-reveal-d2">
+<div class="ms-review-card__meta">
+<span aria-label="5 out of 5 rating" class="ms-review-card__rating">★★★★★ 5.0</span>
+<span class="ms-review-card__source">Capterra review</span>
+</div>
+<h3>Production reports the team relies on every day.</h3>
+<blockquote>
+<p>
+            “It is the backbone of the bakery, we rely on it for creating all our production reports and driver routes.It has all the feature we need as a wholesale bakery (60 to 100 stops per day)”
+          </p>
+</blockquote>
+<div class="ms-review-card__footer">
+<div class="ms-review-card__person">
+<strong>Mathieu C.</strong>
+<span>CEO · Food Production</span>
+</div>
+<a aria-label="Read Mathieu C.'s Capterra review for Mountain Stream Bakery Software" class="ms-review-card__link" href="https://www.capterra.com/p/146354/Streamline/#Capterra___6883641" rel="noopener noreferrer nofollow" target="_blank">
+            Read review
+          </a>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════════════
+     FEATURE BADGE LIST
+═══════════════════════════════════════════════════════════════ -->
+<section class="ms-section ms-section-light">
+<div class="ms-wrap">
+<p class="ms-kicker ms-reveal">Complete feature list</p>
+<h2 class="ms-reveal ms-reveal-d1">Production management features in Streamline.</h2>
+<div class="ms-badge-row ms-reveal ms-reveal-d2">
+<span class="ms-badge">Production planning</span>
+<span class="ms-badge">Production scheduling</span>
+<span class="ms-badge">Wholesale order demand</span>
+<span class="ms-badge">Standing order demand</span>
+<span class="ms-badge">Forecasts</span>
+<span class="ms-badge">Par levels</span>
+<span class="ms-badge">Current stock visibility</span>
+<span class="ms-badge">Maximum stock limits</span>
+<span class="ms-badge">Recipe cards</span>
+<span class="ms-badge">Batch scaling</span>
+<span class="ms-badge">Machine capacity handling</span>
+<span class="ms-badge">Ingredient usage</span>
+<span class="ms-badge">Recipe costing</span>
+<span class="ms-badge">Nutrition facts</span>
+<span class="ms-badge">Allergen matrix</span>
+<span class="ms-badge">Packaging recipes</span>
+<span class="ms-badge">Packaging inventory</span>
+<span class="ms-badge">Packaging cost tracking</span>
+<span class="ms-badge">Traceability records</span>
+<span class="ms-badge">Inventory depletion</span>
+<span class="ms-badge">Production reporting</span>
+<span class="ms-badge">Cut and shape reports</span>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════════════
+     FAQ
+═══════════════════════════════════════════════════════════════ -->
+<section class="ms-section ms-faq" id="faq">
+<div class="ms-wrap-narrow">
+<p class="ms-kicker ms-reveal">FAQ</p>
+<h2 class="ms-reveal ms-reveal-d1">Production management questions, answered.</h2>
+<div class="ms-reveal ms-reveal-d2" style="margin-top: 2rem;">
+<details open="">
+<summary>Does Streamline support bakery production planning?</summary>
+<p>Yes. Streamline supports bakery production planning software workflows using order quantities, current stock, par levels, forecasts, and maximum stock limits to help teams decide what to make.</p>
+</details>
+<details>
+<summary>Can Streamline manage bakery recipes and recipe costing?</summary>
+<p>Yes. Streamline manages recipes, recipe cards, ingredients, yields, batch sizes, sub-recipes, costings, nutrition facts, and allergens in one connected recipe management workflow.</p>
+</details>
+<details>
+<summary>Can Streamline generate nutrition facts and allergen information?</summary>
+<p>Yes. Nutrition facts and allergens are taken from ingredient data and connected to recipes and finished products, supporting bakery allergen management and label workflows.</p>
+</details>
+<details>
+<summary>Does Streamline support packaging recipes?</summary>
+<p>Yes. Streamline lets bakeries create packaging recipes, attach them to multiple items, and track packaging costs and inventory alongside ingredients.</p>
+</details>
+<details>
+<summary>How does production connect to inventory and traceability?</summary>
+<p>When recipes are marked done, inventory is updated, ingredients used can be added to shopping lists, and traceability records are created so production stays connected to ingredient lots and finished goods.</p>
+</details>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════════════
+     RELATED FEATURES
+═══════════════════════════════════════════════════════════════ -->
+<section class="ms-section-sm ms-section-light">
+<div class="ms-wrap">
+<p class="ms-kicker ms-reveal">Related features</p>
+<p class="ms-reveal ms-reveal-d1" style="color: var(--ms-muted); font-size: .95rem; margin-bottom: 0;">Production management connects to every other part of Streamline.</p>
+<div class="ms-related-links ms-reveal ms-reveal-d2">
+<a href="https://mountainstream.co/streamline-features/customers-and-ordering/">Customers &amp; Ordering</a>
+<a href="https://mountainstream.co/streamline-features/inventory-and-traceability/">Inventory &amp; Traceability</a>
+<a href="https://mountainstream.co/streamline-features/delivery-and-distribution/">Delivery &amp; Distribution</a>
+<a href="https://mountainstream.co/streamline-features/finance-and-reporting/">Finance &amp; Reporting</a>
+<a href="https://mountainstream.co/streamline-features/integrations/">Integrations</a>
+<a href="https://mountainstream.co/streamline-features/">All Features</a>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════════════
+     CTA
+═══════════════════════════════════════════════════════════════ -->
+<section class="ms-cta">
+<div class="ms-wrap ms-reveal">
+<p class="ms-kicker">Get started</p>
+<h2>See how Streamline manages bakery production from order to invoice.</h2>
+<p>Connect production planning, recipe management, recipe costing, nutrition facts, allergens, packaging recipes, inventory, traceability, delivery, and reporting in one bakery ERP system.</p>
+<div class="ms-actions">
+<a class="ms-btn ms-btn-primary" href="https://mountainstream.co/register-your-company?cta=hero&amp;intent=book-demo">Book a Demo</a>
+<a class="ms-btn ms-btn-secondary" href="/pricing/">View Pricing</a>
+<a class="ms-link-arrow" href="/streamline-features/">All Features</a>
+</div>
+</div>
+</section>
+</main>
+</div>
+<script>
+    (function () {
+  var root = document.querySelector('.ms-feature-cluster');
+  if (!root) return;
+
+  // ── SCROLL REVEAL ──────────────────────────────────────────
+  var revealObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  root.querySelectorAll('.ms-reveal').forEach(function (el) {
+    var rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.classList.add('visible');
+    } else {
+      revealObserver.observe(el);
+    }
+  });
+
+  // ── ACTIVE NAV ─────────────────────────────────────────────
+  var sections = root.querySelectorAll('section[id]');
+  var navLinks = root.querySelectorAll('.ms-nav a:not(.ms-nav__back)');
+
+  var navObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        navLinks.forEach(function (a) { a.classList.remove('active'); });
+        var active = root.querySelector('.ms-nav a[href="#' + entry.target.id + '"]');
+        if (active) {
+          active.classList.add('active');
+          // Scroll only the nav pill row horizontally, never the page
+          var navWrap = root.querySelector('.ms-nav .ms-wrap');
+          if (navWrap) {
+            navWrap.scrollLeft = active.offsetLeft - navWrap.offsetWidth / 2 + active.offsetWidth / 2;
+          }
+        }
+      }
+    });
+  }, {
+    threshold: 0,
+    rootMargin: '0px 0px -60% 0px'
+  });
+
+  sections.forEach(function (s) { navObserver.observe(s); });
+})();
+</script>
+</div>
+<script id="ms-wysiwyg-editor-script">
+(function(){
+  var HISTORY_KEY = 'ms-wysiwyg-production-recipes-draft-history-v1';
+  var AUTOSAVE_KEY = 'ms-wysiwyg-production-recipes-autosave-v1';
+  var MAX_HISTORY = 30;
+  var currentDownloadName = 'production-and-recipes-edited.html';
+  var savedRange = null;
+  var autosaveTimer = null;
+
+  function $(id){ return document.getElementById(id); }
+  function root(){ return $('ms-editor-content'); }
+
+  function toast(message){
+    var t = $('ms-edit-toast');
+    if(!t) return;
+    t.textContent = message;
+    t.classList.add('visible');
+    clearTimeout(window.__msToastTimer);
+    window.__msToastTimer = setTimeout(function(){ t.classList.remove('visible'); }, 2800);
+  }
+
+  function setToolbarOffset(){
+    var tb = $('ms-editor-toolbar');
+    if(!tb) return;
+    document.documentElement.style.setProperty('--ms-editor-toolbar-height', (tb.offsetHeight || 86) + 'px');
+  }
+
+  function hasText(el){
+    return !!(el && el.textContent && el.textContent.replace(/\s+/g,' ').trim());
+  }
+
+  function isUnsafe(el){
+    return !!(el.closest('script,style,noscript,svg,canvas,form,select,textarea,[data-ms-editor-ui="true"]'));
+  }
+
+  function hasMediaControl(el){
+    return !!el.querySelector('img,video,iframe,input,textarea,select,button');
+  }
+
+  function markEditable(scope){
+    if(!scope) return;
+
+    scope.querySelectorAll('[contenteditable],[data-ms-editable]').forEach(function(el){
+      el.removeAttribute('contenteditable');
+      el.removeAttribute('data-ms-editable');
+      el.removeAttribute('spellcheck');
+    });
+
+    var selector = [
+      'h1','h2','h3','h4','h5','h6',
+      'p','li','summary',
+      'a[href]','button',
+      'strong','em','span',
+      '.eyebrow','.lede','.section-label',
+      '.hero-badge','.btn','.link-arrow',
+      '.step-title','.step-desc',
+      '.testi-quote','.testi-author','.testi-stars',
+      '.app-tab','.app-item-name','.app-item-lot','.app-item-qty',
+      '.panel-title','.panel-kpi-label','.panel-kpi-val','.panel-row-name','.panel-row-lot','.panel-row-qty',
+      '.count-name','.count-meta','.count-val'
+    ].join(',');
+
+    function hasCandidateChild(el){
+      return Array.prototype.some.call(el.children || [], function(child){
+        return child.matches && (child.matches(selector) || child.querySelector(selector));
+      });
+    }
+
+    function make(el){
+      el.setAttribute('contenteditable','true');
+      el.setAttribute('data-ms-editable','true');
+      el.setAttribute('spellcheck','true');
+    }
+
+    Array.prototype.forEach.call(scope.querySelectorAll(selector), function(el){
+      if(!hasText(el) || isUnsafe(el)) return;
+      if(el.closest('[data-ms-editable="true"]')) return;
+      if(hasMediaControl(el)) return;
+
+      var tag = el.tagName ? el.tagName.toLowerCase() : '';
+      var alwaysOk = /^(h1|h2|h3|h4|h5|h6|p|li|summary|a|button|strong|em|span)$/.test(tag);
+      if(!alwaysOk && hasCandidateChild(el)) return;
+      make(el);
+    });
+
+    scope.querySelectorAll('a[href]').forEach(function(a){
+      if(!a.hasAttribute('data-original-href')) {
+        a.setAttribute('data-original-href', a.getAttribute('href') || '#');
+      }
+      a.setAttribute('title','Ctrl/Cmd-click to open link. Use Edit link to change this URL.');
+      if(hasText(a) && !hasMediaControl(a) && !a.closest('[data-ms-editable="true"]')) make(a);
+    });
+  }
+
+  function bindPaste(scope){
+    scope.querySelectorAll('[data-ms-editable="true"]').forEach(function(el){
+      el.onpaste = function(e){
+        e.preventDefault();
+        var text = (e.clipboardData || window.clipboardData).getData('text/plain');
+        document.execCommand('insertText', false, text);
+        scheduleAutosave();
+      };
+    });
+  }
+
+  function prepare(){
+    setToolbarOffset();
+    markEditable(root());
+    bindPaste(root());
+
+    root().querySelectorAll('details').forEach(function(d){
+      if(!d.hasAttribute('data-ms-original-open')) d.setAttribute('data-ms-original-open', d.open ? 'true' : 'false');
+      d.open = true;
+    });
+
+    root().querySelectorAll('.reveal,.reveal-l,.reveal-r,.reveal-d1,.reveal-d2,.reveal-d3').forEach(function(el){
+      el.classList.add('in','is-visible','visible');
+    });
+
+    renderDrafts();
+  }
+
+  function getHistory(){
+    try {
+      var parsed = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+      return Array.isArray(parsed) ? parsed : [];
+    } catch(e) {
+      return [];
+    }
+  }
+
+  function setHistory(list){
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(list.slice(0, MAX_HISTORY)));
+    renderDrafts();
+  }
+
+  function formatDate(iso){
+    try {
+      return new Date(iso).toLocaleString([], {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit'
+      });
+    } catch(e) {
+      return iso || '';
+    }
+  }
+
+  function getEditableHTML(){
+    return root() ? root().innerHTML : '';
+  }
+
+  function saveDraft(type){
+    var history = getHistory();
+    var now = new Date();
+    var defaultName = 'Inventory draft — ' + formatDate(now.toISOString());
+    var name = prompt('Draft name:', defaultName);
+    if(name === null) return;
+    name = (name || defaultName).trim() || defaultName;
+
+    history.unshift({
+      id: String(now.getTime()) + '-' + Math.random().toString(36).slice(2,8),
+      name: name,
+      createdAt: now.toISOString(),
+      type: type || 'manual',
+      fileName: currentDownloadName,
+      html: getEditableHTML()
+    });
+
+    setHistory(history);
+    localStorage.setItem(AUTOSAVE_KEY, JSON.stringify({
+      createdAt: now.toISOString(),
+      html: getEditableHTML()
+    }));
+
+    var menu = $('ms-drafts-menu');
+    if(menu) menu.open = true;
+    toast('Draft saved: ' + name);
+  }
+
+  function loadDraft(id){
+    var draft = getHistory().find(function(item){ return item.id === id; });
+    if(!draft) {
+      toast('Draft not found.');
+      return;
+    }
+    if(!confirm('Load "' + (draft.name || 'Untitled draft') + '"? Your current unsaved edits will be replaced.')) return;
+
+    root().innerHTML = draft.html || '';
+    prepare();
+    toast('Draft loaded: ' + (draft.name || 'Untitled draft'));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function renameDraft(id){
+    var history = getHistory();
+    var draft = history.find(function(item){ return item.id === id; });
+    if(!draft) return;
+
+    var next = prompt('Rename draft:', draft.name || 'Untitled draft');
+    if(next === null) return;
+    next = next.trim();
+    if(!next) {
+      toast('Draft name was not changed.');
+      return;
+    }
+
+    draft.name = next;
+    setHistory(history);
+    toast('Draft renamed.');
+  }
+
+  function deleteDraft(id){
+    var history = getHistory();
+    var draft = history.find(function(item){ return item.id === id; });
+    var label = draft ? (draft.name || 'this draft') : 'this draft';
+    if(!confirm('Delete "' + label + '"?')) return;
+    setHistory(history.filter(function(item){ return item.id !== id; }));
+    toast('Draft deleted.');
+  }
+
+  function clearHistory(){
+    if(!confirm('Clear all saved draft history for this page?')) return;
+    localStorage.removeItem(HISTORY_KEY);
+    renderDrafts();
+    toast('Draft history cleared.');
+  }
+
+  function renderDrafts(){
+    var list = $('ms-draft-list');
+    var count = $('ms-draft-count');
+    if(!list) return;
+
+    var history = getHistory();
+    if(count) count.textContent = String(history.length);
+
+    if(!history.length){
+      list.innerHTML = '<div class="ms-draft-empty">No drafts saved yet. Click <strong>Save current version</strong> to create the first one.</div>';
+      return;
+    }
+
+    list.innerHTML = '';
+    history.forEach(function(draft){
+      var card = document.createElement('div');
+      card.className = 'ms-draft-card';
+
+      var title = document.createElement('div');
+      title.className = 'ms-draft-card-title';
+      title.textContent = draft.name || 'Untitled draft';
+
+      var meta = document.createElement('div');
+      meta.className = 'ms-draft-card-meta';
+      var size = draft.html ? Math.round(draft.html.length / 1024) + ' KB' : '0 KB';
+      meta.textContent = formatDate(draft.createdAt) + ' · ' + (draft.type || 'manual') + ' · ' + size;
+
+      var actions = document.createElement('div');
+      actions.className = 'ms-draft-card-actions';
+
+      var load = document.createElement('button');
+      load.type = 'button';
+      load.textContent = 'Load this version';
+      load.addEventListener('click', function(){ loadDraft(draft.id); });
+
+      var rename = document.createElement('button');
+      rename.type = 'button';
+      rename.textContent = 'Rename';
+      rename.addEventListener('click', function(){ renameDraft(draft.id); });
+
+      var del = document.createElement('button');
+      del.type = 'button';
+      del.textContent = 'Delete';
+      del.addEventListener('click', function(){ deleteDraft(draft.id); });
+
+      actions.append(load, rename, del);
+      card.append(title, meta, actions);
+      list.appendChild(card);
+    });
+  }
+
+  function scheduleAutosave(){
+    clearTimeout(autosaveTimer);
+    autosaveTimer = setTimeout(function(){
+      try {
+        localStorage.setItem(AUTOSAVE_KEY, JSON.stringify({
+          createdAt: new Date().toISOString(),
+          html: getEditableHTML()
+        }));
+      } catch(e) {}
+    }, 900);
+  }
+
+  function restoreSelection(){
+    if(!savedRange) return false;
+    var sel = window.getSelection();
+    if(!sel) return false;
+    sel.removeAllRanges();
+    sel.addRange(savedRange);
+    return true;
+  }
+
+  function saveSelection(){
+    var sel = window.getSelection();
+    if(!sel || !sel.rangeCount) return;
+    var node = sel.anchorNode;
+    if(!node) return;
+    var el = node.nodeType === 1 ? node : node.parentElement;
+    if(el && root() && root().contains(el)) {
+      savedRange = sel.getRangeAt(0).cloneRange();
+    }
+  }
+
+  function exec(cmd, value){
+    restoreSelection();
+    document.execCommand(cmd, false, value || null);
+    scheduleAutosave();
+  }
+
+  function applyTextColor(color){
+    restoreSelection();
+
+    var sel = window.getSelection();
+    if(sel && sel.rangeCount && !sel.isCollapsed && root().contains(sel.anchorNode)) {
+      document.execCommand('foreColor', false, color);
+      scheduleAutosave();
+      toast('Text color applied: ' + color);
+      return;
+    }
+
+    var active = document.activeElement;
+    if(active && active.matches && active.matches('[data-ms-editable="true"]')) {
+      active.style.color = color;
+      scheduleAutosave();
+      toast('Element color applied: ' + color);
+      return;
+    }
+
+    toast('Select text first, then choose a color.');
+  }
+
+  function editLink(){
+    var node = window.getSelection && window.getSelection().anchorNode;
+    var el = node && (node.nodeType === 1 ? node : node.parentElement);
+    var link = el && el.closest ? el.closest('a') : null;
+    if(!link && document.activeElement && document.activeElement.closest) {
+      link = document.activeElement.closest('a');
+    }
+    if(!link || !root().contains(link)) {
+      toast('Place your cursor inside a link or button first.');
+      return;
+    }
+
+    var next = prompt('Edit link URL:', link.getAttribute('href') || '');
+    if(next !== null) {
+      link.setAttribute('href', next.trim());
+      scheduleAutosave();
+      toast('Link URL updated.');
+    }
+  }
+
+  function togglePreview(){
+    document.body.classList.toggle('ms-preview-mode');
+    var preview = document.body.classList.contains('ms-preview-mode');
+    document.querySelectorAll('[data-ms-editable="true"]').forEach(function(el){
+      el.setAttribute('contenteditable', preview ? 'false' : 'true');
+    });
+    toast(preview ? 'Preview mode enabled. Press Esc to return.' : 'Edit mode enabled.');
+  }
+
+  function toggleOutlines(){
+    document.body.classList.toggle('ms-hide-edit-outlines');
+    toast(document.body.classList.contains('ms-hide-edit-outlines') ? 'Edit outlines hidden.' : 'Edit outlines visible.');
+  }
+
+  function resetLinks(){
+    root().querySelectorAll('a[data-original-href]').forEach(function(a){
+      a.setAttribute('href', a.getAttribute('data-original-href') || '#');
+    });
+    scheduleAutosave();
+    toast('Link URLs restored.');
+  }
+
+  function cleanExport(){
+    var clone = document.documentElement.cloneNode(true);
+
+    clone.querySelectorAll('[data-ms-editor-ui="true"],#ms-wysiwyg-editor-style,#ms-wysiwyg-editor-script').forEach(function(el){
+      el.remove();
+    });
+
+    clone.querySelectorAll('[contenteditable],[data-ms-editable]').forEach(function(el){
+      el.removeAttribute('contenteditable');
+      el.removeAttribute('data-ms-editable');
+      el.removeAttribute('spellcheck');
+    });
+
+    clone.querySelectorAll('a[data-original-href]').forEach(function(a){
+      a.removeAttribute('data-original-href');
+      if(a.getAttribute('title') === 'Ctrl/Cmd-click to open link. Use Edit link to change this URL.') {
+        a.removeAttribute('title');
+      }
+    });
+
+    clone.querySelectorAll('[data-ms-original-open]').forEach(function(el){
+      if(el.getAttribute('data-ms-original-open') === 'true') {
+        el.setAttribute('open','');
+      } else {
+        el.removeAttribute('open');
+      }
+      el.removeAttribute('data-ms-original-open');
+    });
+
+    var body = clone.querySelector('body');
+    if(body) {
+      body.classList.remove('ms-hide-edit-outlines','ms-preview-mode');
+      body.removeAttribute('style');
+    }
+
+    var wrap = clone.querySelector('#ms-editor-content');
+    if(wrap) {
+      var parent = wrap.parentNode;
+      while(wrap.firstChild) parent.insertBefore(wrap.firstChild, wrap);
+      wrap.remove();
+    }
+
+    return '<!DOCTYPE html>\n' + clone.outerHTML;
+  }
+
+  function downloadCleanHTML(){
+    var html = cleanExport();
+    var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = currentDownloadName;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+    toast('Clean HTML downloaded.');
+  }
+
+  function openInstructions(){
+    var modal = $('ms-instruction-modal');
+    if(modal) modal.hidden = false;
+  }
+
+  function closeInstructions(){
+    var modal = $('ms-instruction-modal');
+    if(modal) modal.hidden = true;
+  }
+
+  document.addEventListener('selectionchange', saveSelection);
+
+  document.addEventListener('input', function(e){
+    if(root() && root().contains(e.target)) scheduleAutosave();
+  });
+
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('#ms-editor-content a');
+    if(a && !document.body.classList.contains('ms-preview-mode') && !(e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
+      toast('Link click blocked while editing. Ctrl/Cmd-click to open, or use Edit link.');
+    }
+  }, true);
+
+  $('ms-bold-btn')?.addEventListener('click', function(){ exec('bold'); });
+  $('ms-italic-btn')?.addEventListener('click', function(){ exec('italic'); });
+  $('ms-list-btn')?.addEventListener('click', function(){ exec('insertUnorderedList'); });
+  $('ms-edit-link-btn')?.addEventListener('click', editLink);
+  $('ms-preview-btn')?.addEventListener('click', togglePreview);
+  $('ms-outlines-btn')?.addEventListener('click', toggleOutlines);
+  $('ms-reset-links-btn')?.addEventListener('click', resetLinks);
+  $('ms-download-btn')?.addEventListener('click', downloadCleanHTML);
+  $('ms-save-draft-btn')?.addEventListener('click', function(){ saveDraft('manual'); });
+  $('ms-clear-history-btn')?.addEventListener('click', clearHistory);
+  $('ms-instructions-btn')?.addEventListener('click', openInstructions);
+  $('ms-instruction-close')?.addEventListener('click', closeInstructions);
+  $('ms-instruction-modal')?.addEventListener('click', function(e){
+    if(e.target === this) closeInstructions();
+  });
+
+  document.querySelectorAll('.ms-color-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      applyTextColor(btn.getAttribute('data-ms-color'));
+    });
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') {
+      if(!$('ms-instruction-modal')?.hidden) {
+        closeInstructions();
+        return;
+      }
+      if(document.body.classList.contains('ms-preview-mode')) togglePreview();
+    }
+    if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+      e.preventDefault();
+      saveDraft('keyboard');
+    }
+  });
+
+  window.addEventListener('resize', setToolbarOffset);
+  window.addEventListener('load', setToolbarOffset);
+
+  prepare();
+  toast('Production & Recipes editor ready. Click outlined text to edit.');
+})();
+</script>
+</body>
+</html>

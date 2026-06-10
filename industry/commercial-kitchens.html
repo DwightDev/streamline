@@ -1,0 +1,1989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commercial Kitchen ERP Software | Streamline ERP</title>
+  <meta name="description" content="Streamline ERP helps commercial kitchens connect customer ordering, production planning, recipes, ingredient inventory, lot traceability, delivery, invoicing, payments, accounting exports, and reporting in one flexible system.">
+  <link rel="canonical" href="https://mountainstream.co/industries/commercial-kitchen-erp/">
+  <meta property="og:title" content="Commercial Kitchen ERP Software | Streamline ERP">
+  <meta property="og:description" content="Connect customer demand, production planning, recipes, inventory, traceability, delivery, finance, and reporting for commercial kitchens, commissaries, and prepared food teams.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mountainstream.co/industries/commercial-kitchen-erp/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Commercial Kitchen ERP Software | Streamline ERP">
+  <meta name="twitter:description" content="Streamline ERP connects ordering, production, recipes, inventory, traceability, delivery, finance, and reporting for commercial kitchens.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+
+        /* ── 1. TOKENS & BASE ─────────────────────────────────────── */
+.ms-feature-cluster {
+  --ms-primary-950: #113058;
+  --ms-primary-900: #113058;
+  --ms-primary-800: #113058;
+  --ms-primary-700: #113058;
+  --ms-primary-600: #113058;
+  --ms-primary-100: #e4eef9;
+  --ms-primary-050: #f2f7fd;
+  --ms-accent-700:  #ff9100;
+  --ms-accent-600:  #ff9100;
+  --ms-accent-500:  #ff9100;
+  --ms-accent-400:  #ff9100;
+  --ms-accent-100:  #fef0d8;
+  --ms-accent-050:  #fff8ef;
+  --ms-accent-glow: rgba(245,135,14,.22);
+  --ms-sky-600:     #1d7dc0;
+  --ms-sky-500:     #4aa6e8;
+  --ms-sky-100:     #ddf1ff;
+  --ms-sky-050:     #f0f9ff;
+  --ms-success-600: #1e7a52;
+  --ms-success-100: #e6f7ef;
+  --ms-ink:         #101b2a;
+  --ms-text:        #1e2f42;
+  --ms-muted:       #54647a;
+  --ms-soft:        #7a8b9e;
+  --ms-line:        #dbe4ef;
+  --ms-line-strong: #c4d1e2;
+  --ms-surface:     #ffffff;
+  --ms-surface-soft:#f6faff;
+  --ms-surface-warm:#fffaf4;
+  --ms-page:        #f9fbff;
+  --ms-font-display:'Fraunces', Georgia, serif;
+  --ms-font-body:   'DM Sans', system-ui, sans-serif;
+  --ms-wrap:        1180px;
+  --ms-wrap-narrow: 860px;
+  --ms-gutter:      clamp(20px, 4vw, 48px);
+  --ms-section-y:   clamp(72px, 9vw, 120px);
+  --ms-section-y-sm:clamp(48px, 6vw, 80px);
+  --ms-gap:         clamp(18px, 2.4vw, 28px);
+  --ms-r-xs:   6px;
+  --ms-r-sm:   12px;
+  --ms-r-md:   18px;
+  --ms-r-lg:   28px;
+  --ms-r-pill: 999px;
+  --ms-shadow-xs:    0 1px 3px rgba(9,30,60,.07);
+  --ms-shadow-sm:    0 4px 16px rgba(9,30,60,.09);
+  --ms-shadow-md:    0 14px 40px rgba(9,30,60,.13);
+  --ms-shadow-lg:    0 24px 64px rgba(9,30,60,.17);
+  --ms-shadow-focus: 0 0 0 4px rgba(74,166,232,.28);
+  --ms-ease:         cubic-bezier(.25,.46,.45,.94);
+  --ms-ease-spring:  cubic-bezier(.34,1.56,.64,1);
+  color: var(--ms-text);
+  background-color: var(--ms-page);
+  font-family: var(--ms-font-body);
+  font-size: 16px;
+  line-height: 1.68;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── 2. RESET ─────────────────────────────────────────────── */
+.ms-feature-cluster,
+.ms-feature-cluster * { box-sizing: border-box; }
+.ms-feature-cluster :where(h1,h2,h3,h4,p,ul,ol,figure) { margin-top: 0; }
+.ms-feature-cluster :where(img,svg) { max-width: 100%; height: auto; }
+.ms-feature-cluster a {
+  color: var(--ms-primary-800);
+  text-underline-offset: .2em;
+  transition: color .16s var(--ms-ease), background-color .16s var(--ms-ease),
+              border-color .16s var(--ms-ease), box-shadow .16s var(--ms-ease),
+              transform .2s var(--ms-ease-spring);
+}
+.ms-feature-cluster a:hover { color: var(--ms-accent-700); }
+.ms-feature-cluster :where(a,button,summary):focus-visible {
+  outline: none;
+  box-shadow: var(--ms-shadow-focus);
+  border-radius: var(--ms-r-xs);
+}
+
+/* ── 3. LAYOUT ────────────────────────────────────────────── */
+.ms-feature-cluster .ms-wrap {
+  width: min(var(--ms-wrap), calc(100% - var(--ms-gutter) * 2));
+  margin-inline: auto;
+}
+.ms-feature-cluster .ms-wrap-narrow {
+  width: min(var(--ms-wrap-narrow), calc(100% - var(--ms-gutter) * 2));
+  margin-inline: auto;
+}
+
+/* ── 4. TYPOGRAPHY ────────────────────────────────────────── */
+.ms-feature-cluster .ms-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  margin-bottom: 16px;
+  color: var(--ms-accent-600);
+  font-family: var(--ms-font-body);
+  font-size: .73rem;
+  font-weight: 600;
+  letter-spacing: .11em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.ms-feature-cluster .ms-kicker::before {
+  content: "";
+  flex-shrink: 0;
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ms-accent-500);
+}
+.ms-feature-cluster h1,
+.ms-feature-cluster h2,
+.ms-feature-cluster h3,
+.ms-feature-cluster h4 {
+  font-family: var(--ms-font-display);
+  font-weight: 600;
+  letter-spacing: -.035em;
+  color: var(--ms-primary-900);
+}
+.ms-feature-cluster h1 {
+  max-width: 860px;
+  margin-bottom: 20px;
+  font-size: clamp(2.4rem, 5.5vw, 4.6rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.05em;
+}
+.ms-feature-cluster h1 em {
+  font-style: italic;
+  color: var(--ms-accent-600);
+}
+.ms-feature-cluster h2 {
+  max-width: 820px;
+  margin-bottom: 18px;
+  font-size: clamp(1.8rem, 3.8vw, 3.2rem);
+  line-height: 1.05;
+  letter-spacing: -.04em;
+}
+.ms-feature-cluster h3 {
+  margin-bottom: 10px;
+  font-size: clamp(1.1rem, 1.8vw, 1.6rem);
+  line-height: 1.14;
+  letter-spacing: -.025em;
+}
+.ms-feature-cluster h4 {
+  margin-bottom: 8px;
+  font-size: .95rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -.01em;
+}
+.ms-feature-cluster p { margin-bottom: 1rem; }
+.ms-feature-cluster .ms-section-intro {
+  max-width: 760px;
+  color: var(--ms-muted);
+  font-size: clamp(1rem, 1.4vw, 1.16rem);
+  line-height: 1.78;
+}
+.ms-feature-cluster .ms-lede {
+  max-width: 680px;
+  color: var(--ms-muted);
+  font-size: clamp(1rem, 1.3vw, 1.12rem);
+  line-height: 1.75;
+}
+
+/* ── 5. BREADCRUMB ────────────────────────────────────────── */
+.ms-feature-cluster .ms-breadcrumb {
+  padding-block: 14px;
+  border-bottom: 1px solid var(--ms-line);
+  background: var(--ms-surface);
+}
+.ms-feature-cluster .ms-breadcrumb nav {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .82rem;
+  color: var(--ms-soft);
+}
+.ms-feature-cluster .ms-breadcrumb a {
+  color: var(--ms-muted);
+  text-decoration: none;
+  font-weight: 500;
+}
+.ms-feature-cluster .ms-breadcrumb a:hover { color: var(--ms-primary-800); }
+.ms-feature-cluster .ms-breadcrumb-sep { color: var(--ms-line-strong); }
+.ms-feature-cluster .ms-breadcrumb-current {
+  color: var(--ms-text);
+  font-weight: 600;
+}
+
+/* ── 6. COMPACT HERO ──────────────────────────────────────── */
+.ms-feature-cluster .ms-hero-compact {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(56px, 8vw, 96px) 0 clamp(48px, 7vw, 80px);
+  background:
+    radial-gradient(ellipse 65% 80% at 88% 8%, rgba(74,166,232,.12), transparent 52%),
+    radial-gradient(ellipse 45% 55% at 4% 92%, rgba(245,135,14,.08), transparent 48%),
+    linear-gradient(160deg, var(--ms-primary-050) 0%, #ffffff 52%, var(--ms-surface-warm) 100%);
+  border-bottom: 1px solid var(--ms-line);
+}
+.ms-feature-cluster .ms-hero-compact::before {
+  content: "";
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(74,166,232,.09) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+.ms-feature-cluster .ms-hero-compact::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  opacity: .3;
+}
+.ms-feature-cluster .ms-hero-compact__inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+.ms-feature-cluster .ms-hero-compact__stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.ms-feature-cluster .ms-hero-stat {
+  padding: 16px 20px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: rgba(255,255,255,.9);
+  box-shadow: var(--ms-shadow-sm);
+  text-align: center;
+  min-width: 140px;
+}
+.ms-feature-cluster .ms-hero-stat__number {
+  display: block;
+  font-family: var(--ms-font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -.04em;
+  line-height: 1;
+  color: var(--ms-primary-900);
+}
+.ms-feature-cluster .ms-hero-stat__number span { color: var(--ms-accent-500); }
+.ms-feature-cluster .ms-hero-stat__label {
+  display: block;
+  margin-top: 4px;
+  font-size: .78rem;
+  font-weight: 500;
+  color: var(--ms-muted);
+  line-height: 1.3;
+}
+
+/* ── 7. STICKY NAV ────────────────────────────────────────── */
+.ms-feature-cluster .ms-nav {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  background: rgba(255,255,255,.9);
+  border-bottom: 1px solid rgba(219,228,239,.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.ms-feature-cluster .ms-nav .ms-wrap {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding-block: 10px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.ms-feature-cluster .ms-nav .ms-wrap::-webkit-scrollbar { display: none; }
+.ms-feature-cluster .ms-nav a {
+  flex: 0 0 auto;
+  padding: 7px 14px;
+  border: 1px solid transparent;
+  border-radius: var(--ms-r-pill);
+  color: var(--ms-muted);
+  font-size: .84rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .15s, background .15s, border-color .15s;
+}
+.ms-feature-cluster .ms-nav a:hover,
+.ms-feature-cluster .ms-nav a.active {
+  color: var(--ms-primary-900);
+  background: var(--ms-primary-050);
+  border-color: var(--ms-line);
+}
+.ms-feature-cluster .ms-nav__back {
+  color: var(--ms-muted) !important;
+  border-color: var(--ms-line) !important;
+  background: var(--ms-surface) !important;
+}
+.ms-feature-cluster .ms-nav__back::before { content: "← "; }
+.ms-feature-cluster .ms-nav__divider {
+  align-self: center;
+  width: 1px;
+  height: 18px;
+  background: var(--ms-line);
+  flex-shrink: 0;
+}
+
+/* ── 8. SECTIONS ──────────────────────────────────────────── */
+.ms-feature-cluster .ms-section { padding-block: var(--ms-section-y); }
+.ms-feature-cluster .ms-section-sm { padding-block: var(--ms-section-y-sm); }
+.ms-feature-cluster .ms-section-light {
+  background:
+    radial-gradient(ellipse 70% 60% at 4% 20%, rgba(74,166,232,.09), transparent),
+    linear-gradient(180deg, var(--ms-surface-soft) 0%, #fff 100%);
+}
+.ms-feature-cluster .ms-section-warm {
+  background:
+    radial-gradient(ellipse 60% 70% at 90% 15%, rgba(245,135,14,.11), transparent),
+    linear-gradient(180deg, var(--ms-accent-050) 0%, #fff 100%);
+}
+.ms-feature-cluster .ms-section-ruled {
+  border-top: 1px solid var(--ms-line);
+  border-bottom: 1px solid var(--ms-line);
+  background:
+    radial-gradient(ellipse 55% 70% at 90% 15%, rgba(74,166,232,.07), transparent),
+    linear-gradient(170deg, var(--ms-primary-050) 0%, #ffffff 60%, var(--ms-sky-050) 100%);
+}
+
+/* ── 9. GRIDS ─────────────────────────────────────────────── */
+.ms-feature-cluster .ms-grid   { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--ms-gap); }
+.ms-feature-cluster .ms-grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--ms-gap); }
+.ms-feature-cluster .ms-grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: var(--ms-gap); }
+.ms-feature-cluster .ms-stack  { display: grid; gap: var(--ms-gap); }
+
+/* ── 10. SPLIT ────────────────────────────────────────────── */
+.ms-feature-cluster .ms-split {
+  display: grid;
+  grid-template-columns: 1fr minmax(300px, .85fr);
+  gap: clamp(32px, 6vw, 80px);
+  align-items: center;
+}
+.ms-feature-cluster .ms-split--flip { direction: rtl; }
+.ms-feature-cluster .ms-split--flip > * { direction: ltr; }
+
+/* ── 11. CARDS ────────────────────────────────────────────── */
+.ms-feature-cluster .ms-card {
+  position: relative;
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  gap: .5rem;
+  padding: clamp(22px, 2.8vw, 32px);
+  overflow: hidden;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: rgba(255,255,255,.9);
+  box-shadow: var(--ms-shadow-xs);
+  transition: transform .22s var(--ms-ease), border-color .22s var(--ms-ease),
+              box-shadow .22s var(--ms-ease), background .22s var(--ms-ease);
+}
+.ms-feature-cluster .ms-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: #4fa6e9;
+  opacity: 0;
+  transition: opacity .22s var(--ms-ease);
+}
+.ms-feature-cluster .ms-card:hover { transform: translateY(-5px); border-color: var(--ms-line-strong); background: #fff; box-shadow: var(--ms-shadow-md); }
+.ms-feature-cluster .ms-card:hover::before { opacity: 1; }
+.ms-feature-cluster .ms-card h3 { font-size: clamp(1.05rem, 1.4vw, 1.3rem); letter-spacing: -.02em; }
+.ms-feature-cluster .ms-card p { color: var(--ms-muted); flex: 1; }
+.ms-feature-cluster .ms-card a:not(.ms-btn) {
+  margin-top: auto;
+  padding-top: .75rem;
+  color: var(--ms-primary-700);
+  font-size: .875rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+}
+.ms-feature-cluster .ms-card a:not(.ms-btn)::after { content: "→"; transition: transform .18s var(--ms-ease-spring); }
+.ms-feature-cluster .ms-card a:not(.ms-btn):hover::after { transform: translateX(4px); }
+.ms-feature-cluster .ms-card a:not(.ms-btn):hover { color: var(--ms-accent-700); }
+.ms-feature-cluster .ms-card-accent {
+  background: linear-gradient(160deg, #fff 60%, var(--ms-accent-050));
+  border-color: rgba(245,135,14,.22);
+}
+.ms-feature-cluster .ms-card-sky {
+  background: linear-gradient(160deg, #fff 60%, var(--ms-sky-050));
+  border-color: rgba(74,166,232,.25);
+}
+.ms-feature-cluster .ms-card-quiet { box-shadow: none; }
+
+/* Benefit card */
+.ms-feature-cluster .ms-benefit {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  padding: clamp(20px, 2.5vw, 28px);
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: var(--ms-surface);
+  box-shadow: var(--ms-shadow-xs);
+  transition: transform .2s var(--ms-ease), box-shadow .2s var(--ms-ease), border-color .2s;
+}
+.ms-feature-cluster .ms-benefit:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--ms-shadow-md);
+  border-color: var(--ms-line-strong);
+}
+.ms-feature-cluster .ms-benefit__icon {
+  width: 44px; height: 44px;
+  border-radius: var(--ms-r-sm);
+  background: var(--ms-accent-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+  transition: background .2s;
+}
+.ms-feature-cluster .ms-benefit:hover .ms-benefit__icon { background: var(--ms-accent-500); }
+.ms-feature-cluster .ms-benefit h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -.015em;
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+.ms-feature-cluster .ms-benefit p {
+  font-size: .875rem;
+  color: var(--ms-muted);
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+
+/* ── 12. FEATURE BLOCKS ───────────────────────────────────── */
+.ms-feature-cluster .ms-feature-block {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(260px, .7fr);
+  gap: clamp(24px, 4.5vw, 56px);
+  align-items: start;
+  padding-block: clamp(36px, 5.5vw, 62px);
+  border-top: 1px solid var(--ms-line);
+}
+.ms-feature-cluster .ms-feature-block:first-of-type { border-top: 0; padding-top: 0; }
+.ms-feature-cluster .ms-feature-block p { color: var(--ms-muted); }
+
+.ms-feature-cluster .ms-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 9px 22px;
+  padding: 0;
+  margin: 20px 0 0;
+  list-style: none;
+}
+.ms-feature-cluster .ms-list li {
+  position: relative;
+  padding-left: 22px;
+  color: var(--ms-text);
+  font-size: .92rem;
+  line-height: 1.5;
+}
+.ms-feature-cluster .ms-list li::before {
+  content: "";
+  position: absolute;
+  top: .55em; left: 0;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--ms-accent-500);
+  box-shadow: 0 0 0 4px var(--ms-accent-100);
+}
+
+.ms-feature-cluster .ms-mini {
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: rgba(255,255,255,.94);
+  box-shadow: var(--ms-shadow-sm);
+  padding: 22px;
+}
+.ms-feature-cluster .ms-mini h4 { color: var(--ms-primary-800); }
+.ms-feature-cluster .ms-mini p { color: var(--ms-muted); font-size: .875rem; }
+.ms-feature-cluster .ms-mini a {
+  display: block;
+  margin-top: 10px;
+  color: var(--ms-primary-700);
+  font-size: .875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.ms-feature-cluster .ms-mini a::after { content: " →"; }
+.ms-feature-cluster .ms-mini a:hover { color: var(--ms-accent-700); }
+
+/* ── 13. CALLOUT / ANSWER ─────────────────────────────────── */
+.ms-feature-cluster .ms-answer {
+  margin: 28px 0;
+  padding: clamp(20px, 3vw, 28px);
+  border: 1px solid var(--ms-sky-100);
+  border-left: 4px solid var(--ms-sky-500);
+  border-radius: var(--ms-r-md);
+  background: var(--ms-sky-050);
+  box-shadow: var(--ms-shadow-xs);
+}
+.ms-feature-cluster .ms-answer strong { color: var(--ms-primary-900); }
+.ms-feature-cluster .ms-answer p { color: var(--ms-muted); margin-bottom: 0; }
+
+.ms-feature-cluster .ms-callout {
+  padding: clamp(24px, 3.5vw, 36px);
+  border: 1px solid var(--ms-accent-100);
+  border-left: 4px solid var(--ms-accent-500);
+  border-radius: var(--ms-r-md);
+  background:
+    radial-gradient(ellipse 80% 60% at 100% 0%, rgba(245,135,14,.08), transparent),
+    var(--ms-accent-050);
+}
+.ms-feature-cluster .ms-callout h4 { color: var(--ms-primary-900); margin-bottom: 6px; }
+.ms-feature-cluster .ms-callout p { color: var(--ms-muted); margin-bottom: 0; font-size: .92rem; }
+
+/* ── 14. STAT BLOCKS ──────────────────────────────────────── */
+.ms-feature-cluster .ms-stat {
+  padding: 22px 24px;
+  border-left: 4px solid var(--ms-accent-500);
+  border-radius: var(--ms-r-sm);
+  background: var(--ms-accent-050);
+  border: 1px solid var(--ms-accent-100);
+  border-left-width: 4px;
+}
+.ms-feature-cluster .ms-stat strong {
+  display: block;
+  font-family: var(--ms-font-display);
+  font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -.04em;
+  color: var(--ms-primary-900);
+  line-height: 1.1;
+}
+.ms-feature-cluster .ms-stat p { margin-top: 5px; margin-bottom: 0; font-size: .875rem; color: var(--ms-muted); }
+
+/* ── 15. PROCESS STEPS ────────────────────────────────────── */
+.ms-feature-cluster .ms-process {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0,1fr));
+  gap: 10px;
+  counter-reset: ms-step;
+  margin-top: 32px;
+}
+.ms-feature-cluster .ms-step {
+  position: relative;
+  min-height: 120px;
+  padding: 18px 16px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-sm);
+  background: #fff;
+  box-shadow: var(--ms-shadow-xs);
+  color: var(--ms-text);
+  font-size: .875rem;
+  font-weight: 500;
+  line-height: 1.45;
+  transition: border-color .2s, box-shadow .2s, transform .2s var(--ms-ease);
+}
+.ms-feature-cluster .ms-step:hover {
+  border-color: var(--ms-accent-500);
+  box-shadow: var(--ms-shadow-sm);
+  transform: translateY(-3px);
+}
+.ms-feature-cluster .ms-step::before {
+  counter-increment: ms-step;
+  content: counter(ms-step);
+  display: grid;
+  width: 30px; height: 30px;
+  margin-bottom: 12px;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--ms-primary-900);
+  background: var(--ms-accent-100);
+  font-family: var(--ms-font-display);
+  font-size: .82rem;
+  font-weight: 700;
+}
+
+/* ── 16. BADGES ───────────────────────────────────────────── */
+.ms-feature-cluster .ms-badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-block: 18px 0; }
+.ms-feature-cluster .ms-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 5px 11px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-pill);
+  color: var(--ms-primary-800);
+  background: var(--ms-surface);
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  transition: background .15s, border-color .15s;
+}
+.ms-feature-cluster .ms-badge:hover { background: var(--ms-primary-050); border-color: var(--ms-sky-500); }
+
+/* ── 17. RELATED LINKS ────────────────────────────────────── */
+.ms-feature-cluster .ms-related-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.ms-feature-cluster .ms-related-links a {
+  display: inline-flex;
+  padding: 8px 14px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-pill);
+  background: var(--ms-surface);
+  color: var(--ms-primary-800);
+  font-size: .84rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .15s, border-color .15s;
+}
+.ms-feature-cluster .ms-related-links a:hover { border-color: var(--ms-sky-500); background: var(--ms-sky-050); }
+
+/* ── 18. USE CASE BLOCKS ──────────────────────────────────── */
+.ms-feature-cluster .ms-use-case {
+  padding: clamp(22px, 3vw, 32px);
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: linear-gradient(160deg, #fff 60%, var(--ms-primary-050));
+  box-shadow: var(--ms-shadow-xs);
+  transition: box-shadow .2s, transform .2s var(--ms-ease), border-color .2s;
+}
+.ms-feature-cluster .ms-use-case:hover {
+  box-shadow: var(--ms-shadow-md);
+  transform: translateY(-4px);
+  border-color: var(--ms-line-strong);
+}
+.ms-feature-cluster .ms-use-case h3 { font-size: 1.05rem; margin-bottom: 8px; }
+.ms-feature-cluster .ms-use-case p { font-size: .875rem; color: var(--ms-muted); margin-bottom: 0; }
+
+/* ── 19. BUTTONS ──────────────────────────────────────────── */
+.ms-feature-cluster .ms-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-top: 28px;
+}
+.ms-feature-cluster .ms-btn {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: 12px 22px;
+  border: 1.5px solid transparent;
+  border-radius: var(--ms-r-sm);
+  font-family: var(--ms-font-body);
+  font-size: .9rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: .01em;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .18s var(--ms-ease), color .18s var(--ms-ease),
+              border-color .18s var(--ms-ease), box-shadow .18s var(--ms-ease),
+              transform .2s var(--ms-ease-spring);
+}
+.ms-feature-cluster .ms-btn:hover { transform: translateY(-2px); }
+.ms-feature-cluster .ms-btn:active { transform: translateY(0); }
+.ms-feature-cluster .ms-btn-primary {
+  color: #fff !important;
+  background: linear-gradient(180deg, var(--ms-accent-400) 0%, var(--ms-accent-600) 100%);
+  border-color: var(--ms-accent-600);
+  box-shadow: 0 8px 24px var(--ms-accent-glow);
+}
+.ms-feature-cluster .ms-btn-primary:hover {
+  color: #fff !important;
+  background: linear-gradient(180deg, #ffaf3e 0%, var(--ms-accent-700) 100%);
+  box-shadow: 0 14px 32px var(--ms-accent-glow);
+}
+.ms-feature-cluster .ms-btn-secondary {
+  color: var(--ms-primary-900);
+  background: var(--ms-surface);
+  border-color: var(--ms-line-strong);
+  box-shadow: var(--ms-shadow-xs);
+}
+.ms-feature-cluster .ms-btn-secondary:hover {
+  color: var(--ms-primary-900);
+  background: var(--ms-primary-050);
+  border-color: var(--ms-sky-500);
+  box-shadow: var(--ms-shadow-sm);
+}
+.ms-feature-cluster .ms-link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  color: var(--ms-primary-700);
+  font-weight: 600;
+  font-size: .9rem;
+  text-decoration: none;
+}
+.ms-feature-cluster .ms-link-arrow::after { content: "→"; transition: transform .18s var(--ms-ease-spring); }
+.ms-feature-cluster .ms-link-arrow:hover { color: var(--ms-accent-700); }
+.ms-feature-cluster .ms-link-arrow:hover::after { transform: translateX(4px); }
+
+/* ── 20. FAQ ──────────────────────────────────────────────── */
+.ms-feature-cluster .ms-faq details {
+  padding: 20px 24px;
+  margin-bottom: 10px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-sm);
+  background: var(--ms-surface);
+  box-shadow: var(--ms-shadow-xs);
+  transition: border-color .18s, box-shadow .18s;
+}
+.ms-feature-cluster .ms-faq details:hover { border-color: var(--ms-line-strong); }
+.ms-feature-cluster .ms-faq details[open] { border-color: var(--ms-sky-500); box-shadow: var(--ms-shadow-sm); }
+.ms-feature-cluster .ms-faq summary {
+  cursor: pointer;
+  color: var(--ms-primary-900);
+  font-weight: 600;
+  font-size: 1rem;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.ms-feature-cluster .ms-faq summary::-webkit-details-marker { display: none; }
+.ms-feature-cluster .ms-faq summary::after {
+  content: "+";
+  flex-shrink: 0;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--ms-accent-100);
+  color: var(--ms-accent-600);
+  font-weight: 700;
+  font-size: .9rem;
+  display: grid;
+  place-items: center;
+  transition: background .18s, color .18s, transform .25s var(--ms-ease-spring);
+}
+.ms-feature-cluster .ms-faq details[open] summary::after {
+  content: "−";
+  background: var(--ms-accent-500);
+  color: #fff;
+  transform: rotate(180deg);
+}
+.ms-feature-cluster .ms-faq p { margin: 14px 0 0; color: var(--ms-muted); line-height: 1.72; }
+
+/* ── 21. CTA ──────────────────────────────────────────────── */
+.ms-feature-cluster .ms-cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: clamp(72px, 9vw, 112px);
+  background:
+    radial-gradient(ellipse 60% 80% at 90% 10%, rgba(245,135,14,.12), transparent 50%),
+    radial-gradient(ellipse 50% 60% at 5% 85%, rgba(74,166,232,.1), transparent 50%),
+    linear-gradient(160deg, var(--ms-primary-050) 0%, #ffffff 50%, var(--ms-accent-050) 100%);
+  border-top: 1px solid var(--ms-line);
+  border-bottom: 1px solid var(--ms-line);
+}
+.ms-feature-cluster .ms-cta::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: #ff9100;
+}
+.ms-feature-cluster .ms-cta h2 { color: var(--ms-primary-900); }
+.ms-feature-cluster .ms-cta p { max-width: 680px; color: var(--ms-muted); }
+
+/* ── 22. FOOTER ───────────────────────────────────────────── */
+.ms-feature-cluster .ms-footer {
+  padding-block: 28px;
+  background: var(--ms-primary-050);
+  color: var(--ms-muted);
+  font-size: .88rem;
+  border-top: 1px solid var(--ms-line);
+}
+.ms-feature-cluster .ms-footer a { color: var(--ms-primary-700); text-decoration: none; }
+.ms-feature-cluster .ms-footer a:hover { color: var(--ms-accent-700); }
+
+/* ── 23. SCROLL REVEAL ────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .ms-feature-cluster .ms-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .5s var(--ms-ease), transform .5s var(--ms-ease);
+  }
+  .ms-feature-cluster .ms-reveal.visible { opacity: 1; transform: translateY(0); }
+  .ms-feature-cluster .ms-reveal-d1 { transition-delay: .08s; }
+  .ms-feature-cluster .ms-reveal-d2 { transition-delay: .16s; }
+  .ms-feature-cluster .ms-reveal-d3 { transition-delay: .24s; }
+  .ms-feature-cluster .ms-reveal-d4 { transition-delay: .32s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ms-feature-cluster .ms-reveal { opacity: 1; transform: none; }
+}
+
+/* ── 24. RESPONSIVE ───────────────────────────────────────── */
+@media (max-width: 1040px) {
+  .ms-feature-cluster .ms-grid-4 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .ms-feature-cluster .ms-grid   { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .ms-feature-cluster .ms-process { grid-template-columns: repeat(3, minmax(0,1fr)); }
+}
+@media (max-width: 820px) {
+  .ms-feature-cluster .ms-split,
+  .ms-feature-cluster .ms-split--flip,
+  .ms-feature-cluster .ms-grid,
+  .ms-feature-cluster .ms-grid-2,
+  .ms-feature-cluster .ms-grid-4,
+  .ms-feature-cluster .ms-feature-block { grid-template-columns: 1fr; direction: ltr; }
+  .ms-feature-cluster .ms-list { grid-template-columns: 1fr; }
+  .ms-feature-cluster .ms-process { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .ms-feature-cluster .ms-hero-compact__inner { grid-template-columns: 1fr; }
+  .ms-feature-cluster .ms-hero-compact__stats { flex-direction: row; flex-wrap: wrap; display: none; }
+}
+@media (max-width: 520px) {
+  .ms-feature-cluster .ms-process { grid-template-columns: 1fr; }
+  .ms-feature-cluster .ms-btn { width: 100%; justify-content: center; }
+  .ms-feature-cluster .ms-actions { align-items: stretch; }
+  .ms-feature-cluster .ms-hero-compact__stats { flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ms-feature-cluster *,
+  .ms-feature-cluster *::before,
+  .ms-feature-cluster *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+.container-wrap{
+	padding: 0 !important;
+}
+
+html, body {
+	overflow-x: clip;
+  overflow-y: visible !important;
+}
+
+body.js-page-trans-loaded {
+  overflow-x:clip;
+overflow-y: visible !important;
+}
+
+ul li {
+    list-style: none;
+}
+
+
+div:has(> .ms-feature-cluster),
+div:has(> div:has(> .ms-feature-cluster)) {
+  overflow-x: clip !important;
+  overflow-y: visible !important;
+}
+
+/* ── REVIEWS SECTION ─────────────────────────────────────── */
+
+.ms-feature-cluster .ms-reviews {
+  position: relative;
+  overflow: hidden;
+}
+
+.ms-feature-cluster .ms-reviews__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: end;
+  margin-bottom: clamp(34px, 5vw, 56px);
+}
+
+.ms-feature-cluster .ms-reviews__summary {
+  padding: 22px 24px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: rgba(255,255,255,.94);
+  box-shadow: var(--ms-shadow-sm);
+}
+
+.ms-feature-cluster .ms-reviews__score {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.ms-feature-cluster .ms-reviews__score strong {
+  font-family: var(--ms-font-display);
+  font-size: clamp(2.2rem, 4vw, 3.1rem);
+  line-height: 1;
+  letter-spacing: -.05em;
+  color: var(--ms-primary-900);
+}
+
+.ms-feature-cluster .ms-reviews__score span {
+  color: var(--ms-primary-800);
+  font-size: .9rem;
+  font-weight: 700;
+}
+
+.ms-feature-cluster .ms-reviews__stars {
+  display: inline-flex;
+  gap: 2px;
+  color: var(--ms-accent-600);
+  font-size: 1rem;
+  letter-spacing: .04em;
+}
+
+.ms-feature-cluster .ms-reviews__summary p {
+  margin: 10px 0 0;
+  color: var(--ms-muted);
+  font-size: .84rem;
+  line-height: 1.55;
+}
+
+.ms-feature-cluster .ms-review-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ms-gap);
+}
+
+.ms-feature-cluster .ms-review-card {
+  position: relative;
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  padding: clamp(24px, 3vw, 34px);
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-lg);
+  background:
+    radial-gradient(ellipse 85% 70% at 100% 0%, rgba(74,166,232,.08), transparent 52%),
+    #ffffff;
+  box-shadow: var(--ms-shadow-sm);
+  transition:
+    transform .22s var(--ms-ease),
+    border-color .22s var(--ms-ease),
+    box-shadow .22s var(--ms-ease);
+}
+
+.ms-feature-cluster .ms-review-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--ms-line-strong);
+  box-shadow: var(--ms-shadow-md);
+}
+
+.ms-feature-cluster .ms-review-card::before {
+  content: "“";
+  position: absolute;
+  top: 14px;
+  right: 24px;
+  color: var(--ms-primary-050);
+  font-family: var(--ms-font-display);
+  font-size: 6rem;
+  font-weight: 700;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.ms-feature-cluster .ms-review-card__meta {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.ms-feature-cluster .ms-review-card__rating,
+.ms-feature-cluster .ms-review-card__source {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 5px 10px;
+  border-radius: var(--ms-r-pill);
+  font-size: .76rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.ms-feature-cluster .ms-review-card__rating {
+  border: 1px solid var(--ms-accent-100);
+  background: var(--ms-accent-050);
+  color: var(--ms-accent-700);
+}
+
+.ms-feature-cluster .ms-review-card__source {
+  border: 1px solid var(--ms-line);
+  background: var(--ms-primary-050);
+  color: var(--ms-primary-800);
+}
+
+.ms-feature-cluster .ms-review-card h3 {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 14px;
+  font-size: clamp(1.2rem, 1.8vw, 1.55rem);
+  line-height: 1.15;
+}
+
+.ms-feature-cluster .ms-review-card blockquote {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  flex: 1;
+  color: var(--ms-text);
+  font-size: clamp(.98rem, 1.2vw, 1.08rem);
+  line-height: 1.75;
+}
+
+.ms-feature-cluster .ms-review-card blockquote p {
+  margin: 0;
+  color: inherit;
+	font-family: var(--ms-font-body) !important;
+}
+
+.ms-feature-cluster .ms-review-card__footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid var(--ms-line);
+  background: transparent !important;
+}
+
+.ms-feature-cluster .ms-review-card__person {
+  display: grid;
+  gap: 3px;
+}
+
+.ms-feature-cluster .ms-review-card__person strong {
+  color: var(--ms-primary-900);
+  font-size: .95rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.ms-feature-cluster .ms-review-card__person span {
+  color: var(--ms-muted);
+  font-size: .82rem;
+  line-height: 1.35;
+}
+
+.ms-feature-cluster .ms-review-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 7px 12px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-pill);
+  background: var(--ms-surface);
+  color: var(--ms-primary-800);
+  font-size: .82rem;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.ms-feature-cluster .ms-review-card__link::after {
+  content: "↗";
+  font-size: .78rem;
+  transition: transform .18s var(--ms-ease-spring);
+}
+
+.ms-feature-cluster .ms-review-card__link:hover {
+  border-color: var(--ms-accent-500);
+  background: var(--ms-accent-050);
+  color: var(--ms-accent-700);
+}
+
+.ms-feature-cluster .ms-review-card__link:hover::after {
+  transform: translate(2px, -2px);
+}
+
+.ms-feature-cluster .ms-reviews__note {
+  margin-top: 22px;
+  color: var(--ms-soft);
+  font-size: .78rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 820px) {
+  .ms-feature-cluster .ms-reviews__header,
+  .ms-feature-cluster .ms-review-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ms-feature-cluster .ms-reviews__summary {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .ms-feature-cluster .ms-review-card__footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .ms-feature-cluster .ms-review-card__link {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+
+
+    
+
+
+/* ── BAKERY INDUSTRY PAGE ADDITIONS ───────────────────────── */
+body { margin: 0; }
+.ms-feature-cluster .ms-hero-compact--industry .ms-hero-compact__inner {
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, 430px);
+  gap: clamp(28px, 4vw, 56px);
+  align-items: start;
+}
+.ms-feature-cluster .ms-bakery-hero-copy {
+  max-width: 650px;
+  padding-top: clamp(6px, 1vw, 14px);
+}
+.ms-feature-cluster .ms-bakery-hero-copy h1 {
+  max-width: 11.5ch;
+  margin-bottom: 22px;
+  font-size: clamp(3rem, 5vw, 5.15rem);
+  line-height: .93;
+  letter-spacing: -.058em;
+  text-wrap: balance;
+}
+.ms-feature-cluster .ms-bakery-hero-copy h1 .ms-hero-line {
+  display: block;
+}
+.ms-feature-cluster .ms-bakery-hero-copy h1 .ms-hero-line + .ms-hero-line {
+  margin-top: .02em;
+}
+.ms-feature-cluster .ms-bakery-hero-copy h1 em {
+  display: inline-block;
+  white-space: nowrap;
+}
+.ms-feature-cluster .ms-bakery-hero-copy .ms-lede {
+  max-width: 35rem;
+}
+.ms-feature-cluster .ms-bakery-hero-copy .ms-proof-strip {
+  margin-top: 18px;
+}
+.ms-feature-cluster .ms-bakery-hero-copy .ms-actions {
+  margin-top: 28px;
+}
+.ms-feature-cluster .ms-industry-hero-card {
+  position: relative;
+  overflow: hidden;
+  width: min(430px, 100%);
+  padding: clamp(22px, 3vw, 34px);
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-lg);
+  background:
+    radial-gradient(ellipse 90% 70% at 100% 0%, rgba(74,166,232,.12), transparent 54%),
+    radial-gradient(ellipse 80% 70% at 0% 100%, rgba(255,145,0,.12), transparent 52%),
+    rgba(255,255,255,.96);
+  box-shadow: var(--ms-shadow-md);
+}
+.ms-feature-cluster .ms-industry-hero-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: #ff9100;
+}
+.ms-feature-cluster .ms-industry-hero-card h3 {
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  margin-bottom: 14px;
+}
+.ms-feature-cluster .ms-industry-flow {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+.ms-feature-cluster .ms-industry-flow__row {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 12px 14px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-sm);
+  background: rgba(255,255,255,.88);
+}
+.ms-feature-cluster .ms-industry-flow__row span {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--ms-accent-100);
+  color: var(--ms-primary-900);
+  font-weight: 800;
+}
+.ms-feature-cluster .ms-industry-flow__row strong {
+  display: block;
+  color: var(--ms-primary-900);
+  font-size: .94rem;
+  line-height: 1.25;
+}
+.ms-feature-cluster .ms-industry-flow__row small {
+  display: block;
+  color: var(--ms-muted);
+  font-size: .8rem;
+  line-height: 1.45;
+  margin-top: 2px;
+}
+.ms-feature-cluster .ms-proof-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 22px;
+}
+.ms-feature-cluster .ms-proof-strip span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-pill);
+  background: rgba(255,255,255,.86);
+  color: var(--ms-primary-800);
+  font-size: .82rem;
+  font-weight: 700;
+}
+.ms-feature-cluster .ms-proof-strip span::before {
+  content: "✓";
+  color: var(--ms-accent-700);
+  font-weight: 900;
+}
+.ms-feature-cluster .ms-workflow-strip {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 34px;
+}
+.ms-feature-cluster .ms-workflow-strip__item {
+  position: relative;
+  padding: 18px 14px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-sm);
+  background: #fff;
+  box-shadow: var(--ms-shadow-xs);
+}
+.ms-feature-cluster .ms-workflow-strip__item::after {
+  content: "→";
+  position: absolute;
+  top: 50%;
+  right: -12px;
+  transform: translateY(-50%);
+  color: var(--ms-accent-600);
+  font-weight: 800;
+  z-index: 2;
+}
+.ms-feature-cluster .ms-workflow-strip__item:last-child::after { display: none; }
+.ms-feature-cluster .ms-workflow-strip__item strong {
+  display: block;
+  color: var(--ms-primary-900);
+  font-size: .92rem;
+  line-height: 1.25;
+}
+.ms-feature-cluster .ms-workflow-strip__item p {
+  margin: 6px 0 0;
+  color: var(--ms-muted);
+  font-size: .8rem;
+  line-height: 1.45;
+}
+.ms-feature-cluster .ms-table-wrap {
+  overflow-x: auto;
+  margin-top: 28px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: #fff;
+  box-shadow: var(--ms-shadow-xs);
+}
+.ms-feature-cluster .ms-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 760px;
+}
+.ms-feature-cluster .ms-table th,
+.ms-feature-cluster .ms-table td {
+  padding: 15px 18px;
+  border-bottom: 1px solid var(--ms-line);
+  text-align: left;
+  vertical-align: top;
+}
+.ms-feature-cluster .ms-table th {
+  color: var(--ms-primary-900);
+  background: var(--ms-primary-050);
+  font-size: .82rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.ms-feature-cluster .ms-table td {
+  color: var(--ms-muted);
+  font-size: .9rem;
+  line-height: 1.6;
+}
+.ms-feature-cluster .ms-table td strong { color: var(--ms-primary-900); }
+.ms-feature-cluster .ms-table tr:last-child td { border-bottom: 0; }
+.ms-feature-cluster .ms-fit-card {
+  padding: clamp(22px, 3vw, 32px);
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-lg);
+  background:
+    radial-gradient(ellipse 80% 60% at 100% 0%, rgba(74,166,232,.08), transparent 52%),
+    #fff;
+  box-shadow: var(--ms-shadow-sm);
+}
+.ms-feature-cluster .ms-fit-card h3 { font-size: clamp(1.25rem, 2vw, 1.7rem); }
+.ms-feature-cluster .ms-fit-card p { color: var(--ms-muted); }
+.ms-feature-cluster .ms-page-note {
+  margin-top: 24px;
+  padding: 18px 20px;
+  border-radius: var(--ms-r-md);
+  border: 1px solid var(--ms-line);
+  background: var(--ms-primary-050);
+  color: var(--ms-muted);
+  font-size: .9rem;
+}
+@media (max-width: 1120px) {
+  .ms-feature-cluster .ms-hero-compact--industry .ms-hero-compact__inner {
+    grid-template-columns: minmax(0, 1fr) minmax(330px, 400px);
+  }
+
+  .ms-feature-cluster .ms-bakery-hero-copy h1 {
+    max-width: 12ch;
+    font-size: clamp(2.85rem, 5.8vw, 4.65rem);
+  }
+}
+@media (max-width: 1040px) {
+  .ms-feature-cluster .ms-workflow-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ms-feature-cluster .ms-workflow-strip__item::after { display: none; }
+}
+@media (max-width: 900px) {
+  .ms-feature-cluster .ms-hero-compact--industry .ms-hero-compact__inner {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .ms-feature-cluster .ms-bakery-hero-copy {
+    max-width: 100%;
+    padding-top: 0;
+  }
+
+  .ms-feature-cluster .ms-bakery-hero-copy h1 {
+    max-width: 100%;
+    font-size: clamp(2.55rem, 9.5vw, 4.1rem);
+  }
+
+  .ms-feature-cluster .ms-industry-hero-card {
+    width: 100%;
+  }
+}
+@media (max-width: 820px) {
+  .ms-feature-cluster .ms-workflow-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .ms-feature-cluster .ms-bakery-hero-copy .ms-actions {
+    align-items: stretch;
+  }
+
+  .ms-feature-cluster .ms-bakery-hero-copy .ms-actions .ms-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+@media (max-width: 520px) {
+  .ms-feature-cluster .ms-workflow-strip { grid-template-columns: 1fr; }
+}
+
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://mountainstream.co/"},
+          {"@type":"ListItem","position":2,"name":"Industries","item":"https://mountainstream.co/industries/"},
+          {"@type":"ListItem","position":3,"name":"Commercial Kitchen ERP","item":"https://mountainstream.co/industries/commercial-kitchen-erp/"}
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Streamline ERP",
+        "applicationCategory": "Enterprise Resource Planning Software",
+        "applicationSubCategory": "Commercial Kitchen ERP Software",
+        "operatingSystem": "Web-based",
+        "url": "https://mountainstream.co/industries/commercial-kitchen-erp/",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Mountain Stream",
+          "url": "https://mountainstream.co/"
+        },
+        "description": "Streamline ERP helps commercial kitchens, commissaries, central kitchens, and prepared food teams connect customer ordering, production planning, recipes, inventory, lot traceability, delivery, invoicing, payments, accounting exports, and reporting.",
+        "featureList": [
+          "Customer ordering",
+          "Standing orders",
+          "Customer-specific pricing",
+          "Production planning",
+          "Recipe management",
+          "Recipe costing",
+          "Ingredient inventory",
+          "Lot tracking",
+          "Supply chain traceability",
+          "Pick and pack",
+          "Route management",
+          "Delivery notes",
+          "Invoicing",
+          "Payment collection",
+          "Accounting exports",
+          "Reporting"
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is commercial kitchen ERP software?",
+            "acceptedAnswer": {"@type":"Answer","text":"Commercial kitchen ERP software connects the workflows a central kitchen, commissary, or prepared food team uses to manage customer orders, production planning, recipes, ingredient inventory, lot traceability, delivery, invoicing, payments, accounting exports, and reporting."}
+          },
+          {
+            "@type": "Question",
+            "name": "Can Streamline connect kitchen orders to production planning?",
+            "acceptedAnswer": {"@type":"Answer","text":"Yes. Streamline supports customer ordering, standing orders, cart orders, production planning, Recipe Totals, recipe cards, inventory updates, and production dates so customer demand can flow into kitchen production planning."}
+          },
+          {
+            "@type": "Question",
+            "name": "Is Streamline only for bakeries?",
+            "acceptedAnswer": {"@type":"Answer","text":"No. Streamline has deep bakery experience, but it is built as flexible ERP software for order-driven production and distribution businesses, including commercial kitchens, commissaries, prepared food teams, food producers, and route-based distributors."}
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+<div class="ms-feature-cluster">
+
+<!-- ── BREADCRUMB ─────────────────────────────────────────── -->
+<div class="ms-breadcrumb">
+  <div class="ms-wrap">
+    <nav aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="ms-breadcrumb-sep" aria-hidden="true">›</span>
+      <a href="/industries/">Industries</a>
+      <span class="ms-breadcrumb-sep" aria-hidden="true">›</span>
+      <span class="ms-breadcrumb-current">Commercial Kitchen ERP</span>
+    </nav>
+  </div>
+</div>
+
+<!-- ── HERO ───────────────────────────────────────────────── -->
+<header class="ms-hero-compact ms-hero-compact--industry">
+  <div class="ms-wrap">
+    <div class="ms-hero-compact__inner">
+      <div class="ms-bakery-hero-copy">
+        <p class="ms-kicker">Commercial Kitchen ERP Software</p>
+        <h1>
+          <span class="ms-hero-line">Commercial kitchen ERP</span>
+          <span class="ms-hero-line">for order-driven</span>
+          <span class="ms-hero-line"><em>central kitchens</em></span>
+        </h1>
+        <p class="ms-lede">Streamline ERP gives commissary kitchens, central production kitchens, prepared food producers, and route-based food teams one connected system for customer orders, recipe-driven production, ingredient lots, stock, packing, delivery, invoicing, accounts receivable, and reporting.</p>
+        <div class="ms-proof-strip" aria-label="Streamline commercial kitchen ERP highlights">
+          <span>Built for order-driven food production</span>
+          <span>Order-to-production visibility</span>
+          <span>Recipe-to-invoice control</span>
+        </div>
+        <div class="ms-actions">
+          <a class="ms-btn ms-btn-primary" href="https://mountainstream.co/register-your-company?cta=commercial-kitchen-hero&intent=Book%20a%20demo">Book a Demo</a>
+          <a class="ms-btn ms-btn-secondary" href="https://mountainstream.co/pricing/">View Pricing</a>
+        </div>
+      </div>
+      <aside class="ms-industry-hero-card" aria-label="Commercial kitchen ERP workflow preview">
+        <p class="ms-kicker">Connected workflow</p>
+        <h3>See demand, prep, stock, routes, and invoices in one kitchen workflow.</h3>
+        <div class="ms-industry-flow">
+          <div class="ms-industry-flow__row"><span>1</span><div><strong>Account and location demand</strong><small>Standing orders, cart orders, imported orders, delivery addresses, lead times, customer SKUs, and account pricing.</small></div></div>
+          <div class="ms-industry-flow__row"><span>2</span><div><strong>Batch prep and recipe production</strong><small>Turn orders into production totals, recipe cards, ingredient demand, labels, and finished-goods updates.</small></div></div>
+          <div class="ms-industry-flow__row"><span>3</span><div><strong>Ingredient lots and shelf life</strong><small>Receive goods, assign lots, track use-by dates, select stock by FEFO, and link usage to recipes and deliveries.</small></div></div>
+          <div class="ms-industry-flow__row"><span>4</span><div><strong>Packing, routes, and accounts</strong><small>Pack by route or customer, capture delivery records, create invoices, collect payments, and report on margins.</small></div></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</header>
+
+<!-- ── STICKY NAV ─────────────────────────────────────────── -->
+<nav class="ms-nav" aria-label="Page sections">
+  <div class="ms-wrap">
+    <a href="/streamline-features/" class="ms-nav__back">All Features</a>
+    <span class="ms-nav__divider" aria-hidden="true"></span>
+    <a href="#overview">Overview</a>
+    <a href="#ordering">Ordering</a>
+    <a href="#production">Production</a>
+    <a href="#inventory">Inventory</a>
+    <a href="#delivery">Delivery</a>
+    <a href="#finance">Finance</a>
+    <a href="#fit">Best Fit</a>
+    <a href="#faq">FAQ</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════════════════════════════
+     OVERVIEW
+═══════════════════════════════════════════════════════════════ -->
+<section id="overview" class="ms-section">
+  <div class="ms-wrap">
+    <p class="ms-kicker ms-reveal">What it does</p>
+    <h2 class="ms-reveal ms-reveal-d1">Run commercial kitchen operations from one connected ERP workflow.</h2>
+    <p class="ms-section-intro ms-reveal ms-reveal-d2">Commercial kitchens do not just need recipe binders, production spreadsheets, stock sheets, and separate invoice tools. They need customer demand, recipes, ingredients, production, inventory, packing, delivery, finance, and reporting to stay connected every day.</p>
+    <p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline brings those moving parts into one operational workflow for commissaries, central kitchens, prepared food teams, wholesale food producers, and route-based distributors, so the office, kitchen, warehouse, drivers, and finance team work from the same demand and inventory data.</p>
+    <div class="ms-answer ms-reveal ms-reveal-d2">
+      <p><strong>What is commercial kitchen ERP software?</strong> Commercial kitchen ERP software connects the systems a food production team uses to run daily operations: customer ordering, standing orders, production planning, recipes, ingredient inventory, lot tracking, packing, delivery, invoicing, payment collection, accounting exports, and reporting.</p>
+    </div>
+
+    <div class="ms-workflow-strip ms-reveal ms-reveal-d3" aria-label="Commercial kitchen order-to-cash workflow">
+      <div class="ms-workflow-strip__item"><strong>Order</strong><p>Receive recurring, cart, mobile, CSV, SFTP, EDI, wholesale, or multi-location orders.</p></div>
+      <div class="ms-workflow-strip__item"><strong>Plan</strong><p>Convert demand into prep quantities, Recipe Totals, production dates, shopping lists, and ingredient needs.</p></div>
+      <div class="ms-workflow-strip__item"><strong>Prep</strong><p>Use recipe cards, sub-recipes, stages, machines, labels, allergens, and costs to guide daily kitchen work.</p></div>
+      <div class="ms-workflow-strip__item"><strong>Track</strong><p>Control ingredients, supplier lots, internal lots, use-by dates, FEFO, and finished goods.</p></div>
+      <div class="ms-workflow-strip__item"><strong>Deliver</strong><p>Pick, pack, route, capture POD, track delivery assets, and keep customer delivery records.</p></div>
+      <div class="ms-workflow-strip__item"><strong>Invoice</strong><p>Create invoices from deliveries, collect payments, export accounts, and report on margins.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     WHY IT MATTERS
+═══════════════════════════════════════════════════════════════ -->
+<section class="ms-section ms-section-light">
+  <div class="ms-wrap">
+    <p class="ms-kicker ms-reveal">Why kitchens use it</p>
+    <h2 class="ms-reveal ms-reveal-d1">Built for the pace of a fast-paced kitchen.</h2>
+    <p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline is designed for order-driven kitchens where demand changes, recipes need accuracy, ingredients move fast, batches need traceability, and delivery or invoice records need to match what the kitchen actually produced.</p>
+
+    <div class="ms-grid-4" style="margin-top: 2.5rem;">
+      <div class="ms-benefit ms-reveal ms-reveal-d1">
+        <div class="ms-benefit__icon">🧾</div>
+        <h3>Account-ready ordering</h3>
+        <p>Handle schools, cafés, retailers, caterers, institutions, or internal sites with customer-specific catalogues, prices, notes, deadlines, and delivery addresses.</p>
+      </div>
+      <div class="ms-benefit ms-reveal ms-reveal-d2">
+        <div class="ms-benefit__icon">🍲</div>
+        <h3>Batch and prep visibility</h3>
+        <p>Turn live demand into production totals, recipe cards, prep recipes, yields, batch instructions, labels, and daily kitchen summaries.</p>
+      </div>
+      <div class="ms-benefit ms-reveal ms-reveal-d3">
+        <div class="ms-benefit__icon">🔗</div>
+        <h3>Lot and shelf-life control</h3>
+        <p>Receive ingredients, assign lots, capture use-by dates, use FEFO, deplete stock through recipes, and connect finished goods to delivery records.</p>
+      </div>
+      <div class="ms-benefit ms-reveal ms-reveal-d4">
+        <div class="ms-benefit__icon">🚚</div>
+        <h3>Route-to-cash accuracy</h3>
+        <p>Move from packing and route delivery to proof of delivery, invoices, payments, accounting exports, and profitability reporting without rebuilding data.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     ORDERING
+═══════════════════════════════════════════════════════════════ -->
+<section id="ordering" class="ms-section">
+  <div class="ms-wrap">
+    <p class="ms-kicker ms-reveal">Customers & Ordering</p>
+    <h2 class="ms-reveal ms-reveal-d1">Turn customer orders into kitchen production plans.</h2>
+    <div class="ms-split" style="margin-top: 3rem;">
+      <div class="ms-reveal">
+        <p class="ms-section-intro" style="max-width:100%">Streamline gives commercial kitchens one structured order-intake process for recurring wholesale accounts, institutional customers, café and store drops, catering-style demand, and internal locations. Orders carry the details production needs: item quantities, deadlines, lead times, delivery days, customer SKUs, addresses, notes, and pricing.</p>
+        <ul class="ms-list" style="margin-top: 1.5rem;">
+          <li>Standing orders for recurring customers and weekly production</li>
+          <li>Cart orders for one-off demand, changes, and additions</li>
+          <li>Customer-specific catalogues, item visibility, and pricing</li>
+          <li>Saved carts, cloned orders, and repeat-order templates</li>
+          <li>Lead times, order cut-offs, late-order handling, and delivery-day rules</li>
+          <li>Mobile ordering, CSV, SFTP, and EDI order imports</li>
+        </ul>
+        <div class="ms-actions">
+          <a class="ms-btn ms-btn-primary" href="https://mountainstream.co/register-your-company?cta=commercial-kitchen-ordering&intent=Book%20a%20demo">See Kitchen Ordering</a>
+          <a class="ms-link-arrow" href="https://mountainstream.co/streamline-features/customers-and-ordering/">Customers & Ordering features</a>
+        </div>
+      </div>
+      <div class="ms-reveal ms-reveal-d1">
+        <div class="ms-callout">
+          <h4>Why it matters for commercial kitchens</h4>
+          <p>Demand can come from wholesale customers, schools, cafes, institutions, catering accounts, retail channels, or internal locations. Streamline keeps repeat orders, changes, quantities, prices, addresses, and production timing in the same system instead of scattered across calls, emails, spreadsheets, and paper notes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     PRODUCTION
+═══════════════════════════════════════════════════════════════ -->
+<section id="production" class="ms-section ms-section-light">
+  <div class="ms-wrap">
+    <p class="ms-kicker ms-reveal">Production & Recipes</p>
+      <h2 class="ms-reveal ms-reveal-d1">Commercial kitchen production planning connected to recipes, ingredients, and orders.</h2>
+    <p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline helps commissaries, central kitchens, and prepared food teams turn confirmed demand into prep lists, recipe totals, batches, ingredient requirements, stock updates, labels, finished goods, and traceability records without rebuilding production sheets by hand.</p>
+    <div class="ms-grid" style="margin-top: 3rem;">
+      <div class="ms-card ms-card-sky ms-reveal ms-reveal-d1">
+        <h3>Build the day from confirmed demand</h3>
+        <p>Bring standing orders, one-off changes, customer notes, lead times, and delivery dates into one production view so the kitchen knows what needs to be made before prep begins.</p>
+        <a href="https://mountainstream.co/streamline-features/customers-and-ordering/">View ordering workflows</a>
+      </div>
+      <div class="ms-card ms-reveal ms-reveal-d2">
+        <h3>Keep prep and batches under control</h3>
+        <p>Use recipes, ingredients, yields, stages, machines, recipe totals, recipe cards, and nested recipes to guide production by weight, quantity, portion, tray, case, or finished item.</p>
+        <a href="https://mountainstream.co/streamline-features/production-and-recipes/">Explore recipe workflows</a>
+      </div>
+      <div class="ms-card ms-card-accent ms-reveal ms-reveal-d3">
+        <h3>Connect what you make to stock and fulfilment</h3>
+        <p>Track ingredient usage, lot details, finished goods, packing needs, delivery documents, and invoice records in the same workflow so production stays tied to what customers actually receive.</p>
+        <a href="https://mountainstream.co/streamline-features/inventory-and-traceability/">Connect inventory and traceability</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     INVENTORY
+═══════════════════════════════════════════════════════════════ -->
+<section id="inventory" class="ms-section ms-section-ruled">
+  <div class="ms-wrap">
+    <p class="ms-kicker ms-reveal">Inventory & Traceability</p>
+    <h2 class="ms-reveal ms-reveal-d1">Keep kitchen stock traceable from receiving to dispatch.</h2>
+    <div class="ms-split" style="margin-top: 3rem;">
+      <div class="ms-reveal">
+        <p class="ms-section-intro" style="max-width:100%">Streamline helps commercial kitchens receive ingredients, assign lots, manage use-by dates, update stock, and trace finished food back to the ingredients used.</p>
+        <ul class="ms-list" style="margin-top: 1.5rem;">
+          <li>Goods-in and supplier records</li>
+          <li>Ingredient lots and use-by dates</li>
+          <li>Stock counts and adjustments</li>
+          <li>Recipe usage and stock depletion</li>
+          <li>Finished goods traceability</li>
+          <li>Purchasing and replenishment support</li>
+        </ul>
+        <div class="ms-actions">
+          <a class="ms-btn ms-btn-primary" href="https://mountainstream.co/register-your-company?cta=commercial-kitchen-inventory&intent=Book%20a%20demo">See Inventory Workflow</a>
+          <a class="ms-link-arrow" href="https://mountainstream.co/streamline-features/inventory-and-traceability/">Inventory & Traceability features</a>
+        </div>
+      </div>
+      <div class="ms-reveal ms-reveal-d1">
+        <div class="ms-grid-2" style="gap:14px;">
+          <div class="ms-stat"><strong>Receive stock</strong><p>Log supplier deliveries, ingredient details, and quantities as stock arrives.</p></div>
+          <div class="ms-stat" style="border-left-color: var(--ms-sky-500); background: var(--ms-sky-050); border-color: var(--ms-sky-100);"><strong>Use older stock first</strong><p>Track use-by dates and support FEFO stock selection.</p></div>
+          <div class="ms-stat" style="border-left-color: var(--ms-success-600); background: var(--ms-success-100); border-color: #c3ecd7;"><strong>Lot tracking</strong><p>Link ingredient lots to recipes, finished goods, and deliveries.</p></div>
+          <div class="ms-stat"><strong>Replenish smarter</strong><p>Use stock levels and recipe demand to plan purchasing.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     DELIVERY
+═══════════════════════════════════════════════════════════════ -->
+<section id="delivery" class="ms-section ms-section-warm">
+  <div class="ms-wrap">
+    <p class="ms-kicker ms-reveal">Delivery & Distribution</p>
+    <h2 class="ms-reveal ms-reveal-d1">Pack, route, deliver, and document every order.</h2>
+    <p class="ms-section-intro ms-reveal ms-reveal-d2">For commercial kitchens with recurring deliveries, store drops, wholesale routes, or customer-specific delivery requirements, Streamline connects distribution workflows with orders, stock, customer addresses, delivery documents, and invoicing.</p>
+
+    <div class="ms-grid-3" style="margin-top: 3rem;">
+      <div class="ms-card ms-reveal ms-reveal-d1">
+        <h3>Pick and pack by route</h3>
+        <p>Prepare orders by delivery route, address, item, labels, boxes, matrix views, and saved workflow filters.</p>
+      </div>
+      <div class="ms-card ms-reveal ms-reveal-d2">
+        <h3>Customer delivery documents</h3>
+        <p>Create delivery notes and packing slips with customer-specific templates and address-level settings.</p>
+      </div>
+      <div class="ms-card ms-reveal ms-reveal-d3">
+        <h3>Route and driver workflows</h3>
+        <p>Support route management, driver reports, route optimization integrations, delivery records, and delivery asset tracking.</p>
+      </div>
+    </div>
+
+    <div class="ms-actions">
+      <a class="ms-btn ms-btn-primary" href="https://mountainstream.co/register-your-company?cta=commercial-kitchen-delivery&intent=Book%20a%20demo">See Delivery Workflows</a>
+      <a class="ms-link-arrow" href="https://mountainstream.co/streamline-features/delivery-and-distribution/">Delivery & Distribution features</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     FINANCE
+═══════════════════════════════════════════════════════════════ -->
+<section id="finance" class="ms-section">
+  <div class="ms-wrap">
+    <p class="ms-kicker ms-reveal">Finance & Reporting</p>
+    <h2 class="ms-reveal ms-reveal-d1">Connect kitchen output to invoices, payments, and accounting exports.</h2>
+    <p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline helps commercial kitchens reduce re-entry between delivery, finance, and accounting. Completed deliveries and customer pricing can flow into draft invoices, published invoices, customer invoice libraries, payment collection, and accounting exports.</p>
+
+    <article class="ms-feature-block ms-reveal">
+      <div>
+        <ul class="ms-list">
+          <li>Automatic draft invoices from deliveries and pricing</li>
+          <li>Daily, weekly, or monthly invoice frequencies</li>
+          <li>Customer invoice library, statements, and credit notes</li>
+          <li>Accounts receivable and overdue balance tracking</li>
+          <li>Stripe payment collection and invoice payment links</li>
+          <li>QuickBooks and Xero-oriented accounting export workflows</li>
+          <li>Gross profit reporting from recipe and item costs</li>
+          <li>Custom reporting for orders, production, inventory, delivery, and finance</li>
+        </ul>
+      </div>
+      <aside class="ms-mini">
+        <h4>Why it helps</h4>
+        <p>When customer demand, production, delivery, and pricing stay connected, finance teams spend less time rebuilding invoices and more time reviewing exceptions, collecting payments, and closing the loop with accounting.</p>
+      </aside>
+    </article>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     BEST FIT
+═══════════════════════════════════════════════════════════════ -->
+<section id="fit" class="ms-section ms-section-light">
+  <div class="ms-wrap">
+    <p class="ms-kicker ms-reveal">Best fit</p>
+    <h2 class="ms-reveal ms-reveal-d1">Built for kitchens that need more than a recipe spreadsheet.</h2>
+    <p class="ms-section-intro ms-reveal ms-reveal-d2">Commercial kitchen ERP is most useful when customer demand, production, ingredients, stock, delivery, finance, and reporting all need to agree.</p>
+
+    <div class="ms-grid-2" style="margin-top: 2.5rem;">
+      <div class="ms-fit-card ms-reveal ms-reveal-d1">
+        <h3>Great fit for</h3>
+        <ul class="ms-list" style="grid-template-columns:1fr;">
+          <li>Central kitchens and commissary kitchens</li>
+          <li>Prepared food teams producing from recipes and customer demand</li>
+          <li>Commercial kitchens with recurring wholesale or institutional orders</li>
+          <li>Food producers managing ingredients, lots, labels, and delivery records</li>
+          <li>Teams outgrowing spreadsheets, paper prep sheets, and disconnected finance workflows</li>
+        </ul>
+      </div>
+      <div class="ms-fit-card ms-reveal ms-reveal-d2">
+        <h3>Common signs you are ready</h3>
+        <ul class="ms-list" style="grid-template-columns:1fr;">
+          <li>Production depends on manually updated spreadsheets</li>
+          <li>Recurring customers need different products, prices, delivery notes, or addresses</li>
+          <li>Recipe costs, ingredient lots, and use-by dates are hard to track quickly</li>
+          <li>Delivery notes, invoices, and accounting exports require repeated re-entry</li>
+          <li>Managers need clearer reporting across orders, production, stock, routes, and finance</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     FEATURE MAP
+═══════════════════════════════════════════════════════════════ -->
+<section class="ms-section ms-section-ruled">
+  <div class="ms-wrap">
+    <p class="ms-kicker ms-reveal">Feature map</p>
+    <h2 class="ms-reveal ms-reveal-d1">What your commercial kitchen can manage in Streamline ERP.</h2>
+    <div class="ms-table-wrap ms-reveal ms-reveal-d2">
+      <table class="ms-table">
+        <thead>
+          <tr>
+            <th>Workflow</th>
+            <th>What Streamline helps manage</th>
+            <th>Related feature cluster</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Customers & ordering</strong></td>
+            <td>Standing orders, cart orders, saved carts, customer catalogues, price lists, addresses, CRM activity, CSV/SFTP/EDI imports, and mobile ordering.</td>
+            <td><a href="https://mountainstream.co/streamline-features/customers-and-ordering/">Customers & Ordering</a></td>
+          </tr>
+          <tr>
+            <td><strong>Production & recipes</strong></td>
+            <td>Production planner, recipe book, recipe totals, recipe cards, machines, stages, steps, ingredient demand, recipe costing, labels, allergens, nutrition, and finished goods.</td>
+            <td><a href="https://mountainstream.co/streamline-features/production-and-recipes/">Production & Recipes</a></td>
+          </tr>
+          <tr>
+            <td><strong>Inventory & traceability</strong></td>
+            <td>Goods-in, receiving, stock counts, stock adjustments, storage locations, ingredients, supplier lots, internal lots, use-by dates, FEFO, barcode labels, and recall workflows.</td>
+            <td><a href="https://mountainstream.co/streamline-features/inventory-and-traceability/">Inventory & Traceability</a></td>
+          </tr>
+          <tr>
+            <td><strong>Delivery & distribution</strong></td>
+            <td>Route Manager, Pick & Pack, packing slips, delivery notes, delivery charges, driver reports, route optimization integrations, delivery records, and asset tracking.</td>
+            <td><a href="https://mountainstream.co/streamline-features/delivery-and-distribution/">Delivery & Distribution</a></td>
+          </tr>
+          <tr>
+            <td><strong>Finance & integrations</strong></td>
+            <td>Invoices, statements, accounts receivable, payment collection, QuickBooks and Xero-oriented workflows, accounting exports, reporting, and operational integrations.</td>
+            <td><a href="https://mountainstream.co/streamline-features/finance-and-reporting/">Finance & Reporting</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     RELATED FEATURES
+═══════════════════════════════════════════════════════════════ -->
+<section class="ms-section-sm ms-section-light">
+  <div class="ms-wrap">
+    <p class="ms-kicker ms-reveal">Related pages</p>
+    <p class="ms-reveal ms-reveal-d1" style="color: var(--ms-muted); font-size: .95rem; margin-bottom: 0;">Keep users moving from the commercial kitchens industry page into the feature clusters that support buyer evaluation.</p>
+    <div class="ms-related-links ms-reveal ms-reveal-d2">
+      <a href="https://mountainstream.co/streamline-features/">Streamline Features</a>
+      <a href="https://mountainstream.co/streamline-features/customers-and-ordering/">Customers & Ordering</a>
+      <a href="https://mountainstream.co/streamline-features/production-and-recipes/">Production & Recipes</a>
+      <a href="https://mountainstream.co/streamline-features/inventory-and-traceability/">Inventory & Traceability</a>
+      <a href="https://mountainstream.co/streamline-features/delivery-and-distribution/">Delivery & Distribution</a>
+      <a href="https://mountainstream.co/streamline-features/finance-and-reporting/">Finance & Reporting</a>
+      <a href="https://mountainstream.co/streamline-features/integrations/">Integrations</a>
+      <a href="https://mountainstream.co/industries/food-and-beverage-erp/">Food & Beverage ERP</a>
+      <a href="https://mountainstream.co/industries/bakery-erp/">Bakery ERP</a>
+      <a href="https://mountainstream.co/pricing/">Pricing</a>
+      <a href="https://mountainstream.co/case-study/">Case Study</a>
+      <a href="https://mountainstream.co/docs/">Docs</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     FAQ
+═══════════════════════════════════════════════════════════════ -->
+<section id="faq" class="ms-section ms-faq">
+  <div class="ms-wrap-narrow">
+    <p class="ms-kicker ms-reveal">FAQ</p>
+    <h2 class="ms-reveal ms-reveal-d1">Commercial kitchen ERP software questions, answered.</h2>
+
+    <div class="ms-reveal ms-reveal-d2" style="margin-top: 2rem;">
+      <details open>
+        <summary>What is commercial kitchen ERP software?</summary>
+        <p>Commercial kitchen ERP software connects the workflows a central kitchen, commissary, or prepared food team uses to manage customer orders, production planning, recipes, ingredients, inventory, lot traceability, delivery, invoicing, payments, accounting exports, and reporting.</p>
+      </details>
+      <details>
+        <summary>How does Streamline help commercial kitchens?</summary>
+        <p>Streamline helps commercial kitchens manage recurring customer orders, cart orders, price lists, recipes, production planning, ingredient demand, inventory tracking, lot numbers, packing, delivery documents, invoices, payments, and reporting from one connected system.</p>
+      </details>
+      <details>
+        <summary>Can Streamline connect customer orders to kitchen production?</summary>
+        <p>Yes. Customer order demand can flow into production planning, Recipe Totals, Recipe Cards, ingredient demand, inventory updates, production dates, and finished goods workflows, helping teams plan what needs to be made based on real demand and available stock.</p>
+      </details>
+      <details>
+        <summary>Does Streamline support recipe costing and labels?</summary>
+        <p>Yes. Streamline supports recipe costs, item costs, ingredient usage, nutrition facts, allergen roll-ups, labels, recipe cards, yield logic, and finished goods records for production teams.</p>
+      </details>
+      <details>
+        <summary>Can Streamline help with ingredient inventory and traceability?</summary>
+        <p>Yes. Streamline supports goods-in, suppliers, storage locations, stock counts, stock adjustments, ingredients, lot details, use-by dates, FEFO stock selection, production usage, finished goods, delivery records, and recall-ready traceability.</p>
+      </details>
+      <details>
+        <summary>Can commercial kitchens use Streamline for delivery workflows?</summary>
+        <p>Yes. Streamline includes distribution workflows such as Route Manager, Pick & Pack, delivery notes, packing slips, delivery charges, driver reports, route optimization integrations, and delivery asset tracking.</p>
+      </details>
+      <details>
+        <summary>Is Streamline only for bakeries?</summary>
+        <p>No. Bakery is a proven Streamline strength, but the platform is built as flexible ERP software for order-driven production and distribution businesses. That means it can also support commercial kitchens, central kitchens, commissaries, prepared food teams, food producers, and route-based distributors with similar workflow needs.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     CTA
+═══════════════════════════════════════════════════════════════ -->
+<section class="ms-cta">
+  <div class="ms-wrap ms-reveal">
+    <p class="ms-kicker">Get started</p>
+    <h2>See how Streamline connects kitchen orders, recipes, inventory, delivery, and finance.</h2>
+    <p>Book a demo to walk through the commercial kitchen ERP workflow from customer ordering and production planning to recipes, lot traceability, delivery records, invoicing, payment collection, and reporting.</p>
+    <div class="ms-actions">
+      <a class="ms-btn ms-btn-primary" href="https://mountainstream.co/register-your-company?cta=commercial-kitchen-final&intent=Book%20a%20demo">Book a Demo</a>
+      <a class="ms-btn ms-btn-secondary" href="https://mountainstream.co/pricing/">View Pricing</a>
+      <a class="ms-link-arrow" href="https://mountainstream.co/streamline-features/">Explore Features</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="ms-footer">
+  <div class="ms-wrap">
+    Streamline ERP by Mountain Stream &nbsp;|&nbsp;
+    <a href="https://mountainstream.co/pricing/">Pricing</a> &nbsp;|&nbsp;
+    <a href="https://mountainstream.co/case-study/">Case Study</a> &nbsp;|&nbsp;
+    <a href="https://mountainstream.co/docs/">Docs</a> &nbsp;|&nbsp;
+    <a href="https://mountainstream.co/streamline-features/">Features</a>
+  </div>
+</footer>
+
+</div>
+<script>
+(function () {
+  var root = document.querySelector('.ms-feature-cluster');
+  if (!root) return;
+
+  // Scroll reveal
+  var revealObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  root.querySelectorAll('.ms-reveal').forEach(function (el) {
+    var rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.classList.add('visible');
+    } else {
+      revealObserver.observe(el);
+    }
+  });
+
+  // Active nav
+  var sections = root.querySelectorAll('section[id]');
+  var navLinks = root.querySelectorAll('.ms-nav a:not(.ms-nav__back)');
+
+  var navObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        navLinks.forEach(function (a) { a.classList.remove('active'); });
+        var active = root.querySelector('.ms-nav a[href="#' + entry.target.id + '"]');
+        if (active) {
+          active.classList.add('active');
+          var navWrap = root.querySelector('.ms-nav .ms-wrap');
+          if (navWrap) {
+            navWrap.scrollLeft = active.offsetLeft - navWrap.offsetWidth / 2 + active.offsetWidth / 2;
+          }
+        }
+      }
+    });
+  }, { threshold: 0, rootMargin: '0px 0px -60% 0px' });
+
+  sections.forEach(function (s) { navObserver.observe(s); });
+})();
+</script>
+</body>
+</html>

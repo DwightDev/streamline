@@ -1,0 +1,1692 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wholesale Inventory Management Software | Streamline ERP</title>
+  <meta name="description" content="Run wholesale inventory management software for stock counts, receiving, lot-aware movement, barcode labels, purchasing, and connected reporting.">
+  <link rel="canonical" href="https://mountainstream.co/streamline-features/inventory-management/">
+  <meta property="og:title" content="Wholesale Inventory Management Software | Streamline ERP">
+  <meta property="og:description" content="Control inventory across receiving, stock counts, locations, lot-aware movement, purchasing, production, delivery, and reporting in Streamline ERP.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mountainstream.co/streamline-features/inventory-management/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Wholesale Inventory Management Software | Streamline ERP">
+  <meta name="twitter:description" content="Manage wholesale inventory, stock counts, lot-aware movement, replenishment, barcode labels, and connected ERP reporting in Streamline.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+/* Existing Inventory & Traceability master CSS */
+/* ── 1. TOKENS & BASE ─────────────────────────────────────── */
+.ms-feature-cluster {
+  --ms-primary-950: #113058;
+  --ms-primary-900: #113058;
+  --ms-primary-800: #113058;
+  --ms-primary-700: #113058;
+  --ms-primary-600: #113058;
+  --ms-primary-100: #e4eef9;
+  --ms-primary-050: #f2f7fd;
+  --ms-accent-700:  #ff9100;
+  --ms-accent-600:  #ff9100;
+  --ms-accent-500:  #ff9100;
+  --ms-accent-400:  #ff9100;
+  --ms-accent-100:  #fef0d8;
+  --ms-accent-050:  #fff8ef;
+  --ms-accent-glow: rgba(245,135,14,.22);
+  --ms-sky-600:     #1d7dc0;
+  --ms-sky-500:     #4aa6e8;
+  --ms-sky-100:     #ddf1ff;
+  --ms-sky-050:     #f0f9ff;
+  --ms-success-600: #1e7a52;
+  --ms-success-100: #e6f7ef;
+  --ms-ink:         #101b2a;
+  --ms-text:        #1e2f42;
+  --ms-muted:       #54647a;
+  --ms-soft:        #7a8b9e;
+  --ms-line:        #dbe4ef;
+  --ms-line-strong: #c4d1e2;
+  --ms-surface:     #ffffff;
+  --ms-surface-soft:#f6faff;
+  --ms-surface-warm:#fffaf4;
+  --ms-page:        #f9fbff;
+  --ms-font-display:'Fraunces', Georgia, serif;
+  --ms-font-body:   'DM Sans', system-ui, sans-serif;
+  --ms-wrap:        1180px;
+  --ms-wrap-narrow: 860px;
+  --ms-gutter:      clamp(20px, 4vw, 48px);
+  --ms-section-y:   clamp(72px, 9vw, 120px);
+  --ms-section-y-sm:clamp(48px, 6vw, 80px);
+  --ms-gap:         clamp(18px, 2.4vw, 28px);
+  --ms-r-xs:   6px;
+  --ms-r-sm:   12px;
+  --ms-r-md:   18px;
+  --ms-r-lg:   28px;
+  --ms-r-pill: 999px;
+  --ms-shadow-xs:    0 1px 3px rgba(9,30,60,.07);
+  --ms-shadow-sm:    0 4px 16px rgba(9,30,60,.09);
+  --ms-shadow-md:    0 14px 40px rgba(9,30,60,.13);
+  --ms-shadow-lg:    0 24px 64px rgba(9,30,60,.17);
+  --ms-shadow-focus: 0 0 0 4px rgba(74,166,232,.28);
+  --ms-ease:         cubic-bezier(.25,.46,.45,.94);
+  --ms-ease-spring:  cubic-bezier(.34,1.56,.64,1);
+  color: var(--ms-text);
+  background-color: var(--ms-page);
+  font-family: var(--ms-font-body);
+  font-size: 16px;
+  line-height: 1.68;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── 2. RESET ─────────────────────────────────────────────── */
+.ms-feature-cluster,
+.ms-feature-cluster * { box-sizing: border-box; }
+.ms-feature-cluster :where(h1,h2,h3,h4,p,ul,ol,figure) { margin-top: 0; }
+.ms-feature-cluster :where(img,svg) { max-width: 100%; height: auto; }
+.ms-feature-cluster a {
+  color: var(--ms-primary-800);
+  text-underline-offset: .2em;
+  transition: color .16s var(--ms-ease), background-color .16s var(--ms-ease),
+              border-color .16s var(--ms-ease), box-shadow .16s var(--ms-ease),
+              transform .2s var(--ms-ease-spring);
+}
+.ms-feature-cluster a:hover { color: var(--ms-accent-700); }
+.ms-feature-cluster :where(a,button,summary):focus-visible {
+  outline: none;
+  box-shadow: var(--ms-shadow-focus);
+  border-radius: var(--ms-r-xs);
+}
+
+/* ── 3. LAYOUT ────────────────────────────────────────────── */
+.ms-feature-cluster .ms-wrap {
+  width: min(var(--ms-wrap), calc(100% - var(--ms-gutter) * 2));
+  margin-inline: auto;
+}
+.ms-feature-cluster .ms-wrap-narrow {
+  width: min(var(--ms-wrap-narrow), calc(100% - var(--ms-gutter) * 2));
+  margin-inline: auto;
+}
+
+/* ── 4. TYPOGRAPHY ────────────────────────────────────────── */
+.ms-feature-cluster .ms-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  margin-bottom: 16px;
+  color: var(--ms-accent-600);
+  font-family: var(--ms-font-body);
+  font-size: .73rem;
+  font-weight: 600;
+  letter-spacing: .11em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.ms-feature-cluster .ms-kicker::before {
+  content: "";
+  flex-shrink: 0;
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ms-accent-500);
+}
+.ms-feature-cluster h1,
+.ms-feature-cluster h2,
+.ms-feature-cluster h3,
+.ms-feature-cluster h4 {
+  font-family: var(--ms-font-display);
+  font-weight: 600;
+  letter-spacing: -.035em;
+  color: var(--ms-primary-900);
+}
+.ms-feature-cluster h1 {
+  max-width: 860px;
+  margin-bottom: 20px;
+  font-size: clamp(2.4rem, 5.5vw, 4.6rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.05em;
+}
+.ms-feature-cluster h1 em {
+  font-style: italic;
+  color: var(--ms-accent-600);
+}
+.ms-feature-cluster h2 {
+  max-width: 820px;
+  margin-bottom: 18px;
+  font-size: clamp(1.8rem, 3.8vw, 3.2rem);
+  line-height: 1.05;
+  letter-spacing: -.04em;
+}
+.ms-feature-cluster h3 {
+  margin-bottom: 10px;
+  font-size: clamp(1.1rem, 1.8vw, 1.6rem);
+  line-height: 1.14;
+  letter-spacing: -.025em;
+}
+.ms-feature-cluster h4 {
+  margin-bottom: 8px;
+  font-size: .95rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -.01em;
+}
+.ms-feature-cluster p { margin-bottom: 1rem; }
+.ms-feature-cluster .ms-section-intro {
+  max-width: 760px;
+  color: var(--ms-muted);
+  font-size: clamp(1rem, 1.4vw, 1.16rem);
+  line-height: 1.78;
+}
+.ms-feature-cluster .ms-lede {
+  max-width: 680px;
+  color: var(--ms-muted);
+  font-size: clamp(1rem, 1.3vw, 1.12rem);
+  line-height: 1.75;
+}
+
+/* ── 5. BREADCRUMB ────────────────────────────────────────── */
+.ms-feature-cluster .ms-breadcrumb {
+  padding-block: 14px;
+  border-bottom: 1px solid var(--ms-line);
+  background: var(--ms-surface);
+}
+.ms-feature-cluster .ms-breadcrumb nav {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .82rem;
+  color: var(--ms-soft);
+}
+.ms-feature-cluster .ms-breadcrumb a {
+  color: var(--ms-muted);
+  text-decoration: none;
+  font-weight: 500;
+}
+.ms-feature-cluster .ms-breadcrumb a:hover { color: var(--ms-primary-800); }
+.ms-feature-cluster .ms-breadcrumb-sep { color: var(--ms-line-strong); }
+.ms-feature-cluster .ms-breadcrumb-current {
+  color: var(--ms-text);
+  font-weight: 600;
+}
+
+/* ── 6. COMPACT HERO ──────────────────────────────────────── */
+.ms-feature-cluster .ms-hero-compact {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(56px, 8vw, 96px) 0 clamp(48px, 7vw, 80px);
+  background:
+    radial-gradient(ellipse 65% 80% at 88% 8%, rgba(74,166,232,.12), transparent 52%),
+    radial-gradient(ellipse 45% 55% at 4% 92%, rgba(245,135,14,.08), transparent 48%),
+    linear-gradient(160deg, var(--ms-primary-050) 0%, #ffffff 52%, var(--ms-surface-warm) 100%);
+  border-bottom: 1px solid var(--ms-line);
+}
+.ms-feature-cluster .ms-hero-compact::before {
+  content: "";
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(74,166,232,.09) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+.ms-feature-cluster .ms-hero-compact::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  opacity: .3;
+}
+.ms-feature-cluster .ms-hero-compact__inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+.ms-feature-cluster .ms-hero-compact__stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.ms-feature-cluster .ms-hero-stat {
+  padding: 16px 20px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: rgba(255,255,255,.9);
+  box-shadow: var(--ms-shadow-sm);
+  text-align: center;
+  min-width: 140px;
+}
+.ms-feature-cluster .ms-hero-stat__number {
+  display: block;
+  font-family: var(--ms-font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -.04em;
+  line-height: 1;
+  color: var(--ms-primary-900);
+}
+.ms-feature-cluster .ms-hero-stat__number span { color: var(--ms-accent-500); }
+.ms-feature-cluster .ms-hero-stat__label {
+  display: block;
+  margin-top: 4px;
+  font-size: .78rem;
+  font-weight: 500;
+  color: var(--ms-muted);
+  line-height: 1.3;
+}
+
+/* ── 7. STICKY NAV ────────────────────────────────────────── */
+.ms-feature-cluster .ms-nav {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  background: rgba(255,255,255,.9);
+  border-bottom: 1px solid rgba(219,228,239,.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.ms-feature-cluster .ms-nav .ms-wrap {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding-block: 10px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.ms-feature-cluster .ms-nav .ms-wrap::-webkit-scrollbar { display: none; }
+.ms-feature-cluster .ms-nav a {
+  flex: 0 0 auto;
+  padding: 7px 14px;
+  border: 1px solid transparent;
+  border-radius: var(--ms-r-pill);
+  color: var(--ms-muted);
+  font-size: .84rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .15s, background .15s, border-color .15s;
+}
+.ms-feature-cluster .ms-nav a:hover,
+.ms-feature-cluster .ms-nav a.active {
+  color: var(--ms-primary-900);
+  background: var(--ms-primary-050);
+  border-color: var(--ms-line);
+}
+.ms-feature-cluster .ms-nav__back {
+  color: var(--ms-muted) !important;
+  border-color: var(--ms-line) !important;
+  background: var(--ms-surface) !important;
+}
+.ms-feature-cluster .ms-nav__back::before { content: "← "; }
+.ms-feature-cluster .ms-nav__divider {
+  align-self: center;
+  width: 1px;
+  height: 18px;
+  background: var(--ms-line);
+  flex-shrink: 0;
+}
+
+/* ── 8. SECTIONS ──────────────────────────────────────────── */
+.ms-feature-cluster .ms-section { padding-block: var(--ms-section-y); }
+.ms-feature-cluster .ms-section-sm { padding-block: var(--ms-section-y-sm); }
+.ms-feature-cluster .ms-section-light {
+  background:
+    radial-gradient(ellipse 70% 60% at 4% 20%, rgba(74,166,232,.09), transparent),
+    linear-gradient(180deg, var(--ms-surface-soft) 0%, #fff 100%);
+}
+.ms-feature-cluster .ms-section-warm {
+  background:
+    radial-gradient(ellipse 60% 70% at 90% 15%, rgba(245,135,14,.11), transparent),
+    linear-gradient(180deg, var(--ms-accent-050) 0%, #fff 100%);
+}
+.ms-feature-cluster .ms-section-ruled {
+  border-top: 1px solid var(--ms-line);
+  border-bottom: 1px solid var(--ms-line);
+  background:
+    radial-gradient(ellipse 55% 70% at 90% 15%, rgba(74,166,232,.07), transparent),
+    linear-gradient(170deg, var(--ms-primary-050) 0%, #ffffff 60%, var(--ms-sky-050) 100%);
+}
+
+/* ── 9. GRIDS ─────────────────────────────────────────────── */
+.ms-feature-cluster .ms-grid   { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--ms-gap); }
+.ms-feature-cluster .ms-grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--ms-gap); }
+.ms-feature-cluster .ms-grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: var(--ms-gap); }
+.ms-feature-cluster .ms-stack  { display: grid; gap: var(--ms-gap); }
+
+/* ── 10. SPLIT ────────────────────────────────────────────── */
+.ms-feature-cluster .ms-split {
+  display: grid;
+  grid-template-columns: 1fr minmax(300px, .85fr);
+  gap: clamp(32px, 6vw, 80px);
+  align-items: center;
+}
+.ms-feature-cluster .ms-split--flip { direction: rtl; }
+.ms-feature-cluster .ms-split--flip > * { direction: ltr; }
+
+/* ── 11. CARDS ────────────────────────────────────────────── */
+.ms-feature-cluster .ms-card {
+  position: relative;
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  gap: .5rem;
+  padding: clamp(22px, 2.8vw, 32px);
+  overflow: hidden;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: rgba(255,255,255,.9);
+  box-shadow: var(--ms-shadow-xs);
+  transition: transform .22s var(--ms-ease), border-color .22s var(--ms-ease),
+              box-shadow .22s var(--ms-ease), background .22s var(--ms-ease);
+}
+.ms-feature-cluster .ms-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: #4fa6e9;
+  opacity: 0;
+  transition: opacity .22s var(--ms-ease);
+}
+.ms-feature-cluster .ms-card:hover { transform: translateY(-5px); border-color: var(--ms-line-strong); background: #fff; box-shadow: var(--ms-shadow-md); }
+.ms-feature-cluster .ms-card:hover::before { opacity: 1; }
+.ms-feature-cluster .ms-card h3 { font-size: clamp(1.05rem, 1.4vw, 1.3rem); letter-spacing: -.02em; }
+.ms-feature-cluster .ms-card p { color: var(--ms-muted); flex: 1; }
+.ms-feature-cluster .ms-card a:not(.ms-btn) {
+  margin-top: auto;
+  padding-top: .75rem;
+  color: var(--ms-primary-700);
+  font-size: .875rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+}
+.ms-feature-cluster .ms-card a:not(.ms-btn)::after { content: "→"; transition: transform .18s var(--ms-ease-spring); }
+.ms-feature-cluster .ms-card a:not(.ms-btn):hover::after { transform: translateX(4px); }
+.ms-feature-cluster .ms-card a:not(.ms-btn):hover { color: var(--ms-accent-700); }
+.ms-feature-cluster .ms-card-accent {
+  background: linear-gradient(160deg, #fff 60%, var(--ms-accent-050));
+  border-color: rgba(245,135,14,.22);
+}
+.ms-feature-cluster .ms-card-sky {
+  background: linear-gradient(160deg, #fff 60%, var(--ms-sky-050));
+  border-color: rgba(74,166,232,.25);
+}
+.ms-feature-cluster .ms-card-quiet { box-shadow: none; }
+
+/* Benefit card */
+.ms-feature-cluster .ms-benefit {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  padding: clamp(20px, 2.5vw, 28px);
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: var(--ms-surface);
+  box-shadow: var(--ms-shadow-xs);
+  transition: transform .2s var(--ms-ease), box-shadow .2s var(--ms-ease), border-color .2s;
+}
+.ms-feature-cluster .ms-benefit:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--ms-shadow-md);
+  border-color: var(--ms-line-strong);
+}
+.ms-feature-cluster .ms-benefit__icon {
+  width: 44px; height: 44px;
+  border-radius: var(--ms-r-sm);
+  background: var(--ms-accent-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+  transition: background .2s;
+}
+.ms-feature-cluster .ms-benefit:hover .ms-benefit__icon { background: var(--ms-accent-500); }
+.ms-feature-cluster .ms-benefit h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -.015em;
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+.ms-feature-cluster .ms-benefit p {
+  font-size: .875rem;
+  color: var(--ms-muted);
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+
+/* ── 12. FEATURE BLOCKS ───────────────────────────────────── */
+.ms-feature-cluster .ms-feature-block {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(260px, .7fr);
+  gap: clamp(24px, 4.5vw, 56px);
+  align-items: start;
+  padding-block: clamp(36px, 5.5vw, 62px);
+  border-top: 1px solid var(--ms-line);
+}
+.ms-feature-cluster .ms-feature-block:first-of-type { border-top: 0; padding-top: 0; }
+.ms-feature-cluster .ms-feature-block p { color: var(--ms-muted); }
+
+.ms-feature-cluster .ms-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 9px 22px;
+  padding: 0;
+  margin: 20px 0 0;
+  list-style: none;
+}
+.ms-feature-cluster .ms-list li {
+  position: relative;
+  padding-left: 22px;
+  color: var(--ms-text);
+  font-size: .92rem;
+  line-height: 1.5;
+}
+.ms-feature-cluster .ms-list li::before {
+  content: "";
+  position: absolute;
+  top: .55em; left: 0;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--ms-accent-500);
+  box-shadow: 0 0 0 4px var(--ms-accent-100);
+}
+
+.ms-feature-cluster .ms-mini {
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: rgba(255,255,255,.94);
+  box-shadow: var(--ms-shadow-sm);
+  padding: 22px;
+}
+.ms-feature-cluster .ms-mini h4 { color: var(--ms-primary-800); }
+.ms-feature-cluster .ms-mini p { color: var(--ms-muted); font-size: .875rem; }
+.ms-feature-cluster .ms-mini a {
+  display: block;
+  margin-top: 10px;
+  color: var(--ms-primary-700);
+  font-size: .875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.ms-feature-cluster .ms-mini a::after { content: " →"; }
+.ms-feature-cluster .ms-mini a:hover { color: var(--ms-accent-700); }
+
+/* ── 13. CALLOUT / ANSWER ─────────────────────────────────── */
+.ms-feature-cluster .ms-answer {
+  margin: 28px 0;
+  padding: clamp(20px, 3vw, 28px);
+  border: 1px solid var(--ms-sky-100);
+  border-left: 4px solid var(--ms-sky-500);
+  border-radius: var(--ms-r-md);
+  background: var(--ms-sky-050);
+  box-shadow: var(--ms-shadow-xs);
+}
+.ms-feature-cluster .ms-answer strong { color: var(--ms-primary-900); }
+.ms-feature-cluster .ms-answer p { color: var(--ms-muted); margin-bottom: 0; }
+
+.ms-feature-cluster .ms-callout {
+  padding: clamp(24px, 3.5vw, 36px);
+  border: 1px solid var(--ms-accent-100);
+  border-left: 4px solid var(--ms-accent-500);
+  border-radius: var(--ms-r-md);
+  background:
+    radial-gradient(ellipse 80% 60% at 100% 0%, rgba(245,135,14,.08), transparent),
+    var(--ms-accent-050);
+}
+.ms-feature-cluster .ms-callout h4 { color: var(--ms-primary-900); margin-bottom: 6px; }
+.ms-feature-cluster .ms-callout p { color: var(--ms-muted); margin-bottom: 0; font-size: .92rem; }
+
+/* ── 14. STAT BLOCKS ──────────────────────────────────────── */
+.ms-feature-cluster .ms-stat {
+  padding: 22px 24px;
+  border-left: 4px solid var(--ms-accent-500);
+  border-radius: var(--ms-r-sm);
+  background: var(--ms-accent-050);
+  border: 1px solid var(--ms-accent-100);
+  border-left-width: 4px;
+}
+.ms-feature-cluster .ms-stat strong {
+  display: block;
+  font-family: var(--ms-font-display);
+  font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -.04em;
+  color: var(--ms-primary-900);
+  line-height: 1.1;
+}
+.ms-feature-cluster .ms-stat p { margin-top: 5px; margin-bottom: 0; font-size: .875rem; color: var(--ms-muted); }
+
+/* ── 15. PROCESS STEPS ────────────────────────────────────── */
+.ms-feature-cluster .ms-process {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0,1fr));
+  gap: 10px;
+  counter-reset: ms-step;
+  margin-top: 32px;
+}
+.ms-feature-cluster .ms-step {
+  position: relative;
+  min-height: 120px;
+  padding: 18px 16px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-sm);
+  background: #fff;
+  box-shadow: var(--ms-shadow-xs);
+  color: var(--ms-text);
+  font-size: .875rem;
+  font-weight: 500;
+  line-height: 1.45;
+  transition: border-color .2s, box-shadow .2s, transform .2s var(--ms-ease);
+}
+.ms-feature-cluster .ms-step:hover {
+  border-color: var(--ms-accent-500);
+  box-shadow: var(--ms-shadow-sm);
+  transform: translateY(-3px);
+}
+.ms-feature-cluster .ms-step::before {
+  counter-increment: ms-step;
+  content: counter(ms-step);
+  display: grid;
+  width: 30px; height: 30px;
+  margin-bottom: 12px;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--ms-primary-900);
+  background: var(--ms-accent-100);
+  font-family: var(--ms-font-display);
+  font-size: .82rem;
+  font-weight: 700;
+}
+
+/* ── 16. BADGES ───────────────────────────────────────────── */
+.ms-feature-cluster .ms-badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-block: 18px 0; }
+.ms-feature-cluster .ms-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 5px 11px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-pill);
+  color: var(--ms-primary-800);
+  background: var(--ms-surface);
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  transition: background .15s, border-color .15s;
+}
+.ms-feature-cluster .ms-badge:hover { background: var(--ms-primary-050); border-color: var(--ms-sky-500); }
+
+/* ── 17. RELATED LINKS ────────────────────────────────────── */
+.ms-feature-cluster .ms-related-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.ms-feature-cluster .ms-related-links a {
+  display: inline-flex;
+  padding: 8px 14px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-pill);
+  background: var(--ms-surface);
+  color: var(--ms-primary-800);
+  font-size: .84rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .15s, border-color .15s;
+}
+.ms-feature-cluster .ms-related-links a:hover { border-color: var(--ms-sky-500); background: var(--ms-sky-050); }
+
+/* ── 18. USE CASE BLOCKS ──────────────────────────────────── */
+.ms-feature-cluster .ms-use-case {
+  padding: clamp(22px, 3vw, 32px);
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: linear-gradient(160deg, #fff 60%, var(--ms-primary-050));
+  box-shadow: var(--ms-shadow-xs);
+  transition: box-shadow .2s, transform .2s var(--ms-ease), border-color .2s;
+}
+.ms-feature-cluster .ms-use-case:hover {
+  box-shadow: var(--ms-shadow-md);
+  transform: translateY(-4px);
+  border-color: var(--ms-line-strong);
+}
+.ms-feature-cluster .ms-use-case h3 { font-size: 1.05rem; margin-bottom: 8px; }
+.ms-feature-cluster .ms-use-case p { font-size: .875rem; color: var(--ms-muted); margin-bottom: 0; }
+
+/* ── 19. BUTTONS ──────────────────────────────────────────── */
+.ms-feature-cluster .ms-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-top: 28px;
+}
+.ms-feature-cluster .ms-btn {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: 12px 22px;
+  border: 1.5px solid transparent;
+  border-radius: var(--ms-r-sm);
+  font-family: var(--ms-font-body);
+  font-size: .9rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: .01em;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .18s var(--ms-ease), color .18s var(--ms-ease),
+              border-color .18s var(--ms-ease), box-shadow .18s var(--ms-ease),
+              transform .2s var(--ms-ease-spring);
+}
+.ms-feature-cluster .ms-btn:hover { transform: translateY(-2px); }
+.ms-feature-cluster .ms-btn:active { transform: translateY(0); }
+.ms-feature-cluster .ms-btn-primary {
+  color: #fff !important;
+  background: linear-gradient(180deg, var(--ms-accent-400) 0%, var(--ms-accent-600) 100%);
+  border-color: var(--ms-accent-600);
+  box-shadow: 0 8px 24px var(--ms-accent-glow);
+}
+.ms-feature-cluster .ms-btn-primary:hover {
+  color: #fff !important;
+  background: linear-gradient(180deg, #ffaf3e 0%, var(--ms-accent-700) 100%);
+  box-shadow: 0 14px 32px var(--ms-accent-glow);
+}
+.ms-feature-cluster .ms-btn-secondary {
+  color: var(--ms-primary-900);
+  background: var(--ms-surface);
+  border-color: var(--ms-line-strong);
+  box-shadow: var(--ms-shadow-xs);
+}
+.ms-feature-cluster .ms-btn-secondary:hover {
+  color: var(--ms-primary-900);
+  background: var(--ms-primary-050);
+  border-color: var(--ms-sky-500);
+  box-shadow: var(--ms-shadow-sm);
+}
+.ms-feature-cluster .ms-link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  color: var(--ms-primary-700);
+  font-weight: 600;
+  font-size: .9rem;
+  text-decoration: none;
+}
+.ms-feature-cluster .ms-link-arrow::after { content: "→"; transition: transform .18s var(--ms-ease-spring); }
+.ms-feature-cluster .ms-link-arrow:hover { color: var(--ms-accent-700); }
+.ms-feature-cluster .ms-link-arrow:hover::after { transform: translateX(4px); }
+
+/* ── 20. FAQ ──────────────────────────────────────────────── */
+.ms-feature-cluster .ms-faq details {
+  padding: 20px 24px;
+  margin-bottom: 10px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-sm);
+  background: var(--ms-surface);
+  box-shadow: var(--ms-shadow-xs);
+  transition: border-color .18s, box-shadow .18s;
+}
+.ms-feature-cluster .ms-faq details:hover { border-color: var(--ms-line-strong); }
+.ms-feature-cluster .ms-faq details[open] { border-color: var(--ms-sky-500); box-shadow: var(--ms-shadow-sm); }
+.ms-feature-cluster .ms-faq summary {
+  cursor: pointer;
+  color: var(--ms-primary-900);
+  font-weight: 600;
+  font-size: 1rem;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.ms-feature-cluster .ms-faq summary::-webkit-details-marker { display: none; }
+.ms-feature-cluster .ms-faq summary::after {
+  content: "+";
+  flex-shrink: 0;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--ms-accent-100);
+  color: var(--ms-accent-600);
+  font-weight: 700;
+  font-size: .9rem;
+  display: grid;
+  place-items: center;
+  transition: background .18s, color .18s, transform .25s var(--ms-ease-spring);
+}
+.ms-feature-cluster .ms-faq details[open] summary::after {
+  content: "−";
+  background: var(--ms-accent-500);
+  color: #fff;
+  transform: rotate(180deg);
+}
+.ms-feature-cluster .ms-faq p { margin: 14px 0 0; color: var(--ms-muted); line-height: 1.72; }
+
+/* ── 21. CTA ──────────────────────────────────────────────── */
+.ms-feature-cluster .ms-cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: clamp(72px, 9vw, 112px);
+  background:
+    radial-gradient(ellipse 60% 80% at 90% 10%, rgba(245,135,14,.12), transparent 50%),
+    radial-gradient(ellipse 50% 60% at 5% 85%, rgba(74,166,232,.1), transparent 50%),
+    linear-gradient(160deg, var(--ms-primary-050) 0%, #ffffff 50%, var(--ms-accent-050) 100%);
+  border-top: 1px solid var(--ms-line);
+  border-bottom: 1px solid var(--ms-line);
+}
+.ms-feature-cluster .ms-cta::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: #ff9100;
+}
+.ms-feature-cluster .ms-cta h2 { color: var(--ms-primary-900); }
+.ms-feature-cluster .ms-cta p { max-width: 680px; color: var(--ms-muted); }
+
+/* ── 22. FOOTER ───────────────────────────────────────────── */
+.ms-feature-cluster .ms-footer {
+  padding-block: 28px;
+  background: var(--ms-primary-050);
+  color: var(--ms-muted);
+  font-size: .88rem;
+  border-top: 1px solid var(--ms-line);
+}
+.ms-feature-cluster .ms-footer a { color: var(--ms-primary-700); text-decoration: none; }
+.ms-feature-cluster .ms-footer a:hover { color: var(--ms-accent-700); }
+
+/* ── 23. SCROLL REVEAL ────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .ms-feature-cluster .ms-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .5s var(--ms-ease), transform .5s var(--ms-ease);
+  }
+  .ms-feature-cluster .ms-reveal.visible { opacity: 1; transform: translateY(0); }
+  .ms-feature-cluster .ms-reveal-d1 { transition-delay: .08s; }
+  .ms-feature-cluster .ms-reveal-d2 { transition-delay: .16s; }
+  .ms-feature-cluster .ms-reveal-d3 { transition-delay: .24s; }
+  .ms-feature-cluster .ms-reveal-d4 { transition-delay: .32s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ms-feature-cluster .ms-reveal { opacity: 1; transform: none; }
+}
+
+/* ── 24. RESPONSIVE ───────────────────────────────────────── */
+@media (max-width: 1040px) {
+  .ms-feature-cluster .ms-grid-4 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .ms-feature-cluster .ms-grid   { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .ms-feature-cluster .ms-process { grid-template-columns: repeat(3, minmax(0,1fr)); }
+}
+@media (max-width: 820px) {
+  .ms-feature-cluster .ms-split,
+  .ms-feature-cluster .ms-split--flip,
+  .ms-feature-cluster .ms-grid,
+  .ms-feature-cluster .ms-grid-2,
+  .ms-feature-cluster .ms-grid-4,
+  .ms-feature-cluster .ms-feature-block { grid-template-columns: 1fr; direction: ltr; }
+  .ms-feature-cluster .ms-list { grid-template-columns: 1fr; }
+  .ms-feature-cluster .ms-process { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .ms-feature-cluster .ms-hero-compact__inner { grid-template-columns: 1fr; }
+  .ms-feature-cluster .ms-hero-compact__stats { flex-direction: row; flex-wrap: wrap; display: none; }
+}
+@media (max-width: 520px) {
+  .ms-feature-cluster .ms-process { grid-template-columns: 1fr; }
+  .ms-feature-cluster .ms-btn { width: 100%; justify-content: center; }
+  .ms-feature-cluster .ms-actions { align-items: stretch; }
+  .ms-feature-cluster .ms-hero-compact__stats { flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ms-feature-cluster *,
+  .ms-feature-cluster *::before,
+  .ms-feature-cluster *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+.container-wrap{
+	padding: 0 !important;
+}
+
+html, body {
+	overflow-x: clip;
+  overflow-y: visible !important;
+}
+
+body.js-page-trans-loaded {
+  overflow-x:clip;
+overflow-y: visible !important;
+}
+
+ul li {
+    list-style: none;
+}
+
+
+div:has(> .ms-feature-cluster),
+div:has(> div:has(> .ms-feature-cluster)) {
+  overflow-x: clip !important;
+  overflow-y: visible !important;
+}
+
+/* ── REVIEWS SECTION ─────────────────────────────────────── */
+
+.ms-feature-cluster .ms-reviews {
+  position: relative;
+  overflow: hidden;
+}
+
+.ms-feature-cluster .ms-reviews__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: end;
+  margin-bottom: clamp(34px, 5vw, 56px);
+}
+
+.ms-feature-cluster .ms-reviews__summary {
+  padding: 22px 24px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: rgba(255,255,255,.94);
+  box-shadow: var(--ms-shadow-sm);
+}
+
+.ms-feature-cluster .ms-reviews__score {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.ms-feature-cluster .ms-reviews__score strong {
+  font-family: var(--ms-font-display);
+  font-size: clamp(2.2rem, 4vw, 3.1rem);
+  line-height: 1;
+  letter-spacing: -.05em;
+  color: var(--ms-primary-900);
+}
+
+.ms-feature-cluster .ms-reviews__score span {
+  color: var(--ms-primary-800);
+  font-size: .9rem;
+  font-weight: 700;
+}
+
+.ms-feature-cluster .ms-reviews__stars {
+  display: inline-flex;
+  gap: 2px;
+  color: var(--ms-accent-600);
+  font-size: 1rem;
+  letter-spacing: .04em;
+}
+
+.ms-feature-cluster .ms-reviews__summary p {
+  margin: 10px 0 0;
+  color: var(--ms-muted);
+  font-size: .84rem;
+  line-height: 1.55;
+}
+
+.ms-feature-cluster .ms-review-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ms-gap);
+}
+
+.ms-feature-cluster .ms-review-card {
+  position: relative;
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  padding: clamp(24px, 3vw, 34px);
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-lg);
+  background:
+    radial-gradient(ellipse 85% 70% at 100% 0%, rgba(74,166,232,.08), transparent 52%),
+    #ffffff;
+  box-shadow: var(--ms-shadow-sm);
+  transition:
+    transform .22s var(--ms-ease),
+    border-color .22s var(--ms-ease),
+    box-shadow .22s var(--ms-ease);
+}
+
+.ms-feature-cluster .ms-review-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--ms-line-strong);
+  box-shadow: var(--ms-shadow-md);
+}
+
+.ms-feature-cluster .ms-review-card::before {
+  content: "“";
+  position: absolute;
+  top: 14px;
+  right: 24px;
+  color: var(--ms-primary-050);
+  font-family: var(--ms-font-display);
+  font-size: 6rem;
+  font-weight: 700;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.ms-feature-cluster .ms-review-card__meta {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.ms-feature-cluster .ms-review-card__rating,
+.ms-feature-cluster .ms-review-card__source {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 5px 10px;
+  border-radius: var(--ms-r-pill);
+  font-size: .76rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.ms-feature-cluster .ms-review-card__rating {
+  border: 1px solid var(--ms-accent-100);
+  background: var(--ms-accent-050);
+  color: var(--ms-accent-700);
+}
+
+.ms-feature-cluster .ms-review-card__source {
+  border: 1px solid var(--ms-line);
+  background: var(--ms-primary-050);
+  color: var(--ms-primary-800);
+}
+
+.ms-feature-cluster .ms-review-card h3 {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 14px;
+  font-size: clamp(1.2rem, 1.8vw, 1.55rem);
+  line-height: 1.15;
+}
+
+.ms-feature-cluster .ms-review-card blockquote {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  flex: 1;
+  color: var(--ms-text);
+  font-size: clamp(.98rem, 1.2vw, 1.08rem);
+  line-height: 1.75;
+}
+
+.ms-feature-cluster .ms-review-card blockquote p {
+  margin: 0;
+  color: inherit;
+	font-family: var(--ms-font-body) !important;
+}
+
+.ms-feature-cluster .ms-review-card__footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid var(--ms-line);
+  background: transparent !important;
+}
+
+.ms-feature-cluster .ms-review-card__person {
+  display: grid;
+  gap: 3px;
+}
+
+.ms-feature-cluster .ms-review-card__person strong {
+  color: var(--ms-primary-900);
+  font-size: .95rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.ms-feature-cluster .ms-review-card__person span {
+  color: var(--ms-muted);
+  font-size: .82rem;
+  line-height: 1.35;
+}
+
+.ms-feature-cluster .ms-review-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 7px 12px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-pill);
+  background: var(--ms-surface);
+  color: var(--ms-primary-800);
+  font-size: .82rem;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.ms-feature-cluster .ms-review-card__link::after {
+  content: "↗";
+  font-size: .78rem;
+  transition: transform .18s var(--ms-ease-spring);
+}
+
+.ms-feature-cluster .ms-review-card__link:hover {
+  border-color: var(--ms-accent-500);
+  background: var(--ms-accent-050);
+  color: var(--ms-accent-700);
+}
+
+.ms-feature-cluster .ms-review-card__link:hover::after {
+  transform: translate(2px, -2px);
+}
+
+.ms-feature-cluster .ms-reviews__note {
+  margin-top: 22px;
+  color: var(--ms-soft);
+  font-size: .78rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 820px) {
+  .ms-feature-cluster .ms-reviews__header,
+  .ms-feature-cluster .ms-review-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ms-feature-cluster .ms-reviews__summary {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .ms-feature-cluster .ms-review-card__footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .ms-feature-cluster .ms-review-card__link {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Additional Supply Chain Traceability page CSS */
+/* Additional CSS for Supply Chain Traceability feature page
+   Add this after the Inventory & Traceability global CSS.
+   These styles only cover components not already present in the master cluster stylesheet. */
+
+.ms-feature-cluster .ms-hero-visual {
+  position: relative;
+  padding: clamp(18px, 2.5vw, 28px);
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-lg);
+  background:
+    radial-gradient(ellipse 80% 70% at 100% 0%, rgba(74,166,232,.10), transparent 52%),
+    linear-gradient(160deg, #fff 55%, var(--ms-primary-050));
+  box-shadow: var(--ms-shadow-md);
+  min-width: min(420px, 100%);
+}
+.ms-feature-cluster .ms-hero-visual::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border: 1px dashed rgba(74,166,232,.35);
+  border-radius: calc(var(--ms-r-lg) - 8px);
+  pointer-events: none;
+}
+.ms-feature-cluster .ms-trace-card {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 10px;
+}
+.ms-feature-cluster .ms-trace-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 46px;
+  padding: 11px 14px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-sm);
+  background: rgba(255,255,255,.92);
+  box-shadow: var(--ms-shadow-xs);
+  font-size: .88rem;
+}
+.ms-feature-cluster .ms-trace-row strong { color: var(--ms-primary-900); }
+.ms-feature-cluster .ms-trace-row span {
+  color: var(--ms-accent-600);
+  font-size: .78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.ms-feature-cluster .ms-proof-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 22px;
+}
+.ms-feature-cluster .ms-proof-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 30px;
+  padding: 6px 11px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-pill);
+  background: rgba(255,255,255,.86);
+  color: var(--ms-primary-800);
+  font-size: .8rem;
+  font-weight: 700;
+}
+.ms-feature-cluster .ms-proof-pill::before {
+  content: "✓";
+  color: var(--ms-success-600);
+  font-weight: 800;
+}
+
+.ms-feature-cluster .ms-flow-line {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 34px;
+}
+.ms-feature-cluster .ms-flow-item {
+  position: relative;
+  min-height: 158px;
+  padding: 20px 16px;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: rgba(255,255,255,.94);
+  box-shadow: var(--ms-shadow-xs);
+}
+.ms-feature-cluster .ms-flow-item:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  top: 50%;
+  right: -13px;
+  z-index: 2;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--ms-accent-500);
+  color: #fff;
+  font-size: .78rem;
+  font-weight: 800;
+  box-shadow: 0 4px 14px var(--ms-accent-glow);
+}
+.ms-feature-cluster .ms-flow-item h3 {
+  font-size: .98rem;
+  margin-bottom: 6px;
+}
+.ms-feature-cluster .ms-flow-item p {
+  margin: 0;
+  color: var(--ms-muted);
+  font-size: .83rem;
+  line-height: 1.5;
+}
+
+.ms-feature-cluster .ms-data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  border: 1px solid var(--ms-line);
+  border-radius: var(--ms-r-md);
+  background: #fff;
+  box-shadow: var(--ms-shadow-xs);
+}
+.ms-feature-cluster .ms-data-table th,
+.ms-feature-cluster .ms-data-table td {
+  padding: 15px 18px;
+  border-bottom: 1px solid var(--ms-line);
+  text-align: left;
+  vertical-align: top;
+  font-size: .92rem;
+}
+.ms-feature-cluster .ms-data-table tr:last-child th,
+.ms-feature-cluster .ms-data-table tr:last-child td { border-bottom: 0; }
+.ms-feature-cluster .ms-data-table th {
+  width: 30%;
+  color: var(--ms-primary-900);
+  background: var(--ms-primary-050);
+  font-weight: 800;
+}
+.ms-feature-cluster .ms-data-table td { color: var(--ms-muted); }
+
+@media (max-width: 1040px) {
+  .ms-feature-cluster .ms-flow-line { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ms-feature-cluster .ms-flow-item::after { display: none; }
+}
+@media (max-width: 820px) {
+  .ms-feature-cluster .ms-hero-visual { min-width: 0; }
+  .ms-feature-cluster .ms-flow-line { grid-template-columns: 1fr; }
+  .ms-feature-cluster .ms-data-table th,
+  .ms-feature-cluster .ms-data-table td {
+    display: block;
+    width: 100%;
+  }
+}
+  </style>
+</head>
+<body>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://mountainstream.co/"},
+        {"@type": "ListItem", "position": 2, "name": "Features", "item": "https://mountainstream.co/streamline-features/"},
+        {"@type": "ListItem", "position": 3, "name": "Inventory and Traceability", "item": "https://mountainstream.co/streamline-features/inventory-and-traceability/"},
+        {"@type": "ListItem", "position": 4, "name": "Inventory Management", "item": "https://mountainstream.co/streamline-features/inventory-management/"}
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Streamline ERP Inventory Management",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "Wholesale inventory management software",
+      "operatingSystem": "Web-based",
+      "url": "https://mountainstream.co/streamline-features/inventory-management/",
+      "description": "Streamline ERP provides wholesale inventory management software for receiving, stock counts, stock adjustments, lot-aware movement, barcode labels, replenishment, purchasing, production, delivery, and reporting.",
+      "featureList": [
+        "Real-time inventory tracking",
+        "Multi-location stock control",
+        "Goods receipt and stock intake",
+        "Stock counts and variance review",
+        "Stock adjustments and stock movement",
+        "Lot-aware inventory management",
+        "Barcode label support",
+        "Purchase order and replenishment workflows",
+        "Inventory reporting",
+        "Order, production, delivery, and finance integration"
+      ],
+      "publisher": {"@type": "Organization", "name": "Mountain Stream", "url": "https://mountainstream.co/"}
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is wholesale inventory management software?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Wholesale inventory management software helps businesses track stock quantities, locations, receiving, stock counts, movement, replenishment, purchase orders, and reporting across wholesale, manufacturing, and distribution workflows."}
+        },
+        {
+          "@type": "Question",
+          "name": "Is Streamline only for bakery inventory management?",
+          "acceptedAnswer": {"@type": "Answer", "text": "No. Streamline has strong wholesale bakery and food production experience, but its inventory management workflow also supports distributors, manufacturers, commercial kitchens, commissaries, route-based teams, and order-driven wholesale operations."}
+        },
+        {
+          "@type": "Question",
+          "name": "Does Streamline support lot-aware inventory management?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Yes. Streamline can connect lot numbers, use-by dates, barcode labels, stock movements, goods receipt, production usage, and delivery records so inventory stays traceable as it changes."}
+        },
+        {
+          "@type": "Question",
+          "name": "Can Streamline help with purchasing and replenishment?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Yes. Streamline connects inventory with purchasing so teams can work from current stock levels, par levels, usage, order demand, supplier records, and purchase order workflows."}
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="ms-feature-cluster">
+  <div class="ms-breadcrumb">
+    <div class="ms-wrap">
+      <nav aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true" class="ms-breadcrumb-sep">&rsaquo;</span>
+        <a href="/streamline-features/">Features</a>
+        <span aria-hidden="true" class="ms-breadcrumb-sep">&rsaquo;</span>
+        <a href="/streamline-features/inventory-and-traceability/">Inventory and Traceability</a>
+        <span aria-hidden="true" class="ms-breadcrumb-sep">&rsaquo;</span>
+        <span class="ms-breadcrumb-current">Inventory Management</span>
+      </nav>
+    </div>
+  </div>
+
+  <header class="ms-hero-compact">
+    <div class="ms-wrap">
+      <div class="ms-hero-compact__inner">
+        <div>
+          <p class="ms-kicker">Inventory Management</p>
+          <h1>Wholesale inventory management software for every stock-moving business.</h1>
+          <p class="ms-lede">Streamline helps wholesalers, manufacturers, food producers, distributors, and route-based teams track stock, receive goods, count inventory, manage lots, replenish faster, and connect inventory to orders, production, delivery, and finance.</p>
+          <div aria-label="Inventory highlights" class="ms-proof-row">
+            <span class="ms-proof-pill">Real-time stock visibility</span>
+            <span class="ms-proof-pill">Lot-aware inventory control</span>
+            <span class="ms-proof-pill">Purchasing and replenishment</span>
+          </div>
+          <div class="ms-actions">
+            <a class="ms-btn ms-btn-primary" href="/book-a-demo/">Book an Inventory Demo</a>
+            <a class="ms-btn ms-btn-secondary" href="/pricing/">View Pricing</a>
+          </div>
+        </div>
+        <aside aria-label="Inventory workflow preview" class="ms-hero-visual">
+          <div class="ms-trace-card">
+            <div class="ms-trace-row"><strong>Goods received</strong><span>Updated</span></div>
+            <div class="ms-trace-row"><strong>Stock count</strong><span>Checked</span></div>
+            <div class="ms-trace-row"><strong>Location move</strong><span>Recorded</span></div>
+            <div class="ms-trace-row"><strong>Lot details</strong><span>Linked</span></div>
+            <div class="ms-trace-row"><strong>Reorder need</strong><span>Flagged</span></div>
+            <div class="ms-trace-row"><strong>Reports</strong><span>Ready</span></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <nav aria-label="Page sections" class="ms-nav">
+    <div class="ms-wrap">
+      <a class="ms-nav__back" href="/streamline-features/inventory-and-traceability/">Back to Inventory and Traceability</a>
+      <span aria-hidden="true" class="ms-nav__divider"></span>
+      <a href="#overview">Overview</a>
+      <a href="#workflow">Workflow</a>
+      <a href="#stock-control">Stock Control</a>
+      <a href="#replenishment">Replenishment</a>
+      <a href="#lot-aware">Lot-Aware Stock</a>
+      <a href="#industries">Industries</a>
+      <a href="#reports">Reports</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="ms-section" id="overview">
+      <div class="ms-wrap">
+        <p class="ms-kicker ms-reveal">What it does</p>
+        <h2 class="ms-reveal ms-reveal-d1">Control stock without spreadsheet cleanup.</h2>
+        <p class="ms-section-intro ms-reveal ms-reveal-d2">Wholesale inventory management software should answer three questions fast: what is in stock, where it is, and what needs action next. Streamline keeps those answers connected to sales, production, purchasing, delivery, and reporting.</p>
+        <div class="ms-answer ms-reveal ms-reveal-d2">
+          <p><strong>What is wholesale inventory management software?</strong> It is software that helps wholesale and order-driven businesses track stock levels, locations, receiving, counts, adjustments, purchasing, and movement across warehouses, production areas, routes, and customer orders.</p>
+        </div>
+        <div aria-label="Inventory management flow" class="ms-flow-line ms-reveal ms-reveal-d3">
+          <div class="ms-flow-item"><h3>Receive</h3><p>Record items, suppliers, quantities, lots, use-by dates, and storage locations as stock arrives.</p></div>
+          <div class="ms-flow-item"><h3>Store</h3><p>Keep stock organized by location, item type, unit, status, and available quantity.</p></div>
+          <div class="ms-flow-item"><h3>Count</h3><p>Run stock counts, review variances, and update inventory with clearer records.</p></div>
+          <div class="ms-flow-item"><h3>Use</h3><p>Adjust inventory when orders ship, production runs, recipes are made, or stock moves.</p></div>
+          <div class="ms-flow-item"><h3>Replenish</h3><p>Turn stock needs, par levels, usage, and demand into smarter purchase actions.</p></div>
+          <div class="ms-flow-item"><h3>Report</h3><p>Review stock movement, inventory value, usage, shrinkage, and purchasing needs.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ms-section ms-section-ruled" id="workflow">
+      <div class="ms-wrap">
+        <p class="ms-kicker ms-reveal">Connected ERP workflow</p>
+        <h2 class="ms-reveal ms-reveal-d1">Inventory works better when it is tied to the work around it.</h2>
+        <p class="ms-section-intro ms-reveal ms-reveal-d2">Stock changes happen everywhere: receiving, sales, production, transfers, dispatch, returns, and purchasing. Streamline keeps inventory inside the same ERP workflow, so teams are not reconciling separate tools at the end of the day.</p>
+        <div class="ms-grid-2" style="margin-top: 2.5rem;">
+          <div class="ms-card ms-card-sky ms-reveal ms-reveal-d1">
+            <h3>Live operational stock</h3>
+            <p>Streamline updates inventory as teams receive goods, count stock, use materials, ship orders, or complete production. That gives purchasing, operations, and finance a cleaner view of what is available.</p>
+          </div>
+          <div class="ms-card ms-card-accent ms-reveal ms-reveal-d2">
+            <h3>One system of record</h3>
+            <p>Orders, inventory, purchasing, recipes, delivery, invoices, and reports stay connected in Streamline. That reduces double entry and makes stock questions easier to answer.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ms-section ms-section-light" id="stock-control">
+      <div class="ms-wrap">
+        <p class="ms-kicker ms-reveal">Inventory control software</p>
+        <h2 class="ms-reveal ms-reveal-d1">Count, move, adjust, and receive stock with less manual work.</h2>
+        <div class="ms-split" style="margin-top: 3rem;">
+          <div class="ms-reveal">
+            <p class="ms-section-intro" style="max-width:100%">Streamline gives teams practical tools for daily stock control. Use it for raw materials, packaging, components, finished goods, resale items, route stock, or warehouse inventory.</p>
+            <ul class="ms-list" style="margin-top: 1.5rem;">
+              <li>Receive goods into inventory</li>
+              <li>Track stock by location</li>
+              <li>Count stock and review variances</li>
+              <li>Move stock between sites or areas</li>
+              <li>Adjust balances with clearer records</li>
+              <li>Track raw materials and finished goods</li>
+              <li>Import and export inventory by CSV</li>
+              <li>Use barcode support for faster intake</li>
+            </ul>
+          </div>
+          <div class="ms-reveal ms-reveal-d1">
+            <div class="ms-callout">
+              <h4>Why it helps</h4>
+              <p>Manual stock records slow down buying, production, and delivery. A connected inventory system helps teams spot shortages, reduce overstock, and keep stock data current.</p>
+            </div>
+          </div>
+        </div>
+        <div class="ms-grid" style="margin-top: 2.5rem;">
+          <div class="ms-benefit ms-reveal ms-reveal-d1">
+            <div class="ms-benefit__icon">#</div>
+            <h3>Real-time inventory tracking</h3>
+            <p>See item quantities and stock movement as operational work is recorded.</p>
+          </div>
+          <div class="ms-benefit ms-reveal ms-reveal-d2">
+            <div class="ms-benefit__icon">+</div>
+            <h3>Stock adjustments</h3>
+            <p>Correct stock balances without losing the reason behind the change.</p>
+          </div>
+          <div class="ms-benefit ms-reveal ms-reveal-d3">
+            <div class="ms-benefit__icon">@</div>
+            <h3>Multi-location stock</h3>
+            <p>Track inventory across warehouses, production rooms, storage areas, and routes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ms-section" id="replenishment">
+      <div class="ms-wrap">
+        <p class="ms-kicker ms-reveal">Purchasing and replenishment</p>
+        <h2 class="ms-reveal ms-reveal-d1">Buy the right stock before shortages slow orders.</h2>
+        <p class="ms-section-intro ms-reveal ms-reveal-d2">Inventory management should lead to action. Streamline connects stock levels, par levels, usage, production demand, suppliers, and purchase orders so teams can replenish with better timing.</p>
+        <div class="ms-grid" style="margin-top: 2.5rem;">
+          <div class="ms-card ms-card-sky ms-reveal ms-reveal-d1">
+            <h3>Current stock visibility</h3>
+            <p>See what is on hand before making buying decisions, production changes, or order promises.</p>
+          </div>
+          <div class="ms-card ms-card-accent ms-reveal ms-reveal-d2">
+            <h3>Smarter reorder planning</h3>
+            <p>Use par levels, usage, seasonal demand, and order needs to guide purchasing.</p>
+          </div>
+          <div class="ms-card ms-reveal ms-reveal-d3">
+            <h3>Purchase order workflows</h3>
+            <p>Move from stock need to supplier purchase order without rebuilding the same data elsewhere.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ms-section ms-section-warm" id="lot-aware">
+      <div class="ms-wrap">
+        <p class="ms-kicker ms-reveal">Lot-aware inventory</p>
+        <h2 class="ms-reveal ms-reveal-d1">Keep lot details close to every stock movement.</h2>
+        <p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline gives teams a clearer view of ingredients, materials, packaging, and finished goods as they are received, counted, transferred, used, or shipped. Lot details stay connected to each movement, helping teams improve stock accuracy, reduce waste, and make faster inventory decisions.</p>
+        <div class="ms-grid" style="margin-top: 2.5rem;">
+          <div class="ms-use-case ms-reveal ms-reveal-d1">
+            <h3>Lot numbers and use-by dates</h3>
+            <p>Capture supplier lots, internal lots, expiry dates, and use-by dates as part of stock intake.</p>
+          </div>
+          <div class="ms-use-case ms-reveal ms-reveal-d2">
+            <h3>Barcode labels</h3>
+            <p>Support faster stock identification, intake, picking, and warehouse movement with barcode workflows.</p>
+          </div>
+          <div class="ms-use-case ms-reveal ms-reveal-d3">
+            <h3>FEFO-ready inventory</h3>
+            <p>Help teams use the nearest-expiry stock first when freshness or shelf life matters.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ms-section ms-section-ruled" id="industries">
+      <div class="ms-wrap">
+        <p class="ms-kicker ms-reveal">Industry fit</p>
+        <h2 class="ms-reveal ms-reveal-d1">Built for wholesale, manufacturing, and distribution teams.</h2>
+        <p class="ms-section-intro ms-reveal ms-reveal-d2">Streamline has deep bakery and food experience, but the inventory workflow is useful for many businesses that buy, store, make, move, and deliver stock.</p>
+        <div class="ms-grid-4" style="margin-top: 2.5rem;">
+          <div class="ms-use-case ms-reveal ms-reveal-d1"><h3>Wholesale distributors</h3><p>Track warehouse stock, customer orders, picking needs, purchase orders, and delivery-ready items.</p></div>
+          <div class="ms-use-case ms-reveal ms-reveal-d2"><h3>Food manufacturers</h3><p>Manage raw materials, packaging, work in progress, finished goods, lots, and production usage.</p></div>
+          <div class="ms-use-case ms-reveal ms-reveal-d3"><h3>Commercial kitchens</h3><p>Control ingredients, recipes, batch output, stock counts, use-by dates, and replenishment needs.</p></div>
+          <div class="ms-use-case ms-reveal ms-reveal-d4"><h3>Route distributors</h3><p>Keep route stock, delivery records, invoices, and customer-facing inventory details connected.</p></div>
+          <div class="ms-use-case ms-reveal ms-reveal-d1"><h3>Wholesale bakeries</h3><p>Track flour, butter, packaging, finished products, recurring orders, lots, labels, and dispatch.</p></div>
+          <div class="ms-use-case ms-reveal ms-reveal-d2"><h3>Light manufacturers</h3><p>Manage components, materials, finished items, purchase needs, production usage, and stock reports.</p></div>
+          <div class="ms-use-case ms-reveal ms-reveal-d3"><h3>Prepared foods</h3><p>Connect ingredients, containers, daily production, use-by dates, finished goods, and customer deliveries.</p></div>
+          <div class="ms-use-case ms-reveal ms-reveal-d4"><h3>Multi-site operators</h3><p>See stock by site, transfer inventory, review counts, and keep replenishment decisions aligned.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ms-section" id="reports">
+      <div class="ms-wrap">
+        <p class="ms-kicker ms-reveal">Reports and integrations</p>
+        <h2 class="ms-reveal ms-reveal-d1">Connect inventory to orders, production, delivery, and finance.</h2>
+        <p class="ms-section-intro ms-reveal ms-reveal-d2">Inventory data becomes more useful when it reaches the teams that depend on it. Streamline connects stock records to operating workflows and reporting views.</p>
+        <div class="ms-reveal ms-reveal-d2" style="margin-top: 2rem; overflow-x: auto;">
+          <table class="ms-data-table">
+            <tbody>
+              <tr><th>Orders and sales</th><td>Use current stock visibility to support order handling, availability checks, allocations, and customer promises.</td></tr>
+              <tr><th>Production</th><td>Connect raw materials, packaging, recipe usage, batch output, finished goods, and inventory updates.</td></tr>
+              <tr><th>Delivery</th><td>Keep dispatch, route records, packing slips, delivery notes, and customer delivery details tied to stock movement.</td></tr>
+              <tr><th>Finance</th><td>Support inventory value, cost visibility, invoices, credits, and accounting handoff from one connected ERP record.</td></tr>
+              <tr><th>Reporting</th><td>Review stock movement, counts, adjustments, usage, shrinkage, replenishment needs, and inventory performance.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="ms-related-links ms-reveal ms-reveal-d3">
+          <a href="/streamline-features/customers-and-ordering/">Customers and Ordering</a>
+          <a href="/streamline-features/production-and-recipes/">Production and Recipes</a>
+          <a href="/streamline-features/delivery-and-distribution/">Delivery and Distribution</a>
+          <a href="/streamline-features/integrations/">Integrations</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="ms-section ms-faq" id="faq">
+      <div class="ms-wrap-narrow">
+        <p class="ms-kicker ms-reveal">FAQ</p>
+        <h2 class="ms-reveal ms-reveal-d1">Wholesale inventory management software questions, answered.</h2>
+        <div class="ms-reveal ms-reveal-d2" style="margin-top: 2rem;">
+          <details open>
+            <summary>What is wholesale inventory management software?</summary>
+            <p>Wholesale inventory management software helps businesses track stock levels, locations, receiving, counts, transfers, adjustments, replenishment, purchase orders, and inventory reports across wholesale and distribution workflows.</p>
+          </details>
+          <details>
+            <summary>Is Streamline only for bakeries?</summary>
+            <p>No. Streamline has strong wholesale bakery and food production experience, but the inventory workflow also supports wholesalers, manufacturers, commercial kitchens, prepared foods teams, route distributors, and multi-site operators.</p>
+          </details>
+          <details>
+            <summary>Does Streamline support barcode inventory?</summary>
+            <p>Yes. Streamline supports barcode workflows for faster stock intake, labels, picking, and inventory identification.</p>
+          </details>
+          <details>
+            <summary>Can Streamline manage lots and expiry dates?</summary>
+            <p>Yes. Streamline can track supplier lots, internal lot numbers, use-by dates, stock locations, and stock movement. This helps teams keep inventory useful for traceability and freshness control.</p>
+          </details>
+          <details>
+            <summary>Can Streamline help reduce stockouts?</summary>
+            <p>Yes. Streamline connects inventory with purchasing, par levels, usage, demand, and purchase order workflows so teams can replenish before shortages disrupt orders or production.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="ms-cta">
+      <div class="ms-wrap ms-reveal">
+        <p class="ms-kicker">See it in action</p>
+        <h2>Run inventory, purchasing, production, delivery, and reporting from one connected ERP workflow.</h2>
+        <p>Book a focused Streamline inventory demo and see how stock intake, counts, lot-aware movement, replenishment, purchase orders, production usage, delivery records, and reports work together.</p>
+        <div class="ms-actions">
+          <a class="ms-btn ms-btn-primary" href="/book-a-demo/">Book an Inventory Demo</a>
+          <a class="ms-btn ms-btn-secondary" href="/pricing/">View Pricing</a>
+          <a class="ms-link-arrow" href="/streamline-features/inventory-and-traceability/">Inventory and Traceability</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+(function () {
+  var root = document.querySelector('.ms-feature-cluster');
+  if (!root) return;
+
+  var revealObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  root.querySelectorAll('.ms-reveal').forEach(function (el) {
+    var rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.classList.add('visible');
+    } else {
+      revealObserver.observe(el);
+    }
+  });
+
+  var sections = root.querySelectorAll('section[id]');
+  var navLinks = root.querySelectorAll('.ms-nav a:not(.ms-nav__back)');
+
+  var navObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        navLinks.forEach(function (a) { a.classList.remove('active'); });
+        var active = root.querySelector('.ms-nav a[href="#' + entry.target.id + '"]');
+        if (active) {
+          active.classList.add('active');
+          var navWrap = root.querySelector('.ms-nav .ms-wrap');
+          if (navWrap) {
+            navWrap.scrollLeft = active.offsetLeft - navWrap.offsetWidth / 2 + active.offsetWidth / 2;
+          }
+        }
+      }
+    });
+  }, {
+    threshold: 0,
+    rootMargin: '0px 0px -60% 0px'
+  });
+
+  sections.forEach(function (s) { navObserver.observe(s); });
+})();
+</script>
+</body>
+</html>
